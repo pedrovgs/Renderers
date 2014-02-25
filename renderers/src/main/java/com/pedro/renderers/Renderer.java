@@ -4,9 +4,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.pedro.renderers.exception.NotInflateViewException;
 
 /**
- * Base class created to work as a view holder in the classic list view / adapter implementation. This entity will
+ * Base class created to work as a root ViewHolder in the classic list rootView / adapter implementation. This entity will
  * be extended by other renderes.
  *
  * @author Pedro Vicente Gómez Sánchez.
@@ -17,61 +18,53 @@ public abstract class Renderer<T> implements Cloneable {
      * Attributes
      */
 
-    private View view;
+    private View rootView;
     private T content;
-    private ViewGroup parent;
 
 
     /*
      * Public methods
      */
-    public void onCreate(T content) {
+
+    void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent) {
         this.content = content;
-        setupView();
-        hookListeners();
+        this.rootView = inflate(layoutInflater, parent);
+        if (rootView == null) {
+            throw new NotInflateViewException();
+        }
+        this.rootView.setTag(this);
+        setupView(rootView);
+        hookListeners(rootView);
     }
 
-    public void onRecycle(T content) {
+    void onRecycle(T content) {
         this.content = content;
+    }
+
+    View getRootView() {
+        return rootView;
     }
 
     /*
-     * Auxiliary methods
+     * Protected and abstract methods
      */
 
-    protected void setContent(T content) {
-        this.content = content;
-    }
-
+    /**
+     * @return the content stored in the renderer.
+     */
     protected T getContent() {
         return content;
     }
 
-    protected void setParent(ViewGroup parent) {
-        this.parent = parent;
-    }
-
-    protected void setView(View view) {
-        this.view = view;
-    }
-
-    protected View getView() {
-        return view;
-    }
-
-    /*
-     * AbstractMethods
-     */
-
     /**
-     * Map all the widgets from the view.
+     * Map all the widgets from the rootView.
      */
-    protected abstract void setupView();
+    protected abstract void setupView(View rootView);
 
     /**
      * Set all the listeners to widgets.
      */
-    protected abstract void hookListeners();
+    protected abstract void hookListeners(View rootView);
 
     /**
      * Inflates the Layout of the Renderer.
@@ -84,10 +77,10 @@ public abstract class Renderer<T> implements Cloneable {
     /**
      * Abstract method to implement in subtypes. Each subtype has a different way of render the information.
      */
-    public abstract View render();
+    protected abstract void render();
 
 
-    public Renderer copy() {
+    Renderer copy() {
         Renderer copy = null;
         try {
             copy = (Renderer) this.clone();
@@ -96,4 +89,5 @@ public abstract class Renderer<T> implements Cloneable {
         }
         return copy;
     }
+
 }

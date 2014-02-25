@@ -87,7 +87,6 @@ public abstract class RendererBuilder<T> {
 
     private Renderer recycle(View convertView, T content) {
         Renderer renderer = (Renderer) convertView.getTag();
-        renderer.setContent(content);
         renderer.onRecycle(content);
         return renderer;
     }
@@ -95,12 +94,7 @@ public abstract class RendererBuilder<T> {
     private Renderer createRenderer(T content, ViewGroup parent) {
         int prototypeIndex = getPrototypeIndex(content);
         Renderer renderer = prototypes.get(prototypeIndex).copy();
-        renderer.setContent(content);
-        renderer.setParent(parent);
-        View view = renderer.inflate(layoutInflater, parent);
-        view.setTag(renderer);
-        renderer.setView(view);
-        renderer.onCreate(content);
+        renderer.onCreate(content,layoutInflater,parent);
         return renderer;
     }
 

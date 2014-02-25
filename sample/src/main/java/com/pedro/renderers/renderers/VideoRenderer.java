@@ -47,8 +47,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
     }
 
     @Override
-    protected void setupView() {
-        View rootView = getView();
+    protected void setupView(View rootView) {
         thumbnail = (ImageView) rootView.findViewById(R.id.iv_thumbnail);
         title = (TextView) rootView.findViewById(R.id.tv_title);
         playButton = (ImageView) rootView.findViewById(R.id.iv_play);
@@ -57,18 +56,17 @@ public abstract class VideoRenderer extends Renderer<Video> {
     }
 
     @Override
-    protected void hookListeners() {
+    protected void hookListeners(View rootView) {
 
     }
 
     @Override
-    public View render() {
+    protected void render() {
         Video video = getContent();
         renderThumbnail(video);
         renderTitle(video);
         renderMarker(video);
         renderLabel();
-        return getView();
     }
 
 

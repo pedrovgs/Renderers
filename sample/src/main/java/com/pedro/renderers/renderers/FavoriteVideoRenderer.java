@@ -1,8 +1,6 @@
 package com.pedro.renderers.renderers;
 
 import android.content.Context;
-import android.widget.ImageView;
-import android.widget.TextView;
 import com.pedro.renderers.R;
 import com.pedro.renderers.Video;
 import com.squareup.picasso.Picasso;

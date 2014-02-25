@@ -61,7 +61,8 @@ public class RendererAdapter<T> extends BaseAdapter {
         rendererBuilder.withParent(parent);
         rendererBuilder.withLayoutInflater(layoutInflater);
         Renderer<T> renderer = rendererBuilder.build();
-        return renderer.render();
+        renderer.render();
+        return renderer.getRootView();
     }
 
     /*
