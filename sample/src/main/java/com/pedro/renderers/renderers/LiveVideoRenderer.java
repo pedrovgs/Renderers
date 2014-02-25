@@ -70,7 +70,7 @@ public class LiveVideoRenderer extends VideoRenderer {
 
     private void renderDate(Video video) {
         String now = new Date().toLocaleString();
-        date.setText(video.getTitle() + now);
+        date.setText(now);
     }
 
 }
