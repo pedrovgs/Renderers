@@ -1,5 +1,6 @@
 package com.pedrogomez.renderers;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,5 +31,25 @@ public class VideoCollection implements AdapteeCollection<Video> {
     @Override
     public Video get(final int index) {
         return videos.get(index);
+    }
+
+    @Override
+    public void add(Video element) {
+        videos.add(element);
+    }
+
+    @Override
+    public void remove(Video element) {
+        videos.remove(element);
+    }
+
+    @Override
+    public void addAll(Collection<Video> elements) {
+        videos.addAll(elements);
+    }
+
+    @Override
+    public void removeAll(Collection<Video> elements){
+        videos.removeAll(elements);
     }
 }

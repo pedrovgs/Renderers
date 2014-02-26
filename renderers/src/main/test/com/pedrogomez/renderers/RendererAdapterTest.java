@@ -129,7 +129,7 @@ public class RendererAdapterTest {
 
         rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
 
-        verify(rendererAdapter).updateRendererExtraValues(mockedRenderer, ANY_POSITION);
+        verify(rendererAdapter).updateRendererExtraValues(ANY_OBJECT, mockedRenderer, ANY_POSITION);
     }
 
     @Test(expected = NullRendererBuiltException.class)

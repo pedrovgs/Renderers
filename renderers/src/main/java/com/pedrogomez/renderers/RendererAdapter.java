@@ -62,7 +62,7 @@ public class RendererAdapter<T> extends BaseAdapter {
         if (renderer == null) {
             throw new NullRendererBuiltException();
         }
-        updateRendererExtraValues(renderer, position);
+        updateRendererExtraValues(content, renderer, position);
         renderer.render();
         return renderer.getRootView();
     }
@@ -80,10 +80,11 @@ public class RendererAdapter<T> extends BaseAdapter {
      * Empty implementation created to allow the client code to extend this class without override getView method.
      * This method is called before render the renderer.
      *
-     * @param renderer
-     * @param position to be rendererd.
+     * @param content  to be rendered.
+     * @param renderer to be used to paint the content.
+     * @param position of the content.
      */
-    protected void updateRendererExtraValues(Renderer<T> renderer, int position) {
+    protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position) {
         //Empty
     }
 
