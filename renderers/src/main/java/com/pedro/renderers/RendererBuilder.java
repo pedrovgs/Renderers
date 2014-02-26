@@ -130,13 +130,18 @@ public abstract class RendererBuilder<T> {
      */
 
     private int getItemViewType(Class prototypeClass) {
+        System.out.println("->" + prototypeClass);
         int itemViewType = 0;
         for (Renderer renderer : prototypes) {
+            System.out.println("Evaluando " + renderer.getClass());
             if (renderer.getClass().equals(prototypeClass)) {
+                System.out.println("Prototype found");
                 itemViewType = prototypes.indexOf(renderer);
                 break;
             }
         }
+        //Si llega aquí hay que lanzar una excepción
+        //Significa que Prototype class not found
         return itemViewType;
     }
 

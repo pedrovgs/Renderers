@@ -9,7 +9,7 @@ import android.view.ViewGroup;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class ObjectRenderer extends Renderer<Object> {
+public class SubObjectRenderer extends Renderer<Object> {
 
     private View view;
 
@@ -36,6 +36,4 @@ public class ObjectRenderer extends Renderer<Object> {
     public void setView(View view) {
         this.view = view;
     }
-
-
 }
