@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 
+import java.util.Collection;
+
 /**
  * Base adapter created to work RendererBuilders and Renderers. Other adapters have to use this one to create new lists.
  *
@@ -65,6 +67,22 @@ public class RendererAdapter<T> extends BaseAdapter {
         updateRendererExtraValues(content, renderer, position);
         renderer.render();
         return renderer.getRootView();
+    }
+
+    public void add(T element) {
+        collection.add(element);
+    }
+
+    public void remove(T element) {
+        collection.remove(element);
+    }
+
+    public void addAll(Collection<T> elements) {
+        collection.addAll(elements);
+    }
+
+    public void removeAll(Collection<T> elements) {
+        collection.removeAll(elements);
     }
 
     /**

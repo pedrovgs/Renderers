@@ -11,6 +11,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -32,6 +35,7 @@ public class RendererAdapterTest {
     private static final Object ANY_OBJECT = new Object();
     private static final int ANY_ITEM_VIEW_TYPE = 3;
     private static final int ANY_VIEW_TYPE_COUNT = 4;
+    private static final Collection<Object> ANY_OBJECT_COLLECTION = new LinkedList<Object>();
 
     /*
      * Test data
@@ -154,6 +158,34 @@ public class RendererAdapterTest {
         View renderedView = rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
 
         assertEquals(mockedView, renderedView);
+    }
+
+    @Test
+    public void shouldAddElementToAdapteeCollection() {
+        rendererAdapter.add(ANY_OBJECT);
+
+        verify(mockedCollection).add(ANY_OBJECT);
+    }
+
+    @Test
+    public void shouldAddAllEmentsToAdapteeCollection() {
+        rendererAdapter.addAll(ANY_OBJECT_COLLECTION);
+
+        verify(mockedCollection).addAll(ANY_OBJECT_COLLECTION);
+    }
+
+    @Test
+    public void shouldRemoveElementFromAdapteeCollection() {
+        rendererAdapter.remove(ANY_OBJECT);
+
+        verify(mockedCollection).remove(ANY_OBJECT);
+    }
+
+    @Test
+    public void shouldRemoveAllElementsFromAdapteeCollection() {
+        rendererAdapter.removeAll(ANY_OBJECT_COLLECTION);
+
+        verify(mockedCollection).removeAll(ANY_OBJECT_COLLECTION);
     }
 
     /*
