@@ -8,7 +8,7 @@ import com.pedrogomez.renderers.exception.NullContentException;
 import com.pedrogomez.renderers.exception.NullLayoutInflaterException;
 import com.pedrogomez.renderers.exception.NullParentException;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Class created to work as builder for renderers. This class provides methods to create a renderer.
@@ -20,7 +20,7 @@ public abstract class RendererBuilder<T> {
     /*
      * Attributes
      */
-    private final List<Renderer<T>> prototypes;
+    private final Collection<Renderer<T>> prototypes;
 
     private T content;
     private View convertView;
@@ -31,7 +31,7 @@ public abstract class RendererBuilder<T> {
      * Constructor
      */
 
-    public RendererBuilder(List<Renderer<T>> prototypes) {
+    public RendererBuilder(Collection<Renderer<T>> prototypes) {
         if (prototypes == null || prototypes.isEmpty()) {
             throw new NeedsPrototypesException();
         }
@@ -42,29 +42,40 @@ public abstract class RendererBuilder<T> {
      * Builder constructor
      */
 
+    protected Collection<Renderer<T>> getPrototypes() {
+        return prototypes;
+    }
 
-    public RendererBuilder withContent(T content) {
+    RendererBuilder withContent(T content) {
         this.content = content;
         return this;
 
     }
 
-    public RendererBuilder withConvertView(View convertView) {
+    RendererBuilder withConvertView(View convertView) {
         this.convertView = convertView;
         return this;
 
     }
 
-    public RendererBuilder withParent(ViewGroup parent) {
+    RendererBuilder withParent(ViewGroup parent) {
         this.parent = parent;
         return this;
     }
 
-    public RendererBuilder withLayoutInflater(LayoutInflater layoutInflater) {
+    RendererBuilder withLayoutInflater(LayoutInflater layoutInflater) {
         this.layoutInflater = layoutInflater;
         return this;
     }
 
+    int getItemViewType(T content) {
+        Class prototypeClass = getPrototypeClass(content);
+        return getItemViewType(prototypeClass);
+    }
+
+    int getViewTypeCount() {
+        return prototypes.size();
+    }
 
     Renderer build() {
         validateAttributes();
@@ -77,14 +88,6 @@ public abstract class RendererBuilder<T> {
         return renderer;
     }
 
-    protected List<Renderer<T>> getPrototypes() {
-        return prototypes;
-    }
-
-    /*
-     * Recycle methods
-     */
-
     private Renderer recycle(View convertView, T content) {
         Renderer renderer = (Renderer) convertView.getTag();
         renderer.onRecycle(content);
@@ -93,9 +96,21 @@ public abstract class RendererBuilder<T> {
 
     private Renderer createRenderer(T content, ViewGroup parent) {
         int prototypeIndex = getPrototypeIndex(content);
-        Renderer renderer = prototypes.get(prototypeIndex).copy();
+        Renderer renderer = getPrototypeByIndex(prototypeIndex).copy();
         renderer.onCreate(content, layoutInflater, parent);
         return renderer;
+    }
+
+    private Renderer getPrototypeByIndex(final int prototypeIndex) {
+        Renderer prototypeSelected = null;
+        int i = 0;
+        for (Renderer prototype : prototypes) {
+            if (i == prototypeIndex) {
+                prototypeSelected = prototype;
+            }
+            i++;
+        }
+        return prototypeSelected;
     }
 
 
@@ -103,31 +118,9 @@ public abstract class RendererBuilder<T> {
         return convertView != null && convertView.getTag() != null && getPrototypeClass(content).equals(convertView.getTag().getClass());
     }
 
-    int getItemViewType(T content) {
-        Class prototypeClass = getPrototypeClass(content);
-        return getItemViewType(prototypeClass);
-    }
-
-
     private int getPrototypeIndex(T content) {
         return getItemViewType(content);
     }
-
-
-    int getViewTypeCount() {
-        return prototypes.size();
-    }
-
-
-    /*
-     * Abstract method
-     */
-
-    protected abstract Class getPrototypeClass(T content);
-
-    /*
-     * Auxiliary methods
-     */
 
     private int getItemViewType(Class prototypeClass) {
         System.out.println("->" + prototypeClass);
@@ -136,13 +129,24 @@ public abstract class RendererBuilder<T> {
             System.out.println("Evaluando " + renderer.getClass());
             if (renderer.getClass().equals(prototypeClass)) {
                 System.out.println("Prototype found");
-                itemViewType = prototypes.indexOf(renderer);
+                itemViewType = getPrototypeIndex(renderer);
                 break;
             }
         }
         //Si llega aquí hay que lanzar una excepción
         //Significa que Prototype class not found
         return itemViewType;
+    }
+
+    private int getPrototypeIndex(Renderer renderer) {
+        int index = 0;
+        for (Renderer prototype : prototypes) {
+            if (prototype.getClass().equals(renderer.getClass())) {
+                break;
+            }
+            index++;
+        }
+        return index;
     }
 
 
@@ -159,6 +163,12 @@ public abstract class RendererBuilder<T> {
             throw new NullLayoutInflaterException();
         }
     }
+
+    /*
+     * Abstract method
+     */
+
+    protected abstract Class getPrototypeClass(T content);
 
 
 }

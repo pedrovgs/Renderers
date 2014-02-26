@@ -80,6 +80,7 @@ public class RendererAdapter<T> extends BaseAdapter {
 
     /**
      * Empty implementation created to allow the client code to extend this class without override getView method.
+     * This method is called before render the renderer.
      *
      * @param renderer
      * @param position to be rendererd.
