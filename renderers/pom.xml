@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.pedro.renderers</groupId>
+        <groupId>com.pedrogomez.renderers</groupId>
         <artifactId>renderers-parent</artifactId>
         <version>1.0.0</version>
     </parent>
