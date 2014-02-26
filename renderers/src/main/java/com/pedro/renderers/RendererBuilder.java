@@ -32,7 +32,7 @@ public abstract class RendererBuilder<T> {
      */
 
     public RendererBuilder(List<Renderer<T>> prototypes) {
-        if (prototypes == null || prototypes.size() == 0) {
+        if (prototypes == null || prototypes.isEmpty()) {
             throw new NeedsPrototypesException();
         }
         this.prototypes = prototypes;
@@ -94,7 +94,7 @@ public abstract class RendererBuilder<T> {
     private Renderer createRenderer(T content, ViewGroup parent) {
         int prototypeIndex = getPrototypeIndex(content);
         Renderer renderer = prototypes.get(prototypeIndex).copy();
-        renderer.onCreate(content,layoutInflater,parent);
+        renderer.onCreate(content, layoutInflater, parent);
         return renderer;
     }
 
