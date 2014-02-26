@@ -14,8 +14,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Test class created to check the correct behavoiur of RendererAdapter.
@@ -76,6 +75,11 @@ public class RendererAdapterTest {
      */
 
     @Test
+    public void shouldReturnTheAdapteeCollection() {
+        assertEquals(mockedCollection, rendererAdapter.getCollection());
+    }
+
+    @Test
     public void shouldReturnCollectionSizeOnGetCount() {
         when(mockedCollection.size()).thenReturn(ANY_SIZE);
 
@@ -120,6 +124,16 @@ public class RendererAdapterTest {
         verify(mockedRendererBuilder).withLayoutInflater(mockedLayoutInflater);
     }
 
+    @Test
+    public void shouldBuildRendererAndCallUpdateRendererExtraValues() {
+        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+        when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
+
+        rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
+
+        verify(rendererAdapter).updateRendererExtraValues(mockedRenderer, ANY_POSITION);
+    }
+
     @Test(expected = NullRendererBuiltException.class)
     public void shouldThrowNullRendererBuiltException() {
         rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
@@ -154,6 +168,7 @@ public class RendererAdapterTest {
 
     private void initializeRendererAdapter() {
         rendererAdapter = new RendererAdapter<Object>(mockedLayoutInflater, mockedRendererBuilder, mockedCollection);
+        rendererAdapter = spy(rendererAdapter);
     }
 
 }

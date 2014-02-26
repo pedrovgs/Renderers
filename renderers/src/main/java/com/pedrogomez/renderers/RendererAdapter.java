@@ -39,7 +39,6 @@ public class RendererAdapter<T> extends BaseAdapter {
      */
 
     @Override
-
     public int getCount() {
         return collection.size();
     }
@@ -65,8 +64,28 @@ public class RendererAdapter<T> extends BaseAdapter {
         if (renderer == null) {
             throw new NullRendererBuiltException();
         }
+        updateRendererExtraValues(renderer, position);
         renderer.render();
         return renderer.getRootView();
+    }
+
+    /**
+     * Allows the client code to access the adaptee collection from subtypes of RendererAdapter.
+     *
+     * @return collection used in the adapter as the adaptee class.
+     */
+    protected List<T> getCollection() {
+        return collection;
+    }
+
+    /**
+     * Empty implementation created to allow the client code to extend this class without override getView method.
+     *
+     * @param renderer
+     * @param position to be rendererd.
+     */
+    protected void updateRendererExtraValues(Renderer<T> renderer, int position) {
+        //Empty
     }
 
     /*

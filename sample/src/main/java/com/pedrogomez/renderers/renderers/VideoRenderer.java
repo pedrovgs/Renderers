@@ -42,8 +42,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
 
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup parent) {
-        View view = inflater.inflate(R.layout.video_renderer, parent, false);
-        return view;
+        return inflater.inflate(R.layout.video_renderer, parent, false);
     }
 
     @Override
@@ -57,7 +56,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
 
     @Override
     protected void hookListeners(View rootView) {
-
+        //Empty
     }
 
     @Override
