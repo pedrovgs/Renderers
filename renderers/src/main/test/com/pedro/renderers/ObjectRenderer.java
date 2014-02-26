@@ -9,7 +9,7 @@ import android.view.ViewGroup;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-class ObjectRenderer extends Renderer<Object> {
+public class ObjectRenderer extends Renderer<Object> {
 
     @Override
     protected void setupView(View rootView) {

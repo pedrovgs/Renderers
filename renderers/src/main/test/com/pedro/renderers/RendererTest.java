@@ -27,7 +27,7 @@ public class RendererTest {
      */
 
     @Spy
-    private Renderer<Object> renderer;
+    private ObjectRenderer renderer;
 
     /*
      * Mocks
