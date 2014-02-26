@@ -11,8 +11,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -50,7 +48,7 @@ public class RendererAdapterTest {
     @Mock
     private RendererBuilder mockedRendererBuilder;
     @Mock
-    private List<Object> mockedCollection;
+    private AdapteeCollection<Object> mockedCollection;
     @Mock
     private View mockedConvertView;
     @Mock

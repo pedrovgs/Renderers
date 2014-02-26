@@ -1,7 +1,7 @@
 package com.pedrogomez.renderers.renderers;
 
-import com.pedro.renderers.Renderer;
-import com.pedro.renderers.RendererBuilder;
+import com.pedrogomez.renderers.Renderer;
+import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.Video;
 
 import java.util.List;

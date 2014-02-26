@@ -6,8 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 
-import java.util.List;
-
 /**
  * Base adapter created to work RendererBuilders and Renderers. Other adapters have to use this one to create new lists.
  *
@@ -21,14 +19,14 @@ public class RendererAdapter<T> extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private RendererBuilder<T> rendererBuilder;
-    private List<T> collection;
+    private AdapteeCollection<T> collection;
 
 
     /*
      * Constructor
      */
 
-    public RendererAdapter(LayoutInflater layoutInflater, RendererBuilder rendererBuilder, List<T> collection) {
+    public RendererAdapter(LayoutInflater layoutInflater, RendererBuilder rendererBuilder, AdapteeCollection<T> collection) {
         this.layoutInflater = layoutInflater;
         this.rendererBuilder = rendererBuilder;
         this.collection = collection;
@@ -74,7 +72,7 @@ public class RendererAdapter<T> extends BaseAdapter {
      *
      * @return collection used in the adapter as the adaptee class.
      */
-    protected List<T> getCollection() {
+    protected AdapteeCollection<T> getCollection() {
         return collection;
     }
 

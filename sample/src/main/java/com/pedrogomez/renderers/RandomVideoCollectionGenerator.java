@@ -29,13 +29,13 @@ public class RandomVideoCollectionGenerator {
         initializeVideoInfo();
     }
 
-    public List<Video> generate(final int videoCount) {
+    public VideoCollection generate(final int videoCount) {
         List<Video> videos = new LinkedList<Video>();
         for (int i = 0; i < videoCount; i++) {
             Video video = generateRandomVideo();
             videos.add(video);
         }
-        return videos;
+        return new VideoCollection(videos);
     }
 
 

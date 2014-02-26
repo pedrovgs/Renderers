@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.pedro.renderers.Renderer;
 import com.pedrogomez.renderers.R;
+import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.Video;
 import com.squareup.picasso.Picasso;
 

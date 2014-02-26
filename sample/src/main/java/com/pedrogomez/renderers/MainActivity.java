@@ -5,9 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.ListView;
-import com.pedro.renderers.Renderer;
-import com.pedro.renderers.RendererAdapter;
-import com.pedro.renderers.RendererBuilder;
 import com.pedrogomez.renderers.renderers.FavoriteVideoRenderer;
 import com.pedrogomez.renderers.renderers.LikeVideoRenderer;
 import com.pedrogomez.renderers.renderers.LiveVideoRenderer;
@@ -35,7 +32,7 @@ public class MainActivity extends Activity {
 
     private RandomVideoCollectionGenerator randomVideoCollectionGenerator = new RandomVideoCollectionGenerator();
 
-    private List<Video> videos;
+    private VideoCollection videos;
 
     /*
      * Widgets

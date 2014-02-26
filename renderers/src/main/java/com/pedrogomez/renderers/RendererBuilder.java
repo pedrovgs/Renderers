@@ -42,9 +42,6 @@ public abstract class RendererBuilder<T> {
      * Builder constructor
      */
 
-    protected Collection<Renderer<T>> getPrototypes() {
-        return prototypes;
-    }
 
     RendererBuilder withContent(T content) {
         this.content = content;
@@ -169,6 +166,10 @@ public abstract class RendererBuilder<T> {
      */
 
     protected abstract Class getPrototypeClass(T content);
+
+    protected Collection<Renderer<T>> getPrototypes() {
+        return prototypes;
+    }
 
 
 }

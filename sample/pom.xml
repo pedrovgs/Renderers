@@ -27,7 +27,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.pedro.renderers</groupId>
+            <groupId>com.pedrogomez.renderers</groupId>
             <artifactId>renderers</artifactId>
             <version>1.0.0</version>
             <type>jar</type>
