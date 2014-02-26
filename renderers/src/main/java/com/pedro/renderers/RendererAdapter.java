@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import com.pedro.renderers.exception.NullRendererBuiltException;
 
 import java.util.List;
 
@@ -61,6 +62,9 @@ public class RendererAdapter<T> extends BaseAdapter {
         rendererBuilder.withParent(parent);
         rendererBuilder.withLayoutInflater(layoutInflater);
         Renderer<T> renderer = rendererBuilder.build();
+        if (renderer == null) {
+            throw new NullRendererBuiltException();
+        }
         renderer.render();
         return renderer.getRootView();
     }

@@ -1,6 +1,9 @@
 package com.pedro.renderers;
 
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.pedro.renderers.exception.NullRendererBuiltException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +14,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -48,6 +52,14 @@ public class RendererAdapterTest {
     private RendererBuilder mockedRendererBuilder;
     @Mock
     private List<Object> mockedCollection;
+    @Mock
+    private View mockedConvertView;
+    @Mock
+    private ViewGroup mockedParent;
+    @Mock
+    private ObjectRenderer mockedRenderer;
+    @Mock
+    private View mockedView;
 
     /*
      * Before and after methods
@@ -93,6 +105,43 @@ public class RendererAdapterTest {
         when(mockedRendererBuilder.getViewTypeCount()).thenReturn(ANY_VIEW_TYPE_COUNT);
 
         assertEquals(ANY_VIEW_TYPE_COUNT, rendererAdapter.getViewTypeCount());
+    }
+
+    @Test
+    public void shouldBuildRendererUsingAllNeededDependencies() {
+        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+        when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
+
+        rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
+
+        verify(mockedRendererBuilder).withContent(ANY_OBJECT);
+        verify(mockedRendererBuilder).withConvertView(mockedConvertView);
+        verify(mockedRendererBuilder).withParent(mockedParent);
+        verify(mockedRendererBuilder).withLayoutInflater(mockedLayoutInflater);
+    }
+
+    @Test(expected = NullRendererBuiltException.class)
+    public void shouldThrowNullRendererBuiltException() {
+        rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
+    }
+
+    @Test
+    public void shouldRenderTheRendererBuilt() {
+        when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
+
+        rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
+
+        verify(mockedRenderer).render();
+    }
+
+    @Test
+    public void shouldRenturnRendererRootView() {
+        when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
+        when(mockedRenderer.getRootView()).thenReturn(mockedView);
+
+        View renderedView = rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
+
+        assertEquals(mockedView, renderedView);
     }
 
     /*
