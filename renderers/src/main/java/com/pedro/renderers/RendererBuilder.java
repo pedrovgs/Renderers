@@ -5,8 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.pedro.renderers.exception.NeedsPrototypesException;
 import com.pedro.renderers.exception.NullContentException;
+import com.pedro.renderers.exception.NullLayoutInflaterException;
 import com.pedro.renderers.exception.NullParentException;
-import com.pedro.renderers.exception.NullViewGroupParentException;
 
 import java.util.List;
 
@@ -151,7 +151,7 @@ public abstract class RendererBuilder<T> {
         }
 
         if (layoutInflater == null) {
-            throw new NullViewGroupParentException();
+            throw new NullLayoutInflaterException();
         }
     }
 

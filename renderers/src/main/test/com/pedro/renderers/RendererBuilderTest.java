@@ -1,6 +1,12 @@
 package com.pedro.renderers;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import com.pedro.renderers.exception.NeedsPrototypesException;
+import com.pedro.renderers.exception.NullContentException;
+import com.pedro.renderers.exception.NullLayoutInflaterException;
+import com.pedro.renderers.exception.NullParentException;
 import com.sun.tools.javac.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +41,14 @@ public class RendererBuilderTest {
 
     @Mock
     private List<Renderer<Object>> mockedPrototypes;
+    @Mock
+    private View mockedConvertView;
+    @Mock
+    private ViewGroup mockedParent;
+    @Mock
+    private LayoutInflater mockedLayoutInflater;
+    @Mock
+    private Object mockedContent;
 
     /*
      * Before and after methods
@@ -60,6 +74,31 @@ public class RendererBuilderTest {
         when(mockedPrototypes.isEmpty()).thenReturn(true);
 
         rendererBuilder = new ObjectRendererBuilder(mockedPrototypes);
+    }
+
+    @Test(expected = NullContentException.class)
+    public void shouldThrowNullContentExceptionIfBuildRendererWithoutContent() {
+        rendererBuilder.withConvertView(mockedConvertView);
+        rendererBuilder.withParent(mockedParent);
+        rendererBuilder.withLayoutInflater(mockedLayoutInflater);
+        rendererBuilder.build();
+    }
+
+    @Test(expected = NullParentException.class)
+    public void shouldThrowNullParentExceptionIfBuildRendererWithoutParent() {
+        rendererBuilder.withConvertView(mockedConvertView);
+        rendererBuilder.withContent(mockedContent);
+        rendererBuilder.withLayoutInflater(mockedLayoutInflater);
+        rendererBuilder.build();
+    }
+
+
+    @Test(expected = NullLayoutInflaterException.class)
+    public void shouldThrowNullParentExceptionIfBuildARendererWithoutLayoutInflater() {
+        rendererBuilder.withConvertView(mockedConvertView);
+        rendererBuilder.withContent(mockedContent);
+        rendererBuilder.withParent(mockedParent);
+        rendererBuilder.build();
     }
 
 
