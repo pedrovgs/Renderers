@@ -26,7 +26,9 @@ public class LikeVideoRenderer extends VideoRenderer {
 
     @Override
     protected void renderLabel() {
-        label.setText("LIKED");
+        Video video = getContent();
+        String labelText = video.isLiked() ? "DISLIKE" : "LIKE";
+        label.setText(labelText);
     }
 
     @Override
