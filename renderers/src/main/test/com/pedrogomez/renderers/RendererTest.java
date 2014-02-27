@@ -98,7 +98,7 @@ public class RendererTest {
 
         onCreateRenderer();
 
-        verify(renderer).setupView(mockedView);
+        verify(renderer).setUpView(mockedView);
     }
 
     @Test

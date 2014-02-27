@@ -14,7 +14,7 @@ public class ObjectRenderer extends Renderer<Object> {
     private View view;
 
     @Override
-    protected void setupView(View rootView) {
+    protected void setUpView(View rootView) {
 
     }
 

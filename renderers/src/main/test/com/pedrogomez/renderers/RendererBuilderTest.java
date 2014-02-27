@@ -89,6 +89,24 @@ public class RendererBuilderTest {
         buildRenderer(mockedContent, mockedConvertView, null, mockedLayoutInflater);
     }
 
+    @Test(expected = NullPrototypeClassException.class)
+    public void shouldThrowNullPrototypeClassExceptionIfRendererBuilderImplementationReturnsNullPrototypeClassAndGetItemViewType() {
+        when(rendererBuilder.getPrototypeClass(mockedContent)).thenReturn(null);
+
+        buildRenderer(mockedContent, mockedConvertView, mockedParent, mockedLayoutInflater);
+
+        rendererBuilder.getItemViewType(mockedContent);
+    }
+
+    @Test(expected = NullPrototypeClassException.class)
+    public void shouldThrowNullPrototypeClassExceptionIfRendererBuilderImplementationReturnsNullPrototypeClassAndBuildOneRenderer() {
+        when(rendererBuilder.getPrototypeClass(mockedContent)).thenReturn(null);
+
+        buildRenderer(mockedContent, mockedConvertView, mockedParent, mockedLayoutInflater);
+
+        rendererBuilder.build();
+    }
+
 
     @Test(expected = NullLayoutInflaterException.class)
     public void shouldThrowNullParentExceptionIfBuildARendererWithoutLayoutInflater() {

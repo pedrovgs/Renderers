@@ -9,7 +9,13 @@ import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
 
 /**
- * Base adapter created to work RendererBuilders and Renderers. Other adapters have to use this one to create new lists.
+ * BaseAdapter created to work RendererBuilders and Renderers. Other adapters have to use this one to create new lists.
+ * <p/>
+ * This class is the heart of this library. It's used to avoid the library users declare a new renderer each time they
+ * have to implement a new ListView.
+ * <p/>
+ * RendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one RendererBuilder to provide
+ * renderers to the adapter and one AdapteeCollection to provide the elements to render.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -62,53 +68,12 @@ public class RendererAdapter<T> extends BaseAdapter {
         rendererBuilder.withLayoutInflater(layoutInflater);
         Renderer<T> renderer = rendererBuilder.build();
         if (renderer == null) {
-            throw new NullRendererBuiltException();
+            throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
         }
         updateRendererExtraValues(content, renderer, position);
         renderer.render();
         return renderer.getRootView();
     }
-
-    public void add(T element) {
-        collection.add(element);
-    }
-
-    public void remove(T element) {
-        collection.remove(element);
-    }
-
-    public void addAll(Collection<T> elements) {
-        collection.addAll(elements);
-    }
-
-    public void removeAll(Collection<T> elements) {
-        collection.removeAll(elements);
-    }
-
-    /**
-     * Allows the client code to access the adaptee collection from subtypes of RendererAdapter.
-     *
-     * @return collection used in the adapter as the adaptee class.
-     */
-    protected AdapteeCollection<T> getCollection() {
-        return collection;
-    }
-
-    /**
-     * Empty implementation created to allow the client code to extend this class without override getView method.
-     * This method is called before render the renderer.
-     *
-     * @param content  to be rendered.
-     * @param renderer to be used to paint the content.
-     * @param position of the content.
-     */
-    protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position) {
-        //Empty
-    }
-
-    /*
-     * Recycle methods
-     */
 
     @Override
     public int getItemViewType(int position) {
@@ -120,4 +85,63 @@ public class RendererAdapter<T> extends BaseAdapter {
     public int getViewTypeCount() {
         return rendererBuilder.getViewTypeCount();
     }
+
+    /**
+     * Add an element to the AdapteeCollection<T>.
+     *
+     * @param element to add.
+     */
+    public void add(T element) {
+        collection.add(element);
+    }
+
+    /**
+     * Remove an element from the AdapteeCollection<T>.
+     *
+     * @param element to remove.
+     */
+    public void remove(T element) {
+        collection.remove(element);
+    }
+
+    /**
+     * Add a Collection<T> of elements to the AdapteeCollection.
+     *
+     * @param elements to add.
+     */
+    public void addAll(Collection<T> elements) {
+        collection.addAll(elements);
+    }
+
+    /**
+     * Remove a Collection<T> of elements to the AdapteeCollection.
+     *
+     * @param elements to remove.
+     */
+    public void removeAll(Collection<T> elements) {
+        collection.removeAll(elements);
+    }
+
+    /**
+     * Allows the client code to access the AdapteeCollection<T> from subtypes of RendererAdapter.
+     *
+     * @return collection used in the adapter as the adaptee class.
+     */
+    protected AdapteeCollection<T> getCollection() {
+        return collection;
+    }
+
+    /**
+     * Empty implementation created to allow the client code to extend this class without override getView method.
+     * This method is called before render the renderer and can be used in RendererAdapter extension to add extra
+     * info to the renderer created.
+     *
+     * @param content  to be rendered.
+     * @param renderer to be used to paint the content.
+     * @param position of the content.
+     */
+    protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position) {
+        //Empty implementation
+    }
+
 }

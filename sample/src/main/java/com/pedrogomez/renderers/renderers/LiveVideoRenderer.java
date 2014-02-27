@@ -40,8 +40,8 @@ public class LiveVideoRenderer extends VideoRenderer {
     }
 
     @Override
-    protected void setupView(View rootView) {
-        super.setupView(rootView);
+    protected void setUpView(View rootView) {
+        super.setUpView(rootView);
         date = (TextView) rootView.findViewById(R.id.date);
     }
 

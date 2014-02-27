@@ -46,7 +46,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
     }
 
     @Override
-    protected void setupView(View rootView) {
+    protected void setUpView(View rootView) {
         thumbnail = (ImageView) rootView.findViewById(R.id.iv_thumbnail);
         title = (TextView) rootView.findViewById(R.id.tv_title);
         playButton = (ImageView) rootView.findViewById(R.id.iv_play);
