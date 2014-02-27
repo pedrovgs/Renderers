@@ -1,8 +1,11 @@
-package com.pedrogomez.renderers.renderers;
+package com.pedrogomez.renderers.ui.builder;
 
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
-import com.pedrogomez.renderers.Video;
+import com.pedrogomez.renderers.model.Video;
+import com.pedrogomez.renderers.ui.renderers.FavoriteVideoRenderer;
+import com.pedrogomez.renderers.ui.renderers.LikeVideoRenderer;
+import com.pedrogomez.renderers.ui.renderers.LiveVideoRenderer;
 
 import java.util.List;
 

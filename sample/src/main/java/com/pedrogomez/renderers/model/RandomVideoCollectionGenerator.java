@@ -1,4 +1,6 @@
-package com.pedrogomez.renderers;
+package com.pedrogomez.renderers.model;
+
+import com.pedrogomez.renderers.R;
 
 import java.util.*;
 
@@ -55,6 +57,7 @@ public class RandomVideoCollectionGenerator {
 
     private Video generateRandomVideo() {
         Video video = new Video();
+        setFavorite(video);
         setLiked(video);
         setLive(video);
         setTitle(video);
@@ -62,7 +65,12 @@ public class RandomVideoCollectionGenerator {
         return video;
     }
 
-    private void setLiked(final Video video) {
+    private void setLiked(Video video) {
+        boolean liked = random.nextBoolean();
+        video.setLiked(liked);
+    }
+
+    private void setFavorite(final Video video) {
         boolean favorite = random.nextBoolean();
         video.setFavorite(favorite);
     }

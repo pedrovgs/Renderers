@@ -1,4 +1,4 @@
-package com.pedrogomez.renderers;
+package com.pedrogomez.renderers.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.pedrogomez.renderers.renderers.*;
+import com.pedrogomez.renderers.R;
+import com.pedrogomez.renderers.Renderer;
+import com.pedrogomez.renderers.RendererAdapter;
+import com.pedrogomez.renderers.RendererBuilder;
+import com.pedrogomez.renderers.model.RandomVideoCollectionGenerator;
+import com.pedrogomez.renderers.model.Video;
+import com.pedrogomez.renderers.model.VideoCollection;
+import com.pedrogomez.renderers.ui.builder.VideoRendererBuilder;
+import com.pedrogomez.renderers.ui.renderers.FavoriteVideoRenderer;
+import com.pedrogomez.renderers.ui.renderers.LikeVideoRenderer;
+import com.pedrogomez.renderers.ui.renderers.LiveVideoRenderer;
+import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -76,8 +87,7 @@ public class MainActivity extends Activity {
 
     private RendererBuilder getVideoRendererBuilder() {
         List<Renderer<Video>> prototypes = getPrototypes();
-        RendererBuilder<Video> videoRendererBuilder = new VideoRendererBuilder(prototypes);
-        return videoRendererBuilder;
+        return new VideoRendererBuilder(prototypes);
     }
 
     private List<Renderer<Video>> getPrototypes() {

@@ -1,8 +1,8 @@
-package com.pedrogomez.renderers.renderers;
+package com.pedrogomez.renderers.ui.renderers;
 
 import android.content.Context;
 import com.pedrogomez.renderers.R;
-import com.pedrogomez.renderers.Video;
+import com.pedrogomez.renderers.model.Video;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -28,13 +28,13 @@ public class LikeVideoRenderer extends VideoRenderer {
     protected void renderLabel() {
         Video video = getContent();
         String labelText = video.isLiked() ? "DISLIKE" : "LIKE";
-        label.setText(labelText);
+        getLabel().setText(labelText);
     }
 
     @Override
     protected void renderMarker(Video video) {
         int resource = video.isLiked() ? R.drawable.like_active : R.drawable.like_unactive;
-        Picasso.with(context).load(resource).into(marker);
+        Picasso.with(getContext()).load(resource).into(getMarker());
     }
 
 }

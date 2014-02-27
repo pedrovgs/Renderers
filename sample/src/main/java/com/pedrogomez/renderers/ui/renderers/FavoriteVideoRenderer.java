@@ -1,8 +1,8 @@
-package com.pedrogomez.renderers.renderers;
+package com.pedrogomez.renderers.ui.renderers;
 
 import android.content.Context;
 import com.pedrogomez.renderers.R;
-import com.pedrogomez.renderers.Video;
+import com.pedrogomez.renderers.model.Video;
 import com.squareup.picasso.Picasso;
 
 
@@ -28,12 +28,12 @@ public class FavoriteVideoRenderer extends VideoRenderer {
 
     @Override
     protected void renderLabel() {
-        label.setText("FAVORITE");
+        getLabel().setText("FAVORITE");
     }
 
     @Override
     protected void renderMarker(Video video) {
-        Picasso.with(context).load(R.drawable.fav_active).into(marker);
+        Picasso.with(getContext()).load(R.drawable.fav_active).into(getMarker());
     }
 
 }

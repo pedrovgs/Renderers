@@ -1,4 +1,4 @@
-package com.pedrogomez.renderers.renderers;
+package com.pedrogomez.renderers.ui.renderers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.pedrogomez.renderers.R;
 import com.pedrogomez.renderers.Renderer;
-import com.pedrogomez.renderers.Video;
+import com.pedrogomez.renderers.model.Video;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -21,7 +21,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
     /*
      * Attributes
      */
-    protected final Context context;
+    private final Context context;
 
     private OnVideoClicked listener;
 
@@ -36,11 +36,10 @@ public abstract class VideoRenderer extends Renderer<Video> {
      * Widgets
      */
 
-    protected ImageView thumbnail;
-    protected TextView title;
-    protected ImageView playButton;
-    protected ImageView marker;
-    protected TextView label;
+    private ImageView thumbnail;
+    private TextView title;
+    private ImageView marker;
+    private TextView label;
 
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup parent) {
@@ -51,7 +50,6 @@ public abstract class VideoRenderer extends Renderer<Video> {
     protected void setUpView(View rootView) {
         thumbnail = (ImageView) rootView.findViewById(R.id.iv_thumbnail);
         title = (TextView) rootView.findViewById(R.id.tv_title);
-        playButton = (ImageView) rootView.findViewById(R.id.iv_play);
         marker = (ImageView) rootView.findViewById(R.id.iv_marker);
         label = (TextView) rootView.findViewById(R.id.tv_label);
     }
@@ -85,12 +83,24 @@ public abstract class VideoRenderer extends Renderer<Video> {
 
 
     private void renderTitle(Video video) {
-        String title = video.getTitle();
-        this.title.setText(title);
+        this.title.setText(video.getTitle());
     }
 
     public void setListener(OnVideoClicked listener) {
         this.listener = listener;
+    }
+
+
+    protected TextView getLabel() {
+        return label;
+    }
+
+    protected ImageView getMarker() {
+        return marker;
+    }
+
+    protected Context getContext() {
+        return context;
     }
 
     /*
@@ -107,7 +117,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
      */
 
     public interface OnVideoClicked {
-        public void onVideoClicked(final Video video);
+        void onVideoClicked(final Video video);
     }
 
 }

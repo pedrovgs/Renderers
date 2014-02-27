@@ -1,4 +1,6 @@
-package com.pedrogomez.renderers;
+package com.pedrogomez.renderers.model;
+
+import com.pedrogomez.renderers.AdapteeCollection;
 
 import java.util.Collection;
 import java.util.List;
@@ -49,7 +51,7 @@ public class VideoCollection implements AdapteeCollection<Video> {
     }
 
     @Override
-    public void removeAll(Collection<Video> elements){
+    public void removeAll(Collection<Video> elements) {
         videos.removeAll(elements);
     }
 }

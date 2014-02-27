@@ -1,4 +1,4 @@
-package com.pedrogomez.renderers.renderers;
+package com.pedrogomez.renderers.ui.renderers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.pedrogomez.renderers.R;
-import com.pedrogomez.renderers.Video;
+import com.pedrogomez.renderers.model.Video;
 
 import java.util.Date;
 
@@ -47,26 +47,25 @@ public class LiveVideoRenderer extends VideoRenderer {
 
     @Override
     protected void renderLabel() {
-        label.setText("LIVE");
+        getLabel().setText("LIVE");
     }
 
     @Override
     protected void renderMarker(Video video) {
-        marker.setVisibility(View.GONE);
+        getMarker().setVisibility(View.GONE);
     }
 
     @Override
     public void render() {
         super.render();
-        Video video = getContent();
-        renderDate(video);
+        renderDate();
     }
 
     /*
      * Auxiliary methods
      */
 
-    private void renderDate(Video video) {
+    private void renderDate() {
         String now = new Date().toLocaleString();
         date.setText(now);
     }

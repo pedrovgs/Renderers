@@ -1,4 +1,4 @@
-package com.pedrogomez.renderers;
+package com.pedrogomez.renderers.model;
 
 /**
  * Video class created to simulate fake data for the example.
