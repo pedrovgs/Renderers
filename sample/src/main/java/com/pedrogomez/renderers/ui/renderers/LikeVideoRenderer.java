@@ -6,7 +6,8 @@ import com.pedrogomez.renderers.model.Video;
 import com.squareup.picasso.Picasso;
 
 /**
- * VideoRenderer created to contains the liked video renderer presentation logic.
+ * VideoRenderer created to contains the liked video renderer presentation logic. This VideoRenderer subtype only
+ * complete the algorithm implementing renderLabel and renderMarker methods.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -27,7 +28,9 @@ public class LikeVideoRenderer extends VideoRenderer {
     @Override
     protected void renderLabel() {
         Video video = getContent();
-        String labelText = video.isLiked() ? "DISLIKE" : "LIKE";
+        String dislikeLabel = getContext().getString(R.string.dislike_label);
+        String likeLabel = getContext().getString(R.string.like_label);
+        String labelText = video.isLiked() ? dislikeLabel : likeLabel;
         getLabel().setText(labelText);
     }
 

@@ -69,50 +69,74 @@ public class MainActivity extends Activity {
      * Auxiliary methods
      */
 
+    /**
+     * Map all the widget needed from the activity_main.xml layout to activity members.
+     */
     private void mapGUI() {
         listView = (ListView) findViewById(R.id.lv_renderers);
     }
 
-
+    /**
+     * Generate a random video collection with VIDEO_COUNT size.
+     */
     private void initFakeData() {
         videos = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
     }
 
-
+    /**
+     * Obtain a RendererBuilder and initialize RendererAdapter<Video>
+     */
     private void initAdapter() {
         RendererBuilder rendererBuilder = getVideoRendererBuilder();
         LayoutInflater layoutInflater = getLayoutInflater();
         adapter = new RendererAdapter<Video>(layoutInflater, rendererBuilder, videos);
     }
 
+    /**
+     * Generate a VideoRendererBuilder using a list of Renderer<Video> as prototypes.
+     *
+     * @return RendererBuilder configured with a list of Renderer<Video> as prototypes.
+     */
     private RendererBuilder getVideoRendererBuilder() {
         List<Renderer<Video>> prototypes = getPrototypes();
         return new VideoRendererBuilder(prototypes);
     }
 
+    /**
+     * Create a list of prototypes to configure RendererBuilder.
+     * The list of Renderer<Video> that contains all the possible renderers that our RendererBuilder is going to use.
+     *
+     * @return Renderer<Video> prototypes for RendererBuilder.
+     */
     private List<Renderer<Video>> getPrototypes() {
         Context context = getBaseContext();
 
         List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
         LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer(context);
         likeVideoRenderer.setListener(onVideoClickedListener);
+        prototypes.add(likeVideoRenderer);
+
         FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer(context);
         favoriteVideoRenderer.setListener(onVideoClickedListener);
+        prototypes.add(favoriteVideoRenderer);
+
         LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer(context);
         liveVideoRenderer.setListener(onVideoClickedListener);
-
-        prototypes.add(likeVideoRenderer);
-        prototypes.add(favoriteVideoRenderer);
         prototypes.add(liveVideoRenderer);
 
         return prototypes;
     }
 
-
+    /**
+     * Initialize ListVideo with our RendererAdapter.
+     */
     private void initListView() {
         listView.setAdapter(adapter);
     }
 
+    /**
+     * Declare OnVideoClicked listener to be used inside renderers.
+     */
     private VideoRenderer.OnVideoClicked onVideoClickedListener = new VideoRenderer.OnVideoClicked() {
         @Override
         public void onVideoClicked(Video video) {

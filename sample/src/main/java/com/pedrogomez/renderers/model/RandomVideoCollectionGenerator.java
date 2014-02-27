@@ -5,7 +5,7 @@ import com.pedrogomez.renderers.R;
 import java.util.*;
 
 /**
- * Auxiliary class created to generate video collection with random data.
+ * Auxiliary class created to generate a VideoCollection with random data.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -31,6 +31,12 @@ public class RandomVideoCollectionGenerator {
         initializeVideoInfo();
     }
 
+    /**
+     * Generate a VideoCollection with random data obtainded form VIDEO_INFO map.
+     *
+     * @param videoCount size of the collection.
+     * @return VideoCollection generated.
+     */
     public VideoCollection generate(final int videoCount) {
         List<Video> videos = new LinkedList<Video>();
         for (int i = 0; i < videoCount; i++) {
@@ -45,6 +51,9 @@ public class RandomVideoCollectionGenerator {
      * Auxiliary methods
      */
 
+    /**
+     * Initialize VIDEO_INFO data.
+     */
     private void initializeVideoInfo() {
         VIDEO_INFO.put("Video 1", R.drawable.video1);
         VIDEO_INFO.put("Video 2", R.drawable.video2);
@@ -54,7 +63,11 @@ public class RandomVideoCollectionGenerator {
         VIDEO_INFO.put("Video 6", R.drawable.video6);
     }
 
-
+    /**
+     * Create a random video.
+     *
+     * @return random video.
+     */
     private Video generateRandomVideo() {
         Video video = new Video();
         setFavorite(video);

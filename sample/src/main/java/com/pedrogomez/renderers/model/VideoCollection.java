@@ -6,7 +6,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Class created to represent a list of videos
+ * Class created to represent a list of videos. This class has been created to store videos, encapsulate the collection
+ * usage and implements the AdapteeCollection interface needed by RendererAdapter.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */

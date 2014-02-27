@@ -2,5 +2,9 @@
 <resources>
 
     <string name="app_name">Renderers</string>
+    <string name="favorite_label">FAVORITE</string>
+    <string name="like_label">LIKE</string>
+    <string name="dislike_label">DISLIKE</string>
+    <string name="live_label">LIVE</string>
 
 </resources>

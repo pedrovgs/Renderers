@@ -7,7 +7,8 @@ import com.squareup.picasso.Picasso;
 
 
 /**
- * Favorite video renderer created to implement the presentation logic for videos.
+ * Favorite video renderer created to implement the presentation logic for videos. This VideoRenderer subtype only
+ * override renderLabel and renderMarker methods.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -28,7 +29,8 @@ public class FavoriteVideoRenderer extends VideoRenderer {
 
     @Override
     protected void renderLabel() {
-        getLabel().setText("FAVORITE");
+        String label = getContext().getString(R.string.favorite_label);
+        getLabel().setText(label);
     }
 
     @Override

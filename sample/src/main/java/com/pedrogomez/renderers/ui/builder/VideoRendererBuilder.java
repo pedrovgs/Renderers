@@ -10,7 +10,8 @@ import com.pedrogomez.renderers.ui.renderers.LiveVideoRenderer;
 import java.util.List;
 
 /**
- * RendererBuilder extension created to work with videos.
+ * RendererBuilder extension created to work with videos. This class works as connector between RendererAdapter and
+ * VideoRenderers. Define the mapping between Videos and VideoRenderers.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -21,6 +22,15 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
         super(prototypes);
     }
 
+    /**
+     * Method to declare Video-VideoRenderer mapping.
+     * Favorite videos will be rendered using FavoriteVideoRenderer.
+     * Live videos will be rendered using LiveVideoRenderer.
+     * Liked videos will be rendered using LikeVideoRenderer.
+     *
+     * @param content used to map object-renderers.
+     * @return VideoRenderer subtype class.
+     */
     @Override
     protected Class getPrototypeClass(Video content) {
         Class prototypeClass;

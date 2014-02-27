@@ -1,7 +1,7 @@
 package com.pedrogomez.renderers.model;
 
 /**
- * Video class created to simulate fake data for the example.
+ * Main domain class created to simulate fake data for the example.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
