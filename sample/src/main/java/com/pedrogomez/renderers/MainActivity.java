@@ -5,10 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.ListView;
-import com.pedrogomez.renderers.renderers.FavoriteVideoRenderer;
-import com.pedrogomez.renderers.renderers.LikeVideoRenderer;
-import com.pedrogomez.renderers.renderers.LiveVideoRenderer;
-import com.pedrogomez.renderers.renderers.VideoRendererBuilder;
+import android.widget.Toast;
+import com.pedrogomez.renderers.renderers.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -87,8 +85,11 @@ public class MainActivity extends Activity {
 
         List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
         LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer(context);
+        likeVideoRenderer.setListener(onVideoClickedListener);
         FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer(context);
+        favoriteVideoRenderer.setListener(onVideoClickedListener);
         LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer(context);
+        liveVideoRenderer.setListener(onVideoClickedListener);
 
         prototypes.add(likeVideoRenderer);
         prototypes.add(favoriteVideoRenderer);
@@ -101,5 +102,12 @@ public class MainActivity extends Activity {
     private void initListView() {
         listView.setAdapter(adapter);
     }
+
+    private VideoRenderer.OnVideoClicked onVideoClickedListener = new VideoRenderer.OnVideoClicked() {
+        @Override
+        public void onVideoClicked(Video video) {
+            Toast.makeText(getBaseContext(), "Video clicked. Title = " + video.getTitle(), Toast.LENGTH_LONG).show();
+        }
+    };
 
 }

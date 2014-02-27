@@ -23,6 +23,8 @@ public abstract class VideoRenderer extends Renderer<Video> {
      */
     protected final Context context;
 
+    private OnVideoClicked listener;
+
     /*
      * Constructor
      */
@@ -56,7 +58,15 @@ public abstract class VideoRenderer extends Renderer<Video> {
 
     @Override
     protected void hookListeners(View rootView) {
-        //Empty
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    Video video = getContent();
+                    listener.onVideoClicked(video);
+                }
+            }
+        });
     }
 
     @Override
@@ -79,6 +89,9 @@ public abstract class VideoRenderer extends Renderer<Video> {
         this.title.setText(title);
     }
 
+    public void setListener(OnVideoClicked listener) {
+        this.listener = listener;
+    }
 
     /*
      * Abstract methods
@@ -89,5 +102,12 @@ public abstract class VideoRenderer extends Renderer<Video> {
 
     protected abstract void renderMarker(Video video);
 
+    /*
+     * Interface to represent a vide click.
+     */
+
+    public interface OnVideoClicked {
+        public void onVideoClicked(final Video video);
+    }
 
 }
