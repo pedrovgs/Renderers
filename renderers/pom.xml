@@ -12,7 +12,7 @@
     <artifactId>renderers</artifactId>
     <packaging>jar</packaging>
 
-    <name>RENDERERS - BASE</name>
+    <name>RENDERERS - LIBRARY</name>
 
     <dependencies>
         <dependency>
