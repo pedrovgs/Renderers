@@ -127,7 +127,10 @@ public class RendererBuilderTest {
         assertEquals(objectRenderer.getClass(), renderer.getClass());
     }
 
-
+    @Test
+    public void shouldReturnPrototypeSizeOnGetViewTypeCount() {
+        assertEquals(prototypes.size(), rendererBuilder.getViewTypeCount());
+    }
 
 
 

@@ -9,15 +9,15 @@ import java.util.Collection;
  */
 public interface AdapteeCollection<T> {
 
-    public int size();
+    int size();
 
-    public T get(int index);
+    T get(int index);
 
-    public void add(T element);
+    void add(T element);
 
-    public void remove(T element);
+    void remove(T element);
 
-    public void addAll(Collection<T> elements);
+    void addAll(Collection<T> elements);
 
-    public void removeAll(Collection<T> elements);
+    void removeAll(Collection<T> elements);
 }
