@@ -287,7 +287,7 @@ License
     limitations under the License.
 
 
-[1]: https://github.com/pedrovgs/Renderers/blob/master/art/Screenshot_demo_1.png
+[1]: http://raw.github.com/pedrovgs/Renderers/master/art/Screenshot_demo_1.png
 [2]: https://github.com/JakeWharton
 [3]: https://github.com/JakeWharton/butterknife
 [4]: https://vimeo.com/87450999
