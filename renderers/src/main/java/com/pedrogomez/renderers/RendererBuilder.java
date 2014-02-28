@@ -213,12 +213,16 @@ public abstract class RendererBuilder<T> {
      * @return the prototype index associated to the prototypeClass.
      */
     private int getItemViewType(Class prototypeClass) {
-        int itemViewType = 0;
+        int itemViewType = -1;
         for (Renderer renderer : prototypes) {
             if (renderer.getClass().equals(prototypeClass)) {
                 itemViewType = getPrototypeIndex(renderer);
                 break;
             }
+        }
+        if (itemViewType == -1) {
+            throw new PrototypeNotFoundException("Review your RendererBuilder implementation, you are returning one" +
+                    " prototype class not found in prototypes collection");
         }
         return itemViewType;
     }
