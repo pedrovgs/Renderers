@@ -16,14 +16,14 @@
 package com.pedrogomez.renderers.exception;
 
 /**
- * Exception created to be thrown when a RendererBuilder be created without parent. RendererBuilder needs a ViewGroup
- * parent to pass it as parameter to renderers.
+ * RendererException created to be thrown when the RendererBuilder implementation returns a null prototype class.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class NullParentException extends RendererException {
+public class NullPrototypeClassException extends RendererException {
 
-    public NullParentException(String detailMessage) {
+    public NullPrototypeClassException(String detailMessage) {
         super(detailMessage);
     }
+
 }
