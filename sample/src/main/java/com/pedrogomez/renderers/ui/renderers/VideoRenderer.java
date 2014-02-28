@@ -162,7 +162,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
     protected abstract void renderMarker(Video video);
 
     /*
-     * Interface to represent a vide click.
+     * Interface to represent a video click.
      */
 
     public interface OnVideoClicked {

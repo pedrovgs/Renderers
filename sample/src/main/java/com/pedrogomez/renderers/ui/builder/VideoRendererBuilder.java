@@ -58,4 +58,5 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
         }
         return prototypeClass;
     }
+
 }

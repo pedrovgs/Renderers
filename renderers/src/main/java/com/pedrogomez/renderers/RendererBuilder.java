@@ -36,6 +36,7 @@ public abstract class RendererBuilder<T> {
     /*
      * Attributes
      */
+
     private final Collection<Renderer<T>> prototypes;
 
     private T content;
@@ -56,7 +57,7 @@ public abstract class RendererBuilder<T> {
     }
 
     /*
-     * Builder constructor
+     * Builder constructor methods
      */
 
 
@@ -82,6 +83,10 @@ public abstract class RendererBuilder<T> {
         return this;
     }
 
+    /*
+     * Recycle methods
+     */
+
     /**
      * Return the item view type used by the adapter to implement recycle mechanism.
      *
@@ -96,7 +101,7 @@ public abstract class RendererBuilder<T> {
 
     /**
      * Return the amount of renderers to be used in the ListView. This method has to be implemented to support
-     * the adapter recycle mechanism.
+     * the ListView recycle mechanism.
      *
      * @return prototypes size collection.
      */
@@ -105,7 +110,7 @@ public abstract class RendererBuilder<T> {
     }
 
     /**
-     * Main methods of this class. This method is the responsible of recycle or create a new renderer with all the
+     * Main method of this class. This method is the responsible of recycle or create a new renderer with all the
      * needed information to implement the rendering. This method will validate all the attributes passed in the
      * builder constructor and will check if can recycle or has to create a new renderer.
      *
@@ -139,7 +144,7 @@ public abstract class RendererBuilder<T> {
      * Create a renderer getting a copy from the prototypes collection.
      *
      * @param content to render.
-     * @param parent  to inflate the view
+     * @param parent  used to inflate the view.
      * @return a new renderer.
      */
     private Renderer createRenderer(T content, ViewGroup parent) {
@@ -150,7 +155,7 @@ public abstract class RendererBuilder<T> {
     }
 
     /**
-     * Search one prototype using the index. This method has to be implemente because prototypes member is declared with
+     * Search one prototype using the index. This method has to be implemented because prototypes member is declared with
      * Collection and that interface doesn't allow the client code to get one element by index.
      *
      * @param prototypeIndex used to search.
@@ -257,7 +262,7 @@ public abstract class RendererBuilder<T> {
      */
 
     /**
-     * Mehtod to be implemented by the RendererBuilder subtyepes. In this method the library user will define the mapping
+     * Method to be implemented by the RendererBuilder subtypes. In this method the library user will define the mapping
      * between content and renderer class.
      *
      * @param content used to map object-renderers.
@@ -270,7 +275,7 @@ public abstract class RendererBuilder<T> {
      *
      * @return prototypes collection.
      */
-    protected Collection<Renderer<T>> getPrototypes() {
+    protected final Collection<Renderer<T>> getPrototypes() {
         return prototypes;
     }
 

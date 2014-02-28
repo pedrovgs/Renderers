@@ -60,7 +60,7 @@ public abstract class Renderer<T> implements Cloneable {
     }
 
     /**
-     * Method called wieh the renderer has been recycled. This method has the responsibility of update the content stored
+     * Method called when the renderer has been recycled. This method has the responsibility of update the content stored
      * in the renderer.
      *
      * @param content to render.
@@ -70,7 +70,7 @@ public abstract class Renderer<T> implements Cloneable {
     }
 
     /**
-     * Method to access the main view rendered in the renderer.
+     * Method to access the root view rendered in the renderer.
      *
      * @return top view in the view hierarchy of one renderer.
      */
@@ -85,7 +85,7 @@ public abstract class Renderer<T> implements Cloneable {
     /**
      * @return the content stored in the renderer.
      */
-    protected T getContent() {
+    protected final T getContent() {
         return content;
     }
 
@@ -100,7 +100,7 @@ public abstract class Renderer<T> implements Cloneable {
     protected abstract void hookListeners(View rootView);
 
     /**
-     * Inflates the Layout of the Renderer. The view inflated can't be null. If this method returns a null view a
+     * Inflate renderer layout. The view inflated can't be null. If this method returns a null view a
      * NotInflateViewException will be thrown.
      *
      * @param inflater LayoutInflater service to inflate.
@@ -115,11 +115,11 @@ public abstract class Renderer<T> implements Cloneable {
 
     /**
      * Create a clone of the renderer. This method is the base of the prototype mechanism implemented to avoid create
-     * new objects from RendererBuilder
+     * new objects from RendererBuilder. Pay an special attention implementing clone method in Renderer subtypes.
      *
      * @return a copy of the current renderer.
      */
-    protected Renderer copy() {
+    Renderer copy() {
         Renderer copy = null;
         try {
             copy = (Renderer) this.clone();

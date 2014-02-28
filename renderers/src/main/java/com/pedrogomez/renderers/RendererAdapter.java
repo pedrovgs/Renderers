@@ -30,7 +30,7 @@ import java.util.Collection;
  * have to implement a new ListView.
  * <p/>
  * RendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one RendererBuilder to provide
- * renderers to the adapter and one AdapteeCollection to provide the elements to render.
+ * Renderer to RendererAdapterdapter and one AdapteeCollection to provide the elements to render.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -74,6 +74,18 @@ public class RendererAdapter<T> extends BaseAdapter {
         return position;
     }
 
+    /**
+     * Main method of RendererAdapter. This method has the responsibility of update renderer builder values and create
+     * or recycle a new rendere. Once the renderer has been obtained the RendereBuilder will call the render method
+     * in the renderer and will return the renderer root view to the ListView.
+     * <p/>
+     * If rendererBuilder returns a null renderer this method will throw a NullRendererBuiltException.
+     *
+     * @param position    to render.
+     * @param convertView to use to recycle.
+     * @param parent      used to inflate views.
+     * @return view rendered.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         T content = getItem(position);
@@ -90,12 +102,29 @@ public class RendererAdapter<T> extends BaseAdapter {
         return renderer.getRootView();
     }
 
+    /*
+     * Recycle methods.
+     * This methods has to be implemented to allow the ListView recycle our renderers.
+     * The implementation has been delegated to RendereBuilder.
+     */
+
+    /**
+     * Indicate to the ListView the type of renderer used to one position using a numeric value.
+     *
+     * @param position to analyze.
+     * @return the id associated to the renderer used to render the content at position position.
+     */
     @Override
     public int getItemViewType(int position) {
         T content = getItem(position);
         return rendererBuilder.getItemViewType(content);
     }
 
+    /**
+     * Indicate to the ListView the number of different renderers are the RendererBuilder to use.
+     *
+     * @return amount of different renderers.
+     */
     @Override
     public int getViewTypeCount() {
         return rendererBuilder.getViewTypeCount();

@@ -53,14 +53,14 @@ public interface AdapteeCollection<T> {
     void remove(T element);
 
     /**
-     * Add on element collection to the adaptee collection.
+     * Add a element collection to the adaptee collection.
      *
      * @param elements to add.
      */
     void addAll(Collection<T> elements);
 
     /**
-     * Remove on element collection to the adaptee collection.
+     * Remove a element collection to the adaptee collection.
      * @param elements
      */
     void removeAll(Collection<T> elements);

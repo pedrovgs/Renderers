@@ -47,7 +47,7 @@ public class RandomVideoCollectionGenerator {
     }
 
     /**
-     * Generate a VideoCollection with random data obtainded form VIDEO_INFO map.
+     * Generate a VideoCollection with random data obtained form VIDEO_INFO map.
      *
      * @param videoCount size of the collection.
      * @return VideoCollection generated.
