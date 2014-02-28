@@ -4,8 +4,8 @@ Renderers
 Are you bored of creating adapters again and again each time you have to implement a ListView?
 Are you bored of useing ViewHolders and create getView methods with thousand of lines full of if/else if/else sentences?
 
-Renderers it's a library that avoid all the adapter boilerplate needed to create a new adapter and all the spaghetti that
-developers use to create following the ViewHolder classic implementation.
+Renderers it's a library that avoid all the adapter boilerplate needed to create a new adapter and all the spaghetti code that
+developers used to create following the ViewHolder classic implementation.
 
 This library offers you two main classes to extend and create your own render algorithms out of your adapter implementation.
 
