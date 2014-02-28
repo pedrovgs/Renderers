@@ -1,20 +1,21 @@
 Renderers
 =========
 
+
 Are you bored of creating adapters again and again each time you have to implement a ListView?
-Are you bored of useing ViewHolders and create getView methods with thousand of lines full of if/else if/else sentences?
 
-Renderers it's a library that avoid all the adapter boilerplate needed to create a new adapter and all the spaghetti code that
-developers used to create following the ViewHolder classic implementation.
+Are you bored of using ViewHolders and create getView methods with thousand of lines full of if/else if/else sentences?
 
-This library offers you two main classes to extend and create your own render algorithms out of your adapter implementation.
+Renderers it's an Android library created to avoid all the Adapter/ListView boilerplate needed to create a new adapter and all the spaghetti code that developers used to create following the ViewHolder classic implementation.
 
-Renderers is an easy way to work with android ListView and Adapter classes. With this library you only have to create your
-renderers and declare the mapping between the object to render and the renderer.
+This Android library offers you two main classes to extend and create your own rendering algorithms out of your adapter implementation.
+
+Renderers is an easy way to work with android ListView and Adapter classes. With this library you only have to create your renderers and declare the mapping between the object to render and the renderer.
 
 You can find implementation details in this talks:
 
 [Software Design Patterns on Android Video][4]
+
 [Software Design Patterns on Android Slides][5]
 
 
@@ -26,10 +27,9 @@ Screenshots
 Usage
 -----
 
-To use Renderers library and get your ListView working you only have to follow three steps:
+To use Renderers Android library and get your ListView working you only have to follow three steps:
 
-* 1. Create your renderer or renderers extending ```Renderer<T>``. Inside your renderers you will have to implement
-some methods to inflate the layout you want to render and implement the rendering algorithm.
+* 1. Create your renderer or renderers extending ```Renderer<T>``. Inside your renderers you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
 
 ```java
 public abstract class VideoRenderer extends Renderer<Video> {
@@ -173,7 +173,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
 ```
 
 
-You can use [Jake Wharton's][2] [Butterknife][3] library to avoid using findViewById in your renderers if you want.
+You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your renderers if you want.
 
 
 * 2. Create a RendererBuilder with a renderer prototype collection and declare the mapping between the content to render
@@ -251,7 +251,7 @@ private List<Renderer<Video>> getPrototypes() {
 Usage
 -----
 
-Download the project, compile it using ```mvn clean instal``` import ```renderers-1.0.0.jar`` into your project.
+Download the project, compile it using ```mvn clean instal``` import ``renderers-1.0.0.jar`` into your project.
 
 This library will be uploaded to maven central repository asap.
 
@@ -287,7 +287,7 @@ License
     limitations under the License.
 
 
-[1]: https://raw.github.com/pedrovgs/Renderers/master/art/screenshot_demo_1.png
+[1]: https://github.com/pedrovgs/Renderers/blob/master/art/Screenshot_demo_1.png
 [2]: https://github.com/JakeWharton
 [3]: https://github.com/JakeWharton/butterknife
 [4]: https://vimeo.com/87450999
