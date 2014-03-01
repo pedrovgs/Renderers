@@ -29,7 +29,7 @@ Usage
 
 To use Renderers Android library and get your ListView working you only have to follow three steps:
 
-* 1. Create your renderer or renderers extending ```Renderer<T>``. Inside your renderers you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
+* 1. Create your renderer or renderers extending ``Renderer<T>``. Inside your renderers you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
 
 ```java
 public abstract class VideoRenderer extends Renderer<Video> {
