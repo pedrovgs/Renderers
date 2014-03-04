@@ -6,7 +6,7 @@ Are you bored of creating adapters again and again each time you have to impleme
 
 Are you bored of using ViewHolders and create getView methods with thousand of lines full of if/else if/else sentences?
 
-Renderers it's an Android library created to avoid all the Adapter/ListView boilerplate needed to create a new adapter and all the spaghetti code that developers used to create following the ViewHolder classic implementation.
+Renderers is an Android library created to avoid all the Adapter/ListView boilerplate needed to create a new adapter and all the spaghetti code that developers used to create following the ViewHolder classic implementation.
 
 This Android library offers you two main classes to extend and create your own rendering algorithms out of your adapter implementation.
 

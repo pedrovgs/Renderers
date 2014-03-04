@@ -3,12 +3,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.pedrogomez.renderers</groupId>
+    <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers-parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
     <name>RENDERESR - PARENT</name>
+    <description>Library to avoid duplicate adapters code.</description>
+    <url>http://github.com/pedrovgs/Renderers/</url>
+    <inceptionYear>2014</inceptionYear>
+
+    <developers>
+        <developer>
+            <name>Pedro Vicente Gómez Sánchez</name>
+            <email>pedrovicente.gomez@gmail.com</email>
+            <id>pedrovgs</id>
+            <url>http://github.pedrovgs.com</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <modules>
         <module>renderers</module>
@@ -92,5 +113,19 @@
             </dependencies>
         </profile>
     </profiles>
+
+    <licenses>
+        <license>
+            <name>Apache 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/pedrovgs/Renderers/</url>
+        <connection>scm:git:git://github.com/pedrovgs/Renderers.git</connection>
+        <developerConnection>scm:git:git@github.com:pedrovgs/Renderers.git</developerConnection>
+        <tag>1.0.0</tag>
+    </scm>
 
 </project>
