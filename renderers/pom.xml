@@ -6,14 +6,14 @@
     <parent>
         <groupId>com.github.pedrovgs</groupId>
         <artifactId>renderers-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>renderers</artifactId>
     <packaging>jar</packaging>
 
     <name>RENDERERS - LIBRARY</name>
-   
+
 
     <dependencies>
         <dependency>
