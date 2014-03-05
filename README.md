@@ -253,7 +253,22 @@ Usage
 
 Download the project, compile it using ```mvn clean instal``` import ``renderers-1.0.0.jar`` into your project.
 
-This library will be uploaded to maven central repository asap.
+Or declare it into your pom.xml
+
+<dependency>
+    <groupId>com.github.pedrovgs</groupId>
+    <artifactId>renderers</artifactId>
+    <version>1.0.9</version>
+</dependency>
+
+
+Or into your build.gradle
+
+dependencies{
+
+    compile 'com.github.pedrovgs:renderers:1.0.9'
+
+}
 
 Developed By
 ------------
