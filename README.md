@@ -251,25 +251,23 @@ private List<Renderer<Video>> getPrototypes() {
 Usage
 -----
 
-Download the project, compile it using ```mvn clean instal``` import ``renderers-1.0.0.jar`` into your project.
+Download the project, compile it using ```mvn clean install``` import ``renderers-1.0.9.jar`` into your project.
 
 Or declare it into your pom.xml
 
-``
-<dependency>
-    <groupId>com.github.pedrovgs</groupId>
-    <artifactId>renderers</artifactId>
-    <version>1.0.9</version>
-</dependency>
-``
+        <dependency>
+            <groupId>com.github.pedrovgs</groupId>
+            <artifactId>renderers</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+
 
 Or into your build.gradle
 
-``
-dependencies{
-    compile 'com.github.pedrovgs:renderers:1.0.9'
-}
-``
+        dependencies{
+            compile 'com.github.pedrovgs:renderers:1.0.9'
+        }
+
 
 Developed By
 ------------
