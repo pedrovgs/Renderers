@@ -21,6 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 import com.pedrogomez.renderers.R;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.model.Video;
@@ -52,10 +55,14 @@ public abstract class VideoRenderer extends Renderer<Video> {
      * Widgets
      */
 
-    private ImageView thumbnail;
-    private TextView title;
-    private ImageView marker;
-    private TextView label;
+    @InjectView(R.id.iv_thumbnail)
+    ImageView thumbnail;
+    @InjectView(R.id.tv_title)
+    TextView title;
+    @InjectView(R.id.iv_marker)
+    ImageView marker;
+    @InjectView(R.id.tv_label)
+    TextView label;
 
     /**
      * Inflate the main layout used to render videos in the list view.
@@ -66,39 +73,24 @@ public abstract class VideoRenderer extends Renderer<Video> {
      */
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.video_renderer, parent, false);
+        View inflatedView = inflater.inflate(R.layout.video_renderer, parent, false);
+        /*
+         * You don't have to use ButterKnife library to implement the mapping between your layout and your widgets
+         * you can implement setUpView and hookListener methods declared in Renderer<T> class.
+         */
+        ButterKnife.inject(this, inflatedView);
+        return inflatedView;
     }
 
-    /**
-     * Maps all the view elements from the xml declaration to members of this renderer.
-     *
-     * @param rootView
-     */
-    @Override
-    protected void setUpView(View rootView) {
-        thumbnail = (ImageView) rootView.findViewById(R.id.iv_thumbnail);
-        title = (TextView) rootView.findViewById(R.id.tv_title);
-        marker = (ImageView) rootView.findViewById(R.id.iv_marker);
-        label = (TextView) rootView.findViewById(R.id.tv_label);
+
+    @OnClick(R.id.iv_thumbnail)
+    void onVideoClicked() {
+        if (listener != null) {
+            Video video = getContent();
+            listener.onVideoClicked(video);
+        }
     }
 
-    /**
-     * Insert external listeners in some widgets.
-     *
-     * @param rootView
-     */
-    @Override
-    protected void hookListeners(View rootView) {
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    Video video = getContent();
-                    listener.onVideoClicked(video);
-                }
-            }
-        });
-    }
 
     /**
      * Main render algorithm based on render the video thumbnail, render the title, render the marker and the label.
@@ -167,6 +159,31 @@ public abstract class VideoRenderer extends Renderer<Video> {
 
     public interface OnVideoClicked {
         void onVideoClicked(final Video video);
+    }
+
+
+    /**
+     * Maps all the view elements from the xml declaration to members of this renderer.
+     *
+     * @param rootView
+     */
+    @Override
+    protected void setUpView(View rootView) {
+        /*
+         * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
+         */
+    }
+
+    /**
+     * Insert external listeners in some widgets.
+     *
+     * @param rootView
+     */
+    @Override
+    protected void hookListeners(View rootView) {
+        /*
+         * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
+         */
     }
 
 }
