@@ -34,150 +34,87 @@ To use Renderers Android library and get your ListView working you only have to 
 ```java
 public abstract class VideoRenderer extends Renderer<Video> {
 
-    /*
-     * Attributes
-     */
-    private final Context context;
+       private final Context context;
 
-    private OnVideoClicked listener;
-
-    /*
-     * Constructor
-     */
-
-    public VideoRenderer(Context context) {
-        this.context = context;
-    }
-    /*
-     * Widgets
-     */
-
-    private ImageView thumbnail;
-    private TextView title;
-    private ImageView marker;
-    private TextView label;
-
-    /**
-     * Inflate the main layout used to render videos in the list view.
-     *
-     * @param inflater LayoutInflater service to inflate.
-     * @param parent   ViewGroup used to inflate xml.
-     * @return view inflated.
-     */
-    @Override
-    protected View inflate(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.video_renderer, parent, false);
-    }
-
-    /**
-     * Maps all the view elements from the xml declaration to members of this renderer.
-     *
-     * @param rootView
-     */
-    @Override
-    protected void setUpView(View rootView) {
-        thumbnail = (ImageView) rootView.findViewById(R.id.iv_thumbnail);
-        title = (TextView) rootView.findViewById(R.id.tv_title);
-        marker = (ImageView) rootView.findViewById(R.id.iv_marker);
-        label = (TextView) rootView.findViewById(R.id.tv_label);
-    }
-
-    /**
-     * Insert external listeners in some widgets.
-     *
-     * @param rootView
-     */
-    @Override
-    protected void hookListeners(View rootView) {
-        rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    Video video = getContent();
-                    listener.onVideoClicked(video);
-                }
-            }
-        });
-    }
-
-    /**
-     * Main render algorithm based on render the video thumbnail, render the title, render the marker and the label.
-     */
-    @Override
-    protected void render() {
-        Video video = getContent();
-        renderThumbnail(video);
-        renderTitle(video);
-        renderMarker(video);
-        renderLabel();
-    }
-
-    /**
-     * Use picasso to render the video thumbnail into the thumbnail widget using a temporal placeholder.
-     *
-     * @param video to get the rendered thumbnail.
-     */
-    private void renderThumbnail(Video video) {
-        Picasso.with(context).load(video.getResourceThumbnail()).placeholder(R.drawable.placeholder).into(thumbnail);
-    }
+       private OnVideoClicked listener;
 
 
-    /**
-     * Render video title into the title widget.
-     *
-     * @param video to get the video title.
-     */
-    private void renderTitle(Video video) {
-        this.title.setText(video.getTitle());
-    }
+       public VideoRenderer(Context context) {
+           this.context = context;
+       }
 
-    public void setListener(OnVideoClicked listener) {
-        this.listener = listener;
-    }
+       @InjectView(R.id.iv_thumbnail)
+       ImageView thumbnail;
+       @InjectView(R.id.tv_title)
+       TextView title;
+       @InjectView(R.id.iv_marker)
+       ImageView marker;
+       @InjectView(R.id.tv_label)
+       TextView label;
 
-    /*
-     * Protected methods
-     */
+       @Override
+       protected View inflate(LayoutInflater inflater, ViewGroup parent) {
+           View inflatedView = inflater.inflate(R.layout.video_renderer, parent, false);
+           ButterKnife.inject(this, inflatedView);
+           return inflatedView;
+       }
 
-    protected TextView getLabel() {
-        return label;
-    }
 
-    protected ImageView getMarker() {
-        return marker;
-    }
+       @OnClick(R.id.iv_thumbnail)
+       void onVideoClicked() {
+           if (listener != null) {
+               Video video = getContent();
+               listener.onVideoClicked(video);
+           }
+       }
 
-    protected Context getContext() {
-        return context;
-    }
+       @Override
+       protected void render() {
+           Video video = getContent();
+           renderThumbnail(video);
+           renderTitle(video);
+           renderMarker(video);
+           renderLabel();
+       }
 
-    /*
-     * Abstract methods.
-     *
-     * This methods are part of the render algorithm and are going to be implemented by VideoRenderer subtypes.
-     */
+       private void renderThumbnail(Video video) {
+           Picasso.with(context).load(video.getResourceThumbnail()).placeholder(R.drawable.placeholder).into(thumbnail);
+       }
 
-    protected abstract void renderLabel();
+       private void renderTitle(Video video) {
+           this.title.setText(video.getTitle());
+       }
 
-    protected abstract void renderMarker(Video video);
+       public void setListener(OnVideoClicked listener) {
+           this.listener = listener;
+       }
 
-    /*
-     * Interface to represent a video click.
-     */
+       protected TextView getLabel() {
+           return label;
+       }
 
-    public interface OnVideoClicked {
-        void onVideoClicked(final Video video);
-    }
+       protected ImageView getMarker() {
+           return marker;
+       }
+
+       protected Context getContext() {
+           return context;
+       }
+
+       protected abstract void renderLabel();
+
+       protected abstract void renderMarker(Video video);
+
+
 
 }
 ```
 
 
-You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your renderers if you want.
+You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your renderers if you want and [Jake Wharton's][2] [Dagger] [6] library to inject all your dependencies and keep your activities clean of the library initialization code. But use third party libraries is not mandatory.
 
 
-* 2. Create a RendererBuilder with a renderer prototype collection and declare the mapping between the content to render
-and the renderer used.
+* 2. Create a RendererBuilder with a renderer prototype collection and declare the mapping between the content to render and the renderer used.
 
 ```java
 public class VideoRendererBuilder extends RendererBuilder<Video> {
@@ -212,41 +149,20 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
 }
 ```
 
-* 3. Instantiate a new RendererAdapter using the RendererBuilder and one AdapteeCollection.
+* 3. Initialize your ListView with your RendererBuilder<T> and your AdapteeCollection inside Activities and Fragments.
 
 ```java
-private void initAdapter() {
-    RendererBuilder rendererBuilder = getVideoRendererBuilder();
-    LayoutInflater layoutInflater = getLayoutInflater();
-    adapter = new RendererAdapter<Video>(layoutInflater, rendererBuilder, videos);
-    listView.setAdapter(adapter);
-}
 
-private RendererBuilder getVideoRendererBuilder() {
-    List<Renderer<Video>> prototypes = getPrototypes();
-    return new VideoRendererBuilder(prototypes);
-}
+    /**
+     * Initialize ListVideo with our RendererAdapter.
+     */
 
-private List<Renderer<Video>> getPrototypes() {
-    Context context = getBaseContext();
-
-    List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
-    LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer(context);
-    likeVideoRenderer.setListener(onVideoClickedListener);
-    prototypes.add(likeVideoRenderer);
-
-    FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer(context);
-    favoriteVideoRenderer.setListener(onVideoClickedListener);
-    prototypes.add(favoriteVideoRenderer);
-
-    LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer(context);
-    liveVideoRenderer.setListener(onVideoClickedListener);
-    prototypes.add(liveVideoRenderer);
-
-    return prototypes;
-}
-
+    private void initListView() {
+        listView.setAdapter(adapter);
+    }
 ```
+
+The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initialize some entities and findViewById() methods, but you can use this library without third party libraries and provide that dependencies yourself.
 
 Usage
 -----
@@ -306,3 +222,4 @@ License
 [3]: https://github.com/JakeWharton/butterknife
 [4]: https://vimeo.com/87450999
 [5]: http://www.slideshare.net/PedroVicenteGmezSnch/newsfeed?nf_redirect=true
+[6]: https://github.com/square/dagger
