@@ -22,6 +22,7 @@ import com.pedrogomez.renderers.ui.renderers.FavoriteVideoRenderer;
 import com.pedrogomez.renderers.ui.renderers.LikeVideoRenderer;
 import com.pedrogomez.renderers.ui.renderers.LiveVideoRenderer;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ import java.util.List;
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
 
+    @Inject
     public VideoRendererBuilder(List<Renderer<Video>> prototypes) {
         super(prototypes);
     }

@@ -39,6 +39,7 @@ public class SampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initInjection();
     }
 
     /*
@@ -46,8 +47,13 @@ public class SampleApplication extends Application {
      */
 
     private void initInjection() {
-        objectGraph = ObjectGraph.create(new MainModule());
+        MainModule mainModule = new MainModule(getBaseContext());
+        objectGraph = ObjectGraph.create(mainModule);
         objectGraph.inject(this);
         objectGraph.injectStatics();
+    }
+
+    public void inject(Object object) {
+        objectGraph.inject(object);
     }
 }

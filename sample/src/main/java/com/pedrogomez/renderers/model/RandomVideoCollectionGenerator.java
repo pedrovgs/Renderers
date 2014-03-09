@@ -17,6 +17,7 @@ package com.pedrogomez.renderers.model;
 
 import com.pedrogomez.renderers.R;
 
+import javax.inject.Inject;
 import java.util.*;
 
 /**
@@ -41,6 +42,7 @@ public class RandomVideoCollectionGenerator {
      * Constructor
      */
 
+    @Inject
     public RandomVideoCollectionGenerator() {
         this.random = new Random();
         initializeVideoInfo();
