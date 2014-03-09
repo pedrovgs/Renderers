@@ -47,6 +47,18 @@
             <version>4.0.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.squareup.dagger</groupId>
+            <artifactId>dagger</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.dagger</groupId>
+            <artifactId>dagger-compiler</artifactId>
+            <version>1.2.1</version>
+            <optional>true</optional>
+        </dependency>
+
 
     </dependencies>
 
