@@ -20,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.pedrogomez.renderers.R;
 import com.pedrogomez.renderers.model.Video;
 
@@ -37,7 +39,8 @@ public class LiveVideoRenderer extends VideoRenderer {
      * Widgets
      */
 
-    private TextView date;
+    @InjectView(R.id.date)
+    TextView date;
 
     /*
      * Constructor
@@ -53,13 +56,16 @@ public class LiveVideoRenderer extends VideoRenderer {
 
     @Override
     protected View inflate(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.live_video_renderer, parent, false);
+        View inflatedView = inflater.inflate(R.layout.live_video_renderer, parent, false);
+        ButterKnife.inject(this, inflatedView);
+        return inflatedView;
     }
 
     @Override
     protected void setUpView(View rootView) {
-        super.setUpView(rootView);
-        date = (TextView) rootView.findViewById(R.id.date);
+         /*
+          * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
+          */
     }
 
     @Override
