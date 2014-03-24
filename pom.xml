@@ -13,7 +13,7 @@
         <version>7</version>
     </parent>
 
-    <name>RENDERESR - PARENT</name>
+    <name>RENDERERS - PARENT</name>
     <description>Library to avoid duplicate adapters code.</description>
     <url>http://github.com/pedrovgs/Renderers/</url>
     <inceptionYear>2014</inceptionYear>
