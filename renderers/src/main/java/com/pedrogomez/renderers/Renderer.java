@@ -32,10 +32,6 @@ import com.pedrogomez.renderers.exception.NotInflateViewException;
  */
 public abstract class Renderer<T> implements Cloneable {
 
-    /*
-     * Attributes
-     */
-
     private View rootView;
     private T content;
 
@@ -77,10 +73,6 @@ public abstract class Renderer<T> implements Cloneable {
     View getRootView() {
         return rootView;
     }
-
-    /*
-     * Protected and abstract methods
-     */
 
     /**
      * @return the content stored in the renderer.

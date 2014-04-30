@@ -23,18 +23,11 @@ import static org.mockito.Mockito.when;
  */
 public class RendererBuilderTest {
 
-    /*
-     * Test data
-     */
-
     private ObjectRendererBuilder rendererBuilder;
 
     private List<Renderer<Object>> prototypes;
     private ObjectRenderer objectRenderer;
     private SubObjectRenderer subObjectRenderer;
-    /*
-     * Mocks
-     */
 
     @Mock
     private View mockedConvertView;
@@ -47,21 +40,12 @@ public class RendererBuilderTest {
     @Mock
     private View mockedRendererdView;
 
-
-    /*
-     * Before and after methods
-     */
-
     @Before
     public void setUp() {
         initializeMocks();
         initializePrototypes();
         initializeRendererBuilder();
     }
-
-    /*
-     * Test methods
-     */
 
     @Test(expected = NeedsPrototypesException.class)
     public void shouldThrowNeedsPrototypeExceptionIfPrototypesIsNull() {
@@ -146,12 +130,6 @@ public class RendererBuilderTest {
     public void shouldReturnPrototypeSizeOnGetViewTypeCount() {
         assertEquals(prototypes.size(), rendererBuilder.getViewTypeCount());
     }
-
-
-
-    /*
-     * Auxiliary methods
-     */
 
     private void initializeMocks() {
         MockitoAnnotations.initMocks(this);

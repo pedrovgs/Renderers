@@ -22,16 +22,8 @@ import static org.mockito.Mockito.when;
 
 public class RendererTest {
 
-    /*
-     * Text data
-     */
-
     @Spy
     private ObjectRenderer renderer;
-
-    /*
-     * Mocks
-     */
 
     @Mock
     private Object mockedContent;
@@ -42,20 +34,11 @@ public class RendererTest {
     @Mock
     private View mockedView;
 
-    /*
-     * Before and after methods
-     */
-
     @Before
     public void setUp() {
         initializeRenderer();
         initializeMocks();
     }
-
-
-    /*
-     * Test methods
-     */
 
     @Test
     public void shouldKeepTheContentAfterOnCreateCall() {
@@ -118,12 +101,6 @@ public class RendererTest {
 
         assertEquals(mockedContent, renderer.getContent());
     }
-
-
-
-    /*
-     * Auxiliary methods
-     */
 
     private void initializeRenderer() {
         renderer = new ObjectRenderer();

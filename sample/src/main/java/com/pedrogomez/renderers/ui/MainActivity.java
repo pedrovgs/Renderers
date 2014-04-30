@@ -34,23 +34,11 @@ import javax.inject.Inject;
  */
 public class MainActivity extends Activity {
 
-    /*
-     * Attributes
-     */
-
     @Inject
     RendererAdapter<Video> adapter;
 
-    /*
-     * Widgets
-     */
     @InjectView(R.id.lv_renderers)
     ListView listView;
-
-
-    /*
-     * Activity lifecycle
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +47,6 @@ public class MainActivity extends Activity {
         initInjection();
         initListView();
     }
-
-    /*
-     * Auxiliary methods
-     */
 
     /**
      * Initialize ListVideo with our RendererAdapter.

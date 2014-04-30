@@ -28,18 +28,11 @@ import java.util.List;
  */
 public class VideoCollection implements AdapteeCollection<Video> {
 
-    /*
-     * Attributes
-     */
     private final List<Video> videos;
 
     public VideoCollection(List<Video> videos) {
         this.videos = videos;
     }
-
-    /*
-     * Implemented methods
-     */
 
     @Override
     public int size() {

@@ -26,15 +26,7 @@ import dagger.ObjectGraph;
  */
 public class SampleApplication extends Application {
 
-    /*
-     * Attributes
-     */
-
     private ObjectGraph objectGraph;
-
-    /*
-     * Application lifecycle methods.
-     */
 
     @Override
     public void onCreate() {
@@ -42,10 +34,10 @@ public class SampleApplication extends Application {
         initInjection();
     }
 
-    /*
-     * Auxiliary methods
-     */
-
+    public void inject(Object object) {
+        objectGraph.inject(object);
+    }
+    
     private void initInjection() {
         MainModule mainModule = new MainModule(getBaseContext());
         objectGraph = ObjectGraph.create(mainModule);
@@ -53,7 +45,4 @@ public class SampleApplication extends Application {
         objectGraph.injectStatics();
     }
 
-    public void inject(Object object) {
-        objectGraph.inject(object);
-    }
 }

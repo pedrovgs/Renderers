@@ -36,28 +36,15 @@ import java.util.Collection;
  */
 public class RendererAdapter<T> extends BaseAdapter {
 
-    /*
-     * Attributes
-     */
-
     private LayoutInflater layoutInflater;
     private RendererBuilder<T> rendererBuilder;
     private AdapteeCollection<T> collection;
-
-
-    /*
-     * Constructor
-     */
 
     public RendererAdapter(LayoutInflater layoutInflater, RendererBuilder rendererBuilder, AdapteeCollection<T> collection) {
         this.layoutInflater = layoutInflater;
         this.rendererBuilder = rendererBuilder;
         this.collection = collection;
     }
-
-    /*
-     * Implemented methods
-     */
 
     @Override
     public int getCount() {
@@ -101,12 +88,6 @@ public class RendererAdapter<T> extends BaseAdapter {
         renderer.render();
         return renderer.getRootView();
     }
-
-    /*
-     * Recycle methods.
-     * This methods has to be implemented to allow the ListView recycle our renderers.
-     * The implementation has been delegated to RendereBuilder.
-     */
 
     /**
      * Indicate to the ListView the type of renderer used to one position using a numeric value.

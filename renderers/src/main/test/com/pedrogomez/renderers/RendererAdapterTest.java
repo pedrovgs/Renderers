@@ -25,11 +25,6 @@ import static org.mockito.Mockito.*;
 @RunWith(RobolectricTestRunner.class)
 public class RendererAdapterTest {
 
-
-    /*
-     * Constants
-     */
-
     private static final int ANY_SIZE = 11;
     private static final int ANY_POSITION = 2;
     private static final Object ANY_OBJECT = new Object();
@@ -37,15 +32,7 @@ public class RendererAdapterTest {
     private static final int ANY_VIEW_TYPE_COUNT = 4;
     private static final Collection<Object> ANY_OBJECT_COLLECTION = new LinkedList<Object>();
 
-    /*
-     * Test data
-     */
-
     private RendererAdapter<Object> rendererAdapter;
-
-    /*
-     * Mocks
-     */
 
     @Mock
     private LayoutInflater mockedLayoutInflater;
@@ -62,19 +49,11 @@ public class RendererAdapterTest {
     @Mock
     private View mockedView;
 
-    /*
-     * Before and after methods
-     */
-
     @Before
     public void setUp() throws Exception {
         initializeMocks();
         initializeRendererAdapter();
     }
-
-    /*
-     * Test methods
-     */
 
     @Test
     public void shouldReturnTheAdapteeCollection() {
@@ -187,10 +166,6 @@ public class RendererAdapterTest {
 
         verify(mockedCollection).removeAll(ANY_OBJECT_COLLECTION);
     }
-
-    /*
-     * Auxiliary methods
-     */
 
     private void initializeMocks() {
         MockitoAnnotations.initMocks(this);

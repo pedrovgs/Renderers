@@ -12,23 +12,12 @@ import javax.inject.Inject;
  */
 public class OnVideoClickedListener implements VideoRenderer.OnVideoClicked {
 
-    /*
-     * Attributes
-     */
     private Context context;
-
-    /*
-     * Constructor
-     */
 
     @Inject
     public OnVideoClickedListener(Context context) {
         this.context = context;
     }
-
-    /*
-     * Implemented methods
-     */
 
     @Override
     public void onVideoClicked(Video video) {

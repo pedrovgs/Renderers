@@ -22,19 +22,11 @@ package com.pedrogomez.renderers.model;
  */
 public class Video {
 
-    /*
-     * Attributes
-     */
-
     private boolean favorite;
     private boolean liked;
     private boolean live;
     private int resourceThumbnail;
     private String title;
-
-    /*
-     * Getters and setters
-     */
 
     public boolean isFavorite() {
         return favorite;

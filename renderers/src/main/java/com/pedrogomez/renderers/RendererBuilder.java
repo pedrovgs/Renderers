@@ -33,20 +33,12 @@ import java.util.Collection;
  */
 public abstract class RendererBuilder<T> {
 
-    /*
-     * Attributes
-     */
-
     private final Collection<Renderer<T>> prototypes;
 
     private T content;
     private View convertView;
     private ViewGroup parent;
     private LayoutInflater layoutInflater;
-
-    /*
-     * Constructor
-     */
 
     public RendererBuilder(Collection<Renderer<T>> prototypes) {
         if (prototypes == null || prototypes.isEmpty()) {
@@ -55,11 +47,6 @@ public abstract class RendererBuilder<T> {
         }
         this.prototypes = prototypes;
     }
-
-    /*
-     * Builder constructor methods
-     */
-
 
     RendererBuilder withContent(T content) {
         this.content = content;
@@ -82,10 +69,6 @@ public abstract class RendererBuilder<T> {
         this.layoutInflater = layoutInflater;
         return this;
     }
-
-    /*
-     * Recycle methods
-     */
 
     /**
      * Return the item view type used by the adapter to implement recycle mechanism.
@@ -260,10 +243,6 @@ public abstract class RendererBuilder<T> {
             throw new NullLayoutInflaterException("RendererBuilder needs a LayoutInflater to inflate renderers");
         }
     }
-
-    /*
-     * Abstract method
-     */
 
     /**
      * Method to be implemented by the RendererBuilder subtypes. In this method the library user will define the mapping

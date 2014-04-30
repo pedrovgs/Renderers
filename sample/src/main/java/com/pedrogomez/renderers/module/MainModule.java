@@ -46,29 +46,13 @@ import java.util.List;
 })
 public class MainModule {
 
-    /*
-     * Constants
-     */
-
     private static final int VIDEO_COUNT = 100;
 
-    /*
-     * Attributes
-     */
-
     private Context context;
-
-    /*
-     * Constructor
-     */
 
     public MainModule(Context context) {
         this.context = context;
     }
-
-    /*
-     * Provisioning methods
-     */
 
     @Provides
     RendererAdapter<Video> provideVideoRendererAdapter(RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater, VideoRendererBuilder rendererBuilder) {
@@ -93,10 +77,6 @@ public class MainModule {
     Context provideContext() {
         return context;
     }
-
-    /*
-     * Auxiliary methods
-     */
 
     /**
      * Create a list of prototypes to configure RendererBuilder.

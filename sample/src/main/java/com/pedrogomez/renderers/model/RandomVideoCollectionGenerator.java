@@ -27,20 +27,9 @@ import java.util.*;
  */
 public class RandomVideoCollectionGenerator {
 
-    /*
-     * Constants
-     */
     private static final Map<String, Integer> VIDEO_INFO = new HashMap<String, Integer>();
 
-    /*
-     * Attributes
-     */
-
     private Random random;
-
-    /*
-     * Constructor
-     */
 
     @Inject
     public RandomVideoCollectionGenerator() {
@@ -62,11 +51,6 @@ public class RandomVideoCollectionGenerator {
         }
         return new VideoCollection(videos);
     }
-
-
-    /*
-     * Auxiliary methods
-     */
 
     /**
      * Initialize VIDEO_INFO data.
