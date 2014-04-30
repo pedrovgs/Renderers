@@ -171,18 +171,21 @@ Download the project, compile it using ```mvn clean install``` import ``renderer
 
 Or declare it into your pom.xml
 
-        <dependency>
-            <groupId>com.github.pedrovgs</groupId>
-            <artifactId>renderers</artifactId>
-            <version>1.0.9</version>
-        </dependency>
+```xml
+<dependency>
+    <groupId>com.github.pedrovgs</groupId>
+    <artifactId>renderers</artifactId>
+    <version>1.0.9</version>
+</dependency>
+```
 
 
 Or into your build.gradle
-
-        dependencies{
-            compile 'com.github.pedrovgs:renderers:1.0.9'
-        }
+```groovy
+dependencies{
+    compile 'com.github.pedrovgs:renderers:1.0.9'
+}
+```
 
 
 Developed By
