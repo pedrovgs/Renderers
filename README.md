@@ -1,4 +1,4 @@
-Renderers
+Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=master)](https://travis-ci.org/pedrovgs/Renderers)
 =========
 
 
