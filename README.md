@@ -204,6 +204,7 @@ Who's using it
 --------------
 
 * [El Rubius Vídeos][7]
+* [Tuenti][8]
 
 *Does your app use Renderers? If you want to be featured on this list drop me a line.*
 
@@ -233,3 +234,4 @@ License
 [5]: http://www.slideshare.net/PedroVicenteGmezSnch/newsfeed?nf_redirect=true
 [6]: https://github.com/square/dagger
 [7]: https://play.google.com/store/apps/details?id=com.nero.elrubiusomg
+[8]: https://play.google.com/store/apps/details?hl=es&id=com.tuenti.messenger
