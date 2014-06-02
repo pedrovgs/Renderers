@@ -26,23 +26,22 @@ import dagger.ObjectGraph;
  */
 public class SampleApplication extends Application {
 
-    private ObjectGraph objectGraph;
+  private ObjectGraph objectGraph;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        initInjection();
-    }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    initInjection();
+  }
 
-    public void inject(Object object) {
-        objectGraph.inject(object);
-    }
-    
-    private void initInjection() {
-        MainModule mainModule = new MainModule(getBaseContext());
-        objectGraph = ObjectGraph.create(mainModule);
-        objectGraph.inject(this);
-        objectGraph.injectStatics();
-    }
+  public void inject(Object object) {
+    objectGraph.inject(object);
+  }
 
+  private void initInjection() {
+    MainModule mainModule = new MainModule(getBaseContext());
+    objectGraph = ObjectGraph.create(mainModule);
+    objectGraph.inject(this);
+    objectGraph.injectStatics();
+  }
 }

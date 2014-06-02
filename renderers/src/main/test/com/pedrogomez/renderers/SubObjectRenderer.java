@@ -11,29 +11,29 @@ import android.view.ViewGroup;
  */
 public class SubObjectRenderer extends Renderer<Object> {
 
-    private View view;
+  private View view;
 
-    @Override
-    protected void setUpView(View rootView) {
+  @Override
+  protected void setUpView(View rootView) {
 
-    }
+  }
 
-    @Override
-    protected void hookListeners(View rootView) {
+  @Override
+  protected void hookListeners(View rootView) {
 
-    }
+  }
 
-    @Override
-    protected View inflate(LayoutInflater inflater, ViewGroup parent) {
-        return view;
-    }
+  @Override
+  protected View inflate(LayoutInflater inflater, ViewGroup parent) {
+    return view;
+  }
 
-    @Override
-    protected void render() {
+  @Override
+  public void render() {
 
-    }
+  }
 
-    public void setView(View view) {
-        this.view = view;
-    }
+  public void setView(View view) {
+    this.view = view;
+  }
 }

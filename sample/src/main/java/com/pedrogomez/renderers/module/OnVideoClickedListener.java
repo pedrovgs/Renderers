@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.Toast;
 import com.pedrogomez.renderers.model.Video;
 import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
-
 import javax.inject.Inject;
 
 /**
@@ -12,15 +11,15 @@ import javax.inject.Inject;
  */
 public class OnVideoClickedListener implements VideoRenderer.OnVideoClicked {
 
-    private Context context;
+  private Context context;
 
-    @Inject
-    public OnVideoClickedListener(Context context) {
-        this.context = context;
-    }
+  @Inject
+  public OnVideoClickedListener(Context context) {
+    this.context = context;
+  }
 
-    @Override
-    public void onVideoClicked(Video video) {
-        Toast.makeText(context, "Video clicked. Title = " + video.getTitle(), Toast.LENGTH_LONG).show();
-    }
+  @Override
+  public void onVideoClicked(Video video) {
+    Toast.makeText(context, "Video clicked. Title = " + video.getTitle(), Toast.LENGTH_LONG).show();
+  }
 }

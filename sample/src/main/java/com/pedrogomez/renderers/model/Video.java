@@ -22,49 +22,49 @@ package com.pedrogomez.renderers.model;
  */
 public class Video {
 
-    private boolean favorite;
-    private boolean liked;
-    private boolean live;
-    private int resourceThumbnail;
-    private String title;
+  private boolean favorite;
+  private boolean liked;
+  private boolean live;
+  private int resourceThumbnail;
+  private String title;
 
-    public boolean isFavorite() {
-        return favorite;
-    }
+  public boolean isFavorite() {
+    return favorite;
+  }
 
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
-    }
+  public void setFavorite(boolean favorite) {
+    this.favorite = favorite;
+  }
 
-    public boolean isLiked() {
-        return liked;
-    }
+  public boolean isLiked() {
+    return liked;
+  }
 
-    public void setLiked(boolean liked) {
-        this.liked = liked;
-    }
+  public void setLiked(boolean liked) {
+    this.liked = liked;
+  }
 
-    public int getResourceThumbnail() {
-        return resourceThumbnail;
-    }
+  public int getResourceThumbnail() {
+    return resourceThumbnail;
+  }
 
-    public void setResourceThumbnail(int resourceThumbnail) {
-        this.resourceThumbnail = resourceThumbnail;
-    }
+  public void setResourceThumbnail(int resourceThumbnail) {
+    this.resourceThumbnail = resourceThumbnail;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public boolean isLive() {
-        return live;
-    }
+  public boolean isLive() {
+    return live;
+  }
 
-    public void setLive(boolean live) {
-        this.live = live;
-    }
+  public void setLive(boolean live) {
+    this.live = live;
+  }
 }

@@ -22,7 +22,7 @@ package com.pedrogomez.renderers.exception;
  */
 public class RendererException extends RuntimeException {
 
-    public RendererException(String detailMessage) {
-        super(detailMessage);
-    }
+  public RendererException(String detailMessage) {
+    super(detailMessage);
+  }
 }

@@ -9,12 +9,12 @@ import java.util.List;
  */
 public class ObjectRendererBuilder extends RendererBuilder<Object> {
 
-    public ObjectRendererBuilder(List<Renderer<Object>> prototypes) {
-        super(prototypes);
-    }
+  public ObjectRendererBuilder(List<Renderer<Object>> prototypes) {
+    super(prototypes);
+  }
 
-    @Override
-    protected Class getPrototypeClass(Object content) {
-        return null;
-    }
+  @Override
+  protected Class getPrototypeClass(Object content) {
+    return null;
+  }
 }

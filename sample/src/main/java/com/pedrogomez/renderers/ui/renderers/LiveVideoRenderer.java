@@ -24,11 +24,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.pedrogomez.renderers.R;
 import com.pedrogomez.renderers.model.Video;
-
 import java.util.Date;
 
 /**
- * VideoRenderer created to contains the live video presentation logic. This VideoRenderer subtype change the inflated
+ * VideoRenderer created to contains the live video presentation logic. This VideoRenderer subtype
+ * change the inflated
  * layout and override the renderer algorithm to add a new phase to render the date.
  *
  * @author Pedro Vicente Gómez Sánchez.
@@ -39,59 +39,57 @@ public class LiveVideoRenderer extends VideoRenderer {
      * Widgets
      */
 
-    @InjectView(R.id.date)
-    TextView date;
+  @InjectView(R.id.date) TextView date;
 
     /*
      * Constructor
      */
 
-    public LiveVideoRenderer(Context context) {
-        super(context);
-    }
+  public LiveVideoRenderer(Context context) {
+    super(context);
+  }
 
     /*
      * Override methods
      */
 
-    @Override
-    protected View inflate(LayoutInflater inflater, ViewGroup parent) {
-        View inflatedView = inflater.inflate(R.layout.live_video_renderer, parent, false);
-        ButterKnife.inject(this, inflatedView);
-        return inflatedView;
-    }
+  @Override
+  protected View inflate(LayoutInflater inflater, ViewGroup parent) {
+    View inflatedView = inflater.inflate(R.layout.live_video_renderer, parent, false);
+    ButterKnife.inject(this, inflatedView);
+    return inflatedView;
+  }
 
-    @Override
-    protected void setUpView(View rootView) {
+  @Override
+  protected void setUpView(View rootView) {
          /*
           * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
           */
-    }
+  }
 
-    @Override
-    protected void renderLabel() {
-        getLabel().setText(getContext().getString(R.string.live_label));
-    }
+  @Override
+  protected void renderLabel() {
+    getLabel().setText(getContext().getString(R.string.live_label));
+  }
 
-    @Override
-    protected void renderMarker(Video video) {
-        getMarker().setVisibility(View.GONE);
-    }
+  @Override
+  protected void renderMarker(Video video) {
+    getMarker().setVisibility(View.GONE);
+  }
 
-    @Override
-    public void render() {
-        super.render();
-        renderDate();
-    }
+  @Override
+  public void render() {
+    super.render();
+    renderDate();
+  }
 
     /*
      * Auxiliary methods
      */
 
-    private void renderDate() {
-        String now = new Date().toLocaleString();
-        date.setText(now);
-    }
-
+  private void renderDate() {
+    String now = new Date().toLocaleString();
+    date.setText(now);
+  }
 }
 

@@ -24,7 +24,6 @@ import com.pedrogomez.renderers.R;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.pedrogomez.renderers.SampleApplication;
 import com.pedrogomez.renderers.model.Video;
-
 import javax.inject.Inject;
 
 /**
@@ -34,34 +33,31 @@ import javax.inject.Inject;
  */
 public class MainActivity extends Activity {
 
-    @Inject
-    RendererAdapter<Video> adapter;
+  @Inject RendererAdapter<Video> adapter;
 
-    @InjectView(R.id.lv_renderers)
-    ListView listView;
+  @InjectView(R.id.lv_renderers) ListView listView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initInjection();
-        initListView();
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    initInjection();
+    initListView();
+  }
 
-    /**
-     * Initialize ListVideo with our RendererAdapter.
-     */
-    private void initListView() {
-        listView.setAdapter(adapter);
-    }
+  /**
+   * Initialize ListVideo with our RendererAdapter.
+   */
+  private void initListView() {
+    listView.setAdapter(adapter);
+  }
 
-    /**
-     * Initialize injection from SampleApplication
-     */
-    private void initInjection() {
-        SampleApplication application = (SampleApplication) getApplication();
-        application.inject(this);
-        ButterKnife.inject(this);
-    }
-
+  /**
+   * Initialize injection from SampleApplication
+   */
+  private void initInjection() {
+    SampleApplication application = (SampleApplication) getApplication();
+    application.inject(this);
+    ButterKnife.inject(this);
+  }
 }
