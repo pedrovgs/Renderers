@@ -175,7 +175,7 @@ Or declare it into your pom.xml
 <dependency>
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers</artifactId>
-    <version>1.0.10</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -183,7 +183,7 @@ Or declare it into your pom.xml
 Or into your build.gradle
 ```groovy
 dependencies{
-    compile 'com.github.pedrovgs:renderers:1.0.10'
+    compile 'com.github.pedrovgs:renderers:1.1.0'
 }
 ```
 
