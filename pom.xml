@@ -40,7 +40,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.8.2</junit.version>
         <android.version>4.1.1.4</android.version>
-        <renderers.version>1.0.23-SNAPSHOT</renderers.version>
+        <renderers.version>${version}</renderers.version>
         <butterknife.version>4.0.1</butterknife.version>
         <dagger.version>1.2.1</dagger.version>
         <robolectric.version>2.2</robolectric.version>
