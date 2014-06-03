@@ -167,7 +167,7 @@ The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initi
 Usage
 -----
 
-Download the project, compile it using ```mvn clean install``` import ``renderers-1.1.0.jar`` into your project.
+Download the project, compile it using ```mvn clean install``` import ``renderers-1.1.1.jar`` into your project.
 
 Or declare it into your pom.xml
 
@@ -175,7 +175,7 @@ Or declare it into your pom.xml
 <dependency>
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 
@@ -183,7 +183,7 @@ Or declare it into your pom.xml
 Or into your build.gradle
 ```groovy
 dependencies{
-    compile 'com.github.pedrovgs:renderers:1.1.0'
+    compile 'com.github.pedrovgs:renderers:1.1.1'
 }
 ```
 
