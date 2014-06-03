@@ -60,7 +60,8 @@ public abstract class Renderer<T> implements Cloneable {
   }
 
   /**
-   * Method called when the renderer has been recycled. This method has the responsibility of update
+   * Method called when the renderer has been recycled. This method has the responsibility of
+   * update
    * the content stored
    * in the renderer.
    *
@@ -75,7 +76,7 @@ public abstract class Renderer<T> implements Cloneable {
    *
    * @return top view in the view hierarchy of one renderer.
    */
-  View getRootView() {
+  public View getRootView() {
     return rootView;
   }
 
