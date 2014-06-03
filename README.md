@@ -167,7 +167,7 @@ The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initi
 Usage
 -----
 
-Download the project, compile it using ```mvn clean install``` import ``renderers-1.0.9.jar`` into your project.
+Download the project, compile it using ```mvn clean install``` import ``renderers-1.1.0.jar`` into your project.
 
 Or declare it into your pom.xml
 
