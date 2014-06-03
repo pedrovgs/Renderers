@@ -75,7 +75,7 @@ public abstract class Renderer<T> implements Cloneable {
    *
    * @return top view in the view hierarchy of one renderer.
    */
-  View getRootView() {
+  public View getRootView() {
     return rootView;
   }
 
