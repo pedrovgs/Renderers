@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.github.pedrovgs</groupId>
         <artifactId>renderers-parent</artifactId>
-        <version>1.0.22-SNAPSHOT</version>
+        <version>1.0.22</version>
     </parent>
 
     <artifactId>renderers</artifactId>
-    <version>1.0.22-SNAPSHOT</version>
+    <version>1.0.22</version>
     <packaging>jar</packaging>
 
     <name>RENDERERS - LIBRARY</name>
