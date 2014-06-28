@@ -230,8 +230,8 @@ License
 [1]: http://raw.github.com/pedrovgs/Renderers/master/art/Screenshot_demo_1.png
 [2]: https://github.com/JakeWharton
 [3]: https://github.com/JakeWharton/butterknife
-[4]: https://vimeo.com/87450999
-[5]: http://www.slideshare.net/PedroVicenteGmezSnch/newsfeed?nf_redirect=true
+[4]: http://media.fib.upc.edu/fibtv/streamingmedia/view/2/930
+[5]: http://www.slideshare.net/PedroVicenteGmezSnch/software-design-patterns-on-android
 [6]: https://github.com/square/dagger
 [7]: https://play.google.com/store/apps/details?id=com.nero.elrubiusomg
 [8]: https://play.google.com/store/apps/details?hl=es&id=com.tuenti.messenger
