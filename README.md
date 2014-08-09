@@ -119,47 +119,67 @@ You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById c
 ```java
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
+  @Inject
+  public VideoRendererBuilder(Context context, VideoRenderer.OnVideoClicked onVideoClicked) {
+    Collection<Renderer<Video>> prototypes = getPrototypes(context, onVideoClicked);
+    setPrototypes(prototypes);
+  }
 
-    public VideoRendererBuilder(List<Renderer<Video>> prototypes) {
-        super(prototypes);
+  /**
+   * Method to declare Video-VideoRenderer mapping.
+   * Favorite videos will be rendered using FavoriteVideoRenderer.
+   * Live videos will be rendered using LiveVideoRenderer.
+   * Liked videos will be rendered using LikeVideoRenderer.
+   *
+   * @param content used to map object-renderers.
+   * @return VideoRenderer subtype class.
+   */
+  @Override
+  protected Class getPrototypeClass(Video content) {
+    Class prototypeClass;
+    if (content.isFavorite()) {
+      prototypeClass = FavoriteVideoRenderer.class;
+    } else if (content.isLive()) {
+      prototypeClass = LiveVideoRenderer.class;
+    } else {
+      prototypeClass = LikeVideoRenderer.class;
     }
+    return prototypeClass;
+  }
 
-    /**
-     * Method to declare Video-VideoRenderer mapping.
-     * Favorite videos will be rendered using FavoriteVideoRenderer.
-     * Live videos will be rendered using LiveVideoRenderer.
-     * Liked videos will be rendered using LikeVideoRenderer.
-     *
-     * @param content used to map object-renderers.
-     * @return VideoRenderer subtype class.
-     */
-    @Override
-    protected Class getPrototypeClass(Video content) {
-        Class prototypeClass;
-        if (content.isFavorite()) {
-            prototypeClass = FavoriteVideoRenderer.class;
-        } else if (content.isLive()) {
-            prototypeClass = LiveVideoRenderer.class;
-        } else {
-            prototypeClass = LikeVideoRenderer.class;
-        }
-        return prototypeClass;
-    }
+  /**
+   * Create a list of prototypes to configure RendererBuilder.
+   * The list of Renderer<Video> that contains all the possible renderers that our RendererBuilder
+   * is going to use.
+   *
+   * @return Renderer<Video> prototypes for RendererBuilder.
+   */
+  private List<Renderer<Video>> getPrototypes(Context context,
+      VideoRenderer.OnVideoClicked onVideoClickedListener) {
+    List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
+    LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer(context);
+    likeVideoRenderer.setListener(onVideoClickedListener);
+    prototypes.add(likeVideoRenderer);
 
+    FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer(context);
+    favoriteVideoRenderer.setListener(onVideoClickedListener);
+    prototypes.add(favoriteVideoRenderer);
+
+    LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer(context);
+    liveVideoRenderer.setListener(onVideoClickedListener);
+    prototypes.add(liveVideoRenderer);
+
+    return prototypes;
+  }
 }
 ```
 
 * 3. Initialize your ListView with your RendererBuilder<T> and your AdapteeCollection inside Activities and Fragments.
 
 ```java
-
-    /**
-     * Initialize ListVideo with our RendererAdapter.
-     */
-
-    private void initListView() {
-        listView.setAdapter(adapter);
-    }
+private void initListView() {
+    listView.setAdapter(adapter);
+}
 ```
 
 The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initialize some entities and findViewById() methods, but you can use this library without third party libraries and provide that dependencies yourself.
@@ -167,7 +187,7 @@ The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initi
 Usage
 -----
 
-Download the project, compile it using ```mvn clean install``` import ``renderers-1.1.1.jar`` into your project.
+Download the project, compile it using ```mvn clean install``` import ``renderers-1.2.jar`` into your project.
 
 Or declare it into your pom.xml
 
@@ -175,7 +195,7 @@ Or declare it into your pom.xml
 <dependency>
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers</artifactId>
-    <version>1.1.1</version>
+    <version>1.2</version>
 </dependency>
 ```
 
@@ -183,7 +203,7 @@ Or declare it into your pom.xml
 Or into your build.gradle
 ```groovy
 dependencies{
-    compile 'com.github.pedrovgs:renderers:1.1.1'
+    compile 'com.github.pedrovgs:renderers:1.2'
 }
 ```
 
@@ -205,6 +225,7 @@ Who's using it
 
 * [El Rubius Vídeos][7]
 * [Tuenti][8]
+* [DudePerfect Vídeos][9]
 
 *Does your app use Renderers? If you want to be featured on this list drop me a line.*
 
@@ -235,3 +256,4 @@ License
 [6]: https://github.com/square/dagger
 [7]: https://play.google.com/store/apps/details?id=com.nero.elrubiusomg
 [8]: https://play.google.com/store/apps/details?hl=es&id=com.tuenti.messenger
+[9]: https://play.google.com/store/apps/details?id=com.nero.dudeperfect
