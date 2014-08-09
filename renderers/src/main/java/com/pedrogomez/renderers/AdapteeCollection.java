@@ -62,4 +62,9 @@ public interface AdapteeCollection<T> {
    * Remove a element collection to the adaptee collection.
    */
   void removeAll(Collection<T> elements);
+
+  /**
+   * Remove all element inside the collection.
+   */
+  void clear();
 }

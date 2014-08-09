@@ -21,8 +21,8 @@ import java.util.List;
 
 /**
  * Class created to represent a list of videos. This class has been created to store videos,
- * encapsulate the collection
- * usage and implements the AdapteeCollection interface needed by RendererAdapter.
+ * encapsulate the collection usage and implements the AdapteeCollection interface needed by
+ * RendererAdapter.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -62,5 +62,9 @@ public class VideoCollection implements AdapteeCollection<Video> {
   @Override
   public void removeAll(Collection<Video> elements) {
     videos.removeAll(elements);
+  }
+
+  @Override public void clear() {
+    videos.clear();
   }
 }
