@@ -17,7 +17,6 @@ package com.pedrogomez.renderers.module;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.pedrogomez.renderers.SampleApplication;
 import com.pedrogomez.renderers.model.RandomVideoCollectionGenerator;
@@ -25,14 +24,8 @@ import com.pedrogomez.renderers.model.Video;
 import com.pedrogomez.renderers.model.VideoCollection;
 import com.pedrogomez.renderers.ui.MainActivity;
 import com.pedrogomez.renderers.ui.builder.VideoRendererBuilder;
-import com.pedrogomez.renderers.ui.renderers.FavoriteVideoRenderer;
-import com.pedrogomez.renderers.ui.renderers.LikeVideoRenderer;
-import com.pedrogomez.renderers.ui.renderers.LiveVideoRenderer;
-import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
 import dagger.Module;
 import dagger.Provides;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Dagger main module created to provide main dependencies.
@@ -61,10 +54,8 @@ public class MainModule {
     return adapter;
   }
 
-  @Provides VideoRendererBuilder provideVideoRendererBuilder(
-      OnVideoClickedListener onVideoClickListener) {
-    List<Renderer<Video>> prototypes = getPrototypes(onVideoClickListener);
-    return new VideoRendererBuilder(prototypes);
+  @Provides VideoRendererBuilder provideVideoRendererBuilder(VideoRendererBuilder impl) {
+    return impl;
   }
 
   @Provides LayoutInflater provideLayoutInflater() {
@@ -73,29 +64,5 @@ public class MainModule {
 
   @Provides Context provideContext() {
     return context;
-  }
-
-  /**
-   * Create a list of prototypes to configure RendererBuilder.
-   * The list of Renderer<Video> that contains all the possible renderers that our RendererBuilder
-   * is going to use.
-   *
-   * @return Renderer<Video> prototypes for RendererBuilder.
-   */
-  private List<Renderer<Video>> getPrototypes(VideoRenderer.OnVideoClicked onVideoClickedListener) {
-    List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
-    LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer(context);
-    likeVideoRenderer.setListener(onVideoClickedListener);
-    prototypes.add(likeVideoRenderer);
-
-    FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer(context);
-    favoriteVideoRenderer.setListener(onVideoClickedListener);
-    prototypes.add(favoriteVideoRenderer);
-
-    LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer(context);
-    liveVideoRenderer.setListener(onVideoClickedListener);
-    prototypes.add(liveVideoRenderer);
-
-    return prototypes;
   }
 }

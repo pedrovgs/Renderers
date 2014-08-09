@@ -31,26 +31,28 @@ import java.util.Collection;
  * renderer.
  * <p/>
  * The library users have to extends RendererBuilder and create a new one with prototypes. The
- * RendererBuilder
- * implementation will have to declare the mapping between objects from the adaptee collection and
- * renderers passed
- * int the prototypes collection.
+ * RendererBuilder implementation will have to declare the mapping between objects from the adaptee
+ * collection and renderers passed int the prototypes collection.
  *
  * @author Pedro Vicente Gómez Sánchez
  */
 public abstract class RendererBuilder<T> {
 
-  private final Collection<Renderer<T>> prototypes;
+  private Collection<Renderer<T>> prototypes;
 
   private T content;
   private View convertView;
   private ViewGroup parent;
   private LayoutInflater layoutInflater;
 
+  public RendererBuilder() {
+
+  }
+
   public RendererBuilder(Collection<Renderer<T>> prototypes) {
     if (prototypes == null || prototypes.isEmpty()) {
       throw new NeedsPrototypesException(
-          "RendeerrBuilder have to be created with a non empty collection of"
+          "RendererBuilder have to be created with a non empty collection of"
               + "Collection<Renderer<T> to provide new or recycled renderers");
     }
     this.prototypes = prototypes;
@@ -272,5 +274,17 @@ public abstract class RendererBuilder<T> {
    */
   protected final Collection<Renderer<T>> getPrototypes() {
     return prototypes;
+  }
+
+  /**
+   * Configure prototypes used as Renderers.
+   */
+  protected final void setPrototypes(Collection<Renderer<T>> prototypes) {
+    if (prototypes == null || prototypes.isEmpty()) {
+      throw new NeedsPrototypesException(
+          "RendererBuilder have to be created with a non empty collection of"
+              + "Collection<Renderer<T> to provide new or recycled renderers");
+    }
+    this.prototypes = prototypes;
   }
 }
