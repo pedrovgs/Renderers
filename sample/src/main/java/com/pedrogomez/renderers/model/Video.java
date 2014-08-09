@@ -25,7 +25,7 @@ public class Video {
   private boolean favorite;
   private boolean liked;
   private boolean live;
-  private String resourceThumbnail;
+  private String thumbnail;
   private String title;
 
   public boolean isFavorite() {
@@ -44,12 +44,12 @@ public class Video {
     this.liked = liked;
   }
 
-  public String getResourceThumbnail() {
-    return resourceThumbnail;
+  public String getThumbnail() {
+    return thumbnail;
   }
 
-  public void setResourceThumbnail(String resourceThumbnail) {
-    this.resourceThumbnail = resourceThumbnail;
+  public void setThumbnail(String resourceThumbnail) {
+    this.thumbnail = resourceThumbnail;
   }
 
   public String getTitle() {

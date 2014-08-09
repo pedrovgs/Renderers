@@ -97,7 +97,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
    */
   private void renderThumbnail(Video video) {
     Picasso.with(context)
-        .load(video.getResourceThumbnail())
+        .load(video.getThumbnail())
         .placeholder(R.drawable.placeholder)
         .into(thumbnail);
   }

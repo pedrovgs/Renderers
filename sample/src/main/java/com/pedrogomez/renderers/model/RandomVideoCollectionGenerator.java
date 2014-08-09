@@ -83,41 +83,35 @@ public class RandomVideoCollectionGenerator {
    */
   private Video generateRandomVideo() {
     Video video = new Video();
-    setFavorite(video);
-    setLiked(video);
-    setLive(video);
-    setTitle(video);
-    setThumbnail(video);
+    configureFavoriteStatus(video);
+    configureLikeStatus(video);
+    configureLiveStatus(video);
+    configureTitleAndThumbnail(video);
     return video;
   }
 
-  private void setLiked(Video video) {
+  private void configureLikeStatus(final Video video) {
     boolean liked = random.nextBoolean();
     video.setLiked(liked);
   }
 
-  private void setFavorite(final Video video) {
+  private void configureFavoriteStatus(final Video video) {
     boolean favorite = random.nextBoolean();
     video.setFavorite(favorite);
   }
 
-  private void setLive(final Video video) {
+  private void configureLiveStatus(final Video video) {
     boolean live = random.nextBoolean();
     video.setLive(live);
   }
 
-  private void setTitle(final Video video) {
+  private void configureTitleAndThumbnail(final Video video) {
     int maxInt = VIDEO_INFO.size();
     int randomIndex = random.nextInt(maxInt);
     String title = getKeyForIndex(randomIndex);
     video.setTitle(title);
-  }
-
-  private void setThumbnail(final Video video) {
-    int maxInt = VIDEO_INFO.size();
-    int randomIndex = random.nextInt(maxInt);
-    String thumbanil = getValueForIndex(randomIndex);
-    video.setResourceThumbnail(thumbanil);
+    String thumbnail = getValueForIndex(randomIndex);
+    video.setThumbnail(thumbnail);
   }
 
   private String getKeyForIndex(int randomIndex) {
