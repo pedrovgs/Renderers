@@ -27,12 +27,11 @@ import java.util.Collection;
  * to create new lists.
  * <p/>
  * This class is the heart of this library. It's used to avoid the library users declare a new
- * renderer each time they
- * have to implement a new ListView.
+ * renderer each time they have to implement a new ListView.
  * <p/>
  * RendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one
- * RendererBuilder to provide
- * Renderer to RendererAdapterdapter and one AdapteeCollection to provide the elements to render.
+ * RendererBuilder to provide Renderer to RendererAdapterdapter and one AdapteeCollection to
+ * provide the elements to render.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -66,10 +65,9 @@ public class RendererAdapter<T> extends BaseAdapter {
 
   /**
    * Main method of RendererAdapter. This method has the responsibility of update renderer builder
-   * values and create
-   * or recycle a new rendere. Once the renderer has been obtained the RendereBuilder will call the
-   * render method
-   * in the renderer and will return the renderer root view to the ListView.
+   * values and create or recycle a new rendere. Once the renderer has been obtained the
+   * RendereBuilder will call the render method in the renderer and will return the renderer root
+   * view to the ListView.
    * <p/>
    * If rendererBuilder returns a null renderer this method will throw a
    * NullRendererBuiltException.
@@ -166,8 +164,7 @@ public class RendererAdapter<T> extends BaseAdapter {
    * Empty implementation created to allow the client code to extend this class without override
    * getView method.
    * This method is called before render the renderer and can be used in RendererAdapter extension
-   * to add extra
-   * info to the renderer created.
+   * to add extra info to the renderer created.
    *
    * @param content to be rendered.
    * @param renderer to be used to paint the content.

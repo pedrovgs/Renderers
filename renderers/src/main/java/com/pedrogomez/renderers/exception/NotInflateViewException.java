@@ -17,8 +17,7 @@ package com.pedrogomez.renderers.exception;
 
 /**
  * Exception created to be thrown when any renderer is not inflating a view. All renderers have to
- * inflate a view
- * and return it in inflateView method.
+ * inflate a view and return it in inflateView method.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */

@@ -102,10 +102,9 @@ public abstract class RendererBuilder<T> {
 
   /**
    * Main method of this class. This method is the responsible of recycle or create a new renderer
-   * with all the
-   * needed information to implement the rendering. This method will validate all the attributes
-   * passed in the
-   * builder constructor and will check if can recycle or has to create a new renderer.
+   * with all the needed information to implement the rendering. This method will validate all the
+   * attributes passed in the builder constructor and will check if can recycle or has to create a
+   * new renderer.
    */
   Renderer build() {
     validateAttributes();
@@ -147,8 +146,8 @@ public abstract class RendererBuilder<T> {
 
   /**
    * Search one prototype using the index. This method has to be implemented because prototypes
-   * member is declared with
-   * Collection and that interface doesn't allow the client code to get one element by index.
+   * member is declared with Collection and that interface doesn't allow the client code to get one
+   * element by index.
    *
    * @param prototypeIndex used to search.
    * @return prototype renderer.
@@ -259,8 +258,7 @@ public abstract class RendererBuilder<T> {
 
   /**
    * Method to be implemented by the RendererBuilder subtypes. In this method the library user will
-   * define the mapping
-   * between content and renderer class.
+   * define the mapping between content and renderer class.
    *
    * @param content used to map object-renderers.
    * @return the class associated to the renderer.
