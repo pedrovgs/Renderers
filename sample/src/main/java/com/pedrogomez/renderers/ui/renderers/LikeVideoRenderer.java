@@ -21,25 +21,17 @@ import com.pedrogomez.renderers.model.Video;
 import com.squareup.picasso.Picasso;
 
 /**
- * VideoRenderer created to contains the liked video renderer presentation logic. This VideoRenderer
- * subtype only
- * complete the algorithm implementing renderLabel and renderMarker methods.
+ * VideoRenderer created to contains the liked video renderer presentation logic. This
+ * VideoRenderer subtype only complete the algorithm implementing renderLabel and renderMarker
+ * methods.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class LikeVideoRenderer extends VideoRenderer {
 
-    /*
-     * Constructor
-     */
-
   public LikeVideoRenderer(Context context) {
     super(context);
   }
-
-    /*
-     * Implemented methods
-     */
 
   @Override
   protected void renderLabel() {

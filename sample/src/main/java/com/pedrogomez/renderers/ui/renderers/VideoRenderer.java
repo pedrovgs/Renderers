@@ -31,35 +31,24 @@ import com.squareup.picasso.Picasso;
 
 /**
  * Abstract class that works as base renderer for Renderer<Video>. This class implements the main
- * render algorithm
- * and declare some abstract methods to be implemented by subtypes.
+ * render algorithm and declare some abstract methods to be implemented by subtypes.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public abstract class VideoRenderer extends Renderer<Video> {
 
-  /*
-   * Attributes
-   */
   private final Context context;
-
-  private OnVideoClicked listener;
-
-    /*
-     * Constructor
-     */
-
-  public VideoRenderer(Context context) {
-    this.context = context;
-  }
-    /*
-     * Widgets
-     */
 
   @InjectView(R.id.iv_thumbnail) ImageView thumbnail;
   @InjectView(R.id.tv_title) TextView title;
   @InjectView(R.id.iv_marker) ImageView marker;
   @InjectView(R.id.tv_label) TextView label;
+
+  private OnVideoClicked listener;
+
+  public VideoRenderer(Context context) {
+    this.context = context;
+  }
 
   /**
    * Inflate the main layout used to render videos in the list view.
@@ -125,10 +114,6 @@ public abstract class VideoRenderer extends Renderer<Video> {
     this.listener = listener;
   }
 
-    /*
-     * Protected methods
-     */
-
   protected TextView getLabel() {
     return label;
   }
@@ -141,23 +126,9 @@ public abstract class VideoRenderer extends Renderer<Video> {
     return context;
   }
 
-    /*
-     * Abstract methods.
-     *
-     * This methods are part of the render algorithm and are going to be implemented by VideoRenderer subtypes.
-     */
-
   protected abstract void renderLabel();
 
   protected abstract void renderMarker(Video video);
-
-    /*
-     * Interface to represent a video click.
-     */
-
-  public interface OnVideoClicked {
-    void onVideoClicked(final Video video);
-  }
 
   /**
    * Maps all the view elements from the xml declaration to members of this renderer.
@@ -177,5 +148,9 @@ public abstract class VideoRenderer extends Renderer<Video> {
         /*
          * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
          */
+  }
+
+  public interface OnVideoClicked {
+    void onVideoClicked(final Video video);
   }
 }
