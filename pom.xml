@@ -47,6 +47,7 @@
     <mockito-all.version>1.9.5</mockito-all.version>
     <android-maven-plugin.version>3.8.0</android-maven-plugin.version>
     <maven-surefire-plugin.version>2.13</maven-surefire-plugin.version>
+    <picasso.version>2.3.3</picasso.version>
   </properties>
 
   <dependencyManagement>
@@ -79,7 +80,7 @@
       <dependency>
         <groupId>com.squareup.picasso</groupId>
         <artifactId>picasso</artifactId>
-        <version>2.1.1</version>
+        <version>${picasso.version}</version>
       </dependency>
 
       <dependency>
