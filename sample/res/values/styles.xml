@@ -1,8 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <!-- Base application theme. -->
   <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-    <!-- Customize your theme here. -->
+
+  </style>
+
+  <style name="AppTheme.RootView">
+    <item name="android:layout_height">fill_parent</item>
+    <item name="android:layout_width">fill_parent</item>
+  </style>
+
+  <style name="AppTheme.RootView.Vertical">
+    <item name="android:orientation">vertical</item>
+  </style>
+
+
+  <style name="AppTheme.ListView">
+    <item name="android:layout_height">fill_parent</item>
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:dividerHeight">@dimen/divider_height</item>
   </style>
 
 </resources>
