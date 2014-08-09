@@ -24,6 +24,7 @@ import com.pedrogomez.renderers.model.Video;
 import com.pedrogomez.renderers.model.VideoCollection;
 import com.pedrogomez.renderers.ui.MainActivity;
 import com.pedrogomez.renderers.ui.builder.VideoRendererBuilder;
+import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
 import dagger.Module;
 import dagger.Provides;
 
@@ -59,15 +60,15 @@ public class MainModule {
     return adapter;
   }
 
-  @Provides VideoRendererBuilder provideVideoRendererBuilder(VideoRendererBuilder impl) {
-    return impl;
-  }
-
   @Provides LayoutInflater provideLayoutInflater() {
     return LayoutInflater.from(context);
   }
 
   @Provides Context provideContext() {
     return context;
+  }
+
+  @Provides VideoRenderer.OnVideoClicked provideOnVideoClicked(OnVideoClickedListener impl) {
+    return impl;
   }
 }
