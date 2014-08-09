@@ -45,6 +45,11 @@ public class MainModule {
     this.context = context;
   }
 
+  /*
+   * This is a sample of how to inject a RendererAdapter<T> in your code you can inject an empty one
+   * or create a new instance an then assign it to the ListView. Initialize here the RendererAdapter
+   * data is completely optional.
+   */
   @Provides RendererAdapter<Video> provideVideoRendererAdapter(
       RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater,
       VideoRendererBuilder rendererBuilder) {
