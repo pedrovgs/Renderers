@@ -5,3 +5,7 @@ android:
     - build-tools-20.0.0
     - extra-android-m2repository
     - android-20
+
+install: mvn clean install
+
+script: mvn checkstyle:checkstyle
