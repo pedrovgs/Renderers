@@ -58,22 +58,20 @@ public class RandomVideoCollectionGenerator {
    * Initialize VIDEO_INFO data.
    */
   private void initializeVideoInfo() {
-    VIDEO_INFO.put("The Big Bang Theory",
-        "http://thetvdb.com/banners/fanart/original/80379-38.jpg");
-    VIDEO_INFO.put("Breking Bad", "http://thetvdb.com/banners/fanart/original/81189-21.jpg");
-    VIDEO_INFO.put("Arrow", "http://thetvdb.com/banners/fanart/original/257655-16.jpg");
-    VIDEO_INFO.put("Game of Thrones", "http://thetvdb.com/banners/fanart/original/121361-15.jpg");
-    VIDEO_INFO.put("Lost", "http://thetvdb.com/banners/fanart/original/73739-53.jpg");
+    VIDEO_INFO.put("The Big Bang Theory", "http://thetvdb.com/banners/_cache/posters/80379-9.jpg");
+    VIDEO_INFO.put("Breaking Bad", "http://thetvdb.com/banners/_cache/posters/81189-22.jpg");
+    VIDEO_INFO.put("Arrow", "http://thetvdb.com/banners/_cache/posters/257655-15.jpg");
+    VIDEO_INFO.put("Game of Thrones", "http://thetvdb.com/banners/_cache/posters/121361-26.jpg");
+    VIDEO_INFO.put("Lost", "http://thetvdb.com/banners/_cache/posters/73739-2.jpg");
     VIDEO_INFO.put("How I met your mother",
-        "http://thetvdb.com/banners/fanart/original/75760-58.jpg");
-    VIDEO_INFO.put("Dexter", "http://thetvdb.com/banners/fanart/original/79349-16.jpg");
-    VIDEO_INFO.put("Sleepy Hollow", "http://thetvdb.com/banners/fanart/original/269578-8.jpg");
-    VIDEO_INFO.put("The Vampire Diaries",
-        "http://thetvdb.com/banners/fanart/original/95491-68.jpg");
-    VIDEO_INFO.put("Friends", "http://thetvdb.com/banners/fanart/original/79168-6.jpg");
-    VIDEO_INFO.put("New Girl", "http://thetvdb.com/banners/fanart/original/248682-11.jpg");
-    VIDEO_INFO.put("The Mentalist", "http://thetvdb.com/banners/fanart/original/82459-12.jpg");
-    VIDEO_INFO.put("Sons of Anarchy", "http://thetvdb.com/banners/fanart/original/82696-65.jpg");
+        "http://thetvdb.com/banners/_cache/posters/75760-29.jpg");
+    VIDEO_INFO.put("Dexter", "http://thetvdb.com/banners/_cache/posters/79349-24.jpg");
+    VIDEO_INFO.put("Sleepy Hollow", "http://thetvdb.com/banners/_cache/posters/269578-5.jpg");
+    VIDEO_INFO.put("The Vampire Diaries", "http://thetvdb.com/banners/_cache/posters/95491-27.jpg");
+    VIDEO_INFO.put("Friends", "http://thetvdb.com/banners/_cache/posters/79168-4.jpg");
+    VIDEO_INFO.put("New Girl", "http://thetvdb.com/banners/_cache/posters/248682-9.jpg");
+    VIDEO_INFO.put("The Mentalist", "http://thetvdb.com/banners/_cache/posters/82459-1.jpg");
+    VIDEO_INFO.put("Sons of Anarchy", "http://thetvdb.com/banners/_cache/posters/82696-1.jpg");
   }
 
   /**
