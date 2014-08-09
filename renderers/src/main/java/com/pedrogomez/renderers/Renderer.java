@@ -60,9 +60,8 @@ public abstract class Renderer<T> implements Cloneable {
   }
 
   /**
-   * Method called when the renderer has been recycled. This method has the responsibility of update
-   * the content stored
-   * in the renderer.
+   * Method called when the renderer has been recycled. This method has the responsibility of
+   * update the content stored in the renderer.
    *
    * @param content to render.
    */

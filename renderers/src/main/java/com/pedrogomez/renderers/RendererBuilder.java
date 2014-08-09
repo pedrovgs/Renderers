@@ -89,9 +89,8 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Return the amount of renderers to be used in the ListView. This method has to be implemented to
-   * support
-   * the ListView recycle mechanism.
+   * Return the amount of renderers to be used in the ListView. This method has to be implemented
+   * to support the ListView recycle mechanism.
    *
    * @return prototypes size collection.
    */
