@@ -15,7 +15,6 @@
  */
 package com.pedrogomez.renderers.model;
 
-import com.pedrogomez.renderers.R;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,7 +29,7 @@ import javax.inject.Inject;
  */
 public class RandomVideoCollectionGenerator {
 
-  private static final Map<String, Integer> VIDEO_INFO = new HashMap<String, Integer>();
+  private static final Map<String, String> VIDEO_INFO = new HashMap<String, String>();
 
   private Random random;
 
@@ -59,12 +58,22 @@ public class RandomVideoCollectionGenerator {
    * Initialize VIDEO_INFO data.
    */
   private void initializeVideoInfo() {
-    VIDEO_INFO.put("Video 1", R.drawable.video1);
-    VIDEO_INFO.put("Video 2", R.drawable.video2);
-    VIDEO_INFO.put("Video 3", R.drawable.video3);
-    VIDEO_INFO.put("Video 4", R.drawable.video4);
-    VIDEO_INFO.put("Video 5", R.drawable.video5);
-    VIDEO_INFO.put("Video 6", R.drawable.video6);
+    VIDEO_INFO.put("The Big Bang Theory",
+        "http://thetvdb.com/banners/fanart/original/80379-38.jpg");
+    VIDEO_INFO.put("Breking Bad", "http://thetvdb.com/banners/fanart/original/81189-21.jpg");
+    VIDEO_INFO.put("Arrow", "http://thetvdb.com/banners/fanart/original/257655-16.jpg");
+    VIDEO_INFO.put("Game of Thrones", "http://thetvdb.com/banners/fanart/original/121361-15.jpg");
+    VIDEO_INFO.put("Lost", "http://thetvdb.com/banners/fanart/original/73739-53.jpg");
+    VIDEO_INFO.put("How I met your mother",
+        "http://thetvdb.com/banners/fanart/original/75760-58.jpg");
+    VIDEO_INFO.put("Dexter", "http://thetvdb.com/banners/fanart/original/79349-16.jpg");
+    VIDEO_INFO.put("Sleepy Hollow", "http://thetvdb.com/banners/fanart/original/269578-8.jpg");
+    VIDEO_INFO.put("The Vampire Diaries",
+        "http://thetvdb.com/banners/fanart/original/95491-68.jpg");
+    VIDEO_INFO.put("Friends", "http://thetvdb.com/banners/fanart/original/79168-6.jpg");
+    VIDEO_INFO.put("New Girl", "http://thetvdb.com/banners/fanart/original/248682-11.jpg");
+    VIDEO_INFO.put("The Mentalist", "http://thetvdb.com/banners/fanart/original/82459-12.jpg");
+    VIDEO_INFO.put("Sons of Anarchy", "http://thetvdb.com/banners/fanart/original/82696-65.jpg");
   }
 
   /**
@@ -107,7 +116,7 @@ public class RandomVideoCollectionGenerator {
   private void setThumbnail(final Video video) {
     int maxInt = VIDEO_INFO.size();
     int randomIndex = random.nextInt(maxInt);
-    int thumbanil = getValueForIndex(randomIndex);
+    String thumbanil = getValueForIndex(randomIndex);
     video.setResourceThumbnail(thumbanil);
   }
 
@@ -122,7 +131,7 @@ public class RandomVideoCollectionGenerator {
     return null;
   }
 
-  private int getValueForIndex(int randomIndex) {
+  private String getValueForIndex(int randomIndex) {
     int i = 0;
     for (String index : VIDEO_INFO.keySet()) {
       if (i == randomIndex) {
@@ -130,6 +139,6 @@ public class RandomVideoCollectionGenerator {
       }
       i++;
     }
-    return -1;
+    return "";
   }
 }
