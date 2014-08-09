@@ -44,6 +44,7 @@ public class LikeVideoRenderer extends VideoRenderer {
 
   @Override
   protected void renderMarker(Video video) {
-    int resource = video.isLiked() ? R.drawable.like_active : R.drawable.like_unactive;Picasso.with(getContext()).load(resource).into(getMarker());
+    int resource = video.isLiked() ? R.drawable.like_active : R.drawable.like_unactive;
+    Picasso.with(getContext()).load(resource).into(getMarker());
   }
 }
