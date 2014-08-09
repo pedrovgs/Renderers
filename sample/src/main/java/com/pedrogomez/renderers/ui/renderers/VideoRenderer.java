@@ -61,8 +61,9 @@ public abstract class VideoRenderer extends Renderer<Video> {
   protected View inflate(LayoutInflater inflater, ViewGroup parent) {
     View inflatedView = inflater.inflate(R.layout.video_renderer, parent, false);
         /*
-         * You don't have to use ButterKnife library to implement the mapping between your layout and your widgets
-         * you can implement setUpView and hookListener methods declared in Renderer<T> class.
+         * You don't have to use ButterKnife library to implement the mapping between your layout
+         * and your widgets you can implement setUpView and hookListener methods declared in
+         * Renderer<T> class.
          */
     ButterKnife.inject(this, inflatedView);
     return inflatedView;
