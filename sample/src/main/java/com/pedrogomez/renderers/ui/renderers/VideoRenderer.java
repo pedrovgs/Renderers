@@ -96,6 +96,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
    * @param video to get the rendered thumbnail.
    */
   private void renderThumbnail(Video video) {
+    Picasso.with(context).cancelRequest(thumbnail);
     Picasso.with(context)
         .load(video.getThumbnail())
         .placeholder(R.drawable.placeholder)
