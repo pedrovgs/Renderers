@@ -18,7 +18,6 @@ package com.pedrogomez.renderers.ui.renderers;
 import android.content.Context;
 import com.pedrogomez.renderers.R;
 import com.pedrogomez.renderers.model.Video;
-import com.squareup.picasso.Picasso;
 
 /**
  * Favorite video renderer created to implement the presentation logic for videos. This
@@ -29,17 +28,9 @@ import com.squareup.picasso.Picasso;
  */
 public class FavoriteVideoRenderer extends VideoRenderer {
 
-    /*
-     * Constructor
-     */
-
   public FavoriteVideoRenderer(Context context) {
     super(context);
   }
-
-    /*
-     * Implemented methods
-     */
 
   @Override
   protected void renderLabel() {
@@ -49,6 +40,6 @@ public class FavoriteVideoRenderer extends VideoRenderer {
 
   @Override
   protected void renderMarker(Video video) {
-    Picasso.with(getContext()).load(R.drawable.fav_active).into(getMarker());
+    getMarker().setImageResource(R.drawable.fav_active);
   }
 }

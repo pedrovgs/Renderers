@@ -35,23 +35,11 @@ import java.util.Date;
  */
 public class LiveVideoRenderer extends VideoRenderer {
 
-    /*
-     * Widgets
-     */
-
   @InjectView(R.id.date) TextView date;
-
-    /*
-     * Constructor
-     */
 
   public LiveVideoRenderer(Context context) {
     super(context);
   }
-
-    /*
-     * Override methods
-     */
 
   @Override
   protected View inflate(LayoutInflater inflater, ViewGroup parent) {
@@ -82,10 +70,6 @@ public class LiveVideoRenderer extends VideoRenderer {
     super.render();
     renderDate();
   }
-
-    /*
-     * Auxiliary methods
-     */
 
   private void renderDate() {
     String now = new Date().toLocaleString();
