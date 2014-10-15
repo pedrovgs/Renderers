@@ -225,7 +225,8 @@ Who's using it
 
 * [El Rubius Vídeos][7]
 * [Tuenti][8]
-* [Finge Gesture Launcher][9] 
+* [Finge Gesture Launcher][9]
+* [Cabify] [10]
 
 *Does your app use Renderers? If you want to be featured on this list drop me a line.*
 
@@ -257,3 +258,4 @@ License
 [7]: https://play.google.com/store/apps/details?id=com.nero.elrubiusomg
 [8]: https://play.google.com/store/apps/details?hl=es&id=com.tuenti.messenger
 [9]: https://play.google.com/store/apps/details?id=com.carlosdelachica.finger
+[10]: https://play.google.com/store/apps/details?id=com.cabify.rider
