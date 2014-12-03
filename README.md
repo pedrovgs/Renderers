@@ -187,7 +187,7 @@ The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initi
 Usage
 -----
 
-Download the project, compile it using ```mvn clean install``` import ``renderers-1.2.jar`` into your project.
+Download the project, compile it using ```mvn clean install``` import ``renderers-1.3.jar`` into your project.
 
 Or declare it into your pom.xml
 
@@ -195,7 +195,7 @@ Or declare it into your pom.xml
 <dependency>
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
 </dependency>
 ```
 
@@ -203,7 +203,7 @@ Or declare it into your pom.xml
 Or into your build.gradle
 ```groovy
 dependencies{
-    compile 'com.github.pedrovgs:renderers:1.2'
+    compile 'com.github.pedrovgs:renderers:1.3'
 }
 ```
 
@@ -227,6 +227,7 @@ Who's using it
 * [Tuenti][8]
 * [Finge Gesture Launcher][9]
 * [Cabify] [10]
+* [InfoJobs] [11]
 
 *Does your app use Renderers? If you want to be featured on this list drop me a line.*
 
@@ -259,3 +260,4 @@ License
 [8]: https://play.google.com/store/apps/details?hl=es&id=com.tuenti.messenger
 [9]: https://play.google.com/store/apps/details?id=com.carlosdelachica.finger
 [10]: https://play.google.com/store/apps/details?id=com.cabify.rider
+[11]: https://play.google.com/store/apps/details?id=net.infojobs.mobile.android
