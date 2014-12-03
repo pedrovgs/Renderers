@@ -32,19 +32,13 @@ public class RendererBuilderTest {
   private ObjectRenderer objectRenderer;
   private SubObjectRenderer subObjectRenderer;
 
-  @Mock
-  private View mockedConvertView;
-  @Mock
-  private ViewGroup mockedParent;
-  @Mock
-  private LayoutInflater mockedLayoutInflater;
-  @Mock
-  private Object mockedContent;
-  @Mock
-  private View mockedRendererdView;
+  @Mock private View mockedConvertView;
+  @Mock private ViewGroup mockedParent;
+  @Mock private LayoutInflater mockedLayoutInflater;
+  @Mock private Object mockedContent;
+  @Mock private View mockedRendererdView;
 
-  @Before
-  public void setUp() {
+  @Before public void setUp() {
     initializeMocks();
     initializePrototypes();
     initializeRendererBuilder();
@@ -97,8 +91,7 @@ public class RendererBuilderTest {
     buildRenderer(mockedContent, mockedConvertView, mockedParent, null);
   }
 
-  @Test
-  public void shouldReturnCreatedRenderer() {
+  @Test public void shouldReturnCreatedRenderer() {
     when(rendererBuilder.getPrototypeClass(mockedContent)).thenReturn(ObjectRenderer.class);
 
     Renderer<Object> renderer =
@@ -107,8 +100,7 @@ public class RendererBuilderTest {
     assertEquals(objectRenderer.getClass(), renderer.getClass());
   }
 
-  @Test
-  public void shouldReturnRecycledRenderer() {
+  @Test public void shouldReturnRecycledRenderer() {
     when(rendererBuilder.getPrototypeClass(mockedContent)).thenReturn(ObjectRenderer.class);
     when(mockedConvertView.getTag()).thenReturn(objectRenderer);
 
@@ -118,8 +110,7 @@ public class RendererBuilderTest {
     assertEquals(objectRenderer, renderer);
   }
 
-  @Test
-  public void shouldCreateRendererEvenIfTagInConvertViewIsNotNull() {
+  @Test public void shouldCreateRendererEvenIfTagInConvertViewIsNotNull() {
     when(rendererBuilder.getPrototypeClass(mockedContent)).thenReturn(ObjectRenderer.class);
     when(mockedConvertView.getTag()).thenReturn(subObjectRenderer);
 
@@ -129,8 +120,7 @@ public class RendererBuilderTest {
     assertEquals(objectRenderer.getClass(), renderer.getClass());
   }
 
-  @Test
-  public void shouldReturnPrototypeSizeOnGetViewTypeCount() {
+  @Test public void shouldReturnPrototypeSizeOnGetViewTypeCount() {
     assertEquals(prototypes.size(), rendererBuilder.getViewTypeCount());
   }
 

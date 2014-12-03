@@ -37,8 +37,7 @@ public class MainActivity extends Activity {
 
   @InjectView(R.id.lv_renderers) ListView listView;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     initInjection();

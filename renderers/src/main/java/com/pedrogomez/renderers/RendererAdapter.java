@@ -48,18 +48,15 @@ public class RendererAdapter<T> extends BaseAdapter {
     this.collection = collection;
   }
 
-  @Override
-  public int getCount() {
+  @Override public int getCount() {
     return collection.size();
   }
 
-  @Override
-  public T getItem(int position) {
+  @Override public T getItem(int position) {
     return collection.get(position);
   }
 
-  @Override
-  public long getItemId(int position) {
+  @Override public long getItemId(int position) {
     return position;
   }
 
@@ -77,8 +74,7 @@ public class RendererAdapter<T> extends BaseAdapter {
    * @param parent used to inflate views.
    * @return view rendered.
    */
-  @Override
-  public View getView(int position, View convertView, ViewGroup parent) {
+  @Override public View getView(int position, View convertView, ViewGroup parent) {
     T content = getItem(position);
     rendererBuilder.withContent(content);
     rendererBuilder.withConvertView(convertView);
@@ -99,8 +95,7 @@ public class RendererAdapter<T> extends BaseAdapter {
    * @param position to analyze.
    * @return the id associated to the renderer used to render the content at position position.
    */
-  @Override
-  public int getItemViewType(int position) {
+  @Override public int getItemViewType(int position) {
     T content = getItem(position);
     return rendererBuilder.getItemViewType(content);
   }
@@ -110,8 +105,7 @@ public class RendererAdapter<T> extends BaseAdapter {
    *
    * @return amount of different renderers.
    */
-  @Override
-  public int getViewTypeCount() {
+  @Override public int getViewTypeCount() {
     return rendererBuilder.getViewTypeCount();
   }
 

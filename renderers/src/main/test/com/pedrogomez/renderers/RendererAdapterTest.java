@@ -23,8 +23,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-@RunWith(RobolectricTestRunner.class)
-public class RendererAdapterTest {
+@RunWith(RobolectricTestRunner.class) public class RendererAdapterTest {
 
   private static final int ANY_SIZE = 11;
   private static final int ANY_POSITION = 2;
@@ -35,66 +34,51 @@ public class RendererAdapterTest {
 
   private RendererAdapter<Object> rendererAdapter;
 
-  @Mock
-  private LayoutInflater mockedLayoutInflater;
-  @Mock
-  private RendererBuilder mockedRendererBuilder;
-  @Mock
-  private AdapteeCollection<Object> mockedCollection;
-  @Mock
-  private View mockedConvertView;
-  @Mock
-  private ViewGroup mockedParent;
-  @Mock
-  private ObjectRenderer mockedRenderer;
-  @Mock
-  private View mockedView;
+  @Mock private LayoutInflater mockedLayoutInflater;
+  @Mock private RendererBuilder mockedRendererBuilder;
+  @Mock private AdapteeCollection<Object> mockedCollection;
+  @Mock private View mockedConvertView;
+  @Mock private ViewGroup mockedParent;
+  @Mock private ObjectRenderer mockedRenderer;
+  @Mock private View mockedView;
 
-  @Before
-  public void setUp() throws Exception {
+  @Before public void setUp() throws Exception {
     initializeMocks();
     initializeRendererAdapter();
   }
 
-  @Test
-  public void shouldReturnTheAdapteeCollection() {
+  @Test public void shouldReturnTheAdapteeCollection() {
     assertEquals(mockedCollection, rendererAdapter.getCollection());
   }
 
-  @Test
-  public void shouldReturnCollectionSizeOnGetCount() {
+  @Test public void shouldReturnCollectionSizeOnGetCount() {
     when(mockedCollection.size()).thenReturn(ANY_SIZE);
 
     assertEquals(ANY_SIZE, rendererAdapter.getCount());
   }
 
-  @Test
-  public void shouldReturnItemAtCollectionPositionOnGetItem() {
+  @Test public void shouldReturnItemAtCollectionPositionOnGetItem() {
     when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
   }
 
-  @Test
-  public void shouldReturnPositionAsItemId() {
+  @Test public void shouldReturnPositionAsItemId() {
     assertEquals(ANY_POSITION, rendererAdapter.getItemId(ANY_POSITION));
   }
 
-  @Test
-  public void shouldDelegateIntoRendererBuilderToGetItemViewType() {
+  @Test public void shouldDelegateIntoRendererBuilderToGetItemViewType() {
     when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererBuilder.getItemViewType(ANY_OBJECT)).thenReturn(ANY_ITEM_VIEW_TYPE);
 
     assertEquals(ANY_ITEM_VIEW_TYPE, rendererAdapter.getItemViewType(ANY_POSITION));
   }
 
-  @Test
-  public void shouldDelegateIntoRendererBuilderToGetViewTypeCount() {
+  @Test public void shouldDelegateIntoRendererBuilderToGetViewTypeCount() {
     when(mockedRendererBuilder.getViewTypeCount()).thenReturn(ANY_VIEW_TYPE_COUNT);
 
     assertEquals(ANY_VIEW_TYPE_COUNT, rendererAdapter.getViewTypeCount());
   }
 
-  @Test
-  public void shouldBuildRendererUsingAllNeededDependencies() {
+  @Test public void shouldBuildRendererUsingAllNeededDependencies() {
     when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
 
@@ -106,8 +90,7 @@ public class RendererAdapterTest {
     verify(mockedRendererBuilder).withLayoutInflater(mockedLayoutInflater);
   }
 
-  @Test
-  public void shouldBuildRendererAndCallUpdateRendererExtraValues() {
+  @Test public void shouldBuildRendererAndCallUpdateRendererExtraValues() {
     when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
 
@@ -121,8 +104,7 @@ public class RendererAdapterTest {
     rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
   }
 
-  @Test
-  public void shouldRenderTheRendererBuilt() {
+  @Test public void shouldRenderTheRendererBuilt() {
     when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
 
     rendererAdapter.getView(ANY_POSITION, mockedConvertView, mockedParent);
@@ -130,8 +112,7 @@ public class RendererAdapterTest {
     verify(mockedRenderer).render();
   }
 
-  @Test
-  public void shouldRenturnRendererRootView() {
+  @Test public void shouldRenturnRendererRootView() {
     when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
     when(mockedRenderer.getRootView()).thenReturn(mockedView);
 
@@ -140,36 +121,31 @@ public class RendererAdapterTest {
     assertEquals(mockedView, renderedView);
   }
 
-  @Test
-  public void shouldAddElementToAdapteeCollection() {
+  @Test public void shouldAddElementToAdapteeCollection() {
     rendererAdapter.add(ANY_OBJECT);
 
     verify(mockedCollection).add(ANY_OBJECT);
   }
 
-  @Test
-  public void shouldAddAllEmentsToAdapteeCollection() {
+  @Test public void shouldAddAllEmentsToAdapteeCollection() {
     rendererAdapter.addAll(ANY_OBJECT_COLLECTION);
 
     verify(mockedCollection).addAll(ANY_OBJECT_COLLECTION);
   }
 
-  @Test
-  public void shouldRemoveElementFromAdapteeCollection() {
+  @Test public void shouldRemoveElementFromAdapteeCollection() {
     rendererAdapter.remove(ANY_OBJECT);
 
     verify(mockedCollection).remove(ANY_OBJECT);
   }
 
-  @Test
-  public void shouldRemoveAllElementsFromAdapteeCollection() {
+  @Test public void shouldRemoveAllElementsFromAdapteeCollection() {
     rendererAdapter.removeAll(ANY_OBJECT_COLLECTION);
 
     verify(mockedCollection).removeAll(ANY_OBJECT_COLLECTION);
   }
 
-  @Test
-  public void shouldClearElementsFromAdapteeCollection(){
+  @Test public void shouldClearElementsFromAdapteeCollection() {
     rendererAdapter.clear();
 
     verify(mockedCollection).clear();

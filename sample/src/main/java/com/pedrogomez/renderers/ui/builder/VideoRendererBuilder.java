@@ -37,8 +37,8 @@ import javax.inject.Inject;
  */
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
-  @Inject
-  public VideoRendererBuilder(Context context, VideoRenderer.OnVideoClicked onVideoClicked) {
+  @Inject public VideoRendererBuilder(Context context,
+      VideoRenderer.OnVideoClicked onVideoClicked) {
     Collection<Renderer<Video>> prototypes = getPrototypes(context, onVideoClicked);
     setPrototypes(prototypes);
   }
@@ -52,8 +52,7 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
    * @param content used to map object-renderers.
    * @return VideoRenderer subtype class.
    */
-  @Override
-  protected Class getPrototypeClass(Video content) {
+  @Override protected Class getPrototypeClass(Video content) {
     Class prototypeClass;
     if (content.isFavorite()) {
       prototypeClass = FavoriteVideoRenderer.class;

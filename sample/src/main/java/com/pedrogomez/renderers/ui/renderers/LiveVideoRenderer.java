@@ -41,32 +41,27 @@ public class LiveVideoRenderer extends VideoRenderer {
     super(context);
   }
 
-  @Override
-  protected View inflate(LayoutInflater inflater, ViewGroup parent) {
+  @Override protected View inflate(LayoutInflater inflater, ViewGroup parent) {
     View inflatedView = inflater.inflate(R.layout.live_video_renderer, parent, false);
     ButterKnife.inject(this, inflatedView);
     return inflatedView;
   }
 
-  @Override
-  protected void setUpView(View rootView) {
+  @Override protected void setUpView(View rootView) {
          /*
           * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
           */
   }
 
-  @Override
-  protected void renderLabel() {
+  @Override protected void renderLabel() {
     getLabel().setText(getContext().getString(R.string.live_label));
   }
 
-  @Override
-  protected void renderMarker(Video video) {
+  @Override protected void renderMarker(Video video) {
     getMarker().setVisibility(View.GONE);
   }
 
-  @Override
-  public void render() {
+  @Override public void render() {
     super.render();
     renderDate();
   }

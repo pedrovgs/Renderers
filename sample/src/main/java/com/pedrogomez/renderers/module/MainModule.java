@@ -35,8 +35,7 @@ import dagger.Provides;
  */
 @Module(injects = {
     SampleApplication.class, MainActivity.class,
-})
-public class MainModule {
+}) public class MainModule {
 
   private static final int VIDEO_COUNT = 100;
 

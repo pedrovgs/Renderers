@@ -28,8 +28,7 @@ public class SampleApplication extends Application {
 
   private ObjectGraph objectGraph;
 
-  @Override
-  public void onCreate() {
+  @Override public void onCreate() {
     super.onCreate();
     initInjection();
   }

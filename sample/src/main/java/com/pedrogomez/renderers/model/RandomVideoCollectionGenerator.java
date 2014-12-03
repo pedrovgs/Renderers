@@ -33,8 +33,7 @@ public class RandomVideoCollectionGenerator {
 
   private Random random;
 
-  @Inject
-  public RandomVideoCollectionGenerator() {
+  @Inject public RandomVideoCollectionGenerator() {
     this.random = new Random();
     initializeVideoInfo();
   }

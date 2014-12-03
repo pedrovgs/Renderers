@@ -1,62 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.github.pedrovgs</groupId>
-        <artifactId>renderers-parent</artifactId>
-        <version>1.4-SNAPSHOT</version>
-    </parent>
-
-    <artifactId>renderers</artifactId>
+  <parent>
+    <groupId>com.github.pedrovgs</groupId>
+    <artifactId>renderers-parent</artifactId>
     <version>1.4-SNAPSHOT</version>
-    <packaging>jar</packaging>
+  </parent>
 
-    <name>RENDERERS - LIBRARY</name>
+  <artifactId>renderers</artifactId>
+  <version>1.4-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-
-    <dependencies>
-        <dependency>
-            <groupId>com.google.android</groupId>
-            <artifactId>android</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.robolectric</groupId>
-            <artifactId>robolectric</artifactId>
-        </dependency>
+  <name>RENDERERS - LIBRARY</name>
 
 
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.android</groupId>
+      <artifactId>android</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.robolectric</groupId>
+      <artifactId>robolectric</artifactId>
+    </dependency>
 
 
-    </dependencies>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+    </dependency>
 
-    <build>
-        <testSourceDirectory>${project.basedir}/src/main/test</testSourceDirectory>
-        <plugins>
-            <plugin>
-                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                <artifactId>android-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <release>false</release>
-                    <sign>
-                        <debug>false</debug>
-                    </sign>
-                    <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
-                    <resourceDirectory>${project.basedir}/res</resourceDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
+  </dependencies>
+
+  <build>
+    <testSourceDirectory>${project.basedir}/src/main/test</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+        <artifactId>android-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <release>false</release>
+          <sign>
+            <debug>false</debug>
+          </sign>
+          <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+          <resourceDirectory>${project.basedir}/res</resourceDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

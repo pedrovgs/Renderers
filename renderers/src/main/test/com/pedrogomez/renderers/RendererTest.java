@@ -22,26 +22,19 @@ import static org.mockito.Mockito.when;
 
 public class RendererTest {
 
-  @Spy
-  private ObjectRenderer renderer;
+  @Spy private ObjectRenderer renderer;
 
-  @Mock
-  private Object mockedContent;
-  @Mock
-  private LayoutInflater mockedLayoutInflater;
-  @Mock
-  private ViewGroup mockedParent;
-  @Mock
-  private View mockedView;
+  @Mock private Object mockedContent;
+  @Mock private LayoutInflater mockedLayoutInflater;
+  @Mock private ViewGroup mockedParent;
+  @Mock private View mockedView;
 
-  @Before
-  public void setUp() {
+  @Before public void setUp() {
     initializeRenderer();
     initializeMocks();
   }
 
-  @Test
-  public void shouldKeepTheContentAfterOnCreateCall() {
+  @Test public void shouldKeepTheContentAfterOnCreateCall() {
     givenARendererInflatingView(mockedView);
 
     onCreateRenderer();
@@ -49,8 +42,7 @@ public class RendererTest {
     assertEquals(mockedContent, renderer.getContent());
   }
 
-  @Test
-  public void shouldInflateViewUsingLayoutInflaterAndParentAfterOnCreateCall() {
+  @Test public void shouldInflateViewUsingLayoutInflaterAndParentAfterOnCreateCall() {
     givenARendererInflatingView(mockedView);
 
     onCreateRenderer();
@@ -65,8 +57,7 @@ public class RendererTest {
     onCreateRenderer();
   }
 
-  @Test
-  public void shouldAssociateTheRendererToTheRootViewTagAfterOnCreateCall() {
+  @Test public void shouldAssociateTheRendererToTheRootViewTagAfterOnCreateCall() {
     givenARendererInflatingView(mockedView);
 
     onCreateRenderer();
@@ -74,8 +65,7 @@ public class RendererTest {
     verify(mockedView).setTag(renderer);
   }
 
-  @Test
-  public void shouldSetUpViewWithTheInflatedViewAfterOnCreateCall() {
+  @Test public void shouldSetUpViewWithTheInflatedViewAfterOnCreateCall() {
     givenARendererInflatingView(mockedView);
 
     onCreateRenderer();
@@ -83,8 +73,7 @@ public class RendererTest {
     verify(renderer).setUpView(mockedView);
   }
 
-  @Test
-  public void shouldHookListenersViewWithTheInflatedViewAfterOnCreateCall() {
+  @Test public void shouldHookListenersViewWithTheInflatedViewAfterOnCreateCall() {
     givenARendererInflatingView(mockedView);
 
     onCreateRenderer();
@@ -92,8 +81,7 @@ public class RendererTest {
     verify(renderer).hookListeners(mockedView);
   }
 
-  @Test
-  public void shouldKeepTheContentAfterOnRecycleCall() {
+  @Test public void shouldKeepTheContentAfterOnRecycleCall() {
     givenARendererInflatingView(mockedView);
 
     onRecycleRenderer();

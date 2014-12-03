@@ -57,8 +57,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
    * @param parent ViewGroup used to inflate xml.
    * @return view inflated.
    */
-  @Override
-  protected View inflate(LayoutInflater inflater, ViewGroup parent) {
+  @Override protected View inflate(LayoutInflater inflater, ViewGroup parent) {
     View inflatedView = inflater.inflate(R.layout.video_renderer, parent, false);
         /*
          * You don't have to use ButterKnife library to implement the mapping between your layout
@@ -80,8 +79,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
    * Main render algorithm based on render the video thumbnail, render the title, render the marker
    * and the label.
    */
-  @Override
-  public void render() {
+  @Override public void render() {
     Video video = getContent();
     renderThumbnail(video);
     renderTitle(video);
@@ -135,8 +133,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
   /**
    * Maps all the view elements from the xml declaration to members of this renderer.
    */
-  @Override
-  protected void setUpView(View rootView) {
+  @Override protected void setUpView(View rootView) {
         /*
          * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
          */
@@ -145,8 +142,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
   /**
    * Insert external listeners in some widgets.
    */
-  @Override
-  protected void hookListeners(View rootView) {
+  @Override protected void hookListeners(View rootView) {
         /*
          * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
          */

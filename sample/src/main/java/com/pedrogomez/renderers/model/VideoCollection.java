@@ -34,33 +34,27 @@ public class VideoCollection implements AdapteeCollection<Video> {
     this.videos = videos;
   }
 
-  @Override
-  public int size() {
+  @Override public int size() {
     return videos.size();
   }
 
-  @Override
-  public Video get(final int index) {
+  @Override public Video get(final int index) {
     return videos.get(index);
   }
 
-  @Override
-  public void add(Video element) {
+  @Override public void add(Video element) {
     videos.add(element);
   }
 
-  @Override
-  public void remove(Video element) {
+  @Override public void remove(Video element) {
     videos.remove(element);
   }
 
-  @Override
-  public void addAll(Collection<Video> elements) {
+  @Override public void addAll(Collection<Video> elements) {
     videos.addAll(elements);
   }
 
-  @Override
-  public void removeAll(Collection<Video> elements) {
+  @Override public void removeAll(Collection<Video> elements) {
     videos.removeAll(elements);
   }
 

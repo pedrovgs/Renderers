@@ -13,23 +13,19 @@ public class SubObjectRenderer extends Renderer<Object> {
 
   private View view;
 
-  @Override
-  protected void setUpView(View rootView) {
+  @Override protected void setUpView(View rootView) {
 
   }
 
-  @Override
-  protected void hookListeners(View rootView) {
+  @Override protected void hookListeners(View rootView) {
 
   }
 
-  @Override
-  protected View inflate(LayoutInflater inflater, ViewGroup parent) {
+  @Override protected View inflate(LayoutInflater inflater, ViewGroup parent) {
     return view;
   }
 
-  @Override
-  public void render() {
+  @Override public void render() {
 
   }
 

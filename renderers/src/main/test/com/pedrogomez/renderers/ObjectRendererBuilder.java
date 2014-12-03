@@ -13,8 +13,7 @@ public class ObjectRendererBuilder extends RendererBuilder<Object> {
     super(prototypes);
   }
 
-  @Override
-  protected Class getPrototypeClass(Object content) {
+  @Override protected Class getPrototypeClass(Object content) {
     return null;
   }
 }

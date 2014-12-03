@@ -13,13 +13,11 @@ public class OnVideoClickedListener implements VideoRenderer.OnVideoClicked {
 
   private Context context;
 
-  @Inject
-  public OnVideoClickedListener(Context context) {
+  @Inject public OnVideoClickedListener(Context context) {
     this.context = context;
   }
 
-  @Override
-  public void onVideoClicked(Video video) {
+  @Override public void onVideoClicked(Video video) {
     Toast.makeText(context, "Video clicked. Title = " + video.getTitle(), Toast.LENGTH_LONG).show();
   }
 }

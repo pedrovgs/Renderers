@@ -32,8 +32,7 @@ public class LikeVideoRenderer extends VideoRenderer {
     super(context);
   }
 
-  @Override
-  protected void renderLabel() {
+  @Override protected void renderLabel() {
     Video video = getContent();
     String dislikeLabel = getContext().getString(R.string.dislike_label);
     String likeLabel = getContext().getString(R.string.like_label);
@@ -41,8 +40,7 @@ public class LikeVideoRenderer extends VideoRenderer {
     getLabel().setText(labelText);
   }
 
-  @Override
-  protected void renderMarker(Video video) {
+  @Override protected void renderMarker(Video video) {
     int resource = video.isLiked() ? R.drawable.like_active : R.drawable.like_unactive;
     getMarker().setImageResource(resource);
   }

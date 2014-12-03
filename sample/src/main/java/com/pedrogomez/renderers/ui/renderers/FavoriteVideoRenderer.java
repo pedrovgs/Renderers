@@ -32,14 +32,12 @@ public class FavoriteVideoRenderer extends VideoRenderer {
     super(context);
   }
 
-  @Override
-  protected void renderLabel() {
+  @Override protected void renderLabel() {
     String label = getContext().getString(R.string.favorite_label);
     getLabel().setText(label);
   }
 
-  @Override
-  protected void renderMarker(Video video) {
+  @Override protected void renderMarker(Video video) {
     getMarker().setImageResource(R.drawable.fav_active);
   }
 }
