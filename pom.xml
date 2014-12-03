@@ -4,7 +4,7 @@
 
   <groupId>com.github.pedrovgs</groupId>
   <artifactId>renderers-parent</artifactId>
-  <version>1.3-SNAPSHOT</version>
+  <version>1.3</version>
   <packaging>pom</packaging>
 
   <parent>
