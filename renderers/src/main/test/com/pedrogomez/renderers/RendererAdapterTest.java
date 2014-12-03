@@ -168,6 +168,13 @@ public class RendererAdapterTest {
     verify(mockedCollection).removeAll(ANY_OBJECT_COLLECTION);
   }
 
+  @Test
+  public void shouldClearElementsFromAdapteeCollection(){
+    rendererAdapter.clear();
+
+    verify(mockedCollection).clear();
+  }
+
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
   }
