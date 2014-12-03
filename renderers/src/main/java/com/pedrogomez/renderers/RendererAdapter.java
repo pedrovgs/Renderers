@@ -152,6 +152,14 @@ public class RendererAdapter<T> extends BaseAdapter {
   }
 
   /**
+   * Remove all elements inside the AdapteeCollection.
+   *
+   */
+  public void clear() {
+    collection.clear();
+  }
+
+  /**
    * Allows the client code to access the AdapteeCollection<T> from subtypes of RendererAdapter.
    *
    * @return collection used in the adapter as the adaptee class.
