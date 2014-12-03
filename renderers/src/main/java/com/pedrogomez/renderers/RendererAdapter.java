@@ -153,7 +153,6 @@ public class RendererAdapter<T> extends BaseAdapter {
 
   /**
    * Remove all elements inside the AdapteeCollection.
-   *
    */
   public void clear() {
     collection.clear();
