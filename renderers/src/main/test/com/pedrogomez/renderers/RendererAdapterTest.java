@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Test class created to check the correct behavoiur of RendererAdapter.
+ * Test class created to check the correct behaviour of RendererAdapter.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
