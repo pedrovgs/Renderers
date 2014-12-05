@@ -20,7 +20,8 @@ import java.util.Collection;
 /**
  * Interface created to represent the adaptee collection used in RendererAdapter. RendererAdapter
  * will be created with a RendererBuilder and an AdapteeCollection that store all the content to
- * show in a list view.
+ * show in a list view. This library provides a default implementation of AdapteeCollection named
+ * ListAdapteeCollection, use it if needed or create your own AdapteeCollections.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */

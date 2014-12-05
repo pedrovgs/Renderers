@@ -15,6 +15,8 @@
  */
 package com.pedrogomez.renderers.model;
 
+import com.pedrogomez.renderers.AdapteeCollection;
+import com.pedrogomez.renderers.ListAdapteeCollection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +41,8 @@ public class RandomVideoCollectionGenerator {
   }
 
   /**
-   * Generate a VideoCollection with random data obtained form VIDEO_INFO map.
+   * Generate a VideoCollection with random data obtained form VIDEO_INFO map. You don't need o
+   * create your own AdapteeCollections. Review ListAdapteeCollection if needed.
    *
    * @param videoCount size of the collection.
    * @return VideoCollection generated.
@@ -51,6 +54,15 @@ public class RandomVideoCollectionGenerator {
       videos.add(video);
     }
     return new VideoCollection(videos);
+  }
+
+  public AdapteeCollection<Video> generateListAdapteeVideoCollection(int videoCount) {
+    List<Video> videos = new LinkedList<Video>();
+    for (int i = 0; i < videoCount; i++) {
+      Video video = generateRandomVideo();
+      videos.add(video);
+    }
+    return new ListAdapteeCollection<Video>(videos);
   }
 
   /**
