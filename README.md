@@ -174,7 +174,7 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
 }
 ```
 
-* 3. Initialize your ListView with your RendererBuilder<T> and your AdapteeCollection inside Activities and Fragments. You can use ListAdapteeCollection or create your own implementation creating a class which implements AdapteeCollection.
+* 3. Initialize your ListView with your RendererBuilder<T> and your AdapteeCollection inside Activities and Fragments. **You can use ListAdapteeCollection or create your own implementation creating a class which implements AdapteeCollection to configure your RendererAdapter.**
 
 ```java
 private void initListView() {
