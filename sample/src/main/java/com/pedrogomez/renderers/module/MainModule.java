@@ -17,11 +17,11 @@ package com.pedrogomez.renderers.module;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.pedrogomez.renderers.SampleApplication;
 import com.pedrogomez.renderers.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.model.Video;
-import com.pedrogomez.renderers.model.VideoCollection;
 import com.pedrogomez.renderers.ui.MainActivity;
 import com.pedrogomez.renderers.ui.builder.VideoRendererBuilder;
 import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
@@ -53,7 +53,9 @@ import dagger.Provides;
   @Provides RendererAdapter<Video> provideVideoRendererAdapter(
       RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater,
       VideoRendererBuilder rendererBuilder) {
-    VideoCollection videoCollection = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
+    //VideoCollection videoCollection = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
+    AdapteeCollection<Video> videoCollection =
+        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
     RendererAdapter<Video> adapter =
         new RendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
     return adapter;
