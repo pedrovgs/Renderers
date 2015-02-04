@@ -25,44 +25,13 @@ import java.util.List;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class ListAdapteeCollection<T> implements AdapteeCollection<T> {
-
-  private final List<T> list;
+public class ListAdapteeCollection<T> extends ArrayList<T> implements AdapteeCollection<T> {
 
   public ListAdapteeCollection() {
-    this(new ArrayList<T>());
   }
 
   public ListAdapteeCollection(List<T> list) {
-    this.list = new ArrayList<T>();
-    this.list.addAll(list);
+	super(list);
   }
 
-  @Override public int size() {
-    return list.size();
-  }
-
-  @Override public T get(int index) {
-    return list.get(index);
-  }
-
-  @Override public void add(T element) {
-    this.list.add(element);
-  }
-
-  @Override public void remove(T element) {
-    this.list.remove(element);
-  }
-
-  @Override public void addAll(Collection<T> elements) {
-    this.list.addAll(elements);
-  }
-
-  @Override public void removeAll(Collection<T> elements) {
-    this.list.removeAll(elements);
-  }
-
-  @Override public void clear() {
-    this.list.clear();
-  }
 }
