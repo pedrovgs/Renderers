@@ -45,24 +45,24 @@ public interface AdapteeCollection<T> {
    *
    * @param element to add.
    */
-  void add(T element);
+  boolean add(T element);
 
   /**
    * Remove one element from the adatee collection.
    */
-  void remove(T element);
+  boolean remove(T element);
 
   /**
    * Add a element collection to the adaptee collection.
    *
    * @param elements to add.
    */
-  void addAll(Collection<T> elements);
+  boolean addAll(Collection<? extends T> elements);
 
   /**
    * Remove a element collection to the adaptee collection.
    */
-  void removeAll(Collection<T> elements);
+  boolean removeAll(Collection<?> elements);
 
   /**
    * Remove all element inside the collection.
