@@ -50,7 +50,7 @@ public interface AdapteeCollection<T> {
   /**
    * Remove one element from the adatee collection.
    */
-  boolean remove(T element);
+  boolean remove(Object element);
 
   /**
    * Add a element collection to the adaptee collection.
