@@ -63,7 +63,7 @@ public abstract class RendererBuilder<T> {
     return this;
   }
 
-  RendererBuilder withConvertView(View convertView) {
+  protected RendererBuilder withConvertView(View convertView) {
     this.convertView = convertView;
     return this;
   }
@@ -106,7 +106,7 @@ public abstract class RendererBuilder<T> {
    * attributes passed in the builder constructor and will check if can recycle or has to create a
    * new renderer.
    */
-  Renderer build() {
+  protected Renderer build() {
     validateAttributes();
     Renderer renderer;
     if (isRecyclable(convertView, content)) {
