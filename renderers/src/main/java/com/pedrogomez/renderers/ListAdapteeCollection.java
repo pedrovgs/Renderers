@@ -16,7 +16,6 @@
 package com.pedrogomez.renderers;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public class ListAdapteeCollection<T> extends ArrayList<T> implements AdapteeCol
   }
 
   public ListAdapteeCollection(List<T> list) {
-	super(list);
+    super(list);
   }
 
 }
