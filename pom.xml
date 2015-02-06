@@ -43,7 +43,7 @@
     <dagger.version>1.2.1</dagger.version>
     <robolectric.version>2.2</robolectric.version>
     <mockito-all.version>1.9.5</mockito-all.version>
-    <android-maven-plugin.version>3.8.0</android-maven-plugin.version>
+    <android-maven-plugin.version>3.9.0-rc.3</android-maven-plugin.version>
     <maven-surefire-plugin.version>2.13</maven-surefire-plugin.version>
     <picasso.version>2.3.3</picasso.version>
   </properties>
