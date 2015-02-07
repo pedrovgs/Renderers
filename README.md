@@ -231,6 +231,11 @@ Who's using it
 
 *Does your app use Renderers? If you want to be featured on this list drop me a line.*
 
+Contributors
+------------
+
+* [Pedro Vicente Gómez Sánchez][12]
+* [Rayco Araña][13]
 
 License
 -------
@@ -261,3 +266,5 @@ License
 [9]: https://play.google.com/store/apps/details?id=com.carlosdelachica.finger
 [10]: https://play.google.com/store/apps/details?id=com.cabify.rider
 [11]: https://play.google.com/store/apps/details?id=net.infojobs.mobile.android
+[12]: https://github.com/pedrovgs
+[13]: https://github.com/raycoarana
