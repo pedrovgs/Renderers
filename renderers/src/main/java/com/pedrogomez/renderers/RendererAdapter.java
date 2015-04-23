@@ -85,6 +85,7 @@ public class RendererAdapter<T> extends BaseAdapter {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
     }
     updateRendererExtraValues(content, renderer, position);
+	renderer.atPosition(position);
     renderer.render();
     return renderer.getRootView();
   }

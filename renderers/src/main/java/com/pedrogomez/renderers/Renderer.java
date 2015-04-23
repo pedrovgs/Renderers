@@ -81,6 +81,16 @@ public abstract class Renderer<T> implements Cloneable {
   protected final T getContent() {
     return content;
   }
+  /**
+   * @return the position at the collection.
+   */
+  protected final int getPosition() {
+	  return position;
+  }
+  
+  protected void atPosition(int position){
+	  this.position = position;
+  }
 
   /**
    * Map all the widgets from the rootView to renderer members.
