@@ -315,4 +315,4 @@ License
 [11]: https://play.google.com/store/apps/details?id=net.infojobs.mobile.android
 [12]: https://github.com/pedrovgs
 [13]: https://github.com/raycoarana
-[14]: http://raw.github.com/pedrovgs/Renderers/master/art/20150423105059.jpg
+[14]: https://github.com/tmexcept/Renderers-Eclipse/blob/master/art/20150423105059.jpg
