@@ -34,6 +34,7 @@ public abstract class Renderer<T> implements Cloneable {
 
   private View rootView;
   private T content;
+  private int position;
 
   /**
    * Method called when the renderer is going to be created. This method has the responsibility of
