@@ -30,7 +30,6 @@
       <artifactId>renderers</artifactId>
     </dependency>
 
-
     <dependency>
       <groupId>com.squareup.picasso</groupId>
       <artifactId>picasso</artifactId>
@@ -49,7 +48,6 @@
       <groupId>com.squareup.dagger</groupId>
       <artifactId>dagger-compiler</artifactId>
     </dependency>
-
 
   </dependencies>
 

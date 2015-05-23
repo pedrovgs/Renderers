@@ -23,6 +23,7 @@ import com.pedrogomez.renderers.SampleApplication;
 import com.pedrogomez.renderers.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.model.Video;
 import com.pedrogomez.renderers.ui.ListViewActivity;
+import com.pedrogomez.renderers.ui.RecyclerViewActivity;
 import com.pedrogomez.renderers.ui.builder.VideoRendererBuilder;
 import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
 import dagger.Module;
@@ -34,7 +35,7 @@ import dagger.Provides;
  * @author Pedro Vicente Gómez Sánchez.
  */
 @Module(injects = {
-    SampleApplication.class, ListViewActivity.class,
+    SampleApplication.class, ListViewActivity.class, RecyclerViewActivity.class
 }) public class MainModule {
 
   private static final int VIDEO_COUNT = 100;

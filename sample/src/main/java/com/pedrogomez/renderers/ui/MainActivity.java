@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
   }
 
   @OnClick(R.id.bt_open_rv_sample) public void openRecyclerViewSample() {
-
+    open(RecyclerViewActivity.class);
   }
 
   private void open(Class activity) {

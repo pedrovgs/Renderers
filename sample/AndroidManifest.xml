@@ -25,6 +25,10 @@
         android:name=".ui.ListViewActivity"
         android:label="@string/app_name"/>
 
+    <activity
+        android:name=".ui.RecyclerViewActivity"
+        android:label="@string/app_name"/>
+
   </application>
 
 </manifest>
