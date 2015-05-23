@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/AppTheme.RootView">
+
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:gravity="center"
+      >
+
+  <Button
+      android:id="@+id/bt_open_lv_sample"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/open_lv_sample"/>
+
+  <Button
+      android:id="@+id/bt_open_rv_sample"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/open_rv_sample"/>
+
+  </LinearLayout>
+
+</RelativeLayout>
