@@ -27,11 +27,11 @@ import com.pedrogomez.renderers.model.Video;
 import javax.inject.Inject;
 
 /**
- * MainActivity for the Renderers demo.
+ * ListViewActivity for the Renderers demo.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class MainActivity extends Activity {
+public class ListViewActivity extends Activity {
 
   @Inject RendererAdapter<Video> adapter;
 
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_list_view);
     initInjection();
     initListView();
   }
