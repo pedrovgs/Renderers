@@ -84,7 +84,14 @@ public abstract class VideoRenderer extends Renderer<Video> {
     renderThumbnail(video);
     renderTitle(video);
     renderMarker(video);
-    renderLabel();
+    renderLabel();    
+
+    int position = getPosition();
+	  if(position%2 == 0){
+		  getRootView().setBackgroundResource(R.color.gray);
+	  }else{
+		  getRootView().setBackgroundResource(R.color.white);
+	  }
   }
 
   /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
   <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
 
@@ -9,7 +9,7 @@
     <item name="android:layout_height">fill_parent</item>
     <item name="android:layout_width">fill_parent</item>
   </style>
-
+  
   <style name="AppTheme.RootView.Vertical">
     <item name="android:orientation">vertical</item>
   </style>
@@ -24,9 +24,14 @@
   <style name="AppTheme.Video">
     <item name="android:layout_height">@dimen/video_height</item>
     <item name="android:layout_width">fill_parent</item>
+    <item name="android:paddingTop">10dp</item>
+    <item name="android:paddingBottom">10dp</item>
+    <item name="android:paddingLeft">5dp</item>
+    <item name="android:paddingRight">5dp</item>
   </style>
 
   <style name="AppTheme.Video.Thumbnail">
+    <item name="android:layout_width">fill_parent</item>
     <item name="android:layout_height">fill_parent</item>
     <item name="android:src">@drawable/placeholder</item>
     <item name="android:layout_centerVertical">true</item>

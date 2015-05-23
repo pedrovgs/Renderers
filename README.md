@@ -24,6 +24,53 @@ Screenshots
 
 ![Demo Screenshot][1]
 
+just after add position in Renderer
+
+  /**
+   * @return the position at the collection.
+   */
+  protected final int getPosition() {
+	  return position;
+  }
+  
+  protected void atPosition(int position){
+	  this.position = position;
+  }
+
+  in RendererAdapter
+
+   /**
+   * Main method of RendererAdapter. This method has the responsibility of update renderer builder
+   * values and create or recycle a new rendere. Once the renderer has been obtained the
+   * RendereBuilder will call the render method in the renderer and will return the renderer root
+   * view to the ListView.
+   * <p/>
+   * If rendererBuilder returns a null renderer this method will throw a
+   * NullRendererBuiltException.
+   *
+   * @param position to render.
+   * @param convertView to use to recycle.
+   * @param parent used to inflate views.
+   * @return view rendered.
+   */
+  @Override public View getView(int position, View convertView, ViewGroup parent) {
+    T content = getItem(position);
+    rendererBuilder.withContent(content);
+    rendererBuilder.withConvertView(convertView);
+    rendererBuilder.withParent(parent);
+    rendererBuilder.withLayoutInflater(layoutInflater);
+    Renderer<T> renderer = rendererBuilder.build();
+    if (renderer == null) {
+      throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
+    }
+    updateRendererExtraValues(content, renderer, position);
+    renderer.atPosition(position);
+    renderer.render();
+    return renderer.getRootView();
+  }
+
+![Demo Screenshot][14]
+
 Usage
 -----
 
@@ -268,3 +315,4 @@ License
 [11]: https://play.google.com/store/apps/details?id=net.infojobs.mobile.android
 [12]: https://github.com/pedrovgs
 [13]: https://github.com/raycoarana
+[14]: https://github.com/tmexcept/Renderers-Eclipse/blob/master/art/20150423105059.jpg
