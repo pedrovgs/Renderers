@@ -39,11 +39,13 @@ import java.util.Collection;
 public abstract class RendererBuilder<T> {
 
   private Collection<Renderer<T>> prototypes;
+  private Collection<RVRenderer<T>> rvprototypes;
 
   private T content;
   private View convertView;
   private ViewGroup parent;
   private LayoutInflater layoutInflater;
+  private int viewType;
 
   public RendererBuilder() {
 
@@ -75,6 +77,11 @@ public abstract class RendererBuilder<T> {
 
   RendererBuilder withLayoutInflater(LayoutInflater layoutInflater) {
     this.layoutInflater = layoutInflater;
+    return this;
+  }
+
+  RendererBuilder withViewType(int viewType) {
+    this.viewType = viewType;
     return this;
   }
 
@@ -117,6 +124,12 @@ public abstract class RendererBuilder<T> {
     return renderer;
   }
 
+
+  protected RVRenderer buildRendererViewHolder() {
+    validateAttributes();
+    return createRVRenderer(parent,viewType);
+  }
+
   /**
    * Recycle the renderer getting it from the tag associated to the renderer root view.
    *
@@ -144,6 +157,10 @@ public abstract class RendererBuilder<T> {
     return renderer;
   }
 
+  private RVRenderer createRVRenderer(ViewGroup parent,int viewType) {
+    return getRVPrototypeByIndex(viewType).copy();
+  }
+
   /**
    * Search one prototype using the index. This method has to be implemented because prototypes
    * member is declared with Collection and that interface doesn't allow the client code to get one
@@ -156,6 +173,26 @@ public abstract class RendererBuilder<T> {
     Renderer prototypeSelected = null;
     int i = 0;
     for (Renderer prototype : prototypes) {
+      if (i == prototypeIndex) {
+        prototypeSelected = prototype;
+      }
+      i++;
+    }
+    return prototypeSelected;
+  }
+
+  /**
+   * Search one prototype using the index. This method has to be implemented because prototypes
+   * member is declared with Collection and that interface doesn't allow the client code to get one
+   * element by index.
+   *
+   * @param prototypeIndex used to search.
+   * @return prototype renderer.
+   */
+  private RVRenderer getRVPrototypeByIndex(final int prototypeIndex) {
+    RVRenderer prototypeSelected = null;
+    int i = 0;
+    for (RVRenderer prototype : rvprototypes) {
       if (i == prototypeIndex) {
         prototypeSelected = prototype;
       }

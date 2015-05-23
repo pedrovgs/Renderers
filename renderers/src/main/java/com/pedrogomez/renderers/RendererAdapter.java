@@ -37,9 +37,9 @@ import java.util.Collection;
  */
 public class RendererAdapter<T> extends BaseAdapter {
 
-  private LayoutInflater layoutInflater;
-  private RendererBuilder<T> rendererBuilder;
-  private AdapteeCollection<T> collection;
+  private final LayoutInflater layoutInflater;
+  private final RendererBuilder<T> rendererBuilder;
+  private final AdapteeCollection<T> collection;
 
   public RendererAdapter(LayoutInflater layoutInflater, RendererBuilder rendererBuilder,
       AdapteeCollection<T> collection) {

@@ -46,6 +46,7 @@
     <android-maven-plugin.version>3.9.0-rc.3</android-maven-plugin.version>
     <maven-surefire-plugin.version>2.13</maven-surefire-plugin.version>
     <picasso.version>2.3.3</picasso.version>
+    <recyclerview-v7.version>22.1.1</recyclerview-v7.version>
   </properties>
 
   <dependencyManagement>
@@ -72,7 +73,8 @@
       <dependency>
         <groupId>com.android.support</groupId>
         <artifactId>recyclerview-v7</artifactId>
-        <version>22.1.1</version>
+        <version>${recyclerview-v7.version}</version>
+        <type>aar</type>
       </dependency>
 
       <dependency>

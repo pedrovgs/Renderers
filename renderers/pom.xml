@@ -10,15 +10,20 @@
 
   <artifactId>renderers</artifactId>
   <version>1.6-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>aar</packaging>
 
   <name>RENDERERS - LIBRARY</name>
-
 
   <dependencies>
     <dependency>
       <groupId>com.google.android</groupId>
       <artifactId>android</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.android.support</groupId>
+      <artifactId>recyclerview-v7</artifactId>
+      <type>aar</type>
     </dependency>
 
     <dependency>
@@ -31,12 +36,10 @@
       <artifactId>robolectric</artifactId>
     </dependency>
 
-
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
     </dependency>
-
 
   </dependencies>
 
