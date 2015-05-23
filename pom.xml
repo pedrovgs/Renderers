@@ -51,12 +51,6 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
         <groupId>com.google.android</groupId>
         <artifactId>android</artifactId>
         <version>${android.version}</version>
@@ -73,6 +67,12 @@
         <artifactId>renderers</artifactId>
         <version>${project.version}</version>
         <type>jar</type>
+      </dependency>
+
+      <dependency>
+        <groupId>com.android.support</groupId>
+        <artifactId>recyclerview-v7</artifactId>
+        <version>22.1.1</version>
       </dependency>
 
       <dependency>
@@ -99,7 +99,6 @@
         <optional>true</optional>
       </dependency>
 
-
       <dependency>
         <groupId>org.robolectric</groupId>
         <artifactId>robolectric</artifactId>
@@ -107,6 +106,12 @@
         <scope>test</scope>
       </dependency>
 
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
 
       <dependency>
         <groupId>org.mockito</groupId>
