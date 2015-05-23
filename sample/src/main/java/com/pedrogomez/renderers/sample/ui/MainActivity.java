@@ -1,11 +1,11 @@
-package com.pedrogomez.renderers.ui;
+package com.pedrogomez.renderers.sample.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.pedrogomez.renderers.R;
+import com.pedrogomez.renderers.sample.R;
 
 /**
  * ListViewActivity for the Renderers demo.

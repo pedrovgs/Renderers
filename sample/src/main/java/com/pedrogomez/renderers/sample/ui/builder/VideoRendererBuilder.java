@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.ui.builder;
+package com.pedrogomez.renderers.sample.ui.builder;
 
 import android.content.Context;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
-import com.pedrogomez.renderers.model.Video;
-import com.pedrogomez.renderers.ui.renderers.FavoriteVideoRenderer;
-import com.pedrogomez.renderers.ui.renderers.LikeVideoRenderer;
-import com.pedrogomez.renderers.ui.renderers.LiveVideoRenderer;
-import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
+import com.pedrogomez.renderers.sample.model.Video;
+import com.pedrogomez.renderers.sample.ui.renderers.FavoriteVideoRenderer;
+import com.pedrogomez.renderers.sample.ui.renderers.LikeVideoRenderer;
+import com.pedrogomez.renderers.sample.ui.renderers.LiveVideoRenderer;
+import com.pedrogomez.renderers.sample.ui.renderers.VideoRenderer;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;

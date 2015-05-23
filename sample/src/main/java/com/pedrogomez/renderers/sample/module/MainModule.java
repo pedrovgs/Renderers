@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.module;
+package com.pedrogomez.renderers.sample.module;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import com.pedrogomez.renderers.AdapteeCollection;
+import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererAdapter;
-import com.pedrogomez.renderers.SampleApplication;
-import com.pedrogomez.renderers.model.RandomVideoCollectionGenerator;
-import com.pedrogomez.renderers.model.Video;
-import com.pedrogomez.renderers.ui.ListViewActivity;
-import com.pedrogomez.renderers.ui.RecyclerViewActivity;
-import com.pedrogomez.renderers.ui.builder.VideoRendererBuilder;
-import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
+import com.pedrogomez.renderers.sample.SampleApplication;
+import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
+import com.pedrogomez.renderers.sample.model.Video;
+import com.pedrogomez.renderers.sample.ui.ListViewActivity;
+import com.pedrogomez.renderers.sample.ui.RecyclerViewActivity;
+import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
+import com.pedrogomez.renderers.sample.ui.renderers.VideoRenderer;
 import dagger.Module;
 import dagger.Provides;
 
@@ -59,6 +60,22 @@ import dagger.Provides;
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
     RendererAdapter<Video> adapter =
         new RendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
+    return adapter;
+  }
+
+  /*
+   * This is a sample of how to inject a RVRendererAdapter<T> in your code you can inject an empty
+   * one or create a new instance an then assign it to the ListView. Initialize here the
+   * RVRendererAdapter data is completely optional.
+   */
+  @Provides RVRendererAdapter<Video> provideVideoRVRendererAdapter(
+      RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater,
+      VideoRendererBuilder rendererBuilder) {
+    //VideoCollection videoCollection = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
+    AdapteeCollection<Video> videoCollection =
+        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
+    RVRendererAdapter<Video> adapter =
+        new RVRendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
     return adapter;
   }
 

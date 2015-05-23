@@ -13,31 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.ui.renderers;
+package com.pedrogomez.renderers.sample.ui.renderers;
 
 import android.content.Context;
 import com.pedrogomez.renderers.R;
-import com.pedrogomez.renderers.model.Video;
+import com.pedrogomez.renderers.sample.model.Video;
 
 /**
- * Favorite video renderer created to implement the presentation logic for videos. This
- * VideoRenderer subtype only
- * override renderLabel and renderMarker methods.
+ * VideoRenderer created to contains the liked video renderer presentation logic. This
+ * VideoRenderer subtype only complete the algorithm implementing renderLabel and renderMarker
+ * methods.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class FavoriteVideoRenderer extends VideoRenderer {
+public class LikeVideoRenderer extends VideoRenderer {
 
-  public FavoriteVideoRenderer(Context context) {
+  public LikeVideoRenderer(Context context) {
     super(context);
   }
 
   @Override protected void renderLabel() {
-    String label = getContext().getString(R.string.favorite_label);
-    getLabel().setText(label);
+    Video video = getContent();
+    String dislikeLabel = getContext().getString(R.string.dislike_label);
+    String likeLabel = getContext().getString(R.string.like_label);
+    String labelText = video.isLiked() ? dislikeLabel : likeLabel;
+    getLabel().setText(labelText);
   }
 
   @Override protected void renderMarker(Video video) {
-    getMarker().setImageResource(R.drawable.fav_active);
+    int resource = video.isLiked() ? R.drawable.like_active : R.drawable.like_unactive;
+    getMarker().setImageResource(resource);
   }
 }

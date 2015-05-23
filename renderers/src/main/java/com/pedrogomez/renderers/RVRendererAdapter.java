@@ -19,7 +19,7 @@ import java.util.Collection;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class RVRendererAdapter<T,R extends RVRenderer<T>> extends RecyclerView.Adapter<R> {
+public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> {
 
   private final LayoutInflater layoutInflater;
   private final RendererBuilder<T> rendererBuilder;
@@ -45,29 +45,22 @@ public class RVRendererAdapter<T,R extends RVRenderer<T>> extends RecyclerView.A
     return rendererBuilder.getItemViewType(content);
   }
 
-  @Override public R onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+  @Override public RendererViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
     rendererBuilder.withParent(viewGroup);
     rendererBuilder.withLayoutInflater(layoutInflater);
     rendererBuilder.withViewType(viewType);
-    R renderer = (R) rendererBuilder.buildRendererViewHolder();
+    RendererViewHolder renderer = rendererBuilder.buildRendererViewHolder();
     if (renderer == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
     }
     return renderer;
   }
 
-  /**
-   * Main method of RecyclerViewRendererAdapter. This method has the responsibility of update
-   * renderer builder values and recycle the view. Once the renderer has been obtained the
-   * RendereBuilder will call the render method in the renderer.
-   *
-   * @param viewHolder
-   * @param position
-   */
-  @Override public void onBindViewHolder(R viewHolder, int position) {
+  @Override public void onBindViewHolder(RendererViewHolder viewHolder, int position) {
     T content = getItem(position);
     rendererBuilder.withContent(content);
-    com.pedrogomez.renderers.Renderer<T> renderer = rendererBuilder.build();
+    rendererBuilder.withViewHolder(viewHolder);
+    Renderer<T> renderer = rendererBuilder.buildRendererForRecyclerView();
     if (renderer == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
     }
@@ -75,68 +68,30 @@ public class RVRendererAdapter<T,R extends RVRenderer<T>> extends RecyclerView.A
     renderer.render();
   }
 
-  /**
-   * Add an element to the AdapteeCollection<T>.
-   *
-   * @param element to add.
-   */
   public void add(T element) {
     collection.add(element);
   }
 
-  /**
-   * Remove an element from the AdapteeCollection<T>.
-   *
-   * @param element to remove.
-   */
   public void remove(T element) {
     collection.remove(element);
   }
 
-  /**
-   * Add a Collection<T> of elements to the AdapteeCollection.
-   *
-   * @param elements to add.
-   */
   public void addAll(Collection<T> elements) {
     collection.addAll(elements);
   }
 
-  /**
-   * Remove a Collection<T> of elements to the AdapteeCollection.
-   *
-   * @param elements to remove.
-   */
   public void removeAll(Collection<T> elements) {
     collection.removeAll(elements);
   }
 
-  /**
-   * Remove all elements inside the AdapteeCollection.
-   */
   public void clear() {
     collection.clear();
   }
 
-  /**
-   * Allows the client code to access the AdapteeCollection<T> from subtypes of RendererAdapter.
-   *
-   * @return collection used in the adapter as the adaptee class.
-   */
   protected AdapteeCollection<T> getCollection() {
     return collection;
   }
 
-  /**
-   * Empty implementation created to allow the client code to extend this class without override
-   * onBindView method.
-   * This method is called before render the renderer and can be used in RendererAdapter extension
-   * to add extra info to the renderer created.
-   *
-   * @param content to be rendered.
-   * @param renderer to be used to paint the content.
-   * @param position of the content.
-   */
   protected void updateRendererExtraValues(T content, com.pedrogomez.renderers.Renderer<T> renderer, int position) {
     //Empty implementation
   }

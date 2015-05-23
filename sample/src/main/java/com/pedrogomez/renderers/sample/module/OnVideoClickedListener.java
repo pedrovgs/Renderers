@@ -1,9 +1,9 @@
-package com.pedrogomez.renderers.module;
+package com.pedrogomez.renderers.sample.module;
 
 import android.content.Context;
 import android.widget.Toast;
-import com.pedrogomez.renderers.model.Video;
-import com.pedrogomez.renderers.ui.renderers.VideoRenderer;
+import com.pedrogomez.renderers.sample.model.Video;
+import com.pedrogomez.renderers.sample.ui.renderers.VideoRenderer;
 import javax.inject.Inject;
 
 /**

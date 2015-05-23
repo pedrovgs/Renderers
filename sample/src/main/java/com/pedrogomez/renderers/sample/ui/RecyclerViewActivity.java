@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.ui;
+package com.pedrogomez.renderers.sample.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import com.pedrogomez.renderers.R;
-import com.pedrogomez.renderers.RendererAdapter;
-import com.pedrogomez.renderers.SampleApplication;
-import com.pedrogomez.renderers.model.Video;
+import com.pedrogomez.renderers.sample.R;
+import com.pedrogomez.renderers.RVRendererAdapter;
+import com.pedrogomez.renderers.sample.SampleApplication;
+import com.pedrogomez.renderers.sample.model.Video;
 import javax.inject.Inject;
 
 /**
@@ -34,7 +33,7 @@ import javax.inject.Inject;
  */
 public class RecyclerViewActivity extends Activity {
 
-  @Inject RendererAdapter<Video> adapter;
+  @Inject RVRendererAdapter<Video> adapter;
 
   @InjectView(R.id.rv_renderers) RecyclerView recyclerView;
 
@@ -49,7 +48,7 @@ public class RecyclerViewActivity extends Activity {
    * Initialize ListVideo with our RendererAdapter.
    */
   private void initListView() {
-    //recyclerView.setAdapter(adapter);
+    recyclerView.setAdapter(adapter);
   }
 
   /**

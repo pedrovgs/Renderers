@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.model;
+package com.pedrogomez.renderers.sample.model;
 
 /**
  * Main domain class created to simulate fake data for the example.

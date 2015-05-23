@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.ui.renderers;
+package com.pedrogomez.renderers.sample.ui.renderers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -22,8 +22,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import com.pedrogomez.renderers.R;
-import com.pedrogomez.renderers.model.Video;
+import com.pedrogomez.renderers.sample.R;
+import com.pedrogomez.renderers.sample.model.Video;
 import java.util.Date;
 
 /**

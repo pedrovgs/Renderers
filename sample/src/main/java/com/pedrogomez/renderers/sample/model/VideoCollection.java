@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.model;
+package com.pedrogomez.renderers.sample.model;
 
 import com.pedrogomez.renderers.ListAdapteeCollection;
 

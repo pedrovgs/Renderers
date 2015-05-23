@@ -15,6 +15,7 @@
  */
 package com.pedrogomez.renderers;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +40,13 @@ import java.util.Collection;
 public abstract class RendererBuilder<T> {
 
   private Collection<Renderer<T>> prototypes;
-  private Collection<RVRenderer<T>> rvprototypes;
 
   private T content;
   private View convertView;
   private ViewGroup parent;
   private LayoutInflater layoutInflater;
   private int viewType;
+  private RecyclerView.ViewHolder viewHolder;
 
   public RendererBuilder() {
 
@@ -82,6 +83,11 @@ public abstract class RendererBuilder<T> {
 
   RendererBuilder withViewType(int viewType) {
     this.viewType = viewType;
+    return this;
+  }
+
+  RendererBuilder withViewHolder(RendererViewHolder viewHolder) {
+    this.viewHolder = viewHolder;
     return this;
   }
 
@@ -125,7 +131,14 @@ public abstract class RendererBuilder<T> {
   }
 
 
-  protected RVRenderer buildRendererViewHolder() {
+  protected RendererViewHolder buildRendererViewHolder() {
+    validateAttributes();
+    Renderer renderer = getPrototypeByIndex(viewType);
+    renderer.onCreate(null, layoutInflater, parent);
+    return new RendererViewHolder(renderer);
+  }
+
+  protected Renderer buildRendererForRecyclerView() {
     validateAttributes();
     return createRVRenderer(parent,viewType);
   }
@@ -157,8 +170,11 @@ public abstract class RendererBuilder<T> {
     return renderer;
   }
 
-  private RVRenderer createRVRenderer(ViewGroup parent,int viewType) {
-    return getRVPrototypeByIndex(viewType).copy();
+  private Renderer createRVRenderer(ViewGroup parent,int viewType) {
+    int prototypeIndex = getPrototypeIndex(content);
+    Renderer renderer = getPrototypeByIndex(prototypeIndex).copy();
+    renderer.onCreate(content, layoutInflater, parent);
+    return renderer;
   }
 
   /**
@@ -181,25 +197,6 @@ public abstract class RendererBuilder<T> {
     return prototypeSelected;
   }
 
-  /**
-   * Search one prototype using the index. This method has to be implemented because prototypes
-   * member is declared with Collection and that interface doesn't allow the client code to get one
-   * element by index.
-   *
-   * @param prototypeIndex used to search.
-   * @return prototype renderer.
-   */
-  private RVRenderer getRVPrototypeByIndex(final int prototypeIndex) {
-    RVRenderer prototypeSelected = null;
-    int i = 0;
-    for (RVRenderer prototype : rvprototypes) {
-      if (i == prototypeIndex) {
-        prototypeSelected = prototype;
-      }
-      i++;
-    }
-    return prototypeSelected;
-  }
 
   /**
    * Check if one renderer is recyclable getting it from the convertView's tag and checking the
@@ -322,4 +319,5 @@ public abstract class RendererBuilder<T> {
     }
     this.prototypes = prototypes;
   }
+
 }

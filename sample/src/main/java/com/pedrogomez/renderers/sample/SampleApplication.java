@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers;
+package com.pedrogomez.renderers.sample;
 
 import android.app.Application;
-import com.pedrogomez.renderers.module.MainModule;
+import com.pedrogomez.renderers.sample.module.MainModule;
 import dagger.ObjectGraph;
 
 /**
