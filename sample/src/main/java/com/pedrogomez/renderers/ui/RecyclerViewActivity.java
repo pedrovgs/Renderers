@@ -36,7 +36,7 @@ public class RecyclerViewActivity extends Activity {
 
   @Inject RendererAdapter<Video> adapter;
 
-  @InjectView(R.id.rv_renderers) ListView recyclerView;
+  @InjectView(R.id.rv_renderers) RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
