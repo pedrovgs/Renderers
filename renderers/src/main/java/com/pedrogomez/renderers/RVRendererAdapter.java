@@ -55,6 +55,10 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     return collection.get(position);
   }
 
+  @Override public long getItemId(int position) {
+    return position;
+  }
+
   /**
    * Indicate to the RecyclerView the type of Renderer used to one position using a numeric value.
    *
@@ -168,8 +172,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    * @param renderer to be used to paint the content.
    * @param position of the content.
    */
-  protected void updateRendererExtraValues(T content, com.pedrogomez.renderers.Renderer<T> renderer,
-      int position) {
+  protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position) {
     //Empty implementation
   }
 }
