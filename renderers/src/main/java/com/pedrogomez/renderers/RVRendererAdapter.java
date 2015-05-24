@@ -7,7 +7,8 @@ import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
 
 /**
- * Base Adapter for RecyclerView widgets created to work RendererBuilders and Renderers. Other adapters have to
+ * Base Adapter for RecyclerView widgets created to work RendererBuilders and Renderers. Other
+ * adapters have to
  * extend from this one to create new lists.
  * <p/>
  * This class is the heart of this library. It's used to avoid the library users declare a new
@@ -36,7 +37,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     return collection.size();
   }
 
-  public T getItem(int position){
+  public T getItem(int position) {
     return collection.get(position);
   }
 
@@ -49,18 +50,18 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     rendererBuilder.withParent(viewGroup);
     rendererBuilder.withLayoutInflater(layoutInflater);
     rendererBuilder.withViewType(viewType);
-    RendererViewHolder renderer = rendererBuilder.buildRendererViewHolder();
-    if (renderer == null) {
-      throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
+    RendererViewHolder viewHolder = rendererBuilder.buildRendererViewHolder();
+    if (viewHolder == null) {
+      throw new NullRendererBuiltException("RendererBuilder have to return a not null viewHolder");
     }
-    return renderer;
+    return viewHolder;
   }
 
   @Override public void onBindViewHolder(RendererViewHolder viewHolder, int position) {
     T content = getItem(position);
     rendererBuilder.withContent(content);
-    rendererBuilder.withViewHolder(viewHolder);
-    Renderer<T> renderer = rendererBuilder.buildRendererForRecyclerView();
+    Renderer<T> renderer = viewHolder.getRenderer();
+    renderer.setContent(content);
     if (renderer == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
     }
@@ -92,8 +93,8 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     return collection;
   }
 
-  protected void updateRendererExtraValues(T content, com.pedrogomez.renderers.Renderer<T> renderer, int position) {
+  protected void updateRendererExtraValues(T content, com.pedrogomez.renderers.Renderer<T> renderer,
+      int position) {
     //Empty implementation
   }
-
 }

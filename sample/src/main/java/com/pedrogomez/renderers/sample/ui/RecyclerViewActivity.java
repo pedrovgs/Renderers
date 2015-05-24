@@ -17,6 +17,7 @@ package com.pedrogomez.renderers.sample.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -41,13 +42,14 @@ public class RecyclerViewActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_recycler_view);
     initInjection();
-    initListView();
+    initRecyclerView();
   }
 
   /**
    * Initialize ListVideo with our RendererAdapter.
    */
-  private void initListView() {
+  private void initRecyclerView() {
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
   }
 

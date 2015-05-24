@@ -55,11 +55,15 @@ import dagger.Provides;
   @Provides RendererAdapter<Video> provideVideoRendererAdapter(
       RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater,
       VideoRendererBuilder rendererBuilder) {
-    AdapteeCollection<Video> videoCollection =
-        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
+    AdapteeCollection<Video> videoCollection = getVideoAdapteeCollection(randomVideoCollectionGenerator);
     RendererAdapter<Video> adapter =
         new RendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
     return adapter;
+  }
+
+  private AdapteeCollection<Video> getVideoAdapteeCollection(
+      RandomVideoCollectionGenerator randomVideoCollectionGenerator) {
+    return randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
   }
 
   /*
@@ -70,10 +74,8 @@ import dagger.Provides;
   @Provides RVRendererAdapter<Video> provideVideoRVRendererAdapter(
       RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater,
       VideoRendererBuilder rendererBuilder) {
-    AdapteeCollection<Video> videoCollection =
-        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    RVRendererAdapter<Video> adapter =
-        new RVRendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
+    AdapteeCollection<Video> videoCollection = getVideoAdapteeCollection(randomVideoCollectionGenerator);
+    RVRendererAdapter<Video> adapter = new RVRendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
     return adapter;
   }
 

@@ -2,7 +2,7 @@ package com.pedrogomez.renderers;
 
 import android.support.v7.widget.RecyclerView;
 
-class RendererViewHolder  extends RecyclerView.ViewHolder{
+class RendererViewHolder extends RecyclerView.ViewHolder {
 
   private final Renderer renderer;
 

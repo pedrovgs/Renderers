@@ -83,6 +83,13 @@ public abstract class Renderer<T> implements Cloneable {
   }
 
   /**
+   * Configures the content stored in the renderer.
+   */
+  protected final void setContent(T content) {
+    this.content = content;
+  }
+
+  /**
    * Map all the widgets from the rootView to renderer members.
    */
   protected abstract void setUpView(View rootView);
