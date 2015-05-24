@@ -194,6 +194,8 @@ The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initi
 
 **Remember if you are going to use RecyclerView instead of ListView you'll have to use RVRendererAdapter instead of RendererAdapter.**
 
+**If you was using Renderers v1.5 or a lower version and you want to use your Renderers with RecyclerView the only thing you only have to do is to replace your RendererAdapter extension with a RVRendererAdapter.**
+
 Usage
 -----
 
