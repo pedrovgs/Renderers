@@ -22,11 +22,12 @@ import android.view.ViewGroup;
 import com.pedrogomez.renderers.exception.NotInflateViewException;
 
 /**
- * Base class created to work as a root ViewHolder in the classic list rootView / adapter
- * implementation. This entity will be extended by other renderers.
+ * Base class created to work as a root ViewHolder in the classic ListView / Adapter
+ * implementation. This entity will be extended by other renderers in order to show items into the
+ * screen.
  * <p/>
- * A renderer have to encapsulate the presentation logic for ech row of your ListView. Every
- * renderer have inside the view is rendering and the content is using to get the info.
+ * A Renderer have to encapsulate the presentation logic for ech row of your ListView/RecyclerView.
+ * Every Renderer have inside the view is rendering and the content is using to get the info.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -38,9 +39,10 @@ public abstract class Renderer<T> implements Cloneable {
   /**
    * Method called when the renderer is going to be created. This method has the responsibility of
    * inflate the xml layout using the layoutInflater and the parent ViewGroup, set itself to the
-   * tag and call setUpView and hookListeners.
+   * tag and call setUpView and hookListeners methods.
    *
-   * @param content to render.
+   * @param content to render. If you are using Renderers with RecyclerView widget the content will
+   * be null in this method.
    * @param layoutInflater used to inflate the view.
    * @param parent used to inflate the view.
    */

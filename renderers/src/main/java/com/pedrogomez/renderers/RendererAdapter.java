@@ -24,13 +24,13 @@ import java.util.Collection;
 
 /**
  * BaseAdapter created to work RendererBuilders and Renderers. Other adapters have to use this one
- * to create new lists.
+ * to show information into ListView widgets.
  * <p/>
  * This class is the heart of this library. It's used to avoid the library users declare a new
- * renderer each time they have to implement a new ListView.
+ * renderer each time they have to show information into a ListView.
  * <p/>
  * RendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one
- * RendererBuilder to provide Renderer to RendererAdapterdapter and one AdapteeCollection to
+ * RendererBuilder to provide Renderer to RendererAdapter and one AdapteeCollection to
  * provide the elements to render.
  *
  * @author Pedro Vicente Gómez Sánchez.
@@ -61,10 +61,10 @@ public class RendererAdapter<T> extends BaseAdapter {
   }
 
   /**
-   * Main method of RendererAdapter. This method has the responsibility of update renderer builder
-   * values and create or recycle a new rendere. Once the renderer has been obtained the
-   * RendereBuilder will call the render method in the renderer and will return the renderer root
-   * view to the ListView.
+   * Main method of RendererAdapter. This method has the responsibility of update the
+   * RendererBuilder values and create or recycle a new Renderer. Once the renderer has been
+   * obtained the RendereBuilder will call the render method in the renderer and will return the
+   * renderer root view to the ListView.
    * <p/>
    * If rendererBuilder returns a null renderer this method will throw a
    * NullRendererBuiltException.
@@ -90,10 +90,10 @@ public class RendererAdapter<T> extends BaseAdapter {
   }
 
   /**
-   * Indicate to the ListView the type of renderer used to one position using a numeric value.
+   * Indicate to the ListView the type of Renderer used to one position using a numeric value.
    *
    * @param position to analyze.
-   * @return the id associated to the renderer used to render the content at position position.
+   * @return the id associated to the Renderer used to render the content given a position.
    */
   @Override public int getItemViewType(int position) {
     T content = getItem(position);
@@ -101,9 +101,10 @@ public class RendererAdapter<T> extends BaseAdapter {
   }
 
   /**
-   * Indicate to the ListView the number of different renderers are the RendererBuilder to use.
+   * Indicate to the ListView the number of different how many Renderer implementations are in the
+   * RendererBuilder ready to use.
    *
-   * @return amount of different renderers.
+   * @return amount of different Renderer types.
    */
   @Override public int getViewTypeCount() {
     return rendererBuilder.getViewTypeCount();
@@ -164,8 +165,9 @@ public class RendererAdapter<T> extends BaseAdapter {
   /**
    * Empty implementation created to allow the client code to extend this class without override
    * getView method.
-   * This method is called before render the renderer and can be used in RendererAdapter extension
-   * to add extra info to the renderer created.
+   * <p/>
+   * This method is called before render the Renderer and can be used in RendererAdapter extension
+   * to add extra info to the renderer created like the position in the ListView/RecyclerView.
    *
    * @param content to be rendered.
    * @param renderer to be used to paint the content.

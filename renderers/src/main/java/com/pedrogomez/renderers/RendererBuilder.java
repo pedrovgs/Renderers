@@ -27,12 +27,15 @@ import com.pedrogomez.renderers.exception.PrototypeNotFoundException;
 import java.util.Collection;
 
 /**
- * Class created to work as builder for renderers. This class provides methods to create a
- * renderer.
+ * Class created to work as builder for Renderer objects. This class provides methods to create a
+ * Renderer using a fluent API.
  * <p/>
  * The library users have to extends RendererBuilder and create a new one with prototypes. The
- * RendererBuilder implementation will have to declare the mapping between objects from the adaptee
- * collection and renderers passed int the prototypes collection.
+ * RendererBuilder implementation will have to declare the mapping between objects from the
+ * AdapteeCollection and Renderer instances passed to the prototypes collection.
+ * <p/>
+ * This class is not going to implement the view recycling if is used with the RecyclerView widget
+ * because RecyclerView class already implements the view recycling for us.
  *
  * @author Pedro Vicente Gómez Sánchez
  */
@@ -97,8 +100,8 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Return the amount of renderers to be used in the ListView. This method has to be implemented
-   * to support the ListView recycle mechanism.
+   * Return the amount of different Renderer objects to be used in the ListView. This method has to
+   * be implemented to support the ListView recycle mechanism.
    *
    * @return prototypes size collection.
    */
@@ -107,10 +110,13 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Main method of this class. This method is the responsible of recycle or create a new renderer
-   * with all the needed information to implement the rendering. This method will validate all the
-   * attributes passed in the builder constructor and will check if can recycle or has to create a
-   * new renderer.
+   * Main method of this class related to ListView widget. This method is the responsible of
+   * recycle or create a new Renderer instance with all the needed information to implement the
+   * rendering. This method will validate all the attributes passed in the builder constructor and
+   * will check if can recycle or has to create a new Renderer instance.
+   * <p/>
+   * This method is used with ListView because the view recycling mechanism is implemented in this
+   * class. RecyclerView widget will use buildRendererViewHolder method.
    */
   protected Renderer build() {
     validateAttributes();
@@ -123,6 +129,15 @@ public abstract class RendererBuilder<T> {
     return renderer;
   }
 
+  /**
+   * Main method of this class related to RecyclerView widget. This method is the responsible of
+   * create a new Renderer instance with all the needed information to implement the rendering.
+   * This method will validate all the attributes passed in the builder constructor and will create
+   * a RendererViewHolder instance.
+   * <p/>
+   * This method is used with RecyclerView because the view recycling mechanism is implemented out
+   * of this class and we only have to return new RendererViewHolder instances.
+   */
   protected RendererViewHolder buildRendererViewHolder() {
     //TODO: Replace this with a validateRecyclerViewAdapter
     //validateAttributes();
@@ -132,7 +147,9 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Recycle the renderer getting it from the tag associated to the renderer root view.
+   * Recycle the renderer getting it from the tag associated to the renderer root view. This view
+   * is
+   * not used with RecyclerView widget.
    *
    * @param convertView that contains the tag.
    * @param content to be updated in the recycled renderer.
@@ -159,9 +176,9 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Search one prototype using the index. This method has to be implemented because prototypes
-   * member is declared with Collection and that interface doesn't allow the client code to get one
-   * element by index.
+   * Search one prototype using the prototype index witch is equals to the view type. This method
+   * has to be implemented because prototypes member is declared with Collection and that interface
+   * doesn't allow the client code to get one element by index.
    *
    * @param prototypeIndex used to search.
    * @return prototype renderer.
@@ -214,7 +231,7 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Return the renderer class associated to the prototype.
+   * Return the Renderer class associated to the prototype.
    *
    * @param prototypeClass used to search the renderer in the prototypes collection.
    * @return the prototype index associated to the prototypeClass.
@@ -236,7 +253,7 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Return the index associated to the renderer.
+   * Return the index associated to the Renderer.
    *
    * @param renderer used to search in the prototypes collection.
    * @return the prototype index associated to the renderer passed as argument.
@@ -274,13 +291,13 @@ public abstract class RendererBuilder<T> {
    * Method to be implemented by the RendererBuilder subtypes. In this method the library user will
    * define the mapping between content and renderer class.
    *
-   * @param content used to map object-renderers.
+   * @param content used to map object to Renderers.
    * @return the class associated to the renderer.
    */
   protected abstract Class getPrototypeClass(T content);
 
   /**
-   * Get access to the prototypes collection used to create one Rendererbuilder.
+   * Get access to the prototypes collection used to create one RendererBuilder.
    *
    * @return prototypes collection.
    */
