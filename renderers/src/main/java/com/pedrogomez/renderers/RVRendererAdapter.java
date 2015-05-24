@@ -7,7 +7,7 @@ import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
 
 /**
- * Base RecyclerViewAdapter created to work RendererBuilders and Renderers. Other adapters have to
+ * Base Adapter for RecyclerView widgets created to work RendererBuilders and Renderers. Other adapters have to
  * extend from this one to create new lists.
  * <p/>
  * This class is the heart of this library. It's used to avoid the library users declare a new

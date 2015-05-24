@@ -28,6 +28,7 @@
     <dependency>
       <groupId>com.github.pedrovgs</groupId>
       <artifactId>renderers</artifactId>
+      <type>aar</type>
     </dependency>
 
     <dependency>

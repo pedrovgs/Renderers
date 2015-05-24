@@ -67,7 +67,7 @@
         <groupId>com.github.pedrovgs</groupId>
         <artifactId>renderers</artifactId>
         <version>${project.version}</version>
-        <type>jar</type>
+        <type>aar</type>
       </dependency>
 
       <dependency>

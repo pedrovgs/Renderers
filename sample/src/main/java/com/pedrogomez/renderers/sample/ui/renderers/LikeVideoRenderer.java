@@ -16,7 +16,7 @@
 package com.pedrogomez.renderers.sample.ui.renderers;
 
 import android.content.Context;
-import com.pedrogomez.renderers.R;
+import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.Video;
 
 /**
