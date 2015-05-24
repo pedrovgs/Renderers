@@ -2,15 +2,15 @@ Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=m
 =========
 
 
-Are you bored of creating adapters again and again each time you have to implement a ListView?
+Are you bored of creating adapters again and again each time you have to implement a ListView or a RecyclerView?
 
-Are you bored of using ViewHolders and create getView methods with thousand of lines full of if/else if/else sentences?
+Are you bored of using ViewHolders and create getView/onCreateViewHolder/onBindViewHolder methods with thousand of lines full of if/else if/else sentences?
 
-Renderers is an Android library created to avoid all the Adapter/ListView boilerplate needed to create a new adapter and all the spaghetti code that developers used to create following the ViewHolder classic implementation.
+Renderers is an Android library created to avoid all the Adapter/ListView/RecyclerView boilerplate needed to create a new adapter and all the spaghetti code that developers used to create following the ViewHolder classic implementation.
 
 This Android library offers you two main classes to extend and create your own rendering algorithms out of your adapter implementation.
 
-Renderers is an easy way to work with android ListView and Adapter classes. With this library you only have to create your renderers and declare the mapping between the object to render and the renderer.
+Renderers is an easy way to work with android ListView/RecyclerView and Adapter classes. With this library you only have to create your Renderer classes and declare the mapping between the object to render and the Renderer.
 
 You can find implementation details in this talks:
 
@@ -27,9 +27,9 @@ Screenshots
 Usage
 -----
 
-To use Renderers Android library and get your ListView working you only have to follow three steps:
+To use Renderers Android library and get your ListView/RecyclerView working you only have to follow three steps:
 
-* 1. Create your renderer or renderers extending ``Renderer<T>``. Inside your renderers you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
+* 1. Create your renderer or renderers extending ``Renderer<T>``. Inside your Renderer classes you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
 
 ```java
 public abstract class VideoRenderer extends Renderer<Video> {
@@ -114,7 +114,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
 You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your renderers if you want and [Jake Wharton's][2] [Dagger] [6] library to inject all your dependencies and keep your activities clean of the library initialization code. But use third party libraries is not mandatory.
 
 
-* 2. Create a RendererBuilder with a renderer prototype collection and declare the mapping between the content to render and the renderer used.
+* 2. Create a RendererBuilder with a renderer prototype collection and declare the mapping between the content to render and the Renderer used.
 
 ```java
 public class VideoRendererBuilder extends RendererBuilder<Video> {
@@ -174,7 +174,7 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
 }
 ```
 
-* 3. Initialize your ListView with your RendererBuilder<T> and your AdapteeCollection inside Activities and Fragments. **You can use ListAdapteeCollection or create your own implementation creating a class which implements AdapteeCollection to configure your RendererAdapter.**
+* 3. Initialize your ListView/RecyclerView with your RendererBuilder<T> and your AdapteeCollection inside Activities and Fragments. **You can use ListAdapteeCollection or create your own implementation creating a class which implements AdapteeCollection to configure your RendererAdapter/RVRendererAdapter.**
 
 ```java
 private void initListView() {
@@ -182,7 +182,17 @@ private void initListView() {
 }
 ```
 
+or
+
+```java
+private void initListView() {
+    recyclerView.setAdapter(adapter);
+}
+```
+
 The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initialize some entities and findViewById() methods, but you can use this library without third party libraries and provide that dependencies yourself.
+
+**Remember if you are going to use RecyclerView instead of ListView you'll have to use RVRendererAdapter instead of RendererAdapter.**
 
 Usage
 -----
