@@ -16,8 +16,8 @@
 package com.pedrogomez.renderers.exception;
 
 /**
- * Exception created to be thrown when a RendererBuilder be created without parent. RendererBuilder
- * needs a ViewGroup parent to pass it as parameter to renderers.
+ * Exception created to be thrown when a RendererBuilder is created without parent. RendererBuilder
+ * needs a ViewGroup parent to pass it as parameter to Renderer instances.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */

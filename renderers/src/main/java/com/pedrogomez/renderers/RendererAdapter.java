@@ -23,8 +23,8 @@ import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
 
 /**
- * BaseAdapter created to work RendererBuilders and Renderers. Other adapters have to use this one
- * to show information into ListView widgets.
+ * BaseAdapter created to work RendererBuilders and Renderer instances. Other adapters have to use
+ * this one to show information into ListView widgets.
  * <p/>
  * This class is the heart of this library. It's used to avoid the library users declare a new
  * renderer each time they have to show information into a ListView.
@@ -64,9 +64,9 @@ public class RendererAdapter<T> extends BaseAdapter {
    * Main method of RendererAdapter. This method has the responsibility of update the
    * RendererBuilder values and create or recycle a new Renderer. Once the renderer has been
    * obtained the RendereBuilder will call the render method in the renderer and will return the
-   * renderer root view to the ListView.
+   * Renderer root view to the ListView.
    * <p/>
-   * If rendererBuilder returns a null renderer this method will throw a
+   * If rRendererBuilder returns a null Renderer this method will throw a
    * NullRendererBuiltException.
    *
    * @param position to render.
@@ -82,7 +82,7 @@ public class RendererAdapter<T> extends BaseAdapter {
     rendererBuilder.withLayoutInflater(layoutInflater);
     Renderer<T> renderer = rendererBuilder.build();
     if (renderer == null) {
-      throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
+      throw new NullRendererBuiltException("RendererBuilder have to return a not null Renderer");
     }
     updateRendererExtraValues(content, renderer, position);
     renderer.render();

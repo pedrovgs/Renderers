@@ -1,7 +1,7 @@
 package com.pedrogomez.renderers.exception;
 
 /**
- * Exception created to be thrown when RendererBuilders returns one renderer class not found in
+ * Exception created to be thrown when RendererBuilders returns one Renderer class not found in
  * prototypes collection.
  *
  * @author Pedro Vicente Gómez Sánchez.

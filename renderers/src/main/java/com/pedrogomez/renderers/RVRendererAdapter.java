@@ -22,11 +22,11 @@ import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
 
 /**
- * RecyclerView.Adapter extension created to work RendererBuilders and Renderers. Other adapters
- * have to use this one to show information into RecyclerView widgets.
+ * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
+ * adapters have to use this one to show information into RecyclerView widgets.
  * <p/>
  * This class is the heart of this library. It's used to avoid the library users declare a new
- * renderer each time they have to show information into a ListView.
+ * renderer each time they have to show information into a RecyclerView.
  * <p/>
  * RVRendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one
  * RendererBuilder to provide Renderer to RVRendererAdapter and one AdapteeCollection to
@@ -101,10 +101,10 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     T content = getItem(position);
     rendererBuilder.withContent(content);
     Renderer<T> renderer = viewHolder.getRenderer();
-    renderer.setContent(content);
     if (renderer == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
     }
+    renderer.setContent(content);
     updateRendererExtraValues(content, renderer, position);
     renderer.render();
   }
@@ -173,6 +173,6 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    * @param position of the content.
    */
   protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position) {
-    //Empty implementation
+
   }
 }

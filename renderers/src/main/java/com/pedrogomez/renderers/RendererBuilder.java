@@ -28,7 +28,7 @@ import java.util.Collection;
 
 /**
  * Class created to work as builder for Renderer objects. This class provides methods to create a
- * Renderer using a fluent API.
+ * Renderer instances using a fluent API.
  * <p/>
  * The library users have to extends RendererBuilder and create a new one with prototypes. The
  * RendererBuilder implementation will have to declare the mapping between objects from the
@@ -47,7 +47,7 @@ public abstract class RendererBuilder<T> {
   private View convertView;
   private ViewGroup parent;
   private LayoutInflater layoutInflater;
-  private int viewType;
+  private Integer viewType;
 
   public RendererBuilder() {
 
@@ -57,7 +57,7 @@ public abstract class RendererBuilder<T> {
     if (prototypes == null || prototypes.isEmpty()) {
       throw new NeedsPrototypesException(
           "RendererBuilder have to be created with a non empty collection of"
-              + "Collection<Renderer<T> to provide new or recycled renderers");
+              + "Collection<Renderer<T> to provide new or recycled Renderer instances");
     }
     this.prototypes = prototypes;
   }
@@ -82,7 +82,7 @@ public abstract class RendererBuilder<T> {
     return this;
   }
 
-  RendererBuilder withViewType(int viewType) {
+  RendererBuilder withViewType(Integer viewType) {
     this.viewType = viewType;
     return this;
   }
@@ -120,6 +120,7 @@ public abstract class RendererBuilder<T> {
    */
   protected Renderer build() {
     validateAttributes();
+
     Renderer renderer;
     if (isRecyclable(convertView, content)) {
       renderer = recycle(convertView, content);
@@ -139,17 +140,16 @@ public abstract class RendererBuilder<T> {
    * of this class and we only have to return new RendererViewHolder instances.
    */
   protected RendererViewHolder buildRendererViewHolder() {
-    //TODO: Replace this with a validateRecyclerViewAdapter
-    //validateAttributes();
+    validateAttributesToCreateANewRendererViewHolder();
+
     Renderer renderer = getPrototypeByIndex(viewType);
     renderer.onCreate(null, layoutInflater, parent);
     return new RendererViewHolder(renderer);
   }
 
   /**
-   * Recycle the renderer getting it from the tag associated to the renderer root view. This view
-   * is
-   * not used with RecyclerView widget.
+   * Recycles the Renderer getting it from the tag associated to the renderer root view. This view
+   * is not used with RecyclerView widget.
    *
    * @param convertView that contains the tag.
    * @param content to be updated in the recycled renderer.
@@ -162,7 +162,7 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Create a renderer getting a copy from the prototypes collection.
+   * Create a Renderer getting a copy from the prototypes collection.
    *
    * @param content to render.
    * @param parent used to inflate the view.
@@ -196,7 +196,7 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Check if one renderer is recyclable getting it from the convertView's tag and checking the
+   * Check if one Renderer is recyclable getting it from the convertView's tag and checking the
    * class used.
    *
    * @param convertView to get the renderer if is not null.
@@ -274,16 +274,34 @@ public abstract class RendererBuilder<T> {
    */
   private void validateAttributes() {
     if (content == null) {
-      throw new NullContentException("RendererBuilder needs content to create renderers");
+      throw new NullContentException("RendererBuilder needs content to create Renderer instances");
     }
 
     if (parent == null) {
-      throw new NullParentException("RendererBuilder needs a parent to inflate renderers");
+      throw new NullParentException("RendererBuilder needs a parent to inflate Renderer instances");
     }
 
     if (layoutInflater == null) {
       throw new NullLayoutInflaterException(
-          "RendererBuilder needs a LayoutInflater to inflate renderers");
+          "RendererBuilder needs a LayoutInflater to inflate Renderer instances");
+    }
+  }
+
+  /**
+   * Throws one RendererException if the viewType, layoutInflater or parent are null.
+   */
+  private void validateAttributesToCreateANewRendererViewHolder() {
+    if (viewType == null) {
+      throw new NullContentException(
+          "RendererBuilder needs a view type to create a RendererViewHolder");
+    }
+    if (layoutInflater == null) {
+      throw new NullLayoutInflaterException(
+          "RendererBuilder needs a LayoutInflater to create a RendererViewHolder");
+    }
+    if (parent == null) {
+      throw new NullParentException(
+          "RendererBuilder needs a parent to create a RendererViewHolder");
     }
   }
 
@@ -306,7 +324,7 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Configure prototypes used as Renderers.
+   * Configure prototypes used as Renderer instances.
    */
   protected final void setPrototypes(Collection<Renderer<T>> prototypes) {
     if (prototypes == null || prototypes.isEmpty()) {
