@@ -9,12 +9,13 @@ android:
     - extra-android-m2repository
 
 
-before_script:
+before_install:
     - git clone https://github.com/simpligility/maven-android-sdk-deployer.git
     - cd maven-android-sdk-deployer
     - mvn install
     - cd ..
 
+install: mvn clean install
+
 script: mvn checkstyle:checkstyle
 
-install: mvn clean install
