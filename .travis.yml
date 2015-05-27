@@ -12,7 +12,7 @@ android:
 before_install:
     - git clone https://github.com/simpligility/maven-android-sdk-deployer.git
     - cd maven-android-sdk-deployer
-    - mvn install
+    - mvn install -P 5.1
     - cd ..
 
 install: mvn clean install
