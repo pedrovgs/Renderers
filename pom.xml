@@ -136,7 +136,7 @@
           <version>${android-maven-plugin.version}</version>
           <configuration>
             <sdk>
-              <platform>19</platform>
+              <platform>22</platform>
             </sdk>
             <undeployBeforeDeploy>true</undeployBeforeDeploy>
             <includeLibsJarsFromAar>true</includeLibsJarsFromAar>
