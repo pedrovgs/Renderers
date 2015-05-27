@@ -31,6 +31,6 @@ class RendererViewHolder extends RecyclerView.ViewHolder {
   }
 
   Renderer getRenderer() {
-    return renderer.copy();
+    return renderer;
   }
 }

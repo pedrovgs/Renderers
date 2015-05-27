@@ -99,7 +99,6 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    */
   @Override public void onBindViewHolder(RendererViewHolder viewHolder, int position) {
     T content = getItem(position);
-    rendererBuilder.withContent(content);
     Renderer<T> renderer = viewHolder.getRenderer();
     if (renderer == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");

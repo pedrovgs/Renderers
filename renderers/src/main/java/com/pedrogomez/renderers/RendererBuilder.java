@@ -142,7 +142,7 @@ public abstract class RendererBuilder<T> {
   protected RendererViewHolder buildRendererViewHolder() {
     validateAttributesToCreateANewRendererViewHolder();
 
-    Renderer renderer = getPrototypeByIndex(viewType);
+    Renderer renderer = getPrototypeByIndex(viewType).copy();
     renderer.onCreate(null, layoutInflater, parent);
     return new RendererViewHolder(renderer);
   }
