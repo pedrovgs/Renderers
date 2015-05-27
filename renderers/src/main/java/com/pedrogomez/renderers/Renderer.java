@@ -22,11 +22,16 @@ import android.view.ViewGroup;
 import com.pedrogomez.renderers.exception.NotInflateViewException;
 
 /**
- * Base class created to work as a root ViewHolder in the classic list rootView / adapter
- * implementation. This entity will be extended by other renderers.
+ * Core class in this library. Base class created to work as a root ViewHolder in the classic
+ * ListView / Adapter implementation. This entity will be extended by other Renderer classes in
+ * order to show items into the screen.
  * <p/>
- * A renderer have to encapsulate the presentation logic for ech row of your ListView. Every
- * renderer have inside the view is rendering and the content is using to get the info.
+ * A Renderer have to encapsulate the presentation logic for ech row of your ListView/RecyclerView.
+ * <p/>
+ * Every Renderer have inside the view is rendering and the content is using to get the info.
+ * <p/>
+ * If you used to use RecyclerView extensions of this class are going to replace ViewHolder
+ * implementations.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -38,9 +43,10 @@ public abstract class Renderer<T> implements Cloneable {
   /**
    * Method called when the renderer is going to be created. This method has the responsibility of
    * inflate the xml layout using the layoutInflater and the parent ViewGroup, set itself to the
-   * tag and call setUpView and hookListeners.
+   * tag and call setUpView and hookListeners methods.
    *
-   * @param content to render.
+   * @param content to render. If you are using Renderers with RecyclerView widget the content will
+   * be null in this method.
    * @param layoutInflater used to inflate the view.
    * @param parent used to inflate the view.
    */
@@ -49,7 +55,7 @@ public abstract class Renderer<T> implements Cloneable {
     this.rootView = inflate(layoutInflater, parent);
     if (rootView == null) {
       throw new NotInflateViewException(
-          "Renderers have to return a not null view in inflateView method");
+          "Renderer instances have to return a not null view in inflateView method");
     }
     this.rootView.setTag(this);
     setUpView(rootView);
@@ -57,7 +63,7 @@ public abstract class Renderer<T> implements Cloneable {
   }
 
   /**
-   * Method called when the renderer has been recycled. This method has the responsibility of
+   * Method called when the Renderer has been recycled. This method has the responsibility of
    * update the content stored in the renderer.
    *
    * @param content to render.
@@ -67,23 +73,30 @@ public abstract class Renderer<T> implements Cloneable {
   }
 
   /**
-   * Method to access the root view rendered in the renderer.
+   * Method to access the root view rendered in the Renderer.
    *
-   * @return top view in the view hierarchy of one renderer.
+   * @return top view in the view hierarchy of one Renderer.
    */
   public View getRootView() {
     return rootView;
   }
 
   /**
-   * @return the content stored in the renderer.
+   * @return the content stored in the Renderer.
    */
   protected final T getContent() {
     return content;
   }
 
   /**
-   * Map all the widgets from the rootView to renderer members.
+   * Configures the content stored in the Renderer.
+   */
+  protected void setContent(T content) {
+    this.content = content;
+  }
+
+  /**
+   * Map all the widgets from the rootView to Renderer members.
    */
   protected abstract void setUpView(View rootView);
 
@@ -107,7 +120,7 @@ public abstract class Renderer<T> implements Cloneable {
   public abstract void render();
 
   /**
-   * Create a clone of the renderer. This method is the base of the prototype mechanism implemented
+   * Create a clone of the Renderer. This method is the base of the prototype mechanism implemented
    * to avoid create new objects from RendererBuilder. Pay an special attention implementing clone
    * method in Renderer subtypes.
    *

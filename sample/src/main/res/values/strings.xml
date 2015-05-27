@@ -14,11 +14,14 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android" package="com.pedrogomez.renderers">
+<resources>
 
-  <uses-sdk android:minSdkVersion="18"/>
+  <string name="app_name">Renderers</string>
+  <string name="favorite_label">Favorite</string>
+  <string name="like_label">Like</string>
+  <string name="dislike_label">Dislike</string>
+  <string name="live_label">Live</string>
+  <string name="open_lv_sample">Open ListView sample</string>
+  <string name="open_rv_sample">Open RecyclerView sample</string>
 
-  <application/>
-
-</manifest>
+</resources>

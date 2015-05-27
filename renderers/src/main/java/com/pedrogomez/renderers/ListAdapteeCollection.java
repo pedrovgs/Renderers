@@ -32,5 +32,4 @@ public class ListAdapteeCollection<T> extends ArrayList<T> implements AdapteeCol
   public ListAdapteeCollection(List<T> list) {
     super(list);
   }
-
 }

@@ -14,11 +14,27 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android" package="com.pedrogomez.renderers">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/AppTheme.Video">
 
-  <uses-sdk android:minSdkVersion="18"/>
+  <ImageView
+      android:id="@+id/iv_thumbnail"
+      style="@style/AppTheme.Video.Thumbnail"/>
 
-  <application/>
+  <ImageView
+      android:id="@+id/iv_play"
+      style="@style/AppTheme.Video.Play"/>
 
-</manifest>
+  <ImageView
+      android:id="@+id/iv_marker"
+      style="@style/AppTheme.Video.Marker"/>
+
+  <TextView
+      android:id="@+id/tv_label"
+      style="@style/AppTheme.Video.Label"/>
+
+  <TextView
+      android:id="@+id/tv_title"
+      style="@style/AppTheme.Video.Title"/>
+
+</RelativeLayout>

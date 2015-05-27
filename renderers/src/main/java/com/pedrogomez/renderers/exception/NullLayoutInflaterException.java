@@ -16,8 +16,9 @@
 package com.pedrogomez.renderers.exception;
 
 /**
- * Exception created to be thrown when a RendererBuilder be created without layout inflater.
- * RendererBuilder needs one LayoutInflater to pass it as parameter to renderers.
+ * Exception created to be thrown when a RendererBuilder is created without a LayoutInflater
+ * instance. RendererBuilder needs one LayoutInflater to pass it as parameter to Renderer instances
+ * in order to be able to inflate the view associated to the Renderer.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */

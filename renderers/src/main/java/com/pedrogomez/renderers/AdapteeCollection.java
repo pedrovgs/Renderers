@@ -18,10 +18,13 @@ package com.pedrogomez.renderers;
 import java.util.Collection;
 
 /**
- * Interface created to represent the adaptee collection used in RendererAdapter. RendererAdapter
- * will be created with a RendererBuilder and an AdapteeCollection that store all the content to
- * show in a list view. This library provides a default implementation of AdapteeCollection named
- * ListAdapteeCollection, use it if needed or create your own AdapteeCollections.
+ * Interface created to represent the adaptee collection used in RendererAdapter and
+ * RVRendererAdapter. RendererAdapter and RVRendererAdapter will be created with a RendererBuilder
+ * and an AdapteeCollection that store all the content to show in a ListView or RecyclerView
+ * widget.
+ *
+ * This library provides a default implementation of AdapteeCollection named ListAdapteeCollection,
+ * use it if needed or create your own AdapteeCollection implementations.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
@@ -41,31 +44,31 @@ public interface AdapteeCollection<T> {
   T get(int index);
 
   /**
-   * Add a new element to the adaptee collection.
+   * Add a new element to the AdapteeCollection.
    *
    * @param element to add.
    */
   boolean add(T element);
 
   /**
-   * Remove one element from the adatee collection.
+   * Remove one element from the AdapteeCollection.
    */
   boolean remove(Object element);
 
   /**
-   * Add a element collection to the adaptee collection.
+   * Add a element collection to the AdapteeCollection.
    *
    * @param elements to add.
    */
   boolean addAll(Collection<? extends T> elements);
 
   /**
-   * Remove a element collection to the adaptee collection.
+   * Remove a element collection to the AdapteeCollection.
    */
   boolean removeAll(Collection<?> elements);
 
   /**
-   * Remove all element inside the collection.
+   * Remove all element inside the AdapteeCollection.
    */
   void clear();
 }

@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.exception;
+package com.pedrogomez.renderers.sample.model;
+
+import com.pedrogomez.renderers.ListAdapteeCollection;
+
+import java.util.List;
 
 /**
- * Exception created to be thrown when a RendererBuilder be created or configured without any
- * prototype. A RendererBuilder implementation needs prototypes to create or recycle new Renderer
- * instances.
+ * Class created to represent a list of videos. This class has been created to store videos,
+ * encapsulate the collection usage and implements the AdapteeCollection interface needed by
+ * RendererAdapter. You don't have to create your own AdapteeCollection if you don't need it, you
+ * can use ListAdapteeColleciton.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class NeedsPrototypesException extends RendererException {
+public class VideoCollection extends ListAdapteeCollection<Video> {
 
-  public NeedsPrototypesException(String detailMessage) {
-    super(detailMessage);
+  public VideoCollection(List<Video> videos) {
+    super(videos);
   }
+
 }

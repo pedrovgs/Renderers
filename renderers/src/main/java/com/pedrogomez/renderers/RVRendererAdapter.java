@@ -15,44 +15,43 @@
  */
 package com.pedrogomez.renderers;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
 
 /**
- * BaseAdapter created to work RendererBuilders and Renderer instances. Other adapters have to use
- * this one to show information into ListView widgets.
+ * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
+ * adapters have to use this one to show information into RecyclerView widgets.
  * <p/>
  * This class is the heart of this library. It's used to avoid the library users declare a new
- * renderer each time they have to show information into a ListView.
+ * renderer each time they have to show information into a RecyclerView.
  * <p/>
- * RendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one
- * RendererBuilder to provide Renderer to RendererAdapter and one AdapteeCollection to
+ * RVRendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one
+ * RendererBuilder to provide Renderer to RVRendererAdapter and one AdapteeCollection to
  * provide the elements to render.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class RendererAdapter<T> extends BaseAdapter {
+public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> {
 
   private final LayoutInflater layoutInflater;
   private final RendererBuilder<T> rendererBuilder;
   private final AdapteeCollection<T> collection;
 
-  public RendererAdapter(LayoutInflater layoutInflater, RendererBuilder rendererBuilder,
+  public RVRendererAdapter(LayoutInflater layoutInflater, RendererBuilder<T> rendererBuilder,
       AdapteeCollection<T> collection) {
     this.layoutInflater = layoutInflater;
     this.rendererBuilder = rendererBuilder;
     this.collection = collection;
   }
 
-  @Override public int getCount() {
+  @Override public int getItemCount() {
     return collection.size();
   }
 
-  @Override public T getItem(int position) {
+  public T getItem(int position) {
     return collection.get(position);
   }
 
@@ -61,36 +60,7 @@ public class RendererAdapter<T> extends BaseAdapter {
   }
 
   /**
-   * Main method of RendererAdapter. This method has the responsibility of update the
-   * RendererBuilder values and create or recycle a new Renderer. Once the renderer has been
-   * obtained the RendereBuilder will call the render method in the renderer and will return the
-   * Renderer root view to the ListView.
-   * <p/>
-   * If rRendererBuilder returns a null Renderer this method will throw a
-   * NullRendererBuiltException.
-   *
-   * @param position to render.
-   * @param convertView to use to recycle.
-   * @param parent used to inflate views.
-   * @return view rendered.
-   */
-  @Override public View getView(int position, View convertView, ViewGroup parent) {
-    T content = getItem(position);
-    rendererBuilder.withContent(content);
-    rendererBuilder.withConvertView(convertView);
-    rendererBuilder.withParent(parent);
-    rendererBuilder.withLayoutInflater(layoutInflater);
-    Renderer<T> renderer = rendererBuilder.build();
-    if (renderer == null) {
-      throw new NullRendererBuiltException("RendererBuilder have to return a not null Renderer");
-    }
-    updateRendererExtraValues(content, renderer, position);
-    renderer.render();
-    return renderer.getRootView();
-  }
-
-  /**
-   * Indicate to the ListView the type of Renderer used to one position using a numeric value.
+   * Indicate to the RecyclerView the type of Renderer used to one position using a numeric value.
    *
    * @param position to analyze.
    * @return the id associated to the Renderer used to render the content given a position.
@@ -101,13 +71,41 @@ public class RendererAdapter<T> extends BaseAdapter {
   }
 
   /**
-   * Indicate to the ListView the number of different how many Renderer implementations are in the
-   * RendererBuilder ready to use.
+   * One of the two main methods in this class. Creates a RendererViewHolder instance with a
+   * Renderer inside ready to be used. The RendererBuilder to create a RendererViewHolder using the
+   * information given as parameter.
    *
-   * @return amount of different Renderer types.
+   * @param viewGroup used to create the ViewHolder.
+   * @param viewType associated to the renderer.
+   * @return ViewHolder extension with the Renderer it has to use inside.
    */
-  @Override public int getViewTypeCount() {
-    return rendererBuilder.getViewTypeCount();
+  @Override public RendererViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    rendererBuilder.withParent(viewGroup);
+    rendererBuilder.withLayoutInflater(layoutInflater);
+    rendererBuilder.withViewType(viewType);
+    RendererViewHolder viewHolder = rendererBuilder.buildRendererViewHolder();
+    if (viewHolder == null) {
+      throw new NullRendererBuiltException("RendererBuilder have to return a not null viewHolder");
+    }
+    return viewHolder;
+  }
+
+  /**
+   * Given a RendererViewHolder passed as argument and a position renders the view using the
+   * Renderer previously stored into the RendererViewHolder.
+   *
+   * @param viewHolder with a Renderer class inside.
+   * @param position to render.
+   */
+  @Override public void onBindViewHolder(RendererViewHolder viewHolder, int position) {
+    T content = getItem(position);
+    Renderer<T> renderer = viewHolder.getRenderer();
+    if (renderer == null) {
+      throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
+    }
+    renderer.setContent(content);
+    updateRendererExtraValues(content, renderer, position);
+    renderer.render();
   }
 
   /**
@@ -174,6 +172,6 @@ public class RendererAdapter<T> extends BaseAdapter {
    * @param position of the content.
    */
   protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position) {
-    //Empty implementation
+
   }
 }

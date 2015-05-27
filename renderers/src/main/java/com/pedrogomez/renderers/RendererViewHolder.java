@@ -13,18 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pedrogomez.renderers.exception;
+package com.pedrogomez.renderers;
+
+import android.support.v7.widget.RecyclerView;
 
 /**
- * Exception created to be thrown when a RendererBuilder be created or configured without any
- * prototype. A RendererBuilder implementation needs prototypes to create or recycle new Renderer
- * instances.
- *
- * @author Pedro Vicente Gómez Sánchez.
+ * RecyclerView.ViewHolder extension created to be able to use Renderer classes in RecyclerView
+ * widgets. This class will be completely hidden to the library clients.
  */
-public class NeedsPrototypesException extends RendererException {
+class RendererViewHolder extends RecyclerView.ViewHolder {
 
-  public NeedsPrototypesException(String detailMessage) {
-    super(detailMessage);
+  private final Renderer renderer;
+
+  RendererViewHolder(Renderer renderer) {
+    super(renderer.getRootView());
+    this.renderer = renderer;
+  }
+
+  Renderer getRenderer() {
+    return renderer;
   }
 }
