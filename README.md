@@ -199,7 +199,7 @@ The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initi
 Usage
 -----
 
-Download the project, compile it using ```mvn clean install``` import ``renderers-1.5.jar`` into your project.
+Download the project, compile it using ```mvn clean install``` import ``renderers-2.0.0.aar`` into your project.
 
 Or declare it into your pom.xml
 
@@ -207,7 +207,7 @@ Or declare it into your pom.xml
 <dependency>
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers</artifactId>
-    <version>1.5</version>
+    <version>2.0.0</version>
     <type>aar</type>
 </dependency>
 ```
@@ -216,7 +216,7 @@ Or declare it into your pom.xml
 Or into your build.gradle
 ```groovy
 dependencies{
-    compile 'com.github.pedrovgs:renderers:1.5'
+    compile 'com.github.pedrovgs:renderers:2.0.0'
 }
 ```
 
