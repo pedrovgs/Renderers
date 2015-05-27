@@ -7,13 +7,9 @@ android:
     - extra-android-support
     - extra-google-m2repository
     - extra-android-m2repository
-    - add-on
 
 before_install:
-    - git clone https://github.com/simpligility/maven-android-sdk-deployer.git
-    - cd maven-android-sdk-deployer
-    - mvn install -P 5.1
-    - cd ..
+    - cp -R $ANDROID_HOME/extras/android/m2repository/ ~/.m2/repository/
 
 install: mvn clean install
 
