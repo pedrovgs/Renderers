@@ -108,15 +108,6 @@ import static org.mockito.Mockito.when;
     verify(adapter).updateRendererExtraValues(ANY_OBJECT, mockedRenderer, ANY_POSITION);
   }
 
-  @Test public void shouldGetRendererFromViewHolderAndUpdateContentOnBind() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
-    when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
-
-    adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
-
-    verify(mockedRenderer).setContent(ANY_OBJECT);
-  }
-
   @Test(expected = NullRendererBuiltException.class)
   public void shouldThrowNullRendererBuiltException() {
     adapter.onCreateViewHolder(mockedParent, ANY_ITEM_VIEW_TYPE);
