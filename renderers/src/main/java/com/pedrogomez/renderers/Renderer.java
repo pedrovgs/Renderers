@@ -91,7 +91,7 @@ public abstract class Renderer<T> implements Cloneable {
   /**
    * Configures the content stored in the Renderer.
    */
-  protected final void setContent(T content) {
+  protected void setContent(T content) {
     this.content = content;
   }
 

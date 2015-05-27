@@ -143,6 +143,24 @@ import static org.mockito.Mockito.when;
     verify(mockedCollection).clear();
   }
 
+  @Test public void shouldGetRendererFromViewHolderAndUpdateContentOnBind() {
+    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+    when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
+
+    adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
+
+    verify(mockedRenderer).setContent(ANY_OBJECT);
+  }
+
+  @Test public void shouldGetRendererFromViewHolderAndRenderItOnBind() {
+    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+    when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
+
+    adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
+
+    verify(mockedRenderer).render();
+  }
+
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
   }
