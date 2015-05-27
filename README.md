@@ -29,7 +29,7 @@ Usage
 
 To use Renderers Android library and get your ListView/RecyclerView working you only have to follow three steps:
 
-* 1. Create your renderer or renderers extending ``Renderer<T>``. Inside your Renderer classes you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
+* 1. Create your Renderer or Renderers extending ``Renderer<T>``. Inside your Renderer classes you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
 
 ```java
 public abstract class VideoRenderer extends Renderer<Video> {
@@ -111,10 +111,10 @@ public abstract class VideoRenderer extends Renderer<Video> {
 ```
 
 
-You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your renderers if you want and [Jake Wharton's][2] [Dagger] [6] library to inject all your dependencies and keep your activities clean of the library initialization code. But use third party libraries is not mandatory.
+You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want and [Jake Wharton's][2] [Dagger] [6] library to inject all your dependencies and keep your activities clean of the library initialization code. But use third party libraries is not mandatory.
 
 
-* 2. Create a RendererBuilder with a renderer prototype collection and declare the mapping between the content to render and the Renderer used.
+* 2. Create a RendererBuilder with a Renderer prototypes collection and declare the mapping between the content to render and the Renderer used.
 
 ```java
 public class VideoRendererBuilder extends RendererBuilder<Video> {
@@ -192,7 +192,7 @@ private void initListView() {
 
 The sample code is using [Dagger][6] and [ButterKnife][4] library to avoid initialize some entities and findViewById() methods, but you can use this library without third party libraries and provide that dependencies yourself.
 
-**Remember if you are going to use RecyclerView instead of ListView you'll have to use RVRendererAdapter instead of RendererAdapter.**
+**Remember if you are going to use RecyclerView instead of ListView you'll have to use RVRendererAdapter instead of RendererAdapter.** 
 
 **If you was using Renderers v1.5 or a lower version and you want to use your Renderers with RecyclerView the only thing you only have to do is to replace your RendererAdapter extension with a RVRendererAdapter.**
 
