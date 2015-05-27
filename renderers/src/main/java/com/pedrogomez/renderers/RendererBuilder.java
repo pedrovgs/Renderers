@@ -176,7 +176,7 @@ public abstract class RendererBuilder<T> {
   }
 
   /**
-   * Search one prototype using the prototype index witch is equals to the view type. This method
+   * Search one prototype using the prototype index which is equals to the view type. This method
    * has to be implemented because prototypes member is declared with Collection and that interface
    * doesn't allow the client code to get one element by index.
    *

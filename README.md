@@ -208,6 +208,7 @@ Or declare it into your pom.xml
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers</artifactId>
     <version>1.5</version>
+    <type>aar</type>
 </dependency>
 ```
 
