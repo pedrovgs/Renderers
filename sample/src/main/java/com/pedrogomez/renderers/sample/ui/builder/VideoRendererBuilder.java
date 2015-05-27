@@ -30,15 +30,14 @@ import javax.inject.Inject;
 
 /**
  * RendererBuilder extension created to work with videos. This class works as connector between
- * RendererAdapter and
- * VideoRenderers. Define the mapping between Videos and VideoRenderers.
+ * RendererAdapter and VideoRenderers. Define the mapping between Videos and VideoRenderers.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
-  @Inject public VideoRendererBuilder(Context context,
-      VideoRenderer.OnVideoClicked onVideoClicked) {
+  @Inject
+  public VideoRendererBuilder(Context context, VideoRenderer.OnVideoClicked onVideoClicked) {
     Collection<Renderer<Video>> prototypes = getPrototypes(context, onVideoClicked);
     setPrototypes(prototypes);
   }

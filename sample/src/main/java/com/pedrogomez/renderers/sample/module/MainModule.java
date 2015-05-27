@@ -24,6 +24,7 @@ import com.pedrogomez.renderers.sample.SampleApplication;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.ListViewActivity;
+import com.pedrogomez.renderers.sample.ui.MainActivity;
 import com.pedrogomez.renderers.sample.ui.RecyclerViewActivity;
 import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
 import com.pedrogomez.renderers.sample.ui.renderers.VideoRenderer;
@@ -36,7 +37,7 @@ import dagger.Provides;
  * @author Pedro Vicente Gómez Sánchez.
  */
 @Module(injects = {
-    SampleApplication.class, ListViewActivity.class, RecyclerViewActivity.class
+    SampleApplication.class, MainActivity.class, ListViewActivity.class, RecyclerViewActivity.class
 }) public class MainModule {
 
   private static final int VIDEO_COUNT = 100;
@@ -55,7 +56,8 @@ import dagger.Provides;
   @Provides RendererAdapter<Video> provideVideoRendererAdapter(
       RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater,
       VideoRendererBuilder rendererBuilder) {
-    AdapteeCollection<Video> videoCollection = getVideoAdapteeCollection(randomVideoCollectionGenerator);
+    AdapteeCollection<Video> videoCollection =
+        getVideoAdapteeCollection(randomVideoCollectionGenerator);
     RendererAdapter<Video> adapter =
         new RendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
     return adapter;
@@ -74,8 +76,10 @@ import dagger.Provides;
   @Provides RVRendererAdapter<Video> provideVideoRVRendererAdapter(
       RandomVideoCollectionGenerator randomVideoCollectionGenerator, LayoutInflater layoutInflater,
       VideoRendererBuilder rendererBuilder) {
-    AdapteeCollection<Video> videoCollection = getVideoAdapteeCollection(randomVideoCollectionGenerator);
-    RVRendererAdapter<Video> adapter = new RVRendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
+    AdapteeCollection<Video> videoCollection =
+        getVideoAdapteeCollection(randomVideoCollectionGenerator);
+    RVRendererAdapter<Video> adapter =
+        new RVRendererAdapter<Video>(layoutInflater, rendererBuilder, videoCollection);
     return adapter;
   }
 

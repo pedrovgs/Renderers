@@ -21,8 +21,7 @@ import com.pedrogomez.renderers.sample.model.Video;
 
 /**
  * Favorite video renderer created to implement the presentation logic for videos. This
- * VideoRenderer subtype only
- * override renderLabel and renderMarker methods.
+ * VideoRenderer subtype only override renderLabel and renderMarker methods.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */

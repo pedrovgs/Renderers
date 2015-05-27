@@ -15,15 +15,12 @@
  */
 package com.pedrogomez.renderers.sample.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.sample.R;
-import com.pedrogomez.renderers.sample.SampleApplication;
 import com.pedrogomez.renderers.sample.model.Video;
 import javax.inject.Inject;
 
@@ -32,16 +29,15 @@ import javax.inject.Inject;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class RecyclerViewActivity extends Activity {
+public class RecyclerViewActivity extends BaseActivity {
 
   @Inject RVRendererAdapter<Video> adapter;
 
   @InjectView(R.id.rv_renderers) RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_recycler_view);
-    initInjection();
+    super.onCreate(savedInstanceState);
     initRecyclerView();
   }
 
@@ -51,14 +47,5 @@ public class RecyclerViewActivity extends Activity {
   private void initRecyclerView() {
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
-  }
-
-  /**
-   * Initialize injection from SampleApplication
-   */
-  private void initInjection() {
-    SampleApplication application = (SampleApplication) getApplication();
-    application.inject(this);
-    ButterKnife.inject(this);
   }
 }

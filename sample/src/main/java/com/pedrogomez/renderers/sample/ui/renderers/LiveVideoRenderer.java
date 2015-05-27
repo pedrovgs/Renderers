@@ -28,8 +28,8 @@ import java.util.Date;
 
 /**
  * VideoRenderer created to contains the live video presentation logic. This VideoRenderer subtype
- * change the inflated
- * layout and override the renderer algorithm to add a new phase to render the date.
+ * change the inflated layout and override the renderer algorithm to add a new phase to render the
+ * date.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */

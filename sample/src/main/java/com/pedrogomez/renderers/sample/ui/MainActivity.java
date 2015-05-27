@@ -1,9 +1,7 @@
 package com.pedrogomez.renderers.sample.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.pedrogomez.renderers.sample.R;
 
@@ -12,12 +10,11 @@ import com.pedrogomez.renderers.sample.R;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    ButterKnife.inject(this);
+    super.onCreate(savedInstanceState);
   }
 
   @OnClick(R.id.bt_open_lv_sample) public void openListViewSample() {

@@ -15,35 +15,30 @@
  */
 package com.pedrogomez.renderers.sample.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
-import butterknife.InjectView;
-import com.pedrogomez.renderers.RendererAdapter;
-import com.pedrogomez.renderers.sample.R;
-import com.pedrogomez.renderers.sample.model.Video;
-import javax.inject.Inject;
+import butterknife.ButterKnife;
+import com.pedrogomez.renderers.sample.SampleApplication;
 
 /**
- * ListViewActivity for the Renderers demo.
+ * BaseActivity created extended by every activity in this sample project. Performs dependency
+ * injection tasks.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class ListViewActivity extends BaseActivity {
-
-  @Inject RendererAdapter<Video> adapter;
-
-  @InjectView(R.id.lv_renderers) ListView listView;
+public class BaseActivity extends Activity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
-    setContentView(R.layout.activity_list_view);
     super.onCreate(savedInstanceState);
-    initListView();
+    initInjection();
   }
 
   /**
-   * Initialize ListVideo with our RendererAdapter.
+   * Initialize injection from SampleApplication
    */
-  private void initListView() {
-    listView.setAdapter(adapter);
+  private void initInjection() {
+    SampleApplication application = (SampleApplication) getApplication();
+    application.inject(this);
+    ButterKnife.inject(this);
   }
 }
