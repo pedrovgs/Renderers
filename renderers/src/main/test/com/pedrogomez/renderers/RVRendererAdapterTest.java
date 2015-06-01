@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.spy;
@@ -38,7 +39,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-@RunWith(RobolectricTestRunner.class) public class RVRendererAdapterTest {
+@Config(emulateSdk = 16) @RunWith(RobolectricTestRunner.class) public class RVRendererAdapterTest {
 
   private static final int ANY_SIZE = 11;
   private static final int ANY_POSITION = 2;
