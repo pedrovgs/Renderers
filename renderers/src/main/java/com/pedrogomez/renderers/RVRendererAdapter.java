@@ -122,7 +122,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    *
    * @param element to remove.
    */
-  public void remove(T element) {
+  public void remove(Object element) {
     collection.remove(element);
   }
 
@@ -131,7 +131,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    *
    * @param elements to add.
    */
-  public void addAll(Collection<T> elements) {
+  public void addAll(Collection<? extends T> elements) {
     collection.addAll(elements);
   }
 
@@ -140,7 +140,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    *
    * @param elements to remove.
    */
-  public void removeAll(Collection<T> elements) {
+  public void removeAll(Collection<?> elements) {
     collection.removeAll(elements);
   }
 
