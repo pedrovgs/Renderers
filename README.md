@@ -233,23 +233,6 @@ Developed By
   <img alt="Add me to Linkedin" src="http://imageshack.us/a/img41/7877/smallld.png" />
 </a>
 
-Who's using it
---------------
-
-* [El Rubius Vídeos][7]
-* [Tuenti][8]
-* [Finge Gesture Launcher][9]
-* [Cabify] [10]
-* [InfoJobs] [11]
-
-*Does your app use Renderers? If you want to be featured on this list drop me a line.*
-
-Contributors
-------------
-
-* [Pedro Vicente Gómez Sánchez][12]
-* [Rayco Araña][13]
-
 License
 -------
 
@@ -274,10 +257,3 @@ License
 [4]: http://media.fib.upc.edu/fibtv/streamingmedia/view/2/930
 [5]: http://www.slideshare.net/PedroVicenteGmezSnch/software-design-patterns-on-android
 [6]: https://github.com/square/dagger
-[7]: https://play.google.com/store/apps/details?id=com.nero.elrubiusomg
-[8]: https://play.google.com/store/apps/details?hl=es&id=com.tuenti.messenger
-[9]: https://play.google.com/store/apps/details?id=com.carlosdelachica.finger
-[10]: https://play.google.com/store/apps/details?id=com.cabify.rider
-[11]: https://play.google.com/store/apps/details?id=net.infojobs.mobile.android
-[12]: https://github.com/pedrovgs
-[13]: https://github.com/raycoarana
