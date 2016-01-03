@@ -78,7 +78,7 @@ public class RendererBuilder<T> {
   public RendererBuilder(List<Renderer<T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
-          "RendererBuilder have to be created with a non null collection of"
+          "RendererBuilder has to be created with a non null collection of"
               + "Collection<Renderer<T> to provide new or recycled Renderer instances");
     }
     this.prototypes = prototypes;
@@ -102,7 +102,7 @@ public class RendererBuilder<T> {
   public final void setPrototypes(List<Renderer<T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
-          "RendererBuilder have to be created with a non null collection of"
+          "RendererBuilder has to be created with a non null collection of"
               + "Collection<Renderer<T> to provide new or recycled Renderer instances");
     }
     this.prototypes = prototypes;
@@ -117,7 +117,7 @@ public class RendererBuilder<T> {
   public RendererBuilder<T> withPrototypes(List<Renderer<T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
-          "RendererBuilder have to be created with a non null collection of"
+          "RendererBuilder has to be created with a non null collection of"
               + "Collection<Renderer<T> to provide new or recycled Renderer instances");
     }
     this.prototypes = prototypes;

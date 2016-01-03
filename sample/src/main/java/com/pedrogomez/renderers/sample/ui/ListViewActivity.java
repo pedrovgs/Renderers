@@ -46,7 +46,7 @@ public class ListViewActivity extends BaseActivity {
   }
 
   /**
-   * Initialize RVRendererAdapter
+   * Initialize RendererAdapter
    */
   private void initAdapter() {
     RandomVideoCollectionGenerator randomVideoCollectionGenerator =
