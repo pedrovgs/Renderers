@@ -25,6 +25,7 @@ import com.pedrogomez.renderers.exception.NullParentException;
 import com.pedrogomez.renderers.exception.NullPrototypeClassException;
 import com.pedrogomez.renderers.exception.PrototypeNotFoundException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,7 +46,7 @@ import java.util.Map;
  */
 public class RendererBuilder<T> {
 
-  private Collection<Renderer<T>> prototypes;
+  private List<Renderer<T>> prototypes;
 
   private T content;
   private View convertView;
@@ -54,11 +55,27 @@ public class RendererBuilder<T> {
   private Integer viewType;
   private Map<Class<T>, Class<? extends Renderer>> binding;
 
+  /**
+   * Initializes a RendererBuilder with an empty prototypes collection. Using this constructor some
+   * binding configuration is needed.
+   */
   public RendererBuilder() {
     this(new LinkedList<Renderer<T>>());
   }
 
-  public RendererBuilder(Collection<Renderer<T>> prototypes) {
+  /**
+   * Initializes a RendererBuilder with just one prototype. Using this constructor the prototype
+   * used will be always the same and the additional binding configuration wont be needed.
+   */
+  public RendererBuilder(Renderer<T> renderer) {
+    this(Collections.singletonList(renderer));
+  }
+
+  /**
+   * Initializes a RendererBuilder with a list of prototypes. Using this constructor some
+   * binding configuration is needed.
+   */
+  public RendererBuilder(List<Renderer<T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
           "RendererBuilder have to be created with a non null collection of"
@@ -82,7 +99,7 @@ public class RendererBuilder<T> {
    *
    * @param prototypes to use by the builder in order to create Renderer instances.
    */
-  public final void setPrototypes(Collection<Renderer<T>> prototypes) {
+  public final void setPrototypes(List<Renderer<T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
           "RendererBuilder have to be created with a non null collection of"
@@ -403,6 +420,10 @@ public class RendererBuilder<T> {
    * @return the class associated to the renderer.
    */
   protected Class getPrototypeClass(T content) {
-    return binding.get(content.getClass());
+    if (prototypes.size() == 1) {
+      return prototypes.get(0).getClass();
+    } else {
+      return binding.get(content.getClass());
+    }
   }
 }

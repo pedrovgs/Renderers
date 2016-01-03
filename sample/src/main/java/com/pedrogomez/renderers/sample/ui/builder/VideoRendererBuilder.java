@@ -21,7 +21,6 @@ import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.renderers.FavoriteVideoRenderer;
 import com.pedrogomez.renderers.sample.ui.renderers.LikeVideoRenderer;
 import com.pedrogomez.renderers.sample.ui.renderers.LiveVideoRenderer;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +33,7 @@ import java.util.List;
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
   public VideoRendererBuilder() {
-    Collection<Renderer<Video>> prototypes = getRendererVideoPrototypes();
+    List<Renderer<Video>> prototypes = getRendererVideoPrototypes();
     setPrototypes(prototypes);
   }
 

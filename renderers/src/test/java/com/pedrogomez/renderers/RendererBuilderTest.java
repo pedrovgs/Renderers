@@ -147,6 +147,12 @@ public class RendererBuilderTest {
     assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
   }
 
+  @Test public void shouldAddPrototyeAndconfigureBindingOnConstruction() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>(new ObjectRenderer());
+
+    assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
+  }
+
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
   }
