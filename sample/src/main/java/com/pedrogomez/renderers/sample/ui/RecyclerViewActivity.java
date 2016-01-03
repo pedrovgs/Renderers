@@ -21,10 +21,16 @@ import android.support.v7.widget.RecyclerView;
 import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
+import com.pedrogomez.renderers.Renderer;
+import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
-import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
+import com.pedrogomez.renderers.sample.ui.renderers.FavoriteVideoRenderer;
+import com.pedrogomez.renderers.sample.ui.renderers.LikeVideoRenderer;
+import com.pedrogomez.renderers.sample.ui.renderers.LiveVideoRenderer;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * RecyclerViewActivity for the Renderers demo.
@@ -54,7 +60,11 @@ public class RecyclerViewActivity extends BaseActivity {
         new RandomVideoCollectionGenerator();
     AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    adapter = new RVRendererAdapter<Video>(new VideoRendererBuilder(), videoCollection);
+    RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
+        .addPrototype(new LikeVideoRenderer())
+        .bind(Video.class, LikeVideoRenderer.class);
+
+    adapter = new RVRendererAdapter<Video>(rendererBuilder, videoCollection);
   }
 
   /**
@@ -63,5 +73,26 @@ public class RecyclerViewActivity extends BaseActivity {
   private void initRecyclerView() {
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
+  }
+
+  /**
+   * Create a list of prototypes to configure RendererBuilder.
+   * The list of Renderer<Video> that contains all the possible renderers that our RendererBuilder
+   * is going to use.
+   *
+   * @return Renderer<Video> prototypes for RendererBuilder.
+   */
+  private List<Renderer<Video>> getRendererVideoPrototypes() {
+    List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
+    LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer();
+    prototypes.add(likeVideoRenderer);
+
+    FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer();
+    prototypes.add(favoriteVideoRenderer);
+
+    LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer();
+    prototypes.add(liveVideoRenderer);
+
+    return prototypes;
   }
 }
