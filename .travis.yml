@@ -2,6 +2,7 @@ language: android
 
 android:
   components:
+    - tools
     - build-tools-23.0.2
     - android-23
     - extra-android-support
@@ -9,5 +10,5 @@ android:
     - extra-android-m2repository
 
 script: 
-  - ./gradlew checkstye build
+  - ./gradlew checkstyle build
 
