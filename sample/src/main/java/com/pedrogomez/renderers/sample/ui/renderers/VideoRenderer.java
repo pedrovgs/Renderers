@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.Renderer;
@@ -39,10 +39,10 @@ public abstract class VideoRenderer extends Renderer<Video> {
 
   private final Context context;
 
-  @InjectView(R.id.iv_thumbnail) ImageView thumbnail;
-  @InjectView(R.id.tv_title) TextView title;
-  @InjectView(R.id.iv_marker) ImageView marker;
-  @InjectView(R.id.tv_label) TextView label;
+  @Bind(R.id.iv_thumbnail) ImageView thumbnail;
+  @Bind(R.id.tv_title) TextView title;
+  @Bind(R.id.iv_marker) ImageView marker;
+  @Bind(R.id.tv_label) TextView label;
 
   private OnVideoClicked listener;
 
@@ -64,7 +64,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
          * and your widgets you can implement setUpView and hookListener methods declared in
          * Renderer<T> class.
          */
-    ButterKnife.inject(this, inflatedView);
+    ButterKnife.bind(this, inflatedView);
     return inflatedView;
   }
 

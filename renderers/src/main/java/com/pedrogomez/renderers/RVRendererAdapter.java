@@ -24,11 +24,11 @@ import java.util.Collection;
 /**
  * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
  * adapters have to use this one to show information into RecyclerView widgets.
- * <p/>
+ *
  * This class is the heart of this library. It's used to avoid the library users declare a new
  * renderer each time they have to show information into a RecyclerView.
- * <p/>
- * RVRendererAdapter<T> has to be constructed with a LayoutInflater to inflate views, one
+ *
+ * RVRendererAdapter has to be constructed with a LayoutInflater to inflate views, one
  * RendererBuilder to provide Renderer to RVRendererAdapter and one AdapteeCollection to
  * provide the elements to render.
  *
@@ -109,7 +109,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   }
 
   /**
-   * Add an element to the AdapteeCollection<T>.
+   * Add an element to the AdapteeCollection.
    *
    * @param element to add.
    */
@@ -118,7 +118,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   }
 
   /**
-   * Remove an element from the AdapteeCollection<T>.
+   * Remove an element from the AdapteeCollection.
    *
    * @param element to remove.
    */
@@ -127,7 +127,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   }
 
   /**
-   * Add a Collection<T> of elements to the AdapteeCollection.
+   * Add a Collection of elements to the AdapteeCollection.
    *
    * @param elements to add.
    */
@@ -136,7 +136,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   }
 
   /**
-   * Remove a Collection<T> of elements to the AdapteeCollection.
+   * Remove a Collection of elements to the AdapteeCollection.
    *
    * @param elements to remove.
    */
@@ -152,7 +152,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   }
 
   /**
-   * Allows the client code to access the AdapteeCollection<T> from subtypes of RendererAdapter.
+   * Allows the client code to access the AdapteeCollection from subtypes of RendererAdapter.
    *
    * @return collection used in the adapter as the adaptee class.
    */
@@ -163,7 +163,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   /**
    * Empty implementation created to allow the client code to extend this class without override
    * getView method.
-   * <p/>
+   *
    * This method is called before render the Renderer and can be used in RendererAdapter extension
    * to add extra info to the renderer created like the position in the ListView/RecyclerView.
    *

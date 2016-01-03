@@ -39,6 +39,6 @@ public class BaseActivity extends Activity {
   private void initInjection() {
     SampleApplication application = (SampleApplication) getApplication();
     application.inject(this);
-    ButterKnife.inject(this);
+    ButterKnife.bind(this);
   }
 }

@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion 23
+  buildToolsVersion "23.0.2"
+
+  defaultConfig {
+    applicationId "com.github.pedrovgs.renderers.sample"
+    minSdkVersion 14
+    targetSdkVersion 23
+    versionCode 1
+    versionName "1.0"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+}
+
+dependencies {
+  compile fileTree(include: ['*.jar'], dir: 'libs')
+  compile 'com.android.support:appcompat-v7:23.1.1'
+  compile 'com.jakewharton:butterknife:7.0.1'
+  compile 'com.squareup.picasso:picasso:2.5.2'
+  compile 'com.squareup.dagger:dagger:1.2.2'
+  provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+  compile project(':renderers')
+}

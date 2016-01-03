@@ -47,11 +47,15 @@ public interface AdapteeCollection<T> {
    * Add a new element to the AdapteeCollection.
    *
    * @param element to add.
+   * @return if the element was successfully added.
    */
   boolean add(T element);
 
   /**
    * Remove one element from the AdapteeCollection.
+   *
+   * @param  element to add.
+   * @return if the element was successfully removed.
    */
   boolean remove(Object element);
 
@@ -59,11 +63,15 @@ public interface AdapteeCollection<T> {
    * Add a element collection to the AdapteeCollection.
    *
    * @param elements to add.
+   * @return if the elements were successfully added.
    */
   boolean addAll(Collection<? extends T> elements);
 
   /**
    * Remove a element collection to the AdapteeCollection.
+   *
+   * @param elements to add.
+   * @return if the elements were successfully removed.
    */
   boolean removeAll(Collection<?> elements);
 

@@ -18,7 +18,7 @@ package com.pedrogomez.renderers.sample.ui;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import butterknife.InjectView;
+import butterknife.Bind;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.Video;
@@ -33,7 +33,7 @@ public class RecyclerViewActivity extends BaseActivity {
 
   @Inject RVRendererAdapter<Video> adapter;
 
-  @InjectView(R.id.rv_renderers) RecyclerView recyclerView;
+  @Bind(R.id.rv_renderers) RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_recycler_view);
