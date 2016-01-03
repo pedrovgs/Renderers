@@ -9,5 +9,5 @@ android:
     - extra-android-m2repository
 
 script: 
-	- ./gradlew checkstye build
+  - ./gradlew checkstye build
 
