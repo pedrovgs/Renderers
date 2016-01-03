@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Generic AdapteeCollection implementation based on ArrayList<T>. Library clients can use this
+ * Generic AdapteeCollection implementation based on ArrayList. Library clients can use this
  * class instead of create his own AdapteeCollections.
  *
  * @author Pedro Vicente Gómez Sánchez.

@@ -29,11 +29,11 @@ import java.util.Collection;
 /**
  * Class created to work as builder for Renderer objects. This class provides methods to create a
  * Renderer instances using a fluent API.
- * <p/>
+ *
  * The library users have to extends RendererBuilder and create a new one with prototypes. The
  * RendererBuilder implementation will have to declare the mapping between objects from the
  * AdapteeCollection and Renderer instances passed to the prototypes collection.
- * <p/>
+ *
  * This class is not going to implement the view recycling if is used with the RecyclerView widget
  * because RecyclerView class already implements the view recycling for us.
  *
@@ -114,9 +114,11 @@ public abstract class RendererBuilder<T> {
    * recycle or create a new Renderer instance with all the needed information to implement the
    * rendering. This method will validate all the attributes passed in the builder constructor and
    * will check if can recycle or has to create a new Renderer instance.
-   * <p/>
+   *
    * This method is used with ListView because the view recycling mechanism is implemented in this
    * class. RecyclerView widget will use buildRendererViewHolder method.
+   *
+   * @return ready to use Renderer instance.
    */
   protected Renderer build() {
     validateAttributes();
@@ -135,9 +137,11 @@ public abstract class RendererBuilder<T> {
    * create a new Renderer instance with all the needed information to implement the rendering.
    * This method will validate all the attributes passed in the builder constructor and will create
    * a RendererViewHolder instance.
-   * <p/>
+   *
    * This method is used with RecyclerView because the view recycling mechanism is implemented out
    * of this class and we only have to return new RendererViewHolder instances.
+   *
+   * @return ready to use RendererViewHolder instance.
    */
   protected RendererViewHolder buildRendererViewHolder() {
     validateAttributesToCreateANewRendererViewHolder();
@@ -325,6 +329,8 @@ public abstract class RendererBuilder<T> {
 
   /**
    * Configure prototypes used as Renderer instances.
+   *
+   * @param prototypes to use by the builder in order to create Renderer instances.
    */
   protected final void setPrototypes(Collection<Renderer<T>> prototypes) {
     if (prototypes == null || prototypes.isEmpty()) {
