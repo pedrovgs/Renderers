@@ -11,10 +11,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -88,7 +90,7 @@ import static org.mockito.Mockito.when;
     verify(mockedRendererBuilder).withContent(ANY_OBJECT);
     verify(mockedRendererBuilder).withConvertView(mockedConvertView);
     verify(mockedRendererBuilder).withParent(mockedParent);
-    verify(mockedRendererBuilder).withLayoutInflater(mockedLayoutInflater);
+    verify(mockedRendererBuilder).withLayoutInflater((LayoutInflater) notNull());
   }
 
   @Test public void shouldBuildRendererAndCallUpdateRendererExtraValues() {
@@ -154,11 +156,11 @@ import static org.mockito.Mockito.when;
 
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
+    when(mockedParent.getContext()).thenReturn(Robolectric.application);
   }
 
   private void initializeRendererAdapter() {
-    rendererAdapter =
-        new RendererAdapter<Object>(mockedLayoutInflater, mockedRendererBuilder, mockedCollection);
+    rendererAdapter = new RendererAdapter<Object>(mockedRendererBuilder, mockedCollection);
     rendererAdapter = spy(rendererAdapter);
   }
 }

@@ -49,14 +49,6 @@ public class RendererBuilderTest {
     rendererBuilder = new ObjectRendererBuilder(null);
   }
 
-  @Test(expected = NeedsPrototypesException.class)
-  public void shouldThrowNeedsPrototypeExceptionIfPrototypesIsEmpty() {
-    prototypes = new LinkedList<Renderer<Object>>();
-    initializeRendererBuilder();
-
-    rendererBuilder = new ObjectRendererBuilder(prototypes);
-  }
-
   @Test(expected = NullContentException.class)
   public void shouldThrowNullContentExceptionIfBuildRendererWithoutContent() {
     buildRenderer(null, mockedConvertView, mockedParent, mockedLayoutInflater);
