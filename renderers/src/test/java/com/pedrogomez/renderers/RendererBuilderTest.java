@@ -118,6 +118,35 @@ public class RendererBuilderTest {
     assertEquals(prototypes.size(), rendererBuilder.getViewTypeCount());
   }
 
+  @Test(expected = NeedsPrototypesException.class) public void shouldNotAcceptNullPrototypes() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.withPrototypes(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void shouldNotAcceptNullKeysBindingAPrototype() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.bind(null, new ObjectRenderer());
+  }
+
+  @Test public void shouldAddPrototypeAndConfigureRendererBinding() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.bind(Object.class, new ObjectRenderer());
+
+    assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
+  }
+
+  @Test public void shouldAddPrototypeAndConfigureBindingByClass() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.addPrototype(new ObjectRenderer()).bind(Object.class, ObjectRenderer.class);
+
+    assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
+  }
+
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
   }
