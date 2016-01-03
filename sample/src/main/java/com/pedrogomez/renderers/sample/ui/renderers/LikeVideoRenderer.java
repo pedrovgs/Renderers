@@ -15,7 +15,6 @@
  */
 package com.pedrogomez.renderers.sample.ui.renderers;
 
-import android.content.Context;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.Video;
 
@@ -27,10 +26,6 @@ import com.pedrogomez.renderers.sample.model.Video;
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class LikeVideoRenderer extends VideoRenderer {
-
-  public LikeVideoRenderer(Context context) {
-    super(context);
-  }
 
   @Override protected void renderLabel() {
     Video video = getContent();

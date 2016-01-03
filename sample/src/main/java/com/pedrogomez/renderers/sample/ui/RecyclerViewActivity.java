@@ -55,8 +55,8 @@ public class RecyclerViewActivity extends BaseActivity {
         new RandomVideoCollectionGenerator();
     AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    adapter = new RVRendererAdapter<Video>(LayoutInflater.from(this),
-        new VideoRendererBuilder(this, new OnVideoClickedListener(this)), videoCollection);
+    adapter = new RVRendererAdapter<Video>(LayoutInflater.from(this), new VideoRendererBuilder(),
+        videoCollection);
   }
 
   /**
