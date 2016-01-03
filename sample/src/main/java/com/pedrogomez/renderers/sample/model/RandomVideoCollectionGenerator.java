@@ -22,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import javax.inject.Inject;
 
 /**
  * Auxiliary class created to generate a VideoCollection with random data.
@@ -35,7 +34,7 @@ public class RandomVideoCollectionGenerator {
 
   private Random random;
 
-  @Inject public RandomVideoCollectionGenerator() {
+  public RandomVideoCollectionGenerator() {
     this.random = new Random();
     initializeVideoInfo();
   }

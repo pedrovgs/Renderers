@@ -16,12 +16,15 @@
 package com.pedrogomez.renderers.sample.ui;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.ListView;
 import butterknife.Bind;
+import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.pedrogomez.renderers.sample.R;
+import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
-import javax.inject.Inject;
+import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
 
 /**
  * ListViewActivity for the Renderers demo.
@@ -30,14 +33,29 @@ import javax.inject.Inject;
  */
 public class ListViewActivity extends BaseActivity {
 
-  @Inject RendererAdapter<Video> adapter;
+  private static final int VIDEO_COUNT = 100;
+
+  private RendererAdapter<Video> adapter;
 
   @Bind(R.id.lv_renderers) ListView listView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_list_view);
     super.onCreate(savedInstanceState);
+    initAdapter();
     initListView();
+  }
+
+  /**
+   * Initialize RVRendererAdapter
+   */
+  private void initAdapter() {
+    RandomVideoCollectionGenerator randomVideoCollectionGenerator =
+        new RandomVideoCollectionGenerator();
+    AdapteeCollection<Video> videoCollection =
+        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
+    adapter = new RendererAdapter<Video>(LayoutInflater.from(this),
+        new VideoRendererBuilder(this, new OnVideoClickedListener(this)), videoCollection);
   }
 
   /**

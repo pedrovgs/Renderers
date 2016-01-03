@@ -18,7 +18,6 @@ package com.pedrogomez.renderers.sample.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import butterknife.ButterKnife;
-import com.pedrogomez.renderers.sample.SampleApplication;
 
 /**
  * BaseActivity created extended by every activity in this sample project. Performs dependency
@@ -37,8 +36,6 @@ public class BaseActivity extends Activity {
    * Initialize injection from SampleApplication
    */
   private void initInjection() {
-    SampleApplication application = (SampleApplication) getApplication();
-    application.inject(this);
     ButterKnife.bind(this);
   }
 }

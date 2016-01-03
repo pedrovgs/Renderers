@@ -18,11 +18,14 @@ package com.pedrogomez.renderers.sample.ui;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import butterknife.Bind;
+import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.sample.R;
+import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
-import javax.inject.Inject;
+import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
 
 /**
  * RecyclerViewActivity for the Renderers demo.
@@ -31,18 +34,33 @@ import javax.inject.Inject;
  */
 public class RecyclerViewActivity extends BaseActivity {
 
-  @Inject RVRendererAdapter<Video> adapter;
+  private static final int VIDEO_COUNT = 100;
 
   @Bind(R.id.rv_renderers) RecyclerView recyclerView;
+
+  private RVRendererAdapter<Video> adapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_recycler_view);
     super.onCreate(savedInstanceState);
+    initAdapter();
     initRecyclerView();
   }
 
   /**
-   * Initialize ListVideo with our RendererAdapter.
+   * Initialize RVRendererAdapter
+   */
+  private void initAdapter() {
+    RandomVideoCollectionGenerator randomVideoCollectionGenerator =
+        new RandomVideoCollectionGenerator();
+    AdapteeCollection<Video> videoCollection =
+        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
+    adapter = new RVRendererAdapter<Video>(LayoutInflater.from(this),
+        new VideoRendererBuilder(this, new OnVideoClickedListener(this)), videoCollection);
+  }
+
+  /**
+   * Initialize ListVideo with our RVRendererAdapter.
    */
   private void initRecyclerView() {
     recyclerView.setLayoutManager(new LinearLayoutManager(this));

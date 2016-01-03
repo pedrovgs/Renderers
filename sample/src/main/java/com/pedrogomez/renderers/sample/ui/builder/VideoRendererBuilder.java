@@ -26,7 +26,6 @@ import com.pedrogomez.renderers.sample.ui.renderers.VideoRenderer;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import javax.inject.Inject;
 
 /**
  * RendererBuilder extension created to work with videos. This class works as connector between
@@ -36,7 +35,6 @@ import javax.inject.Inject;
  */
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
-  @Inject
   public VideoRendererBuilder(Context context, VideoRenderer.OnVideoClicked onVideoClicked) {
     Collection<Renderer<Video>> prototypes = getPrototypes(context, onVideoClicked);
     setPrototypes(prototypes);
