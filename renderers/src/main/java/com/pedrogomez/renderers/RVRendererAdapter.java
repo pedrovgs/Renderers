@@ -36,13 +36,10 @@ import java.util.Collection;
  */
 public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> {
 
-  private final LayoutInflater layoutInflater;
   private final RendererBuilder<T> rendererBuilder;
   private final AdapteeCollection<T> collection;
 
-  public RVRendererAdapter(LayoutInflater layoutInflater, RendererBuilder<T> rendererBuilder,
-      AdapteeCollection<T> collection) {
-    this.layoutInflater = layoutInflater;
+  public RVRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
     this.rendererBuilder = rendererBuilder;
     this.collection = collection;
   }
@@ -81,7 +78,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    */
   @Override public RendererViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
     rendererBuilder.withParent(viewGroup);
-    rendererBuilder.withLayoutInflater(layoutInflater);
+    rendererBuilder.withLayoutInflater(LayoutInflater.from(viewGroup.getContext()));
     rendererBuilder.withViewType(viewType);
     RendererViewHolder viewHolder = rendererBuilder.buildRendererViewHolder();
     if (viewHolder == null) {

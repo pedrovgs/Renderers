@@ -18,7 +18,6 @@ package com.pedrogomez.renderers.sample.ui;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -55,8 +54,7 @@ public class RecyclerViewActivity extends BaseActivity {
         new RandomVideoCollectionGenerator();
     AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    adapter = new RVRendererAdapter<Video>(LayoutInflater.from(this), new VideoRendererBuilder(),
-        videoCollection);
+    adapter = new RVRendererAdapter<Video>(new VideoRendererBuilder(), videoCollection);
   }
 
   /**

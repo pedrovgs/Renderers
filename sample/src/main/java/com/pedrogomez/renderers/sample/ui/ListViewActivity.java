@@ -16,7 +16,6 @@
 package com.pedrogomez.renderers.sample.ui;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.widget.ListView;
 import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
@@ -54,8 +53,7 @@ public class ListViewActivity extends BaseActivity {
         new RandomVideoCollectionGenerator();
     AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    adapter = new RendererAdapter<Video>(LayoutInflater.from(this), new VideoRendererBuilder(),
-        videoCollection);
+    adapter = new RendererAdapter<Video>(new VideoRendererBuilder(), videoCollection);
   }
 
   /**
