@@ -1,13 +1,13 @@
 Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=master)](https://travis-ci.org/pedrovgs/Renderers) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Renderers-green.svg?style=true)](https://android-arsenal.com/details/1/1195)
 =========
 
-Are you bored of creating adapters again and again each time you have to implement a ``ListView`` or a ``RecyclerView``?
+Are you bored of creating adapters again and again when you have to implement a ``ListView`` or a ``RecyclerView``?
 
 Are you bored of using ``ViewHolders`` and create getView/onCreateViewHolder/onBindViewHolder methods with thousand of lines full of if/else if/else sentences?
 
 **Renderers is an Android library created to avoid all the Adapter/ListView/RecyclerView boilerplate** needed to create a new adapter and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation.
 
-This Android library offers you two main classes to use or extend and create your own rendering algorithms out of your adapter implementation.
+This Android library offers you two main classes to instantiate or extend and create your own rendering algorithms out of your adapter implementation.
 
 **Renderers is an easy way to work with android ListView/RecyclerView and Adapter classes**. With this library you only have to create your **Renderer** classes and declare the mapping between the object to render and the **Renderer**.
 
@@ -52,7 +52,6 @@ public abstract class VideoRenderer extends Renderer<Video> {
        @OnClick(R.id.iv_thumbnail)
        void onVideoClicked() {
            Video video = getContent();
-           listener.onVideoClicked(video);
            Log.d("Renderer", "Clicked: " + video.getTitle());
        }
 
@@ -92,7 +91,7 @@ public abstract class VideoRenderer extends Renderer<Video> {
 }
 ```
 
-You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want and [Jake Wharton's][2] [Dagger] [6] library to inject all your dependencies and keep your activities clean of the library initialization code. But use third party libraries is not mandatory. The usage of abstract methods to implement a Template Method Pattern is also optional.
+You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want. But the usage of third party libraries is not mandatory. The usage of abstract methods to implement a ``Template Method Pattern`` inside your ``Renderer`` classes is optional as well.
 
 * 2. Instantiate a ``RendererBuilder`` with a ``Renderer`.
 
@@ -101,14 +100,14 @@ Renderer<Video> renderer = new LikeVideoRenderer();
 RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>(renderer);
 ```
 
-If you need to map different object instances to different ``Renderer`` implementations you use ``bind`` methods:
+If you need to map different object instances to different ``Renderer`` implementations you can use ``RendererBuilder.bind`` methods:
 
 ```java
 RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
         .bind(Video.class, LikeVideoRenderer());
 ```
 
-If your binding is more complex and it's not based on different classes but in properties of these classes you can also extend ``RendererBuilder``:
+If your binding is more complex and it's not based on different classes but in properties of these classes you can also extend ``RendererBuilder`` and override ``getPrototypeClass`` to customize your binding:
 
 ```java
 public class VideoRendererBuilder extends RendererBuilder<Video> {
@@ -245,4 +244,3 @@ License
 [3]: https://github.com/JakeWharton/butterknife
 [4]: http://media.fib.upc.edu/fibtv/streamingmedia/view/2/930
 [5]: http://www.slideshare.net/PedroVicenteGmezSnch/software-design-patterns-on-android
-[6]: https://github.com/square/dagger
