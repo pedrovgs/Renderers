@@ -17,7 +17,7 @@ package com.pedrogomez.renderers.sample.ui;
 
 import android.os.Bundle;
 import android.widget.ListView;
-import butterknife.InjectView;
+import butterknife.Bind;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.Video;
@@ -32,7 +32,7 @@ public class ListViewActivity extends BaseActivity {
 
   @Inject RendererAdapter<Video> adapter;
 
-  @InjectView(R.id.lv_renderers) ListView listView;
+  @Bind(R.id.lv_renderers) ListView listView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_list_view);
