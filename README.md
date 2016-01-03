@@ -183,7 +183,7 @@ private void initListView() {
 
 The sample code is using [ButterKnife][4] library to avoid initialize some entities and findViewById() methods, but you can use this library without third party libraries and provide that dependencies yourself.
 
-**Remember if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.** 
+**Remember if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.**
 
 Usage
 -----
