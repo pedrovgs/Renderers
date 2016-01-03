@@ -1,0 +1,17 @@
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/NeedsPrototypesException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/ListAdapteeCollection.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/NullContentException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/NullRendererBuiltException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/PrototypeNotFoundException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/RendererViewHolder.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/NullPrototypeClassException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/NullLayoutInflaterException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/Renderer.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/RendererAdapter.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/RendererBuilder.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/RendererException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/AdapteeCollection.java
+/Users/Pedro/Development/Projects/Renderers/renderers/target/generated-sources/r/com/pedrogomez/renderers/BuildConfig.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/NullParentException.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/RVRendererAdapter.java
+/Users/Pedro/Development/Projects/Renderers/renderers/src/main/java/com/pedrogomez/renderers/exception/NotInflateViewException.java
