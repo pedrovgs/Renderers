@@ -142,7 +142,7 @@ public class RendererBuilderTest {
   @Test public void shouldAddPrototypeAndConfigureBindingByClass() {
     RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
 
-    rendererBuilder.addPrototype(new ObjectRenderer()).bind(Object.class, ObjectRenderer.class);
+    rendererBuilder.withPrototype(new ObjectRenderer()).bind(Object.class, ObjectRenderer.class);
 
     assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
   }

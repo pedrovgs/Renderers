@@ -3,7 +3,7 @@ Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=m
 
 Are you bored of creating adapters again and again when you have to implement a ``ListView`` or a ``RecyclerView``?
 
-Are you bored of using ``ViewHolders`` and create getView/onCreateViewHolder/onBindViewHolder methods with thousand of lines full of if/else if/else sentences?
+Are you bored of using ``ViewHolders`` and create getView/onCreateViewHolder/onBindViewHolder methods with thousands of lines full of if/else if/else sentences?
 
 **Renderers is an Android library created to avoid all the Adapter/ListView/RecyclerView boilerplate** needed to create a new adapter and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation.
 
@@ -28,7 +28,7 @@ Usage
 
 To use Renderers Android library and get your ListView/RecyclerView working you only have to follow three steps:
 
-* 1. Create your ``Renderer`` class or classes extending ``Renderer<T>``. Inside your ``Renderer` classes you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
+* 1. Create your ``Renderer`` class or classes extending ``Renderer<T>``. Inside your ``Renderer`` classes you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
 
 ```java
 public abstract class VideoRenderer extends Renderer<Video> {
@@ -162,7 +162,7 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
 }
 ```
 
-* 3. Initialize your ``ListView`` or ``RecyclerView`` with your ``RendererBuilder`` and your ``AdapteeCollection`` instances inside your Activity or Fragment. **You can use ``ListAdapteeCollection`` or create your own implementation creating a class which implements ``AdapteeCollection`` to configure your ``RendererAdapter`` or `RVRendererAdapter``.**
+* 3. Initialize your ``ListView`` or ``RecyclerView`` with your ``RendererBuilder`` and your ``AdapteeCollection`` instances inside your Activity or Fragment. **You can use ``ListAdapteeCollection`` or create your own implementation creating a class which implements ``AdapteeCollection`` to configure your ``RendererAdapter`` or ``RVRendererAdapter``.**
 
 ```java
 private void initListView() {

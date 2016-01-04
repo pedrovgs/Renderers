@@ -61,7 +61,7 @@ public class RecyclerViewActivity extends BaseActivity {
     AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
     RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
-        .addPrototype(new LikeVideoRenderer())
+        .withPrototype(new LikeVideoRenderer())
         .bind(Video.class, LikeVideoRenderer.class);
 
     adapter = new RVRendererAdapter<Video>(rendererBuilder, videoCollection);

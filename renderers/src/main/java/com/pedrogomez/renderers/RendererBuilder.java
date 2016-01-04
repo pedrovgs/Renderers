@@ -24,7 +24,6 @@ import com.pedrogomez.renderers.exception.NullLayoutInflaterException;
 import com.pedrogomez.renderers.exception.NullParentException;
 import com.pedrogomez.renderers.exception.NullPrototypeClassException;
 import com.pedrogomez.renderers.exception.PrototypeNotFoundException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -88,9 +87,9 @@ public class RendererBuilder<T> {
   /**
    * Get access to the prototypes collection used to create one RendererBuilder.
    *
-   * @return prototypes collection.
+   * @return prototypes list.
    */
-  public final Collection<Renderer<T>> getPrototypes() {
+  public final List<Renderer<T>> getPrototypes() {
     return prototypes;
   }
 
@@ -120,7 +119,7 @@ public class RendererBuilder<T> {
           "RendererBuilder has to be created with a non null collection of"
               + "Collection<Renderer<T> to provide new or recycled Renderer instances");
     }
-    this.prototypes = prototypes;
+    this.prototypes.addAll(prototypes);
     return this;
   }
 
@@ -130,7 +129,7 @@ public class RendererBuilder<T> {
    * @param renderer to use as prototype.
    * @return the current RendererBuilder instance.
    */
-  public RendererBuilder<T> addPrototype(Renderer<T> renderer) {
+  public RendererBuilder<T> withPrototype(Renderer<T> renderer) {
     if (renderer == null) {
       throw new NeedsPrototypesException(
           "RendererBuilder can't use a null Renderer<T> instance as prototype");
