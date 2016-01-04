@@ -9,7 +9,7 @@ Are you bored of using ``ViewHolders`` and create getView/onCreateViewHolder/onB
 
 This Android library offers you two main classes to instantiate or extend and create your own rendering algorithms out of your adapter implementation.
 
-**Renderers is an easy way to work with android ListView/RecyclerView and Adapter classes**. With this library you only have to create your **Renderer** classes and declare the mapping between the object to render and the **Renderer**.
+**Renderers is an easy way to work with android ListView/RecyclerView and Adapter classes**. With this library you only have to create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer`. The ``Renderer`` will use the model information to draw your user interface.
 
 You can find implementation details in this talks:
 
@@ -31,7 +31,7 @@ To use Renderers Android library and get your ListView/RecyclerView working you 
 * 1. Create your ``Renderer`` class or classes extending ``Renderer<T>``. Inside your ``Renderer`` classes you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
 
 ```java
-public abstract class VideoRenderer extends Renderer<Video> {
+public class VideoRenderer extends Renderer<Video> {
 
        @InjectView(R.id.iv_thumbnail)
        ImageView thumbnail;
@@ -80,20 +80,12 @@ public abstract class VideoRenderer extends Renderer<Video> {
            return marker;
        }
 
-       protected Context getContext() {
-           return context;
-       }
-
-       protected abstract void renderLabel();
-
-       protected abstract void renderMarker(Video video);
-
 }
 ```
 
-You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want. But the usage of third party libraries is not mandatory. The usage of abstract methods to implement a ``Template Method Pattern`` inside your ``Renderer`` classes is optional as well.
+You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want. But the usage of third party libraries is not mandatory.
 
-* 2. Instantiate a ``RendererBuilder`` with a ``Renderer`.
+* 2. Instantiate a ``RendererBuilder`` with a ``Renderer``.
 
 ```java
 Renderer<Video> renderer = new LikeVideoRenderer();
@@ -180,8 +172,6 @@ private void initListView() {
 }
 ```
 
-The sample code is using [ButterKnife][4] library to avoid initialize some entities and findViewById() methods, but you can use this library without third party libraries and provide that dependencies yourself.
-
 **Remember if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.**
 
 Usage
@@ -224,7 +214,7 @@ Developed By
 License
 -------
 
-    Copyright 2014 Pedro Vicente Gómez Sánchez
+    Copyright 2016 Pedro Vicente Gómez Sánchez
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
