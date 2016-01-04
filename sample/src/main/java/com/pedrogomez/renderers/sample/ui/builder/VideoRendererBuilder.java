@@ -15,18 +15,14 @@
  */
 package com.pedrogomez.renderers.sample.ui.builder;
 
-import android.content.Context;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.renderers.FavoriteVideoRenderer;
 import com.pedrogomez.renderers.sample.ui.renderers.LikeVideoRenderer;
 import com.pedrogomez.renderers.sample.ui.renderers.LiveVideoRenderer;
-import com.pedrogomez.renderers.sample.ui.renderers.VideoRenderer;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import javax.inject.Inject;
 
 /**
  * RendererBuilder extension created to work with videos. This class works as connector between
@@ -36,9 +32,8 @@ import javax.inject.Inject;
  */
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
-  @Inject
-  public VideoRendererBuilder(Context context, VideoRenderer.OnVideoClicked onVideoClicked) {
-    Collection<Renderer<Video>> prototypes = getPrototypes(context, onVideoClicked);
+  public VideoRendererBuilder() {
+    List<Renderer<Video>> prototypes = getRendererVideoPrototypes();
     setPrototypes(prototypes);
   }
 
@@ -70,19 +65,15 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
    *
    * @return Renderer<Video> prototypes for RendererBuilder.
    */
-  private List<Renderer<Video>> getPrototypes(Context context,
-      VideoRenderer.OnVideoClicked onVideoClickedListener) {
+  private List<Renderer<Video>> getRendererVideoPrototypes() {
     List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
-    LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer(context);
-    likeVideoRenderer.setListener(onVideoClickedListener);
+    LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer();
     prototypes.add(likeVideoRenderer);
 
-    FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer(context);
-    favoriteVideoRenderer.setListener(onVideoClickedListener);
+    FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer();
     prototypes.add(favoriteVideoRenderer);
 
-    LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer(context);
-    liveVideoRenderer.setListener(onVideoClickedListener);
+    LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer();
     prototypes.add(liveVideoRenderer);
 
     return prototypes;

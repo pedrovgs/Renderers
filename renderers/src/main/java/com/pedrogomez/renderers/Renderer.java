@@ -15,6 +15,7 @@
  */
 package com.pedrogomez.renderers;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,6 +80,16 @@ public abstract class Renderer<T> implements Cloneable {
    */
   public View getRootView() {
     return rootView;
+  }
+
+  /**
+   * Method to access to the current Renderer Context.
+   *
+   * @return the context associated to the root view or null if the root view has not been
+   * initialized.
+   */
+  protected Context getContext() {
+    return getRootView() != null ? getRootView().getContext() : null;
   }
 
   /**

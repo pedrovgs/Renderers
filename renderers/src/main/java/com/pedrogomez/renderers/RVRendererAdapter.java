@@ -36,13 +36,10 @@ import java.util.Collection;
  */
 public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> {
 
-  private final LayoutInflater layoutInflater;
   private final RendererBuilder<T> rendererBuilder;
   private final AdapteeCollection<T> collection;
 
-  public RVRendererAdapter(LayoutInflater layoutInflater, RendererBuilder<T> rendererBuilder,
-      AdapteeCollection<T> collection) {
-    this.layoutInflater = layoutInflater;
+  public RVRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
     this.rendererBuilder = rendererBuilder;
     this.collection = collection;
   }
@@ -81,7 +78,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    */
   @Override public RendererViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
     rendererBuilder.withParent(viewGroup);
-    rendererBuilder.withLayoutInflater(layoutInflater);
+    rendererBuilder.withLayoutInflater(LayoutInflater.from(viewGroup.getContext()));
     rendererBuilder.withViewType(viewType);
     RendererViewHolder viewHolder = rendererBuilder.buildRendererViewHolder();
     if (viewHolder == null) {
@@ -112,36 +109,40 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    * Add an element to the AdapteeCollection.
    *
    * @param element to add.
+   * @return if the element has been added.
    */
-  public void add(T element) {
-    collection.add(element);
+  public boolean add(T element) {
+    return collection.add(element);
   }
 
   /**
    * Remove an element from the AdapteeCollection.
    *
    * @param element to remove.
+   * @return if the element has been removed.
    */
-  public void remove(Object element) {
-    collection.remove(element);
+  public boolean remove(Object element) {
+    return collection.remove(element);
   }
 
   /**
    * Add a Collection of elements to the AdapteeCollection.
    *
    * @param elements to add.
+   * @return if the elements have been added.
    */
-  public void addAll(Collection<? extends T> elements) {
-    collection.addAll(elements);
+  public boolean addAll(Collection<? extends T> elements) {
+    return collection.addAll(elements);
   }
 
   /**
    * Remove a Collection of elements to the AdapteeCollection.
    *
    * @param elements to remove.
+   * @return if the elements have been removed.
    */
-  public void removeAll(Collection<?> elements) {
-    collection.removeAll(elements);
+  public boolean removeAll(Collection<?> elements) {
+    return collection.removeAll(elements);
   }
 
   /**

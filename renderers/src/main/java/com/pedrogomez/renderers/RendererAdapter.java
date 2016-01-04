@@ -37,13 +37,14 @@ import java.util.Collection;
  */
 public class RendererAdapter<T> extends BaseAdapter {
 
-  private final LayoutInflater layoutInflater;
   private final RendererBuilder<T> rendererBuilder;
   private final AdapteeCollection<T> collection;
 
-  public RendererAdapter(LayoutInflater layoutInflater, RendererBuilder rendererBuilder,
-      AdapteeCollection<T> collection) {
-    this.layoutInflater = layoutInflater;
+  public RendererAdapter(RendererBuilder rendererBuilder) {
+    this(rendererBuilder, new ListAdapteeCollection<T>());
+  }
+
+  public RendererAdapter(RendererBuilder rendererBuilder, AdapteeCollection<T> collection) {
     this.rendererBuilder = rendererBuilder;
     this.collection = collection;
   }
@@ -79,7 +80,7 @@ public class RendererAdapter<T> extends BaseAdapter {
     rendererBuilder.withContent(content);
     rendererBuilder.withConvertView(convertView);
     rendererBuilder.withParent(parent);
-    rendererBuilder.withLayoutInflater(layoutInflater);
+    rendererBuilder.withLayoutInflater(LayoutInflater.from(parent.getContext()));
     Renderer<T> renderer = rendererBuilder.build();
     if (renderer == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null Renderer");

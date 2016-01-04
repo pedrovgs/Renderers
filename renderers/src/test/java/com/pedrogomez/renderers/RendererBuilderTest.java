@@ -49,14 +49,6 @@ public class RendererBuilderTest {
     rendererBuilder = new ObjectRendererBuilder(null);
   }
 
-  @Test(expected = NeedsPrototypesException.class)
-  public void shouldThrowNeedsPrototypeExceptionIfPrototypesIsEmpty() {
-    prototypes = new LinkedList<Renderer<Object>>();
-    initializeRendererBuilder();
-
-    rendererBuilder = new ObjectRendererBuilder(prototypes);
-  }
-
   @Test(expected = NullContentException.class)
   public void shouldThrowNullContentExceptionIfBuildRendererWithoutContent() {
     buildRenderer(null, mockedConvertView, mockedParent, mockedLayoutInflater);
@@ -124,6 +116,41 @@ public class RendererBuilderTest {
 
   @Test public void shouldReturnPrototypeSizeOnGetViewTypeCount() {
     assertEquals(prototypes.size(), rendererBuilder.getViewTypeCount());
+  }
+
+  @Test(expected = NeedsPrototypesException.class) public void shouldNotAcceptNullPrototypes() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.withPrototypes(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void shouldNotAcceptNullKeysBindingAPrototype() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.bind(null, new ObjectRenderer());
+  }
+
+  @Test public void shouldAddPrototypeAndConfigureRendererBinding() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.bind(Object.class, new ObjectRenderer());
+
+    assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
+  }
+
+  @Test public void shouldAddPrototypeAndConfigureBindingByClass() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.withPrototype(new ObjectRenderer()).bind(Object.class, ObjectRenderer.class);
+
+    assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
+  }
+
+  @Test public void shouldAddPrototyeAndconfigureBindingOnConstruction() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>(new ObjectRenderer());
+
+    assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
   }
 
   private void initializeMocks() {

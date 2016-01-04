@@ -15,7 +15,6 @@
  */
 package com.pedrogomez.renderers.sample.ui.renderers;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +35,6 @@ import java.util.Date;
 public class LiveVideoRenderer extends VideoRenderer {
 
   @Bind(R.id.date) TextView date;
-
-  public LiveVideoRenderer(Context context) {
-    super(context);
-  }
 
   @Override protected View inflate(LayoutInflater inflater, ViewGroup parent) {
     View inflatedView = inflater.inflate(R.layout.live_video_renderer, parent, false);

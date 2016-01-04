@@ -15,17 +15,17 @@
  */
 package com.pedrogomez.renderers.sample.ui.renderers;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.ButterKnife;
+import android.widget.Toast;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.Renderer;
+import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.squareup.picasso.Picasso;
 
@@ -37,18 +37,10 @@ import com.squareup.picasso.Picasso;
  */
 public abstract class VideoRenderer extends Renderer<Video> {
 
-  private final Context context;
-
   @Bind(R.id.iv_thumbnail) ImageView thumbnail;
   @Bind(R.id.tv_title) TextView title;
   @Bind(R.id.iv_marker) ImageView marker;
   @Bind(R.id.tv_label) TextView label;
-
-  private OnVideoClicked listener;
-
-  public VideoRenderer(Context context) {
-    this.context = context;
-  }
 
   /**
    * Inflate the main layout used to render videos in the list view.
@@ -69,10 +61,9 @@ public abstract class VideoRenderer extends Renderer<Video> {
   }
 
   @OnClick(R.id.iv_thumbnail) void onVideoClicked() {
-    if (listener != null) {
-      Video video = getContent();
-      listener.onVideoClicked(video);
-    }
+    Video video = getContent();
+    Toast.makeText(getContext(), "Video clicked. Title = " + video.getTitle(), Toast.LENGTH_LONG)
+        .show();
   }
 
   /**
@@ -94,8 +85,8 @@ public abstract class VideoRenderer extends Renderer<Video> {
    * @param video to get the rendered thumbnail.
    */
   private void renderThumbnail(Video video) {
-    Picasso.with(context).cancelRequest(thumbnail);
-    Picasso.with(context)
+    Picasso.with(getContext()).cancelRequest(thumbnail);
+    Picasso.with(getContext())
         .load(video.getThumbnail())
         .placeholder(R.drawable.placeholder)
         .into(thumbnail);
@@ -110,20 +101,12 @@ public abstract class VideoRenderer extends Renderer<Video> {
     this.title.setText(video.getTitle());
   }
 
-  public void setListener(OnVideoClicked listener) {
-    this.listener = listener;
-  }
-
   protected TextView getLabel() {
     return label;
   }
 
   protected ImageView getMarker() {
     return marker;
-  }
-
-  protected Context getContext() {
-    return context;
   }
 
   protected abstract void renderLabel();
@@ -146,9 +129,5 @@ public abstract class VideoRenderer extends Renderer<Video> {
         /*
          * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
          */
-  }
-
-  public interface OnVideoClicked {
-    void onVideoClicked(final Video video);
   }
 }

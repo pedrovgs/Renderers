@@ -15,7 +15,6 @@
  */
 package com.pedrogomez.renderers.sample.ui.renderers;
 
-import android.content.Context;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.Video;
 
@@ -26,10 +25,6 @@ import com.pedrogomez.renderers.sample.model.Video;
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class FavoriteVideoRenderer extends VideoRenderer {
-
-  public FavoriteVideoRenderer(Context context) {
-    super(context);
-  }
 
   @Override protected void renderLabel() {
     String label = getContext().getString(R.string.favorite_label);
