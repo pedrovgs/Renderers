@@ -9,7 +9,7 @@ Are you bored of using ``ViewHolders`` and create getView/onCreateViewHolder/onB
 
 This Android library offers you two main classes to instantiate or extend and create your own rendering algorithms out of your adapter implementation.
 
-**Renderers is an easy way to work with android ListView/RecyclerView and Adapter classes**. With this library you only have to create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer`. The ``Renderer`` will use the model information to draw your user interface.
+**Renderers is an easy way to work with android ListView/RecyclerView and Adapter classes**. With this library you only have to create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer``. The ``Renderer`` will use the model information to draw your user interface.
 
 You can find implementation details in this talks:
 
