@@ -79,7 +79,26 @@ public class VideoRenderer extends Renderer<Video> {
        protected ImageView getMarker() {
            return marker;
        }
+       
+       //If you don't use ButterKnife you have to implement these methods.
+       
+       /**
+        * Maps all the view elements from the xml declaration to members of this renderer.
+        */
+       @Override protected void setUpView(View rootView) {
+        /*
+         * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
+         */
+       }
 
+       /**
+        * Insert external listeners in some widgets.
+       */
+       @Override protected void hookListeners(View rootView) {
+        /*
+         * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
+         */
+       }
 }
 ```
 
