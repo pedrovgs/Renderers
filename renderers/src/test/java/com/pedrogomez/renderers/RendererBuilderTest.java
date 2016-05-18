@@ -10,7 +10,6 @@ import com.pedrogomez.renderers.exception.NullParentException;
 import com.pedrogomez.renderers.exception.NullPrototypeClassException;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Before;
@@ -184,7 +183,8 @@ public class RendererBuilderTest {
   }
 
   @Test public void shouldAddDescendantPrototypesByConstructionAndConfigureBindingByClass() {
-    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>(Arrays.asList(new StringRenderer(), new IntegerRenderer()));
+    RendererBuilder<Object> rendererBuilder =
+            new RendererBuilder<Object>(Arrays.asList(new StringRenderer(), new IntegerRenderer()));
 
     rendererBuilder.bind(String.class, StringRenderer.class);
     rendererBuilder.bind(Integer.class, IntegerRenderer.class);
