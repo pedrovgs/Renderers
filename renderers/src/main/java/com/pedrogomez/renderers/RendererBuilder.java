@@ -24,6 +24,8 @@ import com.pedrogomez.renderers.exception.NullLayoutInflaterException;
 import com.pedrogomez.renderers.exception.NullParentException;
 import com.pedrogomez.renderers.exception.NullPrototypeClassException;
 import com.pedrogomez.renderers.exception.PrototypeNotFoundException;
+
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -45,21 +47,21 @@ import java.util.Map;
  */
 public class RendererBuilder<T> {
 
-  private List<Renderer<T>> prototypes;
+  private List<Renderer<? extends T>> prototypes;
 
   private T content;
   private View convertView;
   private ViewGroup parent;
   private LayoutInflater layoutInflater;
   private Integer viewType;
-  private Map<Class<T>, Class<? extends Renderer>> binding;
+  private Map<Class<? extends T>, Class<? extends Renderer>> binding;
 
   /**
    * Initializes a RendererBuilder with an empty prototypes collection. Using this constructor some
    * binding configuration is needed.
    */
   public RendererBuilder() {
-    this(new LinkedList<Renderer<T>>());
+    this(new LinkedList<Renderer<? extends T>>());
   }
 
   /**
@@ -67,21 +69,21 @@ public class RendererBuilder<T> {
    * used will be always the same and the additional binding configuration wont be needed.
    */
   public RendererBuilder(Renderer<T> renderer) {
-    this(Collections.singletonList(renderer));
+    this(Collections.<Renderer<? extends T>>singletonList(renderer));
   }
 
   /**
    * Initializes a RendererBuilder with a list of prototypes. Using this constructor some
    * binding configuration is needed.
    */
-  public RendererBuilder(List<Renderer<T>> prototypes) {
+  public RendererBuilder(Collection<? extends Renderer<? extends T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
           "RendererBuilder has to be created with a non null collection of"
               + "Collection<Renderer<T> to provide new or recycled Renderer instances");
     }
-    this.prototypes = prototypes;
-    this.binding = new HashMap<Class<T>, Class<? extends Renderer>>();
+    this.prototypes = new LinkedList<>(prototypes);
+    this.binding = new HashMap<Class<? extends T>, Class<? extends Renderer>>();
   }
 
   /**
@@ -89,8 +91,8 @@ public class RendererBuilder<T> {
    *
    * @return prototypes list.
    */
-  public final List<Renderer<T>> getPrototypes() {
-    return prototypes;
+  public final List<Renderer<? extends T>> getPrototypes() {
+    return Collections.unmodifiableList(prototypes);
   }
 
   /**
@@ -98,13 +100,13 @@ public class RendererBuilder<T> {
    *
    * @param prototypes to use by the builder in order to create Renderer instances.
    */
-  public final void setPrototypes(List<Renderer<T>> prototypes) {
+  public final void setPrototypes(Collection<? extends Renderer<? extends T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
           "RendererBuilder has to be created with a non null collection of"
               + "Collection<Renderer<T> to provide new or recycled Renderer instances");
     }
-    this.prototypes = prototypes;
+    this.prototypes = new LinkedList<>(prototypes);
   }
 
   /**
@@ -113,7 +115,7 @@ public class RendererBuilder<T> {
    * @param prototypes to use by the builder in order to create Renderer instances.
    * @return the current RendererBuilder instance.
    */
-  public RendererBuilder<T> withPrototypes(List<Renderer<T>> prototypes) {
+  public RendererBuilder<T> withPrototypes(Collection<? extends Renderer<? extends T>> prototypes) {
     if (prototypes == null) {
       throw new NeedsPrototypesException(
           "RendererBuilder has to be created with a non null collection of"
@@ -129,7 +131,7 @@ public class RendererBuilder<T> {
    * @param renderer to use as prototype.
    * @return the current RendererBuilder instance.
    */
-  public RendererBuilder<T> withPrototype(Renderer<T> renderer) {
+  public RendererBuilder<T> withPrototype(Renderer<? extends T> renderer) {
     if (renderer == null) {
       throw new NeedsPrototypesException(
           "RendererBuilder can't use a null Renderer<T> instance as prototype");
@@ -145,7 +147,7 @@ public class RendererBuilder<T> {
    * @param prototype used as Renderer.
    * @return the current RendererBuilder instance.
    */
-  public RendererBuilder<T> bind(Class<T> clazz, Renderer<T> prototype) {
+  public <G extends T> RendererBuilder<T> bind(Class<G> clazz, Renderer<? extends G> prototype) {
     if (clazz == null || prototype == null) {
       throw new IllegalArgumentException(
           "The binding RecyclerView binding can't be configured using null instances");
@@ -155,7 +157,7 @@ public class RendererBuilder<T> {
     return this;
   }
 
-  public RendererBuilder<T> bind(Class<T> clazz, Class<? extends Renderer> prototypeClass) {
+  public <G extends T> RendererBuilder<T> bind(Class<G> clazz, Class<? extends Renderer<? extends G>> prototypeClass) {
     if (clazz == null || prototypeClass == null) {
       throw new IllegalArgumentException(
           "The binding RecyclerView binding can't be configured using null instances");
