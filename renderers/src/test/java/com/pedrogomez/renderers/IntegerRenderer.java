@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 
 /**
  * Renderer created only for testing purposes.
+ *
+ * @author Rostyslav Roshak.
  */
 public class IntegerRenderer extends Renderer<Integer> {
 
