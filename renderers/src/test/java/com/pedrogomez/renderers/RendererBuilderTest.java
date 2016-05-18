@@ -8,6 +8,9 @@ import com.pedrogomez.renderers.exception.NullContentException;
 import com.pedrogomez.renderers.exception.NullLayoutInflaterException;
 import com.pedrogomez.renderers.exception.NullParentException;
 import com.pedrogomez.renderers.exception.NullPrototypeClassException;
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Before;
@@ -139,12 +142,55 @@ public class RendererBuilderTest {
     assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
   }
 
+  @Test public void shouldAddDescendantPrototypeAndConfigureRendererBinding() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.bind(String.class, new StringRenderer());
+    rendererBuilder.bind(Integer.class, new IntegerRenderer());
+
+
+    assertEquals(StringRenderer.class, rendererBuilder.getPrototypeClass(""));
+    assertEquals(IntegerRenderer.class, rendererBuilder.getPrototypeClass(0));
+  }
+
   @Test public void shouldAddPrototypeAndConfigureBindingByClass() {
     RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
 
     rendererBuilder.withPrototype(new ObjectRenderer()).bind(Object.class, ObjectRenderer.class);
 
     assertEquals(ObjectRenderer.class, rendererBuilder.getPrototypeClass(new Object()));
+  }
+
+  @Test public void shouldAddDescendantPrototypesAndConfigureBindingByClass() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder
+            .withPrototype(new StringRenderer()).bind(String.class, StringRenderer.class)
+            .withPrototype(new IntegerRenderer()).bind(Integer.class, IntegerRenderer.class);
+
+    assertEquals(StringRenderer.class, rendererBuilder.getPrototypeClass(""));
+    assertEquals(IntegerRenderer.class, rendererBuilder.getPrototypeClass(0));
+  }
+
+  @Test public void shouldAddDescendantPrototypesBySetterAndConfigureBindingByClass() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>();
+
+    rendererBuilder.setPrototypes(Arrays.asList(new StringRenderer(), new IntegerRenderer()));
+    rendererBuilder.bind(String.class, StringRenderer.class);
+    rendererBuilder.bind(Integer.class, IntegerRenderer.class);
+
+    assertEquals(StringRenderer.class, rendererBuilder.getPrototypeClass(""));
+    assertEquals(IntegerRenderer.class, rendererBuilder.getPrototypeClass(0));
+  }
+
+  @Test public void shouldAddDescendantPrototypesByConstructionAndConfigureBindingByClass() {
+    RendererBuilder<Object> rendererBuilder = new RendererBuilder<Object>(Arrays.asList(new StringRenderer(), new IntegerRenderer()));
+
+    rendererBuilder.bind(String.class, StringRenderer.class);
+    rendererBuilder.bind(Integer.class, IntegerRenderer.class);
+
+    assertEquals(StringRenderer.class, rendererBuilder.getPrototypeClass(""));
+    assertEquals(IntegerRenderer.class, rendererBuilder.getPrototypeClass(0));
   }
 
   @Test public void shouldAddPrototyeAndconfigureBindingOnConstruction() {
