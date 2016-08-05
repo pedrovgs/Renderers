@@ -114,7 +114,7 @@ RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>(renderer);
 If you need to map different object instances to different ``Renderer`` implementations you can use ``RendererBuilder.bind`` methods:
 
 ```java
-RendererBuilder<Video> rendererBuilder = new RendererBuilder<>()
+RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
         .bind(Video.class, new LikeVideoRenderer());
 ```
 
