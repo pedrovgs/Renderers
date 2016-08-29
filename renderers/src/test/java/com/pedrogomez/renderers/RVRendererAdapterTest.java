@@ -32,11 +32,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.notNull;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Test class created to check the correct behaviour of RVRendererAdapter.
@@ -173,10 +170,10 @@ import static org.mockito.Mockito.when;
     assertEquals(mockedCollection, adapter.getCollection());
   }
 
-  @Test public void shouldBeAdapteeCollectionNotNullWhenCreateOnlyWithRendererBuilder() {
+  @Test public void shouldBeEmptyWhenItsCreatedWithJustARendererBuilder() {
     RVRendererAdapter<Object> adapter = new RVRendererAdapter<Object>(mockedRendererBuilder);
 
-    assertNotNull(adapter.getCollection());
+    assertEquals(0, adapter.getItemCount());
   }
 
 
