@@ -40,11 +40,11 @@ public class RendererAdapter<T> extends BaseAdapter {
   private final RendererBuilder<T> rendererBuilder;
   private AdapteeCollection<T> collection;
 
-  public RendererAdapter(RendererBuilder rendererBuilder) {
+  public RendererAdapter(RendererBuilder<T> rendererBuilder) {
     this(rendererBuilder, new ListAdapteeCollection<T>());
   }
 
-  public RendererAdapter(RendererBuilder rendererBuilder, AdapteeCollection<T> collection) {
+  public RendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
     this.rendererBuilder = rendererBuilder;
     this.collection = collection;
   }
