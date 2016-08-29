@@ -63,7 +63,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
 
   public void setCollection(AdapteeCollection<T> collection) {
       if (collection == null) {
-          throw new IllegalArgumentException("Collection must be not null");
+          throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
       }
 
       this.collection = collection;
