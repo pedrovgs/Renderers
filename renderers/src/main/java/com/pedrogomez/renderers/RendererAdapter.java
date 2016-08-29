@@ -38,7 +38,7 @@ import java.util.Collection;
 public class RendererAdapter<T> extends BaseAdapter {
 
   private final RendererBuilder<T> rendererBuilder;
-  private final AdapteeCollection<T> collection;
+  private AdapteeCollection<T> collection;
 
   public RendererAdapter(RendererBuilder rendererBuilder) {
     this(rendererBuilder, new ListAdapteeCollection<T>());
@@ -59,6 +59,14 @@ public class RendererAdapter<T> extends BaseAdapter {
 
   @Override public long getItemId(int position) {
     return position;
+  }
+
+  public void setCollection(AdapteeCollection<T> collection) {
+    if (collection == null) {
+      throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
+    }
+
+    this.collection = collection;
   }
 
   /**

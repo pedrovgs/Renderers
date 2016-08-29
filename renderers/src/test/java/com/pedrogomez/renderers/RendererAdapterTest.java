@@ -4,8 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
-import java.util.Collection;
-import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +13,12 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.notNull;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Test class created to check the correct behaviour of RendererAdapter.
@@ -152,6 +151,28 @@ import static org.mockito.Mockito.when;
     rendererAdapter.clear();
 
     verify(mockedCollection).clear();
+  }
+
+  @Test public void shouldSetAdapteeCollection() throws Exception {
+    RendererAdapter<Object> adapter = new RendererAdapter<Object>(mockedRendererBuilder);
+
+    adapter.setCollection(mockedCollection);
+
+    assertEquals(mockedCollection, adapter.getCollection());
+  }
+
+  @Test public void shouldBeEmptyWhenItsCreatedWithJustARendererBuilder() {
+    RendererAdapter<Object> adapter = new RendererAdapter<Object>(mockedRendererBuilder);
+
+    assertEquals(0, adapter.getCount());
+  }
+
+
+  @Test(expected = IllegalArgumentException.class)
+  public void shouldThrowExceptionWhenSetNullCollection() {
+    RendererAdapter<Object> adapter = new RendererAdapter<Object>(mockedRendererBuilder);
+
+    adapter.setCollection(null);
   }
 
   private void initializeMocks() {
