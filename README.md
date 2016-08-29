@@ -124,7 +124,7 @@ If your binding is more complex and it's not based on different classes but in p
 public class VideoRendererBuilder extends RendererBuilder<Video> {
 
   public VideoRendererBuilder() {
-    Collection<Renderer<Video>> prototypes = getVideoRendererPrototypes();
+    List<Renderer<Video>> prototypes = getVideoRendererPrototypes();
     setPrototypes(prototypes);
   }
 
