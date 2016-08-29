@@ -39,14 +39,13 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   private final RendererBuilder<T> rendererBuilder;
   private AdapteeCollection<T> collection;
 
+  public RVRendererAdapter(RendererBuilder<T> rendererBuilder) {
+    this(rendererBuilder, new ListAdapteeCollection<T>());
+  }
+
   public RVRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
     this.rendererBuilder = rendererBuilder;
     this.collection = collection;
-  }
-
-  public RVRendererAdapter(RendererBuilder<T> rendererBuilder) {
-        this.rendererBuilder = rendererBuilder;
-        this.collection = new ListAdapteeCollection<T>();
   }
 
   @Override public int getItemCount() {
