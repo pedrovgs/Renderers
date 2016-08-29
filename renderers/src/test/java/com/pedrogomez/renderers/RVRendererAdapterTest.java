@@ -176,7 +176,6 @@ import static org.mockito.Mockito.*;
     assertEquals(0, adapter.getItemCount());
   }
 
-
   @Test(expected = IllegalArgumentException.class)
   public void shouldThrowExceptionWhenSetNullCollection() {
     RVRendererAdapter<Object> adapter = new RVRendererAdapter<Object>(mockedRendererBuilder);
