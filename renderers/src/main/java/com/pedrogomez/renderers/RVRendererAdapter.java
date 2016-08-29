@@ -37,7 +37,11 @@ import java.util.Collection;
 public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> {
 
   private final RendererBuilder<T> rendererBuilder;
-  private final AdapteeCollection<T> collection;
+  private AdapteeCollection<T> collection;
+
+  public RVRendererAdapter(RendererBuilder<T> rendererBuilder) {
+    this(rendererBuilder, new ListAdapteeCollection<T>());
+  }
 
   public RVRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
     this.rendererBuilder = rendererBuilder;
@@ -56,7 +60,15 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     return position;
   }
 
-  /**
+  public void setCollection(AdapteeCollection<T> collection) {
+      if (collection == null) {
+          throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
+      }
+
+      this.collection = collection;
+  }
+
+    /**
    * Indicate to the RecyclerView the type of Renderer used to one position using a numeric value.
    *
    * @param position to analyze.
