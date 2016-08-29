@@ -33,7 +33,9 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.notNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test class created to check the correct behaviour of RVRendererAdapter.
