@@ -23,7 +23,9 @@ public class RemovableVideoRenderer extends VideoRenderer {
         getLabel().setText(deleteLabel);
     }
 
-    @Override protected void renderMarker(Video video) {}
+    @Override protected void renderMarker(Video video) {
+
+    }
 
     @OnClick(R.id.tv_label) void clickOnDelete() {
         removeItemCallback.removeItem(getContent());

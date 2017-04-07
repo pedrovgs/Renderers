@@ -71,10 +71,17 @@ public class Video {
   @Override public boolean equals(Object obj) {
     if (obj instanceof Video) {
       Video other = (Video) obj;
-      return title.equals(other.title) && thumbnail.equals(other.thumbnail) &&
-              favorite == other.favorite && liked == other.liked && live == other.live;
+      return title.equals(other.title)
+              && thumbnail.equals(other.thumbnail)
+              && favorite == other.favorite
+              && liked == other.liked
+              && live == other.live;
     } else {
       return false;
     }
+  }
+
+  @Override public int hashCode() {
+    return super.hashCode();
   }
 }
