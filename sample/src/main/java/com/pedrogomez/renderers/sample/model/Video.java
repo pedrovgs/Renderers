@@ -67,4 +67,14 @@ public class Video {
   public void setLive(boolean live) {
     this.live = live;
   }
+
+  @Override public boolean equals(Object obj) {
+    if (obj instanceof Video) {
+      Video other = (Video) obj;
+      return title.equals(other.title) && thumbnail.equals(other.thumbnail) &&
+              favorite == other.favorite && liked == other.liked && live == other.live;
+    } else {
+      return false;
+    }
+  }
 }
