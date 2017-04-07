@@ -21,6 +21,7 @@
   <string name="like_label">Like</string>
   <string name="dislike_label">Dislike</string>
   <string name="live_label">Live</string>
+  <string name="delete_label">Delete me</string>
   <string name="open_lv_sample">Open ListView sample</string>
   <string name="open_rv_sample">Open RecyclerView sample</string>
 

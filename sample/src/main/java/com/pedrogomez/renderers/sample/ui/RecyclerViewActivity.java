@@ -29,6 +29,10 @@ import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.renderers.FavoriteVideoRenderer;
 import com.pedrogomez.renderers.sample.ui.renderers.LikeVideoRenderer;
 import com.pedrogomez.renderers.sample.ui.renderers.LiveVideoRenderer;
+import com.pedrogomez.renderers.sample.ui.renderers.RemovableVideoRenderer;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,11 +62,17 @@ public class RecyclerViewActivity extends BaseActivity {
   private void initAdapter() {
     RandomVideoCollectionGenerator randomVideoCollectionGenerator =
         new RandomVideoCollectionGenerator();
-    AdapteeCollection<Video> videoCollection =
+    final AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
     RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
-        .withPrototype(new LikeVideoRenderer())
-        .bind(Video.class, LikeVideoRenderer.class);
+        .withPrototype(new RemovableVideoRenderer(new RemovableVideoRenderer.RemoveItemCallback() {
+          @Override public void removeItem(Video video) {
+            ArrayList<Video> clonedList = new ArrayList<>((Collection<? extends Video>) videoCollection);
+            clonedList.remove(video);
+            adapter.update(clonedList);
+          }
+        }))
+        .bind(Video.class, RemovableVideoRenderer.class);
 
     adapter = new DiffRVRendererAdapter<Video>(rendererBuilder, videoCollection, new RecyclerViewDiff());
   }
