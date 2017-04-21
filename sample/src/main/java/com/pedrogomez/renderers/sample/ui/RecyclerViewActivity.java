@@ -65,7 +65,7 @@ public class RecyclerViewActivity extends BaseActivity {
     final AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
     RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
-        .withPrototype(new RemovableVideoRenderer(new RemovableVideoRenderer.RemoveItemCallback() {
+        .withPrototype(new RemovableVideoRenderer(new RemovableVideoRenderer.Listener() {
           @Override public void removeItem(Video video) {
             ArrayList<Video> clonedList = new ArrayList<>((Collection<? extends Video>) videoCollection);
             clonedList.remove(video);

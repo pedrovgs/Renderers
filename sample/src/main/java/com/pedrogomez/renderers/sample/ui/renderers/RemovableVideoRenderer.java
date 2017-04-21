@@ -7,15 +7,15 @@ import butterknife.OnClick;
 
 public class RemovableVideoRenderer extends VideoRenderer {
 
-    private RemoveItemCallback removeItemCallback;
+    private Listener removeItemListener;
 
-    public interface RemoveItemCallback {
+    public interface Listener {
 
         void removeItem(Video video);
     }
 
-    public RemovableVideoRenderer(RemoveItemCallback removeItemCallback) {
-        this.removeItemCallback = removeItemCallback;
+    public RemovableVideoRenderer(Listener removeItemListener) {
+        this.removeItemListener = removeItemListener;
     }
 
     @Override protected void renderLabel() {
@@ -28,7 +28,7 @@ public class RemovableVideoRenderer extends VideoRenderer {
     }
 
     @OnClick(R.id.tv_label) void clickOnDelete() {
-        removeItemCallback.removeItem(getContent());
+        removeItemListener.removeItem(getContent());
     }
 
     @OnClick(R.id.iv_marker) void clickOnLike() {
