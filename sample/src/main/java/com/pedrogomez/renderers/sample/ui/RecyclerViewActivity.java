@@ -20,7 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
-import com.pedrogomez.renderers.DiffRVRendererAdapter;
+import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.sample.R;
@@ -47,7 +47,7 @@ public class RecyclerViewActivity extends BaseActivity {
 
   @Bind(R.id.rv_renderers) RecyclerView recyclerView;
 
-  private DiffRVRendererAdapter<Video> adapter;
+  private RVRendererAdapter<Video> adapter;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_recycler_view);
@@ -69,12 +69,12 @@ public class RecyclerViewActivity extends BaseActivity {
           @Override public void removeItem(Video video) {
             ArrayList<Video> clonedList = new ArrayList<>((Collection<? extends Video>) videoCollection);
             clonedList.remove(video);
-            adapter.update(clonedList);
+            adapter.diffUpdate(clonedList);
           }
         }))
         .bind(Video.class, RemovableVideoRenderer.class);
 
-    adapter = new DiffRVRendererAdapter<Video>(rendererBuilder, videoCollection, new RecyclerViewDiff());
+    adapter = new RVRendererAdapter<Video>(rendererBuilder, videoCollection);
   }
 
   /**
