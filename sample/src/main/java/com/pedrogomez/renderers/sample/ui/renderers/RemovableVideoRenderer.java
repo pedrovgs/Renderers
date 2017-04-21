@@ -11,7 +11,7 @@ public class RemovableVideoRenderer extends VideoRenderer {
 
     public interface Listener {
 
-        void removeItem(Video video);
+        void onRemoveButtonTapped(Video video);
     }
 
     public RemovableVideoRenderer(Listener removeItemListener) {
@@ -28,7 +28,7 @@ public class RemovableVideoRenderer extends VideoRenderer {
     }
 
     @OnClick(R.id.tv_label) void clickOnDelete() {
-        removeItemListener.removeItem(getContent());
+        removeItemListener.onRemoveButtonTapped(getContent());
     }
 
     @OnClick(R.id.iv_marker) void clickOnLike() {
