@@ -190,6 +190,12 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
 
   }
 
+  /**
+   * Provides a ready to use diff update for our adapter based on the implementation of the
+   * standard equals method from Object
+   *
+   * @param newList to refresh our content
+   */
   public void diffUpdate(List<T> newList) {
     if (getCollection().size() == 0) {
       this.addAll(newList);
