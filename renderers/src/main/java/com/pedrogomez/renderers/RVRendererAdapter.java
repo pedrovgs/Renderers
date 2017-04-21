@@ -250,5 +250,9 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
         return newItem.getClass().equals(current.getClass());
       }
     }
+
+    @Override public int hashCode() {
+      return super.hashCode();
+    }
   }
 }
