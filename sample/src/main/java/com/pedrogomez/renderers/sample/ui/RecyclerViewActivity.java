@@ -21,20 +21,14 @@ import android.support.v7.widget.RecyclerView;
 import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
-import com.pedrogomez.renderers.Renderer;
 import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
-import com.pedrogomez.renderers.sample.ui.renderers.FavoriteVideoRenderer;
-import com.pedrogomez.renderers.sample.ui.renderers.LikeVideoRenderer;
-import com.pedrogomez.renderers.sample.ui.renderers.LiveVideoRenderer;
 import com.pedrogomez.renderers.sample.ui.renderers.RemovableVideoRenderer;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * RecyclerViewActivity for the Renderers demo.
