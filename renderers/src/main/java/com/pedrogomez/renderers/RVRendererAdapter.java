@@ -15,11 +15,13 @@
  */
 package com.pedrogomez.renderers;
 
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
@@ -186,5 +188,71 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    */
   protected void updateRendererExtraValues(T content, Renderer<T> renderer, int position) {
 
+  }
+
+  /**
+   * Provides a ready to use diff update for our adapter based on the implementation of the
+   * standard equals method from Object
+   *
+   * @param newList to refresh our content
+   */
+  public void diffUpdate(List<T> newList) {
+    if (getCollection().size() == 0) {
+      this.addAll(newList);
+      notifyDataSetChanged();
+    } else {
+      DiffCallbacks diffCallbacks = new DiffCallbacks(newList);
+      DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallbacks);
+
+      this.clear();
+      this.addAll(newList);
+      diffResult.dispatchUpdatesTo(this);
+    }
+  }
+
+  private class DiffCallbacks extends DiffUtil.Callback {
+
+    private final List<T> newList;
+
+    private int oldItemPosition;
+
+    private boolean deep;
+
+    DiffCallbacks(List<T> newList) {
+      this.newList = newList;
+    }
+
+    @Override public int getOldListSize() {
+      return collection.size();
+    }
+
+    @Override public int getNewListSize() {
+      return newList.size();
+    }
+
+    @Override public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+      this.deep = false;
+      this.oldItemPosition = oldItemPosition;
+      return equals(newList.get(newItemPosition));
+    }
+
+    @Override public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+      this.deep = true;
+      this.oldItemPosition = oldItemPosition;
+      return equals(newList.get(newItemPosition));
+    }
+
+    @Override public boolean equals(Object newItem) {
+      Object current = collection.get(oldItemPosition);
+      if (deep) {
+        return newItem.equals(current);
+      } else {
+        return newItem.getClass().equals(current.getClass());
+      }
+    }
+
+    @Override public int hashCode() {
+      return super.hashCode();
+    }
   }
 }
