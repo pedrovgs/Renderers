@@ -64,17 +64,17 @@ public class RecyclerViewActivity extends BaseActivity {
         new RandomVideoCollectionGenerator();
     final AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
-        .withPrototype(new RemovableVideoRenderer(new RemovableVideoRenderer.Listener() {
+    RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>().withPrototype(
+        new RemovableVideoRenderer(new RemovableVideoRenderer.Listener() {
           @Override public void onRemoveButtonTapped(Video video) {
-            ArrayList<Video> clonedList = new ArrayList<>((Collection<? extends Video>) videoCollection);
+            ArrayList<Video> clonedList =
+                new ArrayList<>((Collection<? extends Video>) videoCollection);
             clonedList.remove(video);
             adapter.diffUpdate(clonedList);
           }
-        }))
-        .bind(Video.class, RemovableVideoRenderer.class);
+        })).bind(Video.class, RemovableVideoRenderer.class);
 
-    adapter = new RVRendererAdapter<Video>(rendererBuilder, videoCollection);
+    adapter = new RVRendererAdapter<>(rendererBuilder, videoCollection);
   }
 
   /**
@@ -83,26 +83,5 @@ public class RecyclerViewActivity extends BaseActivity {
   private void initRecyclerView() {
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
-  }
-
-  /**
-   * Create a list of prototypes to configure RendererBuilder.
-   * The list of Renderer<Video> that contains all the possible renderers that our RendererBuilder
-   * is going to use.
-   *
-   * @return Renderer<Video> prototypes for RendererBuilder.
-   */
-  private List<Renderer<Video>> getRendererVideoPrototypes() {
-    List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
-    LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer();
-    prototypes.add(likeVideoRenderer);
-
-    FavoriteVideoRenderer favoriteVideoRenderer = new FavoriteVideoRenderer();
-    prototypes.add(favoriteVideoRenderer);
-
-    LiveVideoRenderer liveVideoRenderer = new LiveVideoRenderer();
-    prototypes.add(liveVideoRenderer);
-
-    return prototypes;
   }
 }

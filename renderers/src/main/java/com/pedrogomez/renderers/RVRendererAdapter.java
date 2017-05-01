@@ -19,17 +19,19 @@ import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
+
 import java.util.Collection;
 import java.util.List;
 
 /**
  * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
  * adapters have to use this one to show information into RecyclerView widgets.
- *
+ * <p>
  * This class is the heart of this library. It's used to avoid the library users declare a new
  * renderer each time they have to show information into a RecyclerView.
- *
+ * <p>
  * RVRendererAdapter has to be constructed with a LayoutInflater to inflate views, one
  * RendererBuilder to provide Renderer to RVRendererAdapter and one AdapteeCollection to
  * provide the elements to render.
@@ -63,14 +65,14 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   }
 
   public void setCollection(AdapteeCollection<T> collection) {
-      if (collection == null) {
-          throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
-      }
+    if (collection == null) {
+      throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
+    }
 
-      this.collection = collection;
+    this.collection = collection;
   }
 
-    /**
+  /**
    * Indicate to the RecyclerView the type of Renderer used to one position using a numeric value.
    *
    * @param position to analyze.
@@ -178,7 +180,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   /**
    * Empty implementation created to allow the client code to extend this class without override
    * getView method.
-   *
+   * <p>
    * This method is called before render the Renderer and can be used in RendererAdapter extension
    * to add extra info to the renderer created like the position in the ListView/RecyclerView.
    *
@@ -192,67 +194,20 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
 
   /**
    * Provides a ready to use diff update for our adapter based on the implementation of the
-   * standard equals method from Object
+   * standard equals method from Object.
    *
    * @param newList to refresh our content
    */
   public void diffUpdate(List<T> newList) {
     if (getCollection().size() == 0) {
-      this.addAll(newList);
+      addAll(newList);
       notifyDataSetChanged();
     } else {
-      DiffCallbacks diffCallbacks = new DiffCallbacks(newList);
+      DiffCallbacks diffCallbacks = new DiffCallbacks(collection, newList);
       DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallbacks);
-
-      this.clear();
-      this.addAll(newList);
+      clear();
+      addAll(newList);
       diffResult.dispatchUpdatesTo(this);
-    }
-  }
-
-  private class DiffCallbacks extends DiffUtil.Callback {
-
-    private final List<T> newList;
-
-    private int oldItemPosition;
-
-    private boolean deep;
-
-    DiffCallbacks(List<T> newList) {
-      this.newList = newList;
-    }
-
-    @Override public int getOldListSize() {
-      return collection.size();
-    }
-
-    @Override public int getNewListSize() {
-      return newList.size();
-    }
-
-    @Override public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-      this.deep = false;
-      this.oldItemPosition = oldItemPosition;
-      return equals(newList.get(newItemPosition));
-    }
-
-    @Override public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-      this.deep = true;
-      this.oldItemPosition = oldItemPosition;
-      return equals(newList.get(newItemPosition));
-    }
-
-    @Override public boolean equals(Object newItem) {
-      Object current = collection.get(oldItemPosition);
-      if (deep) {
-        return newItem.equals(current);
-      } else {
-        return newItem.getClass().equals(current.getClass());
-      }
-    }
-
-    @Override public int hashCode() {
-      return super.hashCode();
     }
   }
 }

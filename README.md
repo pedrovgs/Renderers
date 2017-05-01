@@ -193,6 +193,16 @@ private void initListView() {
 
 **Remember if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.**
 
+* 4. Diff updates.
+
+If the ``RecyclerView`` performance is crucial in your application remember you can use ``diffUpdate`` method in your ``RVRendererAdapter`` instance to update just the items changed in your adapter and not the whole list.
+
+```java
+adapter.diffUpdate(newList)
+```
+
+This method provides a ready to use diff update for our adapter based on the implementation of the standard ``equals`` method from ``Object`` class.
+
 Usage
 -----
 
