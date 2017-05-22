@@ -1,6 +1,19 @@
 apply plugin: 'com.android.library'
 apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
 
+apply plugin: 'com.github.pedrovgs.kuronometer'
+kuronometer {
+  platformName = 'Android'
+  //This value can be true or false.
+  //It's used to remove the project sensitive information before to being reported. By default is true.
+  reportProjectInfo = true
+  //This value can be true or false.
+  //It's used to send or not the build report to the kuronometer server. By default is true.
+  reportDataRemotely = true
+  //This value can be true or false.
+  //It's used to show a message after the build execution showing the report execution result. By default is false.
+  verbose = true
+}
 android {
   compileSdkVersion 25
   buildToolsVersion '25.0.2'
