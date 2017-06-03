@@ -5,7 +5,7 @@ buildscript {
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:2.3.1'
-    classpath 'com.github.pedrovgs:kuronometer:0.0.4'
+    classpath 'com.github.pedrovgs:kuronometer:0.1.1'
   }
 }
 
@@ -29,3 +29,4 @@ allprojects {
 task clean(type: Delete) {
   delete rootProject.buildDir
 }
+
