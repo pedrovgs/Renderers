@@ -43,7 +43,7 @@ class DiffCallback<T> extends DiffUtil.Callback {
     boolean areTheSameInstance = oldItem == newItem;
     boolean hasTheSameType = oldItem.getClass().equals(newItem);
     boolean hasTheSameHash = oldItem.hashCode() == newItem.hashCode();
-    return areTheSameInstance && hasTheSameType && hasTheSameHash;
+    return areTheSameInstance || hasTheSameType && hasTheSameHash;
   }
 
   @Override public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
