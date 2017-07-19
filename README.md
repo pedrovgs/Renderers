@@ -214,7 +214,7 @@ Or declare it into your pom.xml
 <dependency>
     <groupId>com.github.pedrovgs</groupId>
     <artifactId>renderers</artifactId>
-    <version>3.3.0</version>
+    <version>3.3.1</version>
     <type>aar</type>
 </dependency>
 ```
@@ -223,7 +223,7 @@ Or declare it into your pom.xml
 Or into your build.gradle
 ```groovy
 dependencies{
-    compile 'com.github.pedrovgs:renderers:3.3.0'
+    compile 'com.github.pedrovgs:renderers:3.3.1'
 }
 ```
 
