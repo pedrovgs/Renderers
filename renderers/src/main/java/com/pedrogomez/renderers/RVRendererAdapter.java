@@ -203,8 +203,8 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
       addAll(newList);
       notifyDataSetChanged();
     } else {
-      DiffCallbacks diffCallbacks = new DiffCallbacks(collection, newList);
-      DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallbacks);
+      DiffCallback diffCallback = new DiffCallback(collection, newList);
+      DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
       clear();
       addAll(newList);
       diffResult.dispatchUpdatesTo(this);
