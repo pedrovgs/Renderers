@@ -201,7 +201,7 @@ If the ``RecyclerView`` performance is crucial in your application remember you 
 adapter.diffUpdate(newList)
 ```
 
-This method provides a ready to use diff update for our adapter based on the implementation of the standard ``equals`` method from ``Object`` class.
+This method provides a ready to use diff update for our adapter based on the implementation of the standard ``equals`` and ``hashCode`` methods from ``Object`` class.
 
 Usage
 -----
