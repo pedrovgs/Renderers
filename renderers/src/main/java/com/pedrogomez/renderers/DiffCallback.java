@@ -19,16 +19,12 @@ import android.support.v7.util.DiffUtil;
 
 import java.util.List;
 
-class DiffCallbacks<T> extends DiffUtil.Callback {
+class DiffCallback<T> extends DiffUtil.Callback {
 
   private final AdapteeCollection<T> oldList;
   private final List<T> newList;
 
-  private int oldItemPosition;
-
-  private boolean deep;
-
-  DiffCallbacks(AdapteeCollection<T> oldList, List<T> newList) {
+  DiffCallback(AdapteeCollection<T> oldList, List<T> newList) {
     this.oldList = oldList;
     this.newList = newList;
   }
@@ -42,27 +38,15 @@ class DiffCallbacks<T> extends DiffUtil.Callback {
   }
 
   @Override public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-    this.deep = false;
-    this.oldItemPosition = oldItemPosition;
-    return equals(newList.get(newItemPosition));
+    T oldItem = oldList.get(oldItemPosition);
+    T newItem = newList.get(newItemPosition);
+    boolean areTheSameInstance = oldItem == newItem;
+    boolean hasTheSameType = oldItem.getClass().equals(newItem);
+    boolean hasTheSameHash = oldItem.hashCode() == newItem.hashCode();
+    return areTheSameInstance && hasTheSameType && hasTheSameHash;
   }
 
   @Override public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-    this.deep = true;
-    this.oldItemPosition = oldItemPosition;
-    return equals(newList.get(newItemPosition));
-  }
-
-  @Override public boolean equals(Object newItem) {
-    Object current = oldList.get(oldItemPosition);
-    if (deep) {
-      return newItem.equals(current);
-    } else {
-      return newItem.getClass().equals(current.getClass());
-    }
-  }
-
-  @Override public int hashCode() {
-    return super.hashCode();
+    return oldList.get(oldItemPosition).equals(newList.get(newItemPosition));
   }
 }
