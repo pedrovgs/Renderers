@@ -81,7 +81,13 @@ public class Video {
     }
   }
 
-  @Override public int hashCode() {
-    return super.hashCode();
+  /*
+   * In this example we use the thumbnail property as hashCode because we assume every thumbnail is
+   * going to be different for every video. It can be used as an identifier. This is needed to
+   * support differential updates properly. You can use your item ID if you have one.
+   */
+  @Override
+  public int hashCode() {
+    return thumbnail.hashCode();
   }
 }

@@ -1,21 +1,11 @@
-Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=master)](https://travis-ci.org/pedrovgs/Renderers) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Renderers-green.svg?style=true)](https://android-arsenal.com/details/1/1195)
+Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=master)](https://travis-ci.org/pedrovgs/Renderers) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers)
 =========
 
-Are you bored of creating adapters again and again when you have to implement a ``ListView`` or a ``RecyclerView``?
+**Renderers is an Android library created to avoid all the RecyclerView/Adapter boilerplate** needed to create a list of data in your app and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation. **As performance is also important for us, we've added a new ``diffUpdate`` method supporting differential updated transparently.**
 
-Are you bored of using ``ViewHolders`` and create getView/onCreateViewHolder/onBindViewHolder methods with thousands of lines full of if/else if/else sentences?
+This Android library offers you two main classes to instantiate or extend and create your own rendering algorithms out of your adapter implementation. ``RVRendererAdapter`` and ``Renderer``.
 
-**Renderers is an Android library created to avoid all the Adapter/ListView/RecyclerView boilerplate** needed to create a new adapter and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation.
-
-This Android library offers you two main classes to instantiate or extend and create your own rendering algorithms out of your adapter implementation.
-
-**Renderers is an easy way to work with android ListView/RecyclerView and Adapter classes**. With this library you only have to create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer``. The ``Renderer`` will use the model information to draw your user interface.
-
-You can find implementation details in this talks:
-
-[Software Design Patterns on Android Video][4]
-
-[Software Design Patterns on Android Slides][5]
+**Renderers is an easy way to work with android RecyclerView/ListView and Adapter classes**. With this library you only have to create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer``. The ``Renderer`` will use the model information to draw your user interface.
 
 
 Screenshots
@@ -49,12 +39,6 @@ public class VideoRenderer extends Renderer<Video> {
            return inflatedView;
        }
 
-       @OnClick(R.id.iv_thumbnail)
-       void onVideoClicked() {
-           Video video = getContent();
-           Log.d("Renderer", "Clicked: " + video.getTitle());
-       }
-
        @Override
        protected void render() {
            Video video = getContent();
@@ -64,6 +48,12 @@ public class VideoRenderer extends Renderer<Video> {
            renderLabel();
        }
 
+       @OnClick(R.id.iv_thumbnail)
+       void onVideoClicked() {
+           Video video = getContent();
+           Log.d("Renderer", "Clicked: " + video.getTitle());
+       }
+
        private void renderThumbnail(Video video) {
            Picasso.with(context).load(video.getResourceThumbnail()).placeholder(R.drawable.placeholder).into(thumbnail);
        }
@@ -71,54 +61,71 @@ public class VideoRenderer extends Renderer<Video> {
        private void renderTitle(Video video) {
            this.title.setText(video.getTitle());
        }
-
-       protected TextView getLabel() {
-           return label;
-       }
-
-       protected ImageView getMarker() {
-           return marker;
-       }
-       
-       //If you don't use ButterKnife you have to implement these methods.
-       
-       /**
-        * Maps all the view elements from the xml declaration to members of this renderer.
-        */
-       @Override protected void setUpView(View rootView) {
-        /*
-         * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
-         */
-       }
-
-       /**
-        * Insert external listeners in some widgets.
-       */
-       @Override protected void hookListeners(View rootView) {
-        /*
-         * Empty implementation substituted with the usage of ButterKnife library by Jake Wharton.
-         */
-       }
 }
 ```
 
 You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want. But the usage of third party libraries is not mandatory.
 
-* 2. Instantiate a ``RendererBuilder`` with a ``Renderer``.
+* 2. **If you have just on type of item in your list**, instantiate a ``RendererBuilder`` with a ``Renderer`` instance and you are ready to go:
 
 ```java
 Renderer<Video> renderer = new LikeVideoRenderer();
 RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>(renderer);
 ```
 
-If you need to map different object instances to different ``Renderer`` implementations you can use ``RendererBuilder.bind`` methods:
+**If you need to render different objects** into your list you can use ``RendererBuilder.bind`` fluent API and that's it:
 
 ```java
 RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
-        .bind(Video.class, new LikeVideoRenderer());
+         .bind(VideoHeader.class, new VideoHeaderRenderer())
+         .bind(Video.class, new LikeVideoRenderer());
 ```
 
-If your binding is more complex and it's not based on different classes but in properties of these classes you can also extend ``RendererBuilder`` and override ``getPrototypeClass`` to customize your binding:
+* 3. Initialize your ``ListView`` or ``RecyclerView`` with your ``RendererBuilder`` and your ``AdapteeCollection`` instances inside your Activity or Fragment. **You can use ``ListAdapteeCollection`` or create your own implementation creating a class which implements ``AdapteeCollection`` to configure your ``RendererAdapter`` or ``RVRendererAdapter``.**
+
+```java
+private void initListView() {
+    adapter = new RendererAdapter<Video>(rendererBuilder, adapteeCollection);
+    listView.setAdapter(adapter);
+}
+```
+
+or
+
+```java
+private void initListView() {
+    adapter = new RVRendererAdapter<Video>(rendererBuilder, adapteeCollection);
+    recyclerView.setAdapter(adapter);
+}
+```
+
+**Remember if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.**
+
+* 4. **Diff updates:**
+
+***If the ``RecyclerView`` performance is crucial in your application* remember you can use ``diffUpdate`` method in your ``RVRendererAdapter`` instance to update just the items changed in your adapter and not the whole list.***
+
+```java
+adapter.diffUpdate(newList)
+```
+
+This method provides a ready to use diff update for our adapter based on the implementation of the standard ``equals`` and ``hashCode`` methods from the ``Object`` Java class. The classes associated to your renderers will have to implement ``equals`` and ``hashCode`` methods properly. Your ``hashCode`` implementation can be based on the item ID if you have one. You can use your ``hashCode`` implementation as an identifier of the object you want to represent graphically. We know this implementation is not perfect, but is the best we can do wihtout adding a new interface you have to implement to the library breaking all your existing code. Here you can review the [DiffUtil.Callback implementation](https://github.com/pedrovgs/Renderers/blob/master/renderers/src/main/java/com/pedrogomez/renderers/DiffCallback.java) used in this library. If you can't follow this implementation you can always use [a different approach](https://medium.com/@iammert/using-diffutil-in-android-recyclerview-bdca8e4fbb00) combined with your already implemented renderers.
+
+Usage
+-----
+
+Add this dependency to your ``build.gradle``:
+
+```groovy
+dependencies{
+    compile 'com.github.pedrovgs:renderers:3.3.3'
+}
+```
+
+Complex binding
+---------------
+
+If your renderers binding is complex and it's not based on different classes but in properties of these classes, you can also extend ``RendererBuilder`` and override ``getPrototypeClass`` to customize your binding as follows:
 
 ```java
 public class VideoRendererBuilder extends RendererBuilder<Video> {
@@ -173,60 +180,15 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
 }
 ```
 
-* 3. Initialize your ``ListView`` or ``RecyclerView`` with your ``RendererBuilder`` and your ``AdapteeCollection`` instances inside your Activity or Fragment. **You can use ``ListAdapteeCollection`` or create your own implementation creating a class which implements ``AdapteeCollection`` to configure your ``RendererAdapter`` or ``RVRendererAdapter``.**
 
-```java
-private void initListView() {
-    adapter = new RendererAdapter<Video>(rendererBuilder, adapteeCollection);
-    listView.setAdapter(adapter);
-}
-```
+References
+----------
 
-or
+You can find implementation details in these talks:
 
-```java
-private void initListView() {
-    adapter = new RVRendererAdapter<Video>(rendererBuilder, adapteeCollection);
-    recyclerView.setAdapter(adapter);
-}
-```
+[Software Design Patterns on Android Video][4]
 
-**Remember if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.**
-
-* 4. Diff updates.
-
-If the ``RecyclerView`` performance is crucial in your application remember you can use ``diffUpdate`` method in your ``RVRendererAdapter`` instance to update just the items changed in your adapter and not the whole list.
-
-```java
-adapter.diffUpdate(newList)
-```
-
-This method provides a ready to use diff update for our adapter based on the implementation of the standard ``equals`` and ``hashCode`` methods from ``Object`` class.
-
-Usage
------
-
-Download the project, compile it using ```mvn clean install``` import ``renderers-3.0.0.aar`` into your project.
-
-Or declare it into your pom.xml
-
-```xml
-<dependency>
-    <groupId>com.github.pedrovgs</groupId>
-    <artifactId>renderers</artifactId>
-    <version>3.3.3</version>
-    <type>aar</type>
-</dependency>
-```
-
-
-Or into your build.gradle
-```groovy
-dependencies{
-    compile 'com.github.pedrovgs:renderers:3.3.3'
-}
-```
-
+[Software Design Patterns on Android Slides][5]
 
 Developed By
 ------------
