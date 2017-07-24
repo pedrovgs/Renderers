@@ -3,9 +3,7 @@ Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=m
 
 **Renderers is an Android library created to avoid all the RecyclerView/Adapter boilerplate** needed to create a list of data in your app and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation. **As performance is also important for us, we've added a new ``diffUpdate`` method supporting differential updated transparently.**
 
-This Android library offers you two main classes to instantiate or extend and create your own rendering algorithms out of your adapter implementation. ``RVRendererAdapter`` and ``Renderer``.
-
-**Renderers is an easy way to work with android RecyclerView/ListView and Adapter classes**. With this library you only have to create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer``. The ``Renderer`` will use the model information to draw your user interface.
+With this library you can reduce your RecyclerView/Adapter/ViewHolder sometimes we copy and paste again and again. Using this library you only have to create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer``. The ``Renderer`` will use the model information to draw your user interface. You can reuse them in all your RecyclerView and ListView implementations easily. Using this library you wont need to create any new class extending from ``RecyclerViewAdapter``.
 
 
 Screenshots
