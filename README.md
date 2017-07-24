@@ -1,7 +1,7 @@
 Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=master)](https://travis-ci.org/pedrovgs/Renderers) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.pedrovgs/renderers)
 =========
 
-**Renderers is an Android library created to avoid all the RecyclerView/Adapter boilerplate** needed to create a list of data in your app and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation. **As performance is also important for us, we've added a new ``diffUpdate`` method supporting differential updated transparently.**
+**Renderers is an Android library created to avoid all the RecyclerView/Adapter boilerplate** needed to create a list/grid   of data in your app and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation. **As performance is also important for us, we've added a new ``diffUpdate`` method supporting differential updated transparently.**
 
 With this library you can improve your RecyclerView/Adapter/ViewHolder code. The one we sometimes we copy and paste again and again :smiley:. Using this library you wont need to create any new class extending from ``RecyclerViewAdapter``.
 
@@ -65,14 +65,14 @@ public class VideoRenderer extends Renderer<Video> {
 
 You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want. But the usage of third party libraries is not mandatory.
 
-* 2. **If you have just on type of item in your list**, instantiate a ``RendererBuilder`` with a ``Renderer`` instance and you are ready to go:
+* 2. **If you have just on type of item in your list/grid**, instantiate a ``RendererBuilder`` with a ``Renderer`` instance and you are ready to go:
 
 ```java
 Renderer<Video> renderer = new LikeVideoRenderer();
 RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>(renderer);
 ```
 
-**If you need to render different objects** into your list you can use ``RendererBuilder.bind`` fluent API and that's it:
+**If you need to render different objects** into your list/grid you can use ``RendererBuilder.bind`` fluent API and that's it:
 
 ```java
 RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
@@ -102,7 +102,7 @@ private void initListView() {
 
 * 4. **Diff updates:**
 
-***If the ``RecyclerView`` performance is crucial in your application* remember you can use ``diffUpdate`` method in your ``RVRendererAdapter`` instance to update just the items changed in your adapter and not the whole list.***
+***If the ``RecyclerView`` performance is crucial in your application* remember you can use ``diffUpdate`` method in your ``RVRendererAdapter`` instance to update just the items changed in your adapter and not the whole list/grid.***
 
 ```java
 adapter.diffUpdate(newList)
