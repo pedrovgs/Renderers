@@ -40,8 +40,8 @@ import java.util.List;
  */
 public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> {
 
-  private final RendererBuilder<T> rendererBuilder;
-  private AdapteeCollection<T> collection;
+  protected final RendererBuilder<T> rendererBuilder;
+  protected AdapteeCollection<T> collection;
 
   public RVRendererAdapter(RendererBuilder<T> rendererBuilder) {
     this(rendererBuilder, new ListAdapteeCollection<T>());
