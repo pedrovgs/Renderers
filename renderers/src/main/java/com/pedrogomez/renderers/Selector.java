@@ -11,5 +11,5 @@ public interface Selector<T> {
 
   void setSelected(boolean isSelected, T item);
 
-  boolean isSelected(T content);
+  boolean isSelected(T item);
 }

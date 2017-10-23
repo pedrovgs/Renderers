@@ -15,7 +15,7 @@ public class NoneSelector<T> implements Selector<T> {
     // Nothing
   }
 
-  @Override public boolean isSelected(T content) {
+  @Override public boolean isSelected(T item) {
     return false;
   }
 }

@@ -1,5 +1,8 @@
 package com.pedrogomez.renderers;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * TBD
  *
@@ -7,15 +10,21 @@ package com.pedrogomez.renderers;
  */
 public class MultiSelector<T> implements Selector<T> {
 
+  private final Set<T> selectedItems = new HashSet<>();
+
   @Override public void setSelectable(boolean isSelectable) {
 
   }
 
   @Override public void setSelected(boolean isSelected, T item) {
-
+    if (isSelected) {
+      selectedItems.add(item);
+    } else {
+      selectedItems.remove(item);
+    }
   }
 
-  @Override public boolean isSelected(T content) {
-    return false;
+  @Override public boolean isSelected(T item) {
+    return selectedItems.contains(item);
   }
 }
