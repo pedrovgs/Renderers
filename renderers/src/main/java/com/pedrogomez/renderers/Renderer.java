@@ -40,6 +40,7 @@ public abstract class Renderer<T> implements Cloneable {
 
   private View rootView;
   private T content;
+  private Selector<T> selector;
 
   /**
    * Method called when the renderer is going to be created. This method has the responsibility of
@@ -51,8 +52,10 @@ public abstract class Renderer<T> implements Cloneable {
    * @param layoutInflater used to inflate the view.
    * @param parent used to inflate the view.
    */
-  public void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent) {
+  public void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent,
+      Selector<T> selector) {
     this.content = content;
+    this.selector = selector;
     this.rootView = inflate(layoutInflater, parent);
     if (rootView == null) {
       throw new NotInflateViewException(
@@ -106,6 +109,14 @@ public abstract class Renderer<T> implements Cloneable {
    */
   protected void setContent(T content) {
     this.content = content;
+  }
+
+  protected void setSelected(boolean isSelected) {
+    selector.setSelected(isSelected, getContent());
+  }
+
+  protected boolean isSelected() {
+    return selector.isSelected(getContent());
   }
 
   /**

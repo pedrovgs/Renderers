@@ -19,11 +19,12 @@ import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
-
 import java.util.Collection;
 import java.util.List;
+
+import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.MULTI;
+import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.NONE;
 
 /**
  * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
@@ -40,7 +41,12 @@ import java.util.List;
  */
 public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolder> {
 
+  public enum SelectionMode {
+    NONE, SINGLE, MULTI
+  }
+
   private final RendererBuilder<T> rendererBuilder;
+  private final Selector<T> selector;
   private AdapteeCollection<T> collection;
 
   public RVRendererAdapter(RendererBuilder<T> rendererBuilder) {
@@ -48,8 +54,14 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   }
 
   public RVRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
+    this(rendererBuilder, collection, NONE);
+  }
+
+  public RVRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection,
+      SelectionMode selectionMode) {
     this.rendererBuilder = rendererBuilder;
     this.collection = collection;
+    this.selector = createSelectorFromMode(selectionMode);
   }
 
   @Override public int getItemCount() {
@@ -96,7 +108,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     rendererBuilder.withParent(viewGroup);
     rendererBuilder.withLayoutInflater(LayoutInflater.from(viewGroup.getContext()));
     rendererBuilder.withViewType(viewType);
-    RendererViewHolder viewHolder = rendererBuilder.buildRendererViewHolder();
+    RendererViewHolder viewHolder = rendererBuilder.buildRendererViewHolder(selector);
     if (viewHolder == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null viewHolder");
     }
@@ -209,5 +221,12 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
       addAll(newList);
       diffResult.dispatchUpdatesTo(this);
     }
+  }
+
+  private Selector<T> createSelectorFromMode(SelectionMode mode) {
+    if (mode == MULTI) {
+      return new MultiSelector<>();
+    }
+    return new NoneSelector<>();
   }
 }

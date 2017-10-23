@@ -24,7 +24,6 @@ import com.pedrogomez.renderers.exception.NullLayoutInflaterException;
 import com.pedrogomez.renderers.exception.NullParentException;
 import com.pedrogomez.renderers.exception.NullPrototypeClassException;
 import com.pedrogomez.renderers.exception.PrototypeNotFoundException;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -157,7 +156,8 @@ public class RendererBuilder<T> {
     return this;
   }
 
-  public <G extends T> RendererBuilder<T> bind(Class<G> clazz, Class<? extends Renderer<? extends G>> prototypeClass) {
+  public <G extends T> RendererBuilder<T> bind(Class<G> clazz,
+      Class<? extends Renderer<? extends G>> prototypeClass) {
     if (clazz == null || prototypeClass == null) {
       throw new IllegalArgumentException(
           "The binding RecyclerView binding can't be configured using null instances");
@@ -231,7 +231,7 @@ public class RendererBuilder<T> {
     if (isRecyclable(convertView, content)) {
       renderer = recycle(convertView, content);
     } else {
-      renderer = createRenderer(content, parent);
+      renderer = createRenderer(content, parent, null);
     }
     return renderer;
   }
@@ -247,11 +247,11 @@ public class RendererBuilder<T> {
    *
    * @return ready to use RendererViewHolder instance.
    */
-  protected RendererViewHolder buildRendererViewHolder() {
+  protected RendererViewHolder buildRendererViewHolder(Selector<T> selector) {
     validateAttributesToCreateANewRendererViewHolder();
 
     Renderer renderer = getPrototypeByIndex(viewType).copy();
-    renderer.onCreate(null, layoutInflater, parent);
+    renderer.onCreate(null, layoutInflater, parent, selector);
     return new RendererViewHolder(renderer);
   }
 
@@ -276,10 +276,10 @@ public class RendererBuilder<T> {
    * @param parent used to inflate the view.
    * @return a new renderer.
    */
-  private Renderer createRenderer(T content, ViewGroup parent) {
+  private Renderer createRenderer(T content, ViewGroup parent, Selector<T> selector) {
     int prototypeIndex = getPrototypeIndex(content);
     Renderer renderer = getPrototypeByIndex(prototypeIndex).copy();
-    renderer.onCreate(content, layoutInflater, parent);
+    renderer.onCreate(content, layoutInflater, parent, selector);
     return renderer;
   }
 
