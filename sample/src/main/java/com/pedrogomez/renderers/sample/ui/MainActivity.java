@@ -25,6 +25,10 @@ public class MainActivity extends BaseActivity {
     open(RecyclerViewActivity.class);
   }
 
+  @OnClick(R.id.bt_open_multiselect_rv_sample) public void openMultiSelectRecyclerViewSample() {
+    open(MultiSelectRecyclerViewActivity.class);
+  }
+
   private void open(Class activity) {
     Intent intent = new Intent(this, activity);
     startActivity(intent);
