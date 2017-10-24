@@ -18,6 +18,10 @@ package com.pedrogomez.renderers.sample.ui;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -25,7 +29,8 @@ import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
-import com.pedrogomez.renderers.sample.ui.renderers.RemovableVideoRenderer;
+import com.pedrogomez.renderers.sample.ui.renderers.SelectableVideoRenderer;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -44,6 +49,29 @@ public class MultiSelectRecyclerViewActivity extends BaseActivity {
 
   private RVRendererAdapter<Video> adapter;
 
+  private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+      return true;
+    }
+
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+      return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+      return false;
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+      adapter.setSelectable(false);
+    }
+  };
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_recycler_view);
     super.onCreate(savedInstanceState);
@@ -59,15 +87,25 @@ public class MultiSelectRecyclerViewActivity extends BaseActivity {
         new RandomVideoCollectionGenerator();
     final AdapteeCollection<Video> videoCollection =
         randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>().withPrototype(
-        new RemovableVideoRenderer(new RemovableVideoRenderer.Listener() {
-          @Override public void onRemoveButtonTapped(Video video) {
-            ArrayList<Video> clonedList =
-                new ArrayList<>((Collection<? extends Video>) videoCollection);
-            clonedList.remove(video);
-            adapter.diffUpdate(clonedList);
-          }
-        })).bind(Video.class, RemovableVideoRenderer.class);
+
+    RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
+            .withPrototype(new SelectableVideoRenderer(new SelectableVideoRenderer.Listener() {
+              @Override
+              public void onLongPressClicked(SelectableVideoRenderer renderer) {
+                adapter.setSelectable(true);
+                renderer.setSelected(true);
+
+                startActionMode(actionModeCallback);
+              }
+
+              @Override
+              public void onRemoveButtonTapped(Video video) {
+                ArrayList<Video> clonedList =
+                        new ArrayList<>((Collection<? extends Video>) videoCollection);
+                clonedList.remove(video);
+                adapter.diffUpdate(clonedList);
+              }
+            })).bind(Video.class, SelectableVideoRenderer.class);
 
     adapter = new RVRendererAdapter<>(rendererBuilder, videoCollection, MULTI);
   }

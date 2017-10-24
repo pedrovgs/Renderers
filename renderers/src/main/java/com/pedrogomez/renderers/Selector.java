@@ -1,5 +1,7 @@
 package com.pedrogomez.renderers;
 
+import java.util.Set;
+
 /**
  * TBD
  *
@@ -12,4 +14,6 @@ public interface Selector<T> {
   void setSelected(boolean isSelected, T item);
 
   boolean isSelected(T item);
+
+  Set<T> getSelectedItems();
 }

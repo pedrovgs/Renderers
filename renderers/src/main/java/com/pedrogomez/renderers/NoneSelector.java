@@ -1,5 +1,8 @@
 package com.pedrogomez.renderers;
 
+import java.util.Collections;
+import java.util.Set;
+
 /**
  * TBD
  *
@@ -17,5 +20,10 @@ public class NoneSelector<T> implements Selector<T> {
 
   @Override public boolean isSelected(T item) {
     return false;
+  }
+
+  @Override
+  public Set<T> getSelectedItems() {
+    return Collections.emptySet();
   }
 }

@@ -11,12 +11,20 @@ import java.util.Set;
 public class MultiSelector<T> implements Selector<T> {
 
   private final Set<T> selectedItems = new HashSet<>();
+  private boolean isSelectable = false;
 
   @Override public void setSelectable(boolean isSelectable) {
-
+    this.isSelectable = isSelectable;
+    if (!isSelectable) {
+      selectedItems.clear();
+    }
   }
 
   @Override public void setSelected(boolean isSelected, T item) {
+    if (!isSelectable) {
+      return;
+    }
+
     if (isSelected) {
       selectedItems.add(item);
     } else {
@@ -26,5 +34,10 @@ public class MultiSelector<T> implements Selector<T> {
 
   @Override public boolean isSelected(T item) {
     return selectedItems.contains(item);
+  }
+
+  @Override
+  public Set<T> getSelectedItems() {
+    return selectedItems;
   }
 }

@@ -16,7 +16,7 @@
   -->
 <resources>
 
-  <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
   </style>
 
@@ -41,11 +41,23 @@
     <item name="android:layout_width">fill_parent</item>
   </style>
 
+  <style name="AppTheme.Video.ThumbnailContainer">
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:foreground">?attr/selectableItemBackground</item>
+    <item name="android:clickable">true</item>
+    <item name="android:focusable">true</item>
+  </style>
+
   <style name="AppTheme.Video.Thumbnail">
     <item name="android:layout_height">fill_parent</item>
     <item name="android:src">@drawable/placeholder</item>
     <item name="android:layout_centerVertical">true</item>
     <item name="android:scaleType">centerCrop</item>
+  </style>
+
+  <style name="AppTheme.Video.ThumbnailSelector">
+    <item name="android:background">#88FF0000</item>
   </style>
 
   <style name="AppTheme.Video.Play">

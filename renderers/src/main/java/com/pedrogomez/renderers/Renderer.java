@@ -111,14 +111,6 @@ public abstract class Renderer<T> implements Cloneable {
     this.content = content;
   }
 
-  protected void setSelected(boolean isSelected) {
-    selector.setSelected(isSelected, getContent());
-  }
-
-  protected boolean isSelected() {
-    return selector.isSelected(getContent());
-  }
-
   /**
    * Map all the widgets from the rootView to Renderer members.
    *
@@ -147,6 +139,18 @@ public abstract class Renderer<T> implements Cloneable {
    * Method where the presentation logic algorithm have to be declared or implemented.
    */
   public abstract void render();
+
+  public void setSelected(boolean isSelected) {
+    selector.setSelected(isSelected, getContent());
+  }
+
+  public void toggleSelection() {
+    setSelected(!isSelected());
+  }
+
+  public boolean isSelected() {
+    return selector.isSelected(getContent());
+  }
 
   /**
    * Create a clone of the Renderer. This method is the base of the prototype mechanism implemented

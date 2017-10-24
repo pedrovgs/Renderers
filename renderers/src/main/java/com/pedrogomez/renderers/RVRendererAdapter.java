@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.MULTI;
 import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.NONE;
@@ -221,6 +222,15 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
       addAll(newList);
       diffResult.dispatchUpdatesTo(this);
     }
+  }
+
+  public void setSelectable(boolean isSelectable) {
+    selector.setSelectable(isSelectable);
+    notifyDataSetChanged();
+  }
+
+  public Set<T> getSelectedItems() {
+    return selector.getSelectedItems();
   }
 
   private Selector<T> createSelectorFromMode(SelectionMode mode) {
