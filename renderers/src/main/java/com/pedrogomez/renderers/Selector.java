@@ -3,17 +3,19 @@ package com.pedrogomez.renderers;
 import java.util.Set;
 
 /**
- * TBD
+ * Interface created to represent a items selector over Renderers.
  *
  * @author Arturo Gutiérrez Díaz-Guerra.
  */
-public interface Selector<T> {
+interface Selector<T> {
 
   void setSelectable(boolean isSelectable);
 
-  void setSelected(boolean isSelected, T item);
+  boolean isSelected(String itemId);
 
-  boolean isSelected(T item);
+  void setSelected(boolean isSelected, String itemId);
 
-  Set<T> getSelectedItems();
+  void onBindRenderer(Renderer<T> renderer);
+
+  Set<String> getSelectedItemIds();
 }

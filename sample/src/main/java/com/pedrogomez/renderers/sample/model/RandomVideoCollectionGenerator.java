@@ -47,7 +47,7 @@ public class RandomVideoCollectionGenerator {
    * @return VideoCollection generated.
    */
   public VideoCollection generate(final int videoCount) {
-    List<Video> videos = new LinkedList<Video>();
+    List<Video> videos = new LinkedList<>();
     for (int i = 0; i < videoCount; i++) {
       Video video = generateRandomVideo();
       videos.add(video);
@@ -61,7 +61,7 @@ public class RandomVideoCollectionGenerator {
       Video video = generateRandomVideo();
       videos.add(video);
     }
-    return new ListAdapteeCollection<Video>(videos);
+    return new ListAdapteeCollection<>(videos);
   }
 
   /**
@@ -95,6 +95,7 @@ public class RandomVideoCollectionGenerator {
     configureLikeStatus(video);
     configureLiveStatus(video);
     configureTitleAndThumbnail(video);
+    configureUniqueId(video);
     return video;
   }
 
@@ -120,6 +121,11 @@ public class RandomVideoCollectionGenerator {
     video.setTitle(title);
     String thumbnail = getValueForIndex(randomIndex);
     video.setThumbnail(thumbnail);
+  }
+
+  private void configureUniqueId(final Video video) {
+    int randomIndex = random.nextInt();
+    video.setId(String.valueOf(randomIndex));
   }
 
   private String getKeyForIndex(int randomIndex) {

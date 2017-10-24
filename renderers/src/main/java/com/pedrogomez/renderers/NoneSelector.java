@@ -4,26 +4,32 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * TBD
+ * None selector implementation. Used in the ListView Renderer implementation because ListView
+ * has its own selection behavior.
  *
  * @author Arturo Gutiérrez Díaz-Guerra.
  */
-public class NoneSelector<T> implements Selector<T> {
+class NoneSelector<T> implements Selector<T> {
 
   @Override public void setSelectable(boolean isSelectable) {
     // Nothing
   }
 
-  @Override public void setSelected(boolean isSelected, T item) {
+  @Override public void setSelected(boolean isSelected, String itemId) {
     // Nothing
   }
 
-  @Override public boolean isSelected(T item) {
+  @Override
+  public void onBindRenderer(Renderer<T> renderer) {
+    // Nothing
+  }
+
+  @Override public boolean isSelected(String itemId) {
     return false;
   }
 
   @Override
-  public Set<T> getSelectedItems() {
+  public Set<String> getSelectedItemIds() {
     return Collections.emptySet();
   }
 }

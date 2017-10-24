@@ -27,6 +27,7 @@ public class Video {
   private boolean live;
   private String thumbnail;
   private String title;
+  private String id;
 
   public boolean isFavorite() {
     return favorite;
@@ -66,6 +67,14 @@ public class Video {
 
   public void setLive(boolean live) {
     this.live = live;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   @Override public boolean equals(Object obj) {

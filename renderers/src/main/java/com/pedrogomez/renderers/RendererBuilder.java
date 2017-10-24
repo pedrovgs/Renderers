@@ -54,6 +54,7 @@ public class RendererBuilder<T> {
   private LayoutInflater layoutInflater;
   private Integer viewType;
   private Map<Class<? extends T>, Class<? extends Renderer>> binding;
+  private final NoneSelector<T> noneSelector = new NoneSelector<>();
 
   /**
    * Initializes a RendererBuilder with an empty prototypes collection. Using this constructor some
@@ -231,7 +232,7 @@ public class RendererBuilder<T> {
     if (isRecyclable(convertView, content)) {
       renderer = recycle(convertView, content);
     } else {
-      renderer = createRenderer(content, parent, null);
+      renderer = createRenderer(content, parent, noneSelector);
     }
     return renderer;
   }

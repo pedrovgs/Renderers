@@ -40,6 +40,11 @@ public class SelectableVideoRenderer extends VideoRenderer {
     }
 
     @Override
+    protected String getItemId() {
+        return getContent().getId();
+    }
+
+    @Override
     public void render() {
         super.render();
         renderSelection(isSelected());

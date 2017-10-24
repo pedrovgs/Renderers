@@ -26,11 +26,24 @@ public class MainActivity extends BaseActivity {
   }
 
   @OnClick(R.id.bt_open_multiselect_rv_sample) public void openMultiSelectRecyclerViewSample() {
+    Intent intent = getIntentForClass(MultiSelectRecyclerViewActivity.class);
+    intent.putExtra(MultiSelectRecyclerViewActivity.IS_MULTI_SELECT_EXTRA, true);
+    open(intent);
+  }
+
+  @OnClick(R.id.bt_open_singleselect_rv_sample) public void openSingleSelectRecyclerViewSample() {
     open(MultiSelectRecyclerViewActivity.class);
   }
 
   private void open(Class activity) {
-    Intent intent = new Intent(this, activity);
+    startActivity(getIntentForClass(activity));
+  }
+
+  private void open(Intent intent) {
     startActivity(intent);
+  }
+
+  private Intent getIntentForClass(Class activity) {
+    return new Intent(this, activity);
   }
 }

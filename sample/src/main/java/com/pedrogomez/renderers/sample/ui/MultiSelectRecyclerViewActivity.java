@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
+import com.pedrogomez.renderers.RVRendererAdapter.SelectionMode;
 import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.MULTI;
+import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.SINGLE;
 
 /**
  * RecyclerViewActivity for the Renderers demo.
@@ -42,6 +44,8 @@ import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.MULTI;
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class MultiSelectRecyclerViewActivity extends BaseActivity {
+
+  public static final String IS_MULTI_SELECT_EXTRA = "multiselect";
 
   private static final int VIDEO_COUNT = 100;
 
@@ -75,14 +79,12 @@ public class MultiSelectRecyclerViewActivity extends BaseActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_recycler_view);
     super.onCreate(savedInstanceState);
-    initAdapter();
+    boolean isMultiSelect = getIntent().getBooleanExtra(IS_MULTI_SELECT_EXTRA, false);
+    initAdapter(isMultiSelect);
     initRecyclerView();
   }
 
-  /**
-   * Initialize RVRendererAdapter
-   */
-  private void initAdapter() {
+  private void initAdapter(boolean isMultiSelect) {
     RandomVideoCollectionGenerator randomVideoCollectionGenerator =
         new RandomVideoCollectionGenerator();
     final AdapteeCollection<Video> videoCollection =
@@ -107,7 +109,8 @@ public class MultiSelectRecyclerViewActivity extends BaseActivity {
               }
             })).bind(Video.class, SelectableVideoRenderer.class);
 
-    adapter = new RVRendererAdapter<>(rendererBuilder, videoCollection, MULTI);
+    SelectionMode selectionMode = isMultiSelect ? MULTI : SINGLE;
+    adapter = new RVRendererAdapter<>(rendererBuilder, videoCollection, selectionMode);
   }
 
   /**

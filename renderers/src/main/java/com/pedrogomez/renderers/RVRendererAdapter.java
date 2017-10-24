@@ -20,12 +20,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.MULTI;
 import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.NONE;
+import static com.pedrogomez.renderers.RVRendererAdapter.SelectionMode.SINGLE;
 
 /**
  * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
@@ -123,13 +126,14 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
    * @param viewHolder with a Renderer class inside.
    * @param position to render.
    */
-  @Override public void onBindViewHolder(RendererViewHolder viewHolder, int position) {
+  @Override public void onBindViewHolder(final RendererViewHolder viewHolder, int position) {
     T content = getItem(position);
     Renderer<T> renderer = viewHolder.getRenderer();
     if (renderer == null) {
       throw new NullRendererBuiltException("RendererBuilder have to return a not null renderer");
     }
     renderer.setContent(content);
+    selector.onBindRenderer(renderer);
     updateRendererExtraValues(content, renderer, position);
     renderer.render();
   }
@@ -224,18 +228,24 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
     }
   }
 
+  /**
+   * Change the selector state to start or stop to listen the selections events from
+   * {@link Renderer#setSelected(boolean)} setSelected} method on Renderer
+   * @param isSelectable If the adapter should listen to selection events or not
+   */
   public void setSelectable(boolean isSelectable) {
     selector.setSelectable(isSelectable);
-    notifyDataSetChanged();
   }
 
-  public Set<T> getSelectedItems() {
-    return selector.getSelectedItems();
+  public Set<String> getSelectedItemIds() {
+    return selector.getSelectedItemIds();
   }
 
   private Selector<T> createSelectorFromMode(SelectionMode mode) {
     if (mode == MULTI) {
       return new MultiSelector<>();
+    } else if (mode == SINGLE) {
+      return new SingleSelector<>();
     }
     return new NoneSelector<>();
   }

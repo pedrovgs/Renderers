@@ -1,22 +1,23 @@
 package com.pedrogomez.renderers;
 
 /**
- * TBD
+ * Implementation of selector for single selection. Basically, it's the multi selector
+ * implementation but deselecting the previous selected items before selecting the new one.
  *
  * @author Arturo Gutiérrez Díaz-Guerra.
  */
-public class SingleSelector<T> extends MultiSelector<T> {
+class SingleSelector<T> extends MultiSelector<T> {
 
     @Override
-    public void setSelected(boolean isSelected, T item) {
+    public void setSelected(boolean isSelected, String itemId) {
         if (isSelected) {
-            for (T selectedItem : getSelectedItems()) {
-                if (!selectedItem.equals(item)) {
-                    super.setSelected(false, selectedItem);
+            for (String selectedItemId : getSelectedItemIds()) {
+                if (!itemId.equals(selectedItemId)) {
+                    super.setSelected(false, selectedItemId);
                 }
             }
         }
 
-        super.setSelected(isSelected, item);
+        super.setSelected(isSelected, itemId);
     }
 }

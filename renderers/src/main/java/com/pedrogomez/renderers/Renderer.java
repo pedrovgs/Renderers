@@ -103,9 +103,18 @@ public abstract class Renderer<T> implements Cloneable {
   }
 
   /**
+   * Only needed for {@link RVRendererAdapter RecyclerView} implementation. The id should be
+   * unique in order to provide a correct uniqueness selection between items
+   * @return the unique id from the associated content of this renderer
+   */
+  protected String getItemId() {
+    return String.valueOf(content.hashCode());
+  }
+
+  /**
    * Configures the content stored in the Renderer.
+   *  @param content associated to the Renderer instance.
    *
-   * @param content associated to the Renderer instance.
    */
   protected void setContent(T content) {
     this.content = content;
@@ -140,16 +149,26 @@ public abstract class Renderer<T> implements Cloneable {
    */
   public abstract void render();
 
+  /**
+   * Change the selection state of the associated content of this renderer
+   * @param isSelected The selection state
+   */
   public void setSelected(boolean isSelected) {
-    selector.setSelected(isSelected, getContent());
+    selector.setSelected(isSelected, getItemId());
   }
 
-  public void toggleSelection() {
+  /**
+   * Toggle the current selection of the associated {@link #getContent() content}
+   */
+  protected void toggleSelection() {
     setSelected(!isSelected());
   }
 
-  public boolean isSelected() {
-    return selector.isSelected(getContent());
+  /**
+   * @return the selection state of the associated {@link #getContent() content}
+   */
+  protected boolean isSelected() {
+    return selector.isSelected(getItemId());
   }
 
   /**

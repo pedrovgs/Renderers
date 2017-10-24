@@ -25,5 +25,6 @@
   <string name="open_lv_sample">Open ListView sample</string>
   <string name="open_rv_sample">Open RecyclerView sample</string>
   <string name="open_multiselect_rv_sample">Open Multi-selection RecyclerView sample</string>
+  <string name="open_singleselect_rv_sample">Open Single-selection RecyclerView sample</string>
 
 </resources>

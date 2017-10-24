@@ -28,6 +28,7 @@ public class RendererTest {
   @Mock private LayoutInflater mockedLayoutInflater;
   @Mock private ViewGroup mockedParent;
   @Mock private View mockedView;
+  @Mock private Selector<Object> mockedSelector;
 
   @Before public void setUp() {
     initializeRenderer();
@@ -98,7 +99,7 @@ public class RendererTest {
   }
 
   private void onCreateRenderer() {
-    renderer.onCreate(mockedContent, mockedLayoutInflater, mockedParent);
+    renderer.onCreate(mockedContent, mockedLayoutInflater, mockedParent, mockedSelector);
   }
 
   private void onRecycleRenderer() {
