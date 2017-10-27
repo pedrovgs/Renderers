@@ -1,7 +1,6 @@
 package com.pedrogomez.renderers;
 
 import android.support.annotation.Nullable;
-
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,8 +42,7 @@ class MultiSelector<T> implements Selector<T> {
     refreshPosition(itemId);
   }
 
-  @Override
-  public void onBindRenderer(Renderer<T> renderer) {
+  @Override public void onBindRenderer(Renderer<T> renderer) {
     trackedRenderers.put(renderer.getItemId(), new WeakReference<>(renderer));
   }
 
@@ -52,8 +50,7 @@ class MultiSelector<T> implements Selector<T> {
     return selectedItemIds.contains(itemId);
   }
 
-  @Override
-  public Set<String> getSelectedItemIds() {
+  @Override public Set<String> getSelectedItemIds() {
     return selectedItemIds;
   }
 
@@ -65,7 +62,7 @@ class MultiSelector<T> implements Selector<T> {
   }
 
   private void refreshAllRenderers() {
-    for(WeakReference<Renderer<T>> weakReference : trackedRenderers.values()) {
+    for (WeakReference<Renderer<T>> weakReference : trackedRenderers.values()) {
       Renderer<T> renderer = weakReference.get();
       if (renderer != null) {
         refreshRenderer(renderer);

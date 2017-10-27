@@ -77,7 +77,8 @@ public class RandomVideoCollectionGenerator {
         "https://thetvdb.com/banners/_cache/posters/75760-29.jpg");
     VIDEO_INFO.put("Dexter", "https://thetvdb.com/banners/_cache/posters/79349-24.jpg");
     VIDEO_INFO.put("Sleepy Hollow", "https://thetvdb.com/banners/_cache/posters/269578-5.jpg");
-    VIDEO_INFO.put("The Vampire Diaries", "https://thetvdb.com/banners/_cache/posters/95491-27.jpg");
+    VIDEO_INFO.put("The Vampire Diaries",
+        "https://thetvdb.com/banners/_cache/posters/95491-27.jpg");
     VIDEO_INFO.put("Friends", "https://thetvdb.com/banners/_cache/posters/79168-4.jpg");
     VIDEO_INFO.put("New Girl", "https://thetvdb.com/banners/_cache/posters/248682-9.jpg");
     VIDEO_INFO.put("The Mentalist", "https://thetvdb.com/banners/_cache/posters/82459-1.jpg");

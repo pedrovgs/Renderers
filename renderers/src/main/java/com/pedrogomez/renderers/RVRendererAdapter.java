@@ -20,8 +20,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
-
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -231,6 +229,7 @@ public class RVRendererAdapter<T> extends RecyclerView.Adapter<RendererViewHolde
   /**
    * Change the selector state to start or stop to listen the selections events from
    * {@link Renderer#setSelected(boolean)} setSelected} method on Renderer
+   *
    * @param isSelectable If the adapter should listen to selection events or not
    */
   public void setSelectable(boolean isSelectable) {

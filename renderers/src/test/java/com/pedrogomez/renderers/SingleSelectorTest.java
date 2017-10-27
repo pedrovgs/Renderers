@@ -1,5 +1,6 @@
 package com.pedrogomez.renderers;
 
+import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,12 +9,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.Set;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @Config(emulateSdk = 16) @RunWith(RobolectricTestRunner.class) public class SingleSelectorTest {
@@ -26,8 +24,7 @@ import static org.mockito.Mockito.when;
   @Mock private ObjectRenderer mockedFirstRenderer;
   @Mock private ObjectRenderer mockedSecondRenderer;
 
-  @Before
-  public void setUp() {
+  @Before public void setUp() {
     initializeSelector();
     initializeMocks();
   }
