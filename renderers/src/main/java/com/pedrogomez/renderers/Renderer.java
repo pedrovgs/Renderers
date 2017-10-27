@@ -52,8 +52,11 @@ public abstract class Renderer<T> implements Cloneable {
    * @param layoutInflater used to inflate the view.
    * @param parent used to inflate the view.
    */
-  public void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent,
-      Selector<T> selector) {
+  public void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent) {
+    onCreate(content, layoutInflater, parent);
+  }
+
+  void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent, Selector<T> selector) {
     this.content = content;
     this.selector = selector;
     this.rootView = inflate(layoutInflater, parent);
@@ -160,14 +163,14 @@ public abstract class Renderer<T> implements Cloneable {
   /**
    * Toggle the current selection of the associated {@link #getContent() content}
    */
-  protected void toggleSelection() {
+  public void toggleSelection() {
     setSelected(!isSelected());
   }
 
   /**
    * @return the selection state of the associated {@link #getContent() content}
    */
-  protected boolean isSelected() {
+  public boolean isSelected() {
     return selector.isSelected(getItemId());
   }
 
