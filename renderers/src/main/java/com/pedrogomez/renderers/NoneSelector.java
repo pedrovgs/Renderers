@@ -11,6 +11,10 @@ import java.util.Set;
  */
 class NoneSelector<T> implements Selector<T> {
 
+  @Override public boolean isSelectable() {
+    return false;
+  }
+
   @Override public void setSelectable(boolean isSelectable) {
     // Nothing
   }

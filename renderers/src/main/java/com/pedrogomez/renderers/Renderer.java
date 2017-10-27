@@ -174,6 +174,10 @@ public abstract class Renderer<T> implements Cloneable {
     return selector.isSelected(getItemId());
   }
 
+  protected boolean isSelectable() {
+    return selector.isSelectable();
+  }
+
   /**
    * Create a clone of the Renderer. This method is the base of the prototype mechanism implemented
    * to avoid create new objects from RendererBuilder. Pay an special attention implementing clone

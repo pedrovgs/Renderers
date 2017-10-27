@@ -20,6 +20,10 @@ class MultiSelector<T> implements Selector<T> {
 
   private boolean isSelectable = false;
 
+  @Override public boolean isSelectable() {
+    return isSelectable;
+  }
+
   @Override public void setSelectable(boolean isSelectable) {
     this.isSelectable = isSelectable;
     if (!isSelectable) {

@@ -9,6 +9,8 @@ import java.util.Set;
  */
 interface Selector<T> {
 
+  boolean isSelectable();
+
   void setSelectable(boolean isSelectable);
 
   boolean isSelected(String itemId);
