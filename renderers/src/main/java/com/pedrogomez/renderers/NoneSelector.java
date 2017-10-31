@@ -1,7 +1,7 @@
 package com.pedrogomez.renderers;
 
 import java.util.Collections;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * None selector implementation. Used in the ListView Renderer implementation because ListView
@@ -19,7 +19,7 @@ class NoneSelector<T> implements Selector<T> {
     // Nothing
   }
 
-  @Override public void setSelected(boolean isSelected, String itemId) {
+  @Override public void setSelected(boolean isSelected, String itemId, T item) {
     // Nothing
   }
 
@@ -33,7 +33,7 @@ class NoneSelector<T> implements Selector<T> {
   }
 
   @Override
-  public Set<String> getSelectedItemIds() {
-    return Collections.emptySet();
+  public Map<String, T> getSelectedItems() {
+    return Collections.emptyMap();
   }
 }

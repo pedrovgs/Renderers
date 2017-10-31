@@ -1,6 +1,6 @@
 package com.pedrogomez.renderers;
 
-import java.util.Set;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +18,8 @@ import static org.mockito.Mockito.when;
 
   private static final String FIRST_ITEM_ID = "1";
   private static final String SECOND_ITEM_ID = "2";
+  private static final Object FIRST_ITEM = new Object();
+  private static final Object SECOND_ITEM = new Object();
 
   private SingleSelector<Object> selector;
 
@@ -34,16 +36,16 @@ import static org.mockito.Mockito.when;
     givenASelectableSelector();
     givenFirstSelectedItem();
 
-    selector.setSelected(true, SECOND_ITEM_ID);
-    Set<String> selectedItemIds = selector.getSelectedItemIds();
+    selector.setSelected(true, SECOND_ITEM_ID, SECOND_ITEM);
+    Map<String, Object> selectedItems = selector.getSelectedItems();
 
     assertFalse(selector.isSelected(FIRST_ITEM_ID));
-    assertTrue(selectedItemIds.contains(SECOND_ITEM_ID));
-    assertEquals(1, selectedItemIds.size());
+    assertTrue(selectedItems.containsKey(SECOND_ITEM_ID));
+    assertEquals(1, selectedItems.size());
   }
 
   private void givenFirstSelectedItem() {
-    selector.setSelected(true, FIRST_ITEM_ID);
+    selector.setSelected(true, FIRST_ITEM_ID, FIRST_ITEM);
   }
 
   private void givenASelectableSelector() {

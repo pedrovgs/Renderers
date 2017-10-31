@@ -1,5 +1,6 @@
 package com.pedrogomez.renderers;
 
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +8,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -19,14 +18,14 @@ import static org.mockito.Mockito.when;
 
 @Config(emulateSdk = 16) @RunWith(RobolectricTestRunner.class) public class MultiSelectorTest {
 
-  private static final java.lang.String ANY_ITEM_ID = "1";
+  private static final String ANY_ITEM_ID = "1";
+  private static final Object ANY_ITEM = new Object();
 
   private MultiSelector<Object> selector;
 
   @Mock private ObjectRenderer mockedRenderer;
 
-  @Before
-  public void setUp() {
+  @Before public void setUp() {
     initializeSelector();
     initializeMocks();
   }
@@ -36,9 +35,9 @@ import static org.mockito.Mockito.when;
     givenANotSelectableSelector();
     givenASelectedItem();
 
-    Set<String> selectedItemIds = selector.getSelectedItemIds();
+    Map<String, Object> selectedItems = selector.getSelectedItems();
 
-    assertEquals(0, selectedItemIds.size());
+    assertEquals(0, selectedItems.size());
     assertFalse(selector.isSelected(ANY_ITEM_ID));
   }
 
@@ -47,9 +46,9 @@ import static org.mockito.Mockito.when;
     givenASelectableSelector();
     givenASelectedItem();
 
-    Set<String> selectedItemIds = selector.getSelectedItemIds();
+    Map<String, Object> selectedItems = selector.getSelectedItems();
 
-    assertTrue(selectedItemIds.contains(ANY_ITEM_ID));
+    assertTrue(selectedItems.containsKey(ANY_ITEM_ID));
     assertTrue(selector.isSelected(ANY_ITEM_ID));
   }
 
@@ -57,7 +56,7 @@ import static org.mockito.Mockito.when;
     givenABindedRendererWithItemId();
     givenASelectableSelector();
 
-    selector.setSelected(true, ANY_ITEM_ID);
+    selector.setSelected(true, ANY_ITEM_ID, ANY_ITEM);
 
     verify(mockedRenderer).render();
   }
@@ -73,7 +72,7 @@ import static org.mockito.Mockito.when;
   }
 
   private void givenASelectedItem() {
-    selector.setSelected(true, ANY_ITEM_ID);
+    selector.setSelected(true, ANY_ITEM_ID, ANY_ITEM);
   }
 
   private void givenANotSelectableSelector() {

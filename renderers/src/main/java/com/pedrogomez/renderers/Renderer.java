@@ -155,7 +155,7 @@ public abstract class Renderer<T> implements Cloneable {
    * @param isSelected The selection state
    */
   public void setSelected(boolean isSelected) {
-    selector.setSelected(isSelected, getItemId());
+    selector.setSelected(isSelected, getItemId(), getContent());
   }
 
   /**

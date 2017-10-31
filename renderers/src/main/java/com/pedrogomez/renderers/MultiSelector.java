@@ -3,9 +3,7 @@ package com.pedrogomez.renderers;
 import android.support.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Implementation of selector to give support for multi-selection. It tracks the selected
@@ -15,7 +13,7 @@ import java.util.Set;
  */
 class MultiSelector<T> implements Selector<T> {
 
-  private final Set<String> selectedItemIds = new HashSet<>();
+  private final Map<String, T> selectedItems = new HashMap<>();
   private final Map<String, WeakReference<Renderer<T>>> trackedRenderers = new HashMap<>();
 
   private boolean isSelectable = false;
@@ -27,20 +25,20 @@ class MultiSelector<T> implements Selector<T> {
   @Override public void setSelectable(boolean isSelectable) {
     this.isSelectable = isSelectable;
     if (!isSelectable) {
-      selectedItemIds.clear();
+      selectedItems.clear();
       refreshAllRenderers();
     }
   }
 
-  @Override public void setSelected(boolean isSelected, String itemId) {
+  @Override public void setSelected(boolean isSelected, String itemId, T item) {
     if (!isSelectable) {
       return;
     }
 
     if (isSelected) {
-      selectedItemIds.add(itemId);
+      selectedItems.put(itemId, item);
     } else {
-      selectedItemIds.remove(itemId);
+      selectedItems.remove(itemId);
     }
 
     refreshPosition(itemId);
@@ -51,11 +49,11 @@ class MultiSelector<T> implements Selector<T> {
   }
 
   @Override public boolean isSelected(String itemId) {
-    return selectedItemIds.contains(itemId);
+    return selectedItems.containsKey(itemId);
   }
 
-  @Override public Set<String> getSelectedItemIds() {
-    return selectedItemIds;
+  @Override public Map<String, T> getSelectedItems() {
+    return selectedItems;
   }
 
   private void refreshPosition(String itemId) {

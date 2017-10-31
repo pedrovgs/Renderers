@@ -1,5 +1,7 @@
 package com.pedrogomez.renderers;
 
+import java.util.Map;
+
 /**
  * Implementation of selector for single selection. Basically, it's the multi selector
  * implementation but deselecting the previous selected items before selecting the new one.
@@ -8,16 +10,15 @@ package com.pedrogomez.renderers;
  */
 class SingleSelector<T> extends MultiSelector<T> {
 
-    @Override
-    public void setSelected(boolean isSelected, String itemId) {
-        if (isSelected) {
-            for (String selectedItemId : getSelectedItemIds()) {
-                if (!itemId.equals(selectedItemId)) {
-                    super.setSelected(false, selectedItemId);
-                }
-            }
+  @Override public void setSelected(boolean isSelected, String itemId, T item) {
+    if (isSelected) {
+      for (Map.Entry<String, T> entry : getSelectedItems().entrySet()) {
+        if (!itemId.equals(entry.getKey())) {
+          super.setSelected(false, entry.getKey(), item);
         }
-
-        super.setSelected(isSelected, itemId);
+      }
     }
+
+    super.setSelected(isSelected, itemId, item);
+  }
 }

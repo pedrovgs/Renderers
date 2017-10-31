@@ -1,6 +1,6 @@
 package com.pedrogomez.renderers;
 
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Interface created to represent a items selector over Renderers.
@@ -15,9 +15,9 @@ public interface Selector<T> {
 
   boolean isSelected(String itemId);
 
-  void setSelected(boolean isSelected, String itemId);
+  void setSelected(boolean isSelected, String itemId, T item);
 
   void onBindRenderer(Renderer<T> renderer);
 
-  Set<String> getSelectedItemIds();
+  Map<String, T> getSelectedItems();
 }
