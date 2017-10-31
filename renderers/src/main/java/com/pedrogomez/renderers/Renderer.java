@@ -51,12 +51,10 @@ public abstract class Renderer<T> implements Cloneable {
    * be null in this method.
    * @param layoutInflater used to inflate the view.
    * @param parent used to inflate the view.
+   * @param selector used to manage selection when using with RecyclerView.
    */
-  public void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent) {
-    onCreate(content, layoutInflater, parent);
-  }
-
-  void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent, Selector<T> selector) {
+  public void onCreate(T content, LayoutInflater layoutInflater, ViewGroup parent,
+      Selector<T> selector) {
     this.content = content;
     this.selector = selector;
     this.rootView = inflate(layoutInflater, parent);
