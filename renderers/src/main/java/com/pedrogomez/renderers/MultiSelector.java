@@ -80,6 +80,9 @@ class MultiSelector<T> implements Selector<T> {
 
   @Nullable private Renderer<T> getRendererForItemId(String itemId) {
     WeakReference<Renderer<T>> weakReference = trackedRenderers.get(itemId);
+    if (weakReference == null) {
+      return null;
+    }
     Renderer<T> renderer = weakReference.get();
     if (renderer != null) {
       String rendererItemId = renderer.getItemId();

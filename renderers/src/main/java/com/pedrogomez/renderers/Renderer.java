@@ -174,7 +174,7 @@ public abstract class Renderer<T> implements Cloneable {
     return selector.isSelected(getItemId());
   }
 
-  protected boolean isSelectable() {
+  public boolean isSelectable() {
     return selector.isSelectable();
   }
 
