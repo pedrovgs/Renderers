@@ -7,7 +7,7 @@ import java.util.Set;
  *
  * @author Arturo Gutiérrez Díaz-Guerra.
  */
-interface Selector<T> {
+public interface Selector<T> {
 
   boolean isSelectable();
 
