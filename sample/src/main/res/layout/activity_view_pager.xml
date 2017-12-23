@@ -14,16 +14,8 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<resources>
-
-  <string name="app_name">Renderers</string>
-  <string name="favorite_label">Favorite</string>
-  <string name="like_label">Like</string>
-  <string name="dislike_label">Dislike</string>
-  <string name="live_label">Live</string>
-  <string name="delete_label">Delete me</string>
-  <string name="open_lv_sample">Open ListView sample</string>
-  <string name="open_rv_sample">Open RecyclerView sample</string>
-  <string name="open_vp_sample">Open ViewPager sample</string>
-
-</resources>
+<android.support.v4.view.ViewPager
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vp_renderers"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"/>
