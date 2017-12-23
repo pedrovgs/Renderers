@@ -3,7 +3,7 @@ Renderers [![Build Status](https://travis-ci.org/pedrovgs/Renderers.svg?branch=m
 
 **Renderers is an Android library created to avoid all the RecyclerView/Adapter boilerplate** needed to create a list/grid   of data in your app and all the spaghetti code that developers used to create following the ``ViewHolder`` classic implementation. **As performance is also important for us, we've added a new ``diffUpdate`` method supporting differential updated transparently.**
 
-With this library you can improve your RecyclerView/Adapter/ViewHolder code. The one we sometimes we copy and paste again and again :smiley:. Using this library you wont need to create any new class extending from ``RecyclerViewAdapter``.
+With this library you can improve your RecyclerView/Adapter/ViewHolder code. The one sometimes we copy and paste again and again :smiley:. Using this library you won't need to create any new class extending from ``RecyclerViewAdapter``.
 
 Create your ``Renderer`` classes and declare the mapping between the object to render and the ``Renderer``. The ``Renderer`` will use the model information to draw your user interface. You can reuse them in all your RecyclerView and ListView implementations easily. That's it!
 
@@ -15,9 +15,9 @@ Screenshots
 Usage
 -----
 
-To use Renderers Android library and get your you only have to follow three steps:
+To use Renderers Android library you only have to follow three steps:
 
-* 1. Create your ``Renderer`` class or classes extending ``Renderer<T>``. Inside your ``Renderer`` classes you will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
+* 1. Create your ``Renderer`` class or classes extending ``Renderer<T>``. Inside your ``Renderer`` classes. You will have to implement some methods to inflate the layout you want to render and implement the rendering algorithm.
 
 ```java
 public class VideoRenderer extends Renderer<Video> {
@@ -65,7 +65,7 @@ public class VideoRenderer extends Renderer<Video> {
 
 You can use [Jake Wharton's][2] [Butterknife][3] library to avoid findViewById calls inside your Renderers if you want. But the usage of third party libraries is not mandatory.
 
-* 2. **If you have just on type of item in your list/grid**, instantiate a ``RendererBuilder`` with a ``Renderer`` instance and you are ready to go:
+* 2. **If you have just one type of item in your list**, instantiate a ``RendererBuilder`` with a ``Renderer`` instance and you are ready to go:
 
 ```java
 Renderer<Video> renderer = new LikeVideoRenderer();
@@ -98,7 +98,7 @@ private void initListView() {
 }
 ```
 
-**Remember if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.**
+**Remember, if you are going to use ``RecyclerView`` instead of ``ListView`` you'll have to use ``RVRendererAdapter`` instead of ``RendererAdapter``.**
 
 * 4. **Diff updates:**
 
@@ -109,6 +109,8 @@ adapter.diffUpdate(newList)
 ```
 
 This method provides a ready to use diff update for our adapter based on the implementation of the standard ``equals`` and ``hashCode`` methods from the ``Object`` Java class. The classes associated to your renderers will have to implement ``equals`` and ``hashCode`` methods properly. Your ``hashCode`` implementation can be based on the item ID if you have one. You can use your ``hashCode`` implementation as an identifier of the object you want to represent graphically. We know this implementation is not perfect, but is the best we can do wihtout adding a new interface you have to implement to the library breaking all your existing code. Here you can review the [DiffUtil.Callback implementation](https://github.com/pedrovgs/Renderers/blob/master/renderers/src/main/java/com/pedrogomez/renderers/DiffCallback.java) used in this library. If you can't follow this implementation you can always use [a different approach](https://medium.com/@iammert/using-diffutil-in-android-recyclerview-bdca8e4fbb00) combined with your already implemented renderers.
+
+***This library can also be used to show views inside a ``ViewPager``. Take a look at ``VPRendererAdapter`` :smiley:***
 
 Usage
 -----
