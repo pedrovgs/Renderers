@@ -15,10 +15,13 @@
  */
 package com.pedrogomez.renderers;
 
+import android.arch.paging.PagedList;
+import android.support.v7.util.DiffUtil;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,67 +31,47 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.Collection;
-import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Test class created to check the correct behaviour of RVRendererAdapter.
- *
- * @author Pedro Vicente Gómez Sánchez.
- */
-@Config(sdk = 27) @RunWith(RobolectricTestRunner.class) public class RVRendererAdapterTest {
 
-  private static final int ANY_SIZE = 11;
+@Config(sdk = 27) @RunWith(RobolectricTestRunner.class) public class PagedRendererAdapterTest {
+
   private static final int ANY_POSITION = 2;
   private static final Object ANY_OBJECT = new Object();
-  private static final Collection<Object> ANY_OBJECT_COLLECTION = new LinkedList<Object>();
   private static final int ANY_ITEM_VIEW_TYPE = 3;
 
-  private RVRendererAdapter<Object> adapter;
+  private PagedRendererAdapter<Object> adapter;
 
   @Mock private RendererBuilder mockedRendererBuilder;
-  @Mock private AdapteeCollection<Object> mockedCollection;
-  @Mock private View mockedConvertView;
   @Mock private ViewGroup mockedParent;
   @Mock private ObjectRenderer mockedRenderer;
-  @Mock private View mockedView;
   @Mock private RendererViewHolder mockedRendererViewHolder;
+  @Mock private DiffUtil.ItemCallback mockDiffCallback;
+  @Mock private PagedList mockPagedList;
 
-  @Before public void setUp() throws Exception {
+
+  @Before public void setUp() {
     initializeMocks();
     initializeRVRendererAdapter();
   }
-
-  @Test public void shouldReturnTheAdapteeCollection() {
-    assertEquals(mockedCollection, adapter.getCollection());
-  }
-
-  @Test public void shouldReturnCollectionSizeOnGetCount() {
-    when(mockedCollection.size()).thenReturn(ANY_SIZE);
-
-    assertEquals(ANY_SIZE, adapter.getItemCount());
-  }
-
 
   @Test public void shouldReturnPositionAsItemId() {
     assertEquals(ANY_POSITION, adapter.getItemId(ANY_POSITION));
   }
 
   @Test public void shouldDelegateIntoRendererBuilderToGetItemViewType() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererBuilder.getItemViewType(ANY_OBJECT)).thenReturn(ANY_ITEM_VIEW_TYPE);
 
     assertEquals(ANY_ITEM_VIEW_TYPE, adapter.getItemViewType(ANY_POSITION));
   }
 
   @Test public void shouldBuildRendererUsingAllNeededDependencies() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererBuilder.buildRendererViewHolder()).thenReturn(mockedRendererViewHolder);
 
     adapter.onCreateViewHolder(mockedParent, ANY_ITEM_VIEW_TYPE);
@@ -100,7 +83,6 @@ import static org.mockito.Mockito.when;
   }
 
   @Test public void shouldGetRendererFromViewHolderAndCallUpdateRendererExtraValuesOnBind() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
 
     adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
@@ -113,38 +95,7 @@ import static org.mockito.Mockito.when;
     adapter.onCreateViewHolder(mockedParent, ANY_ITEM_VIEW_TYPE);
   }
 
-  @Test public void shouldAddElementToAdapteeCollection() {
-    adapter.add(ANY_OBJECT);
-
-    verify(mockedCollection).add(ANY_OBJECT);
-  }
-
-  @Test public void shouldAddAllElementsToAdapteeCollection() {
-    adapter.addAll(ANY_OBJECT_COLLECTION);
-
-    verify(mockedCollection).addAll(ANY_OBJECT_COLLECTION);
-  }
-
-  @Test public void shouldRemoveElementFromAdapteeCollection() {
-    adapter.remove(ANY_OBJECT);
-
-    verify(mockedCollection).remove(ANY_OBJECT);
-  }
-
-  @Test public void shouldRemoveAllElementsFromAdapteeCollection() {
-    adapter.removeAll(ANY_OBJECT_COLLECTION);
-
-    verify(mockedCollection).removeAll(ANY_OBJECT_COLLECTION);
-  }
-
-  @Test public void shouldClearElementsFromAdapteeCollection() {
-    adapter.clear();
-
-    verify(mockedCollection).clear();
-  }
-
   @Test public void shouldGetRendererFromViewHolderAndUpdateContentOnBind() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
 
     adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
@@ -153,7 +104,6 @@ import static org.mockito.Mockito.when;
   }
 
   @Test public void shouldGetRendererFromViewHolderAndRenderItOnBind() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
 
     adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
@@ -161,13 +111,6 @@ import static org.mockito.Mockito.when;
     verify(mockedRenderer).render();
   }
 
-  @Test public void shouldSetAdapteeCollection() throws Exception {
-    RVRendererAdapter<Object> adapter = new RVRendererAdapter<Object>(mockedRendererBuilder);
-
-    adapter.setCollection(mockedCollection);
-
-    assertEquals(mockedCollection, adapter.getCollection());
-  }
 
   @Test public void shouldBeEmptyWhenItsCreatedWithJustARendererBuilder() {
     RVRendererAdapter<Object> adapter = new RVRendererAdapter<Object>(mockedRendererBuilder);
@@ -175,12 +118,6 @@ import static org.mockito.Mockito.when;
     assertEquals(0, adapter.getItemCount());
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void shouldThrowExceptionWhenSetNullCollection() {
-    RVRendererAdapter<Object> adapter = new RVRendererAdapter<Object>(mockedRendererBuilder);
-
-    adapter.setCollection(null);
-  }
 
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
@@ -188,7 +125,9 @@ import static org.mockito.Mockito.when;
   }
 
   private void initializeRVRendererAdapter() {
-    adapter = new RVRendererAdapter<Object>(mockedRendererBuilder, mockedCollection);
+    when(mockPagedList.get(anyInt())).thenReturn(ANY_OBJECT);
+    adapter = new PagedRendererAdapter<>(mockedRendererBuilder, mockDiffCallback);
+    adapter.submitList(mockPagedList);
     adapter = spy(adapter);
   }
 }
