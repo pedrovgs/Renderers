@@ -31,6 +31,10 @@ public class MainActivity extends BaseActivity {
     open(ViewPagerActivity.class);
   }
 
+  @OnClick(R.id.bt_open_pr_sample) public void launchPagedRecyclerViewSample() {
+    open(PagedRecyclerViewActivity.class);
+  }
+
   private void open(Class activity) {
     Intent intent = new Intent(this, activity);
     startActivity(intent);

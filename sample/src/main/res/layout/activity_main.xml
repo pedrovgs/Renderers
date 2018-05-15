@@ -22,8 +22,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
-      android:gravity="center"
-      >
+      android:gravity="center">
 
   <Button
       android:id="@+id/bt_open_lv_sample"
@@ -43,6 +42,11 @@
       android:layout_height="wrap_content"
       android:text="@string/open_vp_sample"/>
 
+    <Button
+      android:id="@+id/bt_open_pr_sample"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/open_pr_sample"/>
   </LinearLayout>
 
 </RelativeLayout>

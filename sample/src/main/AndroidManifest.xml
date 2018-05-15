@@ -47,6 +47,10 @@
         android:name=".ui.ViewPagerActivity"
         android:label="@string/app_name"/>
 
+    <activity
+        android:name=".ui.PagedRecyclerViewActivity"
+        android:label="@string/app_name"/>
+
   </application>
 
 </manifest>

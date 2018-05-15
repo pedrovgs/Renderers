@@ -25,5 +25,6 @@
   <string name="open_lv_sample">Open ListView sample</string>
   <string name="open_rv_sample">Open RecyclerView sample</string>
   <string name="open_vp_sample">Open ViewPager sample</string>
+    <string name="open_pr_sample">Open PagedRecyclerView sample</string>
 
 </resources>
