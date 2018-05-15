@@ -15,17 +15,28 @@
  */
 package com.pedrogomez.renderers.sample.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 /**
  * Main domain class created to simulate fake data for the example.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
+@Entity(tableName = "videos")
 public class Video {
 
   private boolean favorite;
+
   private boolean liked;
   private boolean live;
   private String thumbnail;
+
+  @PrimaryKey(autoGenerate = true)
+  @NonNull
+  public long id;
+
   private String title;
 
   public boolean isFavorite() {
@@ -68,17 +79,20 @@ public class Video {
     this.live = live;
   }
 
-  @Override public boolean equals(Object obj) {
-    if (obj instanceof Video) {
-      Video other = (Video) obj;
-      return title.equals(other.title)
-              && thumbnail.equals(other.thumbnail)
-              && favorite == other.favorite
-              && liked == other.liked
-              && live == other.live;
-    } else {
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Video video = (Video) o;
+
+    if (favorite != video.favorite) return false;
+    if (liked != video.liked) return false;
+    if (live != video.live) return false;
+    if (id != video.id) return false;
+    if (thumbnail != null ? !thumbnail.equals(video.thumbnail) : video.thumbnail != null)
       return false;
-    }
+    return title != null ? title.equals(video.title) : video.title == null;
   }
 
   /*
