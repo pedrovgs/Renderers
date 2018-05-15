@@ -43,8 +43,10 @@ import butterknife.BindView;
 
 public class PagedRecyclerViewActivity extends BaseActivity {
 
-  private static final int VIDEO_COUNT = 20;
+  private static final int VIDEO_COUNT = 10;
   private static final int PAGE_SIZE = 10;
+  private PositionalDataSource<Video> dataSource;
+  private ListAdapteeCollection<Video> videoCollection;
 
   @BindView(R.id.rv_renderers) RecyclerView recyclerView;
 
@@ -60,7 +62,7 @@ public class PagedRecyclerViewActivity extends BaseActivity {
   private void initAdapter() {
     RandomVideoCollectionGenerator randomVideoCollectionGenerator =
         new RandomVideoCollectionGenerator();
-    final ListAdapteeCollection<Video> videoCollection =
+    videoCollection =
             (ListAdapteeCollection<Video>) randomVideoCollectionGenerator
                     .generateListAdapteeVideoCollection(VIDEO_COUNT);
 
@@ -77,6 +79,13 @@ public class PagedRecyclerViewActivity extends BaseActivity {
 
     DiffUtil.ItemCallback<Video> itemCallback = getDIffItemCallback();
     adapter = new PagedRendererAdapter<>(rendererBuilder, itemCallback);
+    Video item = new Video();
+    item.setFavorite(true);
+    item.setThumbnail("http://example.com");
+    item.setTitle("PLACEHOLDER");
+    item.setLiked(false);
+    item.setLive(true);
+    adapter.setDefaultItem(item);
 
     /*
     The following lines of code will probably not be needed in real apps.
@@ -89,8 +98,8 @@ public class PagedRecyclerViewActivity extends BaseActivity {
     The only code of interest is the PagedList.BoundaryCallback<Video>,
     it allows you to fetch more data when the RecyclerView reaches the bottom of the page.
      */
-    final DataSource.Factory<Integer, Video> factory = getDataSourceFactory(videoCollection);
-    final PositionalDataSource<Video> dataSource = getVideoPositionalDataSource(factory);
+    final DataSource.Factory<Integer, Video> factory = getDataSourceFactory(videoCollection, 0);
+    dataSource = getVideoPositionalDataSource(factory);
     final PagedList<Video> pagedList = getPagedList(dataSource);
 
     adapter.submitList(pagedList);
@@ -98,7 +107,8 @@ public class PagedRecyclerViewActivity extends BaseActivity {
   }
 
   @NonNull
-  private DataSource.Factory<Integer, Video> getDataSourceFactory(final ListAdapteeCollection<Video> videoCollection) {
+  private DataSource.Factory<Integer, Video> getDataSourceFactory(final ListAdapteeCollection<Video> videoCollection,
+                                                                  final int postition) {
     return new DataSource.Factory<Integer, Video>() {
       @Override
       public DataSource<Integer, Video> create() {
@@ -106,8 +116,8 @@ public class PagedRecyclerViewActivity extends BaseActivity {
           @Override
           public void loadInitial(@NonNull LoadInitialParams params, @NonNull LoadInitialCallback<Video> callback) {
             final int totalCount = videoCollection.size();
-            List<Video> sublist = videoCollection.subList(0, PAGE_SIZE);
-            callback.onResult(sublist, 0, totalCount);
+            List<Video> sublist = videoCollection.subList(postition, PAGE_SIZE * totalCount / PAGE_SIZE);
+            callback.onResult(sublist, postition, totalCount);
           }
 
           @Override
@@ -137,22 +147,16 @@ public class PagedRecyclerViewActivity extends BaseActivity {
 
   @NonNull
   private PagedList<Video> getPagedList(final PositionalDataSource<Video> dataSource) {
-    return new PagedList.Builder<>(dataSource, PAGE_SIZE)
+    PagedList.Config config = new PagedList.Config.Builder()
+            .setPageSize(10)
+            .setPrefetchDistance(0)
+            .build();
+    return new PagedList.Builder<>(dataSource, config)
             .setFetchExecutor(Executors.newSingleThreadExecutor())
             .setNotifyExecutor(new MainThreadExecutor())
             .setBoundaryCallback(new PagedList.BoundaryCallback<Video>() {
               @Override
               public void onItemAtEndLoaded(@NonNull Video itemAtEnd) {
-
-                final PositionalDataSource.LoadRangeParams loadRangeParams =
-                        new PositionalDataSource.LoadRangeParams(PAGE_SIZE, 10);
-                final PositionalDataSource.LoadRangeCallback<Video> loadRangeCallback =
-                        new PositionalDataSource.LoadRangeCallback<Video>() {
-                  @Override
-                  public void onResult(@NonNull List<Video> data) {
-
-                  }
-                };
 
                 Executors.newSingleThreadExecutor().execute(new Runnable() {
                   @Override
@@ -162,7 +166,28 @@ public class PagedRecyclerViewActivity extends BaseActivity {
                     } catch (InterruptedException e) {
                       e.printStackTrace();
                     }
-                    dataSource.loadRange(loadRangeParams, loadRangeCallback);
+                    dataSource.invalidate();
+                    RandomVideoCollectionGenerator randomVideoCollectionGenerator =
+                            new RandomVideoCollectionGenerator();
+                    final ListAdapteeCollection<Video> videoCollection =
+                            (ListAdapteeCollection<Video>) randomVideoCollectionGenerator
+                                    .generateListAdapteeVideoCollection(VIDEO_COUNT);
+                    ListAdapteeCollection<Video> allVideos =
+                            new ListAdapteeCollection<>(PagedRecyclerViewActivity.this.videoCollection);
+                    allVideos.addAll(videoCollection);
+                    DataSource.Factory<Integer, Video> dataSourceFactory =
+                            getDataSourceFactory(new ListAdapteeCollection<>(allVideos), 10);
+                    final PositionalDataSource<Video> dataSource = getVideoPositionalDataSource(dataSourceFactory);
+                    final PagedList<Video> pagedList = new PagedList.Builder<>(dataSource, PAGE_SIZE)
+                            .setFetchExecutor(Executors.newSingleThreadExecutor())
+                            .setNotifyExecutor(new MainThreadExecutor()).build();
+                    new MainThreadExecutor().execute(new Runnable() {
+                      @Override
+                      public void run() {
+                        adapter.submitList(pagedList);
+                      }
+
+                    });
                   }
                 });
               }

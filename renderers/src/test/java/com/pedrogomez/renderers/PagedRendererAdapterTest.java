@@ -61,6 +61,18 @@ import static org.mockito.Mockito.when;
     initializeRVRendererAdapter();
   }
 
+  @Test
+  public void setDefault() {
+    when(mockPagedList.get(anyInt())).thenReturn(null);
+    adapter.setDefaultItem(ANY_OBJECT);
+    when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
+
+    adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
+
+    verify(mockedRenderer).setContent(ANY_OBJECT);
+    verify(adapter).updateRendererExtraValues(ANY_OBJECT, mockedRenderer, ANY_POSITION);
+  }
+
   @Test public void shouldReturnPositionAsItemId() {
     assertEquals(ANY_POSITION, adapter.getItemId(ANY_POSITION));
   }
