@@ -25,8 +25,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.Collection;
@@ -43,7 +43,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Jc Miñarro
  */
-@Config(emulateSdk = 16) @RunWith(RobolectricTestRunner.class) public class VPRendererAdapterTest {
+@Config(sdk = 27) @RunWith(RobolectricTestRunner.class) public class VPRendererAdapterTest {
 
   private static final int ANY_SIZE = 11;
   private static final int ANY_POSITION = 2;
@@ -156,7 +156,7 @@ import static org.mockito.Mockito.when;
 
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
-    when(mockedParent.getContext()).thenReturn(Robolectric.application);
+    when(mockedParent.getContext()).thenReturn(RuntimeEnvironment.application);
   }
 
   private void initializeVPRendererAdapter() {

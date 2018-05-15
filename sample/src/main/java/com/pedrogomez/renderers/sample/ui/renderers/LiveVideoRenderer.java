@@ -19,7 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.Video;
@@ -34,7 +34,7 @@ import java.util.Date;
  */
 public class LiveVideoRenderer extends VideoRenderer {
 
-  @Bind(R.id.date) TextView date;
+  @BindView(R.id.date) TextView date;
 
   @Override protected View inflate(LayoutInflater inflater, ViewGroup parent) {
     View inflatedView = inflater.inflate(R.layout.live_video_renderer, parent, false);

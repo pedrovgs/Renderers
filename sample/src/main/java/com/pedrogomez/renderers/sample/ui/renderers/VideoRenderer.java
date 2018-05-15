@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.pedrogomez.renderers.Renderer;
@@ -37,10 +37,10 @@ import com.squareup.picasso.Picasso;
  */
 public abstract class VideoRenderer extends Renderer<Video> {
 
-  @Bind(R.id.iv_thumbnail) ImageView thumbnail;
-  @Bind(R.id.tv_title) TextView title;
-  @Bind(R.id.iv_marker) ImageView marker;
-  @Bind(R.id.tv_label) TextView label;
+  @BindView(R.id.iv_thumbnail) ImageView thumbnail;
+  @BindView(R.id.tv_title) TextView title;
+  @BindView(R.id.iv_marker) ImageView marker;
+  @BindView(R.id.tv_label) TextView label;
 
   /**
    * Inflate the main layout used to render videos in the list view.
@@ -85,8 +85,8 @@ public abstract class VideoRenderer extends Renderer<Video> {
    * @param video to get the rendered thumbnail.
    */
   private void renderThumbnail(Video video) {
-    Picasso.with(getContext()).cancelRequest(thumbnail);
-    Picasso.with(getContext())
+    Picasso.get().cancelRequest(thumbnail);
+    Picasso.get()
         .load(video.getThumbnail())
         .placeholder(R.drawable.placeholder)
         .into(thumbnail);
