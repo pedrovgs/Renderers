@@ -17,13 +17,14 @@ package com.pedrogomez.renderers.sample.ui;
 
 import android.os.Bundle;
 import android.widget.ListView;
-import butterknife.Bind;
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
+
+import butterknife.BindView;
 
 /**
  * ListViewActivity for the Renderers demo.
@@ -36,7 +37,7 @@ public class ListViewActivity extends BaseActivity {
 
   private RendererAdapter<Video> adapter;
 
-  @Bind(R.id.lv_renderers) ListView listView;
+  @BindView(R.id.lv_renderers) ListView listView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_list_view);

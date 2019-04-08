@@ -25,7 +25,7 @@ import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ViewPagerActivity for the Renderers demo.
@@ -38,7 +38,7 @@ public class ViewPagerActivity extends BaseActivity {
 
   private VPRendererAdapter<Video> adapter;
 
-  @Bind(R.id.vp_renderers) ViewPager viewPager;
+  @BindView(R.id.vp_renderers) ViewPager viewPager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_view_pager);
