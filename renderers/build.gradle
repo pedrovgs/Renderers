@@ -15,11 +15,11 @@ kuronometer {
   verbose = true
 }
 android {
-  compileSdkVersion 25
+  compileSdkVersion 28
 
   defaultConfig {
     minSdkVersion 10
-    targetSdkVersion 25
+    targetSdkVersion 28
     versionCode 1
     versionName "1.0"
   }
