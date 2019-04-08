@@ -23,7 +23,8 @@ android {
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation 'com.android.support:appcompat-v7:28.0.0'
-  implementation 'com.jakewharton:butterknife:7.0.1'
+  implementation 'com.jakewharton:butterknife:10.1.0'
+  annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
   implementation 'com.squareup.picasso:picasso:2.5.2'
   implementation project(':renderers')
 }
