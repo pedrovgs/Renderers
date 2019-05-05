@@ -2,9 +2,10 @@ buildscript {
   repositories {
     mavenCentral()
     jcenter()
+    google()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.3.1'
+    classpath 'com.android.tools.build:gradle:3.3.2'
     classpath 'com.github.pedrovgs:kuronometer:0.1.1'
   }
 }
@@ -12,6 +13,8 @@ buildscript {
 allprojects {
   repositories {
     mavenCentral()
+    jcenter()
+    google()
   }
 
   apply plugin: 'checkstyle'

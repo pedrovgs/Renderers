@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion '25.0.2'
+  compileSdkVersion 28
 
   defaultConfig {
     applicationId "com.github.pedrovgs.renderers.sample"
     minSdkVersion 14
-    targetSdkVersion 25
+    targetSdkVersion 28
     versionCode 1
     versionName "1.0"
   }
@@ -22,9 +21,11 @@ android {
 }
 
 dependencies {
-  compile fileTree(include: ['*.jar'], dir: 'libs')
-  compile 'com.android.support:appcompat-v7:25.3.1'
-  compile 'com.jakewharton:butterknife:7.0.1'
-  compile 'com.squareup.picasso:picasso:2.5.2'
-  compile project(':renderers')
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation 'com.android.support:appcompat-v7:28.0.0'
+  implementation 'com.android.support:recyclerview-v7:28.0.0'
+  implementation 'com.jakewharton:butterknife:8.8.1'
+  annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+  implementation 'com.squareup.picasso:picasso:2.71828'
+  implementation project(':renderers')
 }
