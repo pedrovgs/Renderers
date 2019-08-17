@@ -23,12 +23,16 @@ public class MainActivity extends BaseActivity {
     open(ListViewActivity.class);
   }
 
-  @OnClick(R.id.bt_open_rv_sample) public void openRecyclerViewSample() {
-    open(RecyclerViewActivity.class);
+  @OnClick(R.id.bt_open_rv_adapter_sample) public void openRecyclerViewAdapterSample() {
+    open(RecyclerViewAdapterActivity.class);
   }
 
   @OnClick(R.id.bt_open_vp_sample) public void openViewPagerSample() {
     open(ViewPagerActivity.class);
+  }
+
+  @OnClick(R.id.bt_open_rv_list_adapter_sample) public void openRecyclerViewListAdapterSample() {
+    open(RecyclerViewListAdapterActivity.class);
   }
 
   private void open(Class activity) {

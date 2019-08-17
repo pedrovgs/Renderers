@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * RecyclerView.Adapter extension created to work RendererBuilders and Renderer instances. Other
- * adapters have to use this one to show information into RecyclerView widgets.
+ * adapters have to use this one or RVListRendererAdapter to show information into RecyclerView widgets.
  * <p>
  * This class is the heart of this library. It's used to avoid the library users declare a new
  * renderer each time they have to show information into a RecyclerView.

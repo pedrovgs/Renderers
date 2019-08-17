@@ -32,16 +32,22 @@
       android:text="@string/open_lv_sample"/>
 
   <Button
-      android:id="@+id/bt_open_rv_sample"
+      android:id="@+id/bt_open_rv_adapter_sample"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/open_rv_sample"/>
+      android:text="@string/open_rv_adapter_sample"/>
 
   <Button
       android:id="@+id/bt_open_vp_sample"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/open_vp_sample"/>
+
+    <Button
+      android:id="@+id/bt_open_rv_list_adapter_sample"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/open_rv_list_adapter_sample"/>
 
   </LinearLayout>
 

@@ -33,11 +33,11 @@ import java.util.Collection;
 import butterknife.BindView;
 
 /**
- * RecyclerViewActivity for the Renderers demo.
+ * RecyclerViewAdapterActivity for the Renderers demo.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
-public class RecyclerViewActivity extends BaseActivity {
+public class RecyclerViewAdapterActivity extends BaseActivity {
 
   private static final int VIDEO_COUNT = 100;
 

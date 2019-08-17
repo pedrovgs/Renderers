@@ -23,7 +23,8 @@
   <string name="live_label">Live</string>
   <string name="delete_label">Delete me</string>
   <string name="open_lv_sample">Open ListView sample</string>
-  <string name="open_rv_sample">Open RecyclerView sample</string>
+  <string name="open_rv_adapter_sample">Open RecyclerView adapter sample</string>
+  <string name="open_rv_list_adapter_sample">Open RecyclerView list adapter sample</string>
   <string name="open_vp_sample">Open ViewPager sample</string>
 
 </resources>
