@@ -18,7 +18,9 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.notNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 @Config(sdk = 16) @RunWith(RobolectricTestRunner.class) public class RVListRendererAdapterTest {
 
@@ -157,7 +159,8 @@ import static org.mockito.Mockito.*;
 
     @Test
     public void shouldSetAdapteeCollection() {
-        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder, mockedDiffItemCallback);
+        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder,
+                mockedDiffItemCallback);
 
         adapter.setCollection(mockedCollection);
 
@@ -166,14 +169,16 @@ import static org.mockito.Mockito.*;
 
     @Test
     public void shouldBeEmptyWhenItsCreatedWithJustARendererBuilder() {
-        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder, mockedDiffItemCallback);
+        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder,
+                mockedDiffItemCallback);
 
         assertEquals(0, adapter.getItemCount());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenSetNullCollection() {
-        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder, mockedDiffItemCallback);
+        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder,
+                mockedDiffItemCallback);
 
         adapter.setCollection(null);
     }

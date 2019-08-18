@@ -35,7 +35,9 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
         this(rendererBuilder, diffCallback, new ListAdapteeCollection<T>());
     }
 
-    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, @NonNull DiffUtil.ItemCallback diffCallback, AdapteeCollection<T> collection) {
+    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder,
+                                 @NonNull DiffUtil.ItemCallback diffCallback,
+                                 AdapteeCollection<T> collection) {
         super(diffCallback);
         this.rendererBuilder = rendererBuilder;
         this.collection = collection;
@@ -45,7 +47,9 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
         this(rendererBuilder, config, new ListAdapteeCollection<T>());
     }
 
-    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, @NonNull AsyncDifferConfig config, AdapteeCollection<T> collection) {
+    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder,
+                                 @NonNull AsyncDifferConfig config,
+                                 AdapteeCollection<T> collection) {
         super(config);
         this.rendererBuilder = rendererBuilder;
         this.collection = collection;

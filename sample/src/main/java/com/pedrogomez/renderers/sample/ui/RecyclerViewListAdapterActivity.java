@@ -29,7 +29,8 @@ public class RecyclerViewListAdapterActivity extends BaseActivity {
 
     private void initAdapter() {
         final RandomVideoCollectionGenerator randomVideoCollectionGenerator = new RandomVideoCollectionGenerator();
-        final AdapteeCollection<Video> videoCollection = randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
+        final AdapteeCollection<Video> videoCollection =
+                randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
         adapter = new RVListRendererAdapter<>(new VideoRendererBuilder(), new VideoItemDiffCallback(), videoCollection);
     }
 
