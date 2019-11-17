@@ -7,6 +7,7 @@ import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 
 import java.util.Collection;
@@ -30,6 +31,16 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
 
     private final RendererBuilder<T> rendererBuilder;
     private AdapteeCollection<T> collection;
+
+    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder) {
+        this(rendererBuilder, new DefaultDiffUtilItemCallback<T>(), new ListAdapteeCollection<T>());
+    }
+
+    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
+        super(new DefaultDiffUtilItemCallback<T>());
+        this.rendererBuilder = rendererBuilder;
+        this.collection = collection;
+    }
 
     public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, @NonNull DiffUtil.ItemCallback diffCallback) {
         this(rendererBuilder, diffCallback, new ListAdapteeCollection<T>());
