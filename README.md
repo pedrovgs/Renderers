@@ -110,6 +110,10 @@ adapter.diffUpdate(newList)
 
 This method provides a ready to use diff update for our adapter based on the implementation of the standard ``equals`` and ``hashCode`` methods from the ``Object`` Java class. The classes associated to your renderers will have to implement ``equals`` and ``hashCode`` methods properly. Your ``hashCode`` implementation can be based on the item ID if you have one. You can use your ``hashCode`` implementation as an identifier of the object you want to represent graphically. We know this implementation is not perfect, but is the best we can do wihtout adding a new interface you have to implement to the library breaking all your existing code. Here you can review the [DiffUtil.Callback implementation](https://github.com/pedrovgs/Renderers/blob/master/renderers/src/main/java/com/pedrogomez/renderers/DiffCallback.java) used in this library. If you can't follow this implementation you can always use [a different approach](https://medium.com/@iammert/using-diffutil-in-android-recyclerview-bdca8e4fbb00) combined with your already implemented renderers.
 
+Also, `RVListRendererAdapter` provides a way to perform diff updates in a background thread transparently. When using `RVListRendererAdapter` you'll have a default `DiffUtil.ItemCallback` implementation (https://developer.android.com/reference/android/support/v7/util/DiffUtil.ItemCallback)) based on referencial equality for `areItemsTheSame` method and structural equality for `areContentsTheSame` method. You also have constructors on this class to provide your own implementation for `DiffUtil.ItemCallback`. You can even configure the threads used to perform the calculations through `AsynDifferConfig` class (https://developer.android.com/reference/android/support/v7/recyclerview/extensions/AsyncDifferConfig).
+
+
+
 ***This library can also be used to show views inside a ``ViewPager``. Take a look at ``VPRendererAdapter`` :smiley:***
 
 Usage

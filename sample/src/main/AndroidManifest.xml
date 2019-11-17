@@ -40,11 +40,15 @@
         android:label="@string/app_name"/>
 
     <activity
-        android:name=".ui.RecyclerViewActivity"
+        android:name=".ui.RecyclerViewAdapterActivity"
         android:label="@string/app_name"/>
 
     <activity
         android:name=".ui.ViewPagerActivity"
+        android:label="@string/app_name"/>
+
+    <activity
+        android:name=".ui.RecyclerViewListAdapterActivity"
         android:label="@string/app_name"/>
 
   </application>
