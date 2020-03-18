@@ -120,7 +120,9 @@ public abstract class Renderer<T> implements Cloneable {
    *
    * @param rootView inflated using previously.
    */
-  protected abstract void hookListeners(View rootView);
+  protected void hookListeners(View rootView) {
+    // blank
+  }
 
   /**
    * Inflate renderer layout. The view inflated can't be null. If this method returns a null view a
