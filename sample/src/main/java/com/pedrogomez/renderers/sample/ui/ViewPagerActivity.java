@@ -16,7 +16,8 @@
 package com.pedrogomez.renderers.sample.ui;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.VPRendererAdapter;
@@ -38,7 +39,8 @@ public class ViewPagerActivity extends BaseActivity {
 
   private VPRendererAdapter<Video> adapter;
 
-  @BindView(R.id.vp_renderers) ViewPager viewPager;
+  @BindView(R.id.vp_renderers)
+  ViewPager viewPager;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_view_pager);

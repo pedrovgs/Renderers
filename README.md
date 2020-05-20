@@ -123,7 +123,7 @@ Add this dependency to your ``build.gradle``:
 
 ```groovy
 dependencies{
-    compile 'com.github.pedrovgs:renderers:3.4.0'
+    implementation 'com.github.pedrovgs:renderers:4.0.0'
 }
 ```
 

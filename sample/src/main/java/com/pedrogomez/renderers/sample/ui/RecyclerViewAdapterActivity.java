@@ -16,8 +16,9 @@
 package com.pedrogomez.renderers.sample.ui;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -41,7 +42,8 @@ public class RecyclerViewAdapterActivity extends BaseActivity {
 
   private static final int VIDEO_COUNT = 100;
 
-  @BindView(R.id.rv_renderers) RecyclerView recyclerView;
+  @BindView(R.id.rv_renderers)
+  RecyclerView recyclerView;
 
   private RVRendererAdapter<Video> adapter;
 
