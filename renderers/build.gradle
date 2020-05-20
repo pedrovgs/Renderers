@@ -1,25 +1,25 @@
 apply plugin: 'com.android.library'
 apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
-
 apply plugin: 'com.github.pedrovgs.kuronometer'
+
 kuronometer {
   platformName = 'Android'
   //This value can be true or false.
   //It's used to remove the project sensitive information before to being reported. By default is true.
-  reportProjectInfo = true
+  reportProjectInfo = false
   //This value can be true or false.
   //It's used to send or not the build report to the kuronometer server. By default is true.
-  reportDataRemotely = true
+  reportDataRemotely = false
   //This value can be true or false.
   //It's used to show a message after the build execution showing the report execution result. By default is false.
-  verbose = true
+  verbose = false
 }
 android {
-  compileSdkVersion 28
+  compileSdkVersion 29
 
   defaultConfig {
-    minSdkVersion 10
-    targetSdkVersion 28
+    minSdkVersion 14
+    targetSdkVersion 29
     versionCode 1
     versionName "1.0"
   }
@@ -35,9 +35,9 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation 'com.android.support:recyclerview-v7:28.0.0'
-  implementation 'com.android.support:support-v4:28.0.0'
+  implementation 'androidx.recyclerview:recyclerview:1.1.0'
+  implementation 'androidx.viewpager:viewpager:1.0.0'
   testImplementation 'junit:junit:4.12'
-  testImplementation "org.mockito:mockito-core:2.26.0"
+  testImplementation 'org.mockito:mockito-core:2.26.0'
   testImplementation 'org.robolectric:robolectric:4.2'
 }

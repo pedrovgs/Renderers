@@ -1,7 +1,8 @@
 package com.pedrogomez.renderers.sample.ui.diffing;
 
-import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.pedrogomez.renderers.sample.model.Video;
 
 public class VideoItemDiffCallback extends DiffUtil.ItemCallback<Video> {
