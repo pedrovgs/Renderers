@@ -1,5 +1,9 @@
 language: android
 
+cache:
+  directories:
+    - $HOME/.gradle
+
 android:
   components:
     - tools
