@@ -21,10 +21,10 @@ import java.util.List;
 
 class DiffCallback<T> extends DiffUtil.Callback {
 
-  private final AdapteeCollection<T> oldList;
+  private final List<T> oldList;
   private final List<T> newList;
 
-  DiffCallback(AdapteeCollection<T> oldList, List<T> newList) {
+  DiffCallback(List<T> oldList, List<T> newList) {
     this.oldList = oldList;
     this.newList = newList;
   }

@@ -19,12 +19,13 @@ import android.os.Bundle;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.VPRendererAdapter;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -55,9 +56,8 @@ public class ViewPagerActivity extends BaseActivity {
   private void initAdapter() {
     RandomVideoCollectionGenerator randomVideoCollectionGenerator =
         new RandomVideoCollectionGenerator();
-    AdapteeCollection<Video> videoCollection =
-        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    adapter = new VPRendererAdapter<Video>(new VideoRendererBuilder(), videoCollection);
+    List<Video> videoCollection = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
+    adapter = new VPRendererAdapter<>(new VideoRendererBuilder(), videoCollection);
   }
 
   /**

@@ -15,7 +15,9 @@ import org.robolectric.annotation.Config;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.verify;
@@ -34,6 +36,7 @@ import static org.mockito.Mockito.spy;
 
     @Mock private RendererBuilder mockedRendererBuilder;
     @Mock private AdapteeCollection<Object> mockedCollection;
+    @Mock private List<Object> mockedList;
     @Mock private DiffUtil.ItemCallback<Object> mockedDiffItemCallback;
     @Mock private ViewGroup mockedParent;
     @Mock private ObjectRenderer mockedRenderer;
@@ -45,20 +48,15 @@ import static org.mockito.Mockito.spy;
     }
 
     @Test
-    public void shouldReturnTheAdapteeCollection() {
-        assertEquals(mockedCollection, adapter.getCollection());
+    public void shouldReturnTheList() {
+        assertEquals(mockedList, adapter.getList());
     }
 
     @Test
     public void shouldReturnCollectionSizeOnGetCount() {
-        when(mockedCollection.size()).thenReturn(ANY_SIZE);
+        when(mockedList.size()).thenReturn(ANY_SIZE);
 
         assertEquals(ANY_SIZE, adapter.getItemCount());
-    }
-
-    @Test
-    public void shouldReturnItemAtCollectionPositionOnGetItem() {
-        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     }
 
     @Test
@@ -68,7 +66,7 @@ import static org.mockito.Mockito.spy;
 
     @Test
     public void shouldDelegateIntoRendererBuilderToGetItemViewType() {
-        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+        when(mockedList.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
         when(mockedRendererBuilder.getItemViewType(ANY_OBJECT)).thenReturn(ANY_ITEM_VIEW_TYPE);
 
         assertEquals(ANY_ITEM_VIEW_TYPE, adapter.getItemViewType(ANY_POSITION));
@@ -76,7 +74,7 @@ import static org.mockito.Mockito.spy;
 
     @Test
     public void shouldBuildRendererUsingAllNeededDependencies() {
-        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+        when(mockedList.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
         when(mockedRendererBuilder.buildRendererViewHolder()).thenReturn(mockedRendererViewHolder);
 
         adapter.onCreateViewHolder(mockedParent, ANY_ITEM_VIEW_TYPE);
@@ -89,7 +87,7 @@ import static org.mockito.Mockito.spy;
 
     @Test
     public void shouldGetRendererFromViewHolderAndCallUpdateRendererExtraValuesOnBind() {
-        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+        when(mockedList.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
         when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
 
         adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
@@ -103,43 +101,43 @@ import static org.mockito.Mockito.spy;
     }
 
     @Test
-    public void shouldAddElementToAdapteeCollection() {
+    public void shouldAddElementToList() {
         adapter.add(ANY_OBJECT);
 
-        verify(mockedCollection).add(ANY_OBJECT);
+        verify(mockedList).add(ANY_OBJECT);
     }
 
     @Test
-    public void shouldAddAllElementsToAdapteeCollection() {
+    public void shouldAddAllElementsToList() {
         adapter.addAll(ANY_OBJECT_COLLECTION);
 
-        verify(mockedCollection).addAll(ANY_OBJECT_COLLECTION);
+        verify(mockedList).addAll(ANY_OBJECT_COLLECTION);
     }
 
     @Test
-    public void shouldRemoveElementFromAdapteeCollection() {
+    public void shouldRemoveElementFromList() {
         adapter.remove(ANY_OBJECT);
 
-        verify(mockedCollection).remove(ANY_OBJECT);
+        verify(mockedList).remove(ANY_OBJECT);
     }
 
     @Test
-    public void shouldRemoveAllElementsFromAdapteeCollection() {
+    public void shouldRemoveAllElementsFromList() {
         adapter.removeAll(ANY_OBJECT_COLLECTION);
 
-        verify(mockedCollection).removeAll(ANY_OBJECT_COLLECTION);
+        verify(mockedList).removeAll(ANY_OBJECT_COLLECTION);
     }
 
     @Test
-    public void shouldClearElementsFromAdapteeCollection() {
+    public void shouldClearElementsFromList() {
         adapter.clear();
 
-        verify(mockedCollection).clear();
+        verify(mockedList).clear();
     }
 
     @Test
     public void shouldGetRendererFromViewHolderAndUpdateContentOnBind() {
-        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+        when(mockedList.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
         when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
 
         adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
@@ -149,7 +147,7 @@ import static org.mockito.Mockito.spy;
 
     @Test
     public void shouldGetRendererFromViewHolderAndRenderItOnBind() {
-        when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+        when(mockedList.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
         when(mockedRendererViewHolder.getRenderer()).thenReturn(mockedRenderer);
 
         adapter.onBindViewHolder(mockedRendererViewHolder, ANY_POSITION);
@@ -159,12 +157,24 @@ import static org.mockito.Mockito.spy;
 
     @Test
     public void shouldSetAdapteeCollection() {
+        ListAdapteeCollection collection = new ListAdapteeCollection();
+        collection.add("test");
         RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder,
                 mockedDiffItemCallback);
 
-        adapter.setCollection(mockedCollection);
+        adapter.setCollection(collection);
 
-        assertEquals(mockedCollection, adapter.getCollection());
+        assertArrayEquals(collection.toArray(), ((ListAdapteeCollection) adapter.getCollection()).toArray());
+    }
+
+    @Test
+    public void shouldSetList() {
+        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder,
+                mockedDiffItemCallback);
+
+        adapter.setList(mockedList);
+
+        assertEquals(mockedList, adapter.getList());
     }
 
     @Test
@@ -183,13 +193,21 @@ import static org.mockito.Mockito.spy;
         adapter.setCollection(null);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenSetNullList() {
+        RVListRendererAdapter<Object> adapter = new RVListRendererAdapter<Object>(mockedRendererBuilder,
+                mockedDiffItemCallback);
+
+        adapter.setList(null);
+    }
+
     private void initializeMocks() {
         MockitoAnnotations.initMocks(this);
         when(mockedParent.getContext()).thenReturn(RuntimeEnvironment.application);
     }
 
     private void initializeRVListRendererAdapter() {
-        adapter = new RVListRendererAdapter<>(mockedRendererBuilder, mockedDiffItemCallback, mockedCollection);
+        adapter = new RVListRendererAdapter<>(mockedRendererBuilder, mockedDiffItemCallback, mockedList);
         adapter = spy(adapter);
     }
 }

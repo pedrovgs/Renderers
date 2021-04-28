@@ -19,11 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @deprecated Adapters collections are provided through List class. This class has no purpose
+ * anymore. This class is going to be removed in upcoming version.
+ *
  * Generic AdapteeCollection implementation based on ArrayList. Library clients can use this
  * class instead of create his own AdapteeCollections.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
+@Deprecated
 public class ListAdapteeCollection<T> extends ArrayList<T> implements AdapteeCollection<T> {
 
   public ListAdapteeCollection() {

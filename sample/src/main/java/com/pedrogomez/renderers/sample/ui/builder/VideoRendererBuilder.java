@@ -46,8 +46,8 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
    * @param content used to map object-renderers.
    * @return VideoRenderer subtype class.
    */
-  @Override protected Class getPrototypeClass(Video content) {
-    Class prototypeClass;
+  @Override protected Class<? extends Renderer<Video>> getPrototypeClass(Video content) {
+    Class<? extends Renderer<Video>> prototypeClass;
     if (content.isFavorite()) {
       prototypeClass = FavoriteVideoRenderer.class;
     } else if (content.isLive()) {
@@ -66,7 +66,7 @@ public class VideoRendererBuilder extends RendererBuilder<Video> {
    * @return Renderer<Video> prototypes for RendererBuilder.
    */
   private List<Renderer<Video>> getRendererVideoPrototypes() {
-    List<Renderer<Video>> prototypes = new LinkedList<Renderer<Video>>();
+    List<Renderer<Video>> prototypes = new LinkedList<>();
     LikeVideoRenderer likeVideoRenderer = new LikeVideoRenderer();
     prototypes.add(likeVideoRenderer);
 

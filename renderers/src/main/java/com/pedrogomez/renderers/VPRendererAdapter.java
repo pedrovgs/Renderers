@@ -15,6 +15,7 @@
  */
 package com.pedrogomez.renderers;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,9 @@ import android.view.ViewGroup;
 
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * PagerAdapter extension created to work RendererBuilders and Renderer instances. Other
@@ -32,22 +35,37 @@ import java.util.Collection;
  * renderer each time they have to show information into a ViewPager.
  * <p>
  * VPRendererAdapter has to be constructed with a RendererBuilder to provide Renderer to
- * VPRendererAdapter and one AdapteeCollection to provide the elements to render.
+ * VPRendererAdapter and one list to provide the elements to render.
  *
  * @author Jc Miñarro.
  */
 public class VPRendererAdapter<T> extends PagerAdapter {
 
     private final RendererBuilder<T> rendererBuilder;
-    private AdapteeCollection<T> collection;
+    private List<T> list;
 
     public VPRendererAdapter(RendererBuilder<T> rendererBuilder) {
-        this(rendererBuilder, new ListAdapteeCollection<T>());
+        this(rendererBuilder, new ArrayList<T>());
     }
 
+    /**
+     * @deprecated Use {@link #VPRendererAdapter(RendererBuilder, List)} function instead.
+     * This constructor is going to be removed in upcoming version.
+     */
+    @Deprecated
     public VPRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
         this.rendererBuilder = rendererBuilder;
-        this.collection = collection;
+        try {
+            this.list = (List) collection;
+        } catch (ClassCastException exception) {
+            throw new ClassCastException("collection parameter needs to implement List interface. "
+                    + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+        }
+    }
+
+    public VPRendererAdapter(RendererBuilder<T> rendererBuilder, List<T> list) {
+        this.rendererBuilder = rendererBuilder;
+        this.list = list;
     }
 
     /**
@@ -97,11 +115,11 @@ public class VPRendererAdapter<T> extends PagerAdapter {
     }
 
     @Override public int getCount() {
-        return collection.size();
+        return list.size();
     }
 
     public T getItem(int position) {
-        return collection.get(position);
+        return list.get(position);
     }
 
     /**
@@ -111,7 +129,7 @@ public class VPRendererAdapter<T> extends PagerAdapter {
      * @return if the element has been added.
      */
     public boolean add(T element) {
-        return collection.add(element);
+        return list.add(element);
     }
 
     /**
@@ -121,7 +139,7 @@ public class VPRendererAdapter<T> extends PagerAdapter {
      * @return if the element has been removed.
      */
     public boolean remove(Object element) {
-        return collection.remove(element);
+        return list.remove(element);
     }
 
     /**
@@ -130,7 +148,7 @@ public class VPRendererAdapter<T> extends PagerAdapter {
      * @param elements to add.
      */
     public void addAll(Collection<? extends T> elements) {
-        collection.addAll(elements);
+        list.addAll(elements);
     }
 
     /**
@@ -140,31 +158,57 @@ public class VPRendererAdapter<T> extends PagerAdapter {
      * @return if the elements have been removed.
      */
     public boolean removeAll(Collection<?> elements) {
-        return collection.removeAll(elements);
+        return list.removeAll(elements);
     }
 
     /**
      * Remove all elements inside the AdapteeCollection.
      */
     public void clear() {
-        collection.clear();
+        list.clear();
     }
 
     /**
+     * @deprecated Use {@link #getList()} function instead.
+     * This method is going to be removed in upcoming version.
+     *
      * Allows the client code to access the AdapteeCollection from subtypes of RendererAdapter.
      *
      * @return collection used in the adapter as the adaptee class.
      */
+    @Deprecated
     protected AdapteeCollection<T> getCollection() {
-        return collection;
+        return new ListAdapteeCollection(list);
     }
 
+    /**
+     * Allows the client code to access the list from subtypes of RendererAdapter.
+     *
+     * @return collection used in the adapter as the adaptee class.
+     */
+    protected List<T> getList() {
+        return list;
+    }
+
+    /**
+     * @deprecated Use {@link #setList(List)} function instead.
+     * This method is going to be removed in upcoming version.
+     */
     public void setCollection(AdapteeCollection<T> collection) {
-        if (collection == null) {
-            throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
+        try {
+            setList((List) collection);
+        } catch (ClassCastException exception) {
+            throw new ClassCastException("collection parameter needs to implement List interface. "
+                    + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+        }
+    }
+
+    public void setList(@NonNull List<T> list) {
+        if (list == null) {
+            throw new IllegalArgumentException("The list configured can't be null");
         }
 
-        this.collection = collection;
+        this.list = list;
     }
 
     /**

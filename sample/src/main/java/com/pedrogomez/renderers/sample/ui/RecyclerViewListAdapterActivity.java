@@ -4,13 +4,14 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVListRendererAdapter;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
 import com.pedrogomez.renderers.sample.ui.diffing.VideoItemDiffCallback;
+
+import java.util.List;
 
 public class RecyclerViewListAdapterActivity extends BaseActivity {
 
@@ -29,8 +30,7 @@ public class RecyclerViewListAdapterActivity extends BaseActivity {
 
     private void initAdapter() {
         final RandomVideoCollectionGenerator randomVideoCollectionGenerator = new RandomVideoCollectionGenerator();
-        final AdapteeCollection<Video> videoCollection =
-                randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
+        final List<Video> videoCollection = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
         adapter = new RVListRendererAdapter<>(new VideoRendererBuilder(), new VideoItemDiffCallback(), videoCollection);
     }
 

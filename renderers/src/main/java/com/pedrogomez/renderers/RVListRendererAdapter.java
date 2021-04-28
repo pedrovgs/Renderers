@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,28 +31,62 @@ import java.util.List;
 public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder> {
 
     private final RendererBuilder<T> rendererBuilder;
-    private AdapteeCollection<T> collection;
+    private List<T> list;
 
     public RVListRendererAdapter(RendererBuilder<T> rendererBuilder) {
-        this(rendererBuilder, new DefaultDiffUtilItemCallback<T>(), new ListAdapteeCollection<T>());
+        this(rendererBuilder, new DefaultDiffUtilItemCallback<T>(), new ArrayList<T>());
     }
 
+    /**
+     * @deprecated Use {@link #RVListRendererAdapter(RendererBuilder, List)} function instead.
+     * This constructor is going to be removed in upcoming version.
+     */
+    @Deprecated
     public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
         super(new DefaultDiffUtilItemCallback<T>());
         this.rendererBuilder = rendererBuilder;
-        this.collection = collection;
+        try {
+            this.list = (List) collection;
+        } catch (ClassCastException exception) {
+            throw new ClassCastException("collection parameter needs to implement List interface. "
+                    + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+        }
+    }
+
+    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, List<T> list) {
+        super(new DefaultDiffUtilItemCallback<T>());
+        this.rendererBuilder = rendererBuilder;
+        this.list = list;
     }
 
     public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, @NonNull DiffUtil.ItemCallback diffCallback) {
-        this(rendererBuilder, diffCallback, new ListAdapteeCollection<T>());
+        this(rendererBuilder, diffCallback, new ArrayList<T>());
     }
 
+    /**
+     * @deprecated Use {@link #RVListRendererAdapter(RendererBuilder, DiffUtil.ItemCallback, List)} function instead.
+     * This constructor is going to be removed in upcoming version.
+     */
+    @Deprecated
     public RVListRendererAdapter(RendererBuilder<T> rendererBuilder,
                                  @NonNull DiffUtil.ItemCallback diffCallback,
                                  AdapteeCollection<T> collection) {
         super(diffCallback);
         this.rendererBuilder = rendererBuilder;
-        this.collection = collection;
+        try {
+            this.list = (List) collection;
+        } catch (ClassCastException exception) {
+            throw new ClassCastException("collection parameter needs to implement List interface. "
+                    + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+        }
+    }
+
+    public RVListRendererAdapter(RendererBuilder<T> rendererBuilder,
+                                 @NonNull DiffUtil.ItemCallback diffCallback,
+                                 List<T> list) {
+        super(diffCallback);
+        this.rendererBuilder = rendererBuilder;
+        this.list = list;
     }
 
     public RVListRendererAdapter(RendererBuilder<T> rendererBuilder, @NonNull AsyncDifferConfig config) {
@@ -60,19 +95,19 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
 
     public RVListRendererAdapter(RendererBuilder<T> rendererBuilder,
                                  @NonNull AsyncDifferConfig config,
-                                 AdapteeCollection<T> collection) {
+                                 List<T> list) {
         super(config);
         this.rendererBuilder = rendererBuilder;
-        this.collection = collection;
+        this.list = list;
     }
 
     @Override
     public int getItemCount() {
-        return collection.size();
+        return list.size();
     }
 
     public T getItem(int position) {
-        return collection.get(position);
+        return list.get(position);
     }
 
     @Override
@@ -80,12 +115,26 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
         return position;
     }
 
+    /**
+     * @deprecated Use {@link #setList} function instead.
+     * This method is going to be removed in upcoming version.
+     */
+    @Deprecated
     public void setCollection(AdapteeCollection<T> collection) {
-        if (collection == null) {
-            throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
+        try {
+            setList((List) collection);
+        } catch (ClassCastException exception) {
+            throw new ClassCastException("collection parameter needs to implement List interface. "
+                    + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+        }
+    }
+
+    public void setList(List<T> list) {
+        if (list == null) {
+            throw new IllegalArgumentException("The List configured can't be null");
         }
 
-        this.collection = collection;
+        this.list = list;
     }
 
     /**
@@ -147,7 +196,7 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
      * @return if the element has been added.
      */
     public boolean add(T element) {
-        return collection.add(element);
+        return list.add(element);
     }
 
     /**
@@ -157,7 +206,7 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
      * @return if the element has been removed.
      */
     public boolean remove(Object element) {
-        return collection.remove(element);
+        return list.remove(element);
     }
 
     /**
@@ -167,7 +216,7 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
      * @return if the elements have been added.
      */
     public boolean addAll(Collection<? extends T> elements) {
-        return collection.addAll(elements);
+        return list.addAll(elements);
     }
 
     /**
@@ -177,23 +226,35 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
      * @return if the elements have been removed.
      */
     public boolean removeAll(Collection<?> elements) {
-        return collection.removeAll(elements);
+        return list.removeAll(elements);
     }
 
     /**
      * Remove all elements inside the AdapteeCollection.
      */
     public void clear() {
-        collection.clear();
+        list.clear();
     }
 
     /**
+     * @deprecated Use {@link #getList()} function instead.
+     * This method is going to be removed in upcoming version.
+     *
      * Allows the client code to access the AdapteeCollection from subtypes of RendererAdapter.
      *
      * @return collection used in the adapter as the adaptee class.
      */
     protected AdapteeCollection<T> getCollection() {
-        return collection;
+        return new ListAdapteeCollection(getList());
+    }
+
+    /**
+     * Allows the client code to access the list from subtypes of RendererAdapter.
+     *
+     * @return collection used in the adapter as the adaptee class.
+     */
+    protected List<T> getList() {
+        return list;
     }
 
     /**
@@ -220,7 +281,7 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
      */
     @Override
     public void submitList(@Nullable List<T> newList) {
-        if (getCollection().size() > 0) {
+        if (getList().size() > 0) {
             clear();
         }
         addAll(newList);

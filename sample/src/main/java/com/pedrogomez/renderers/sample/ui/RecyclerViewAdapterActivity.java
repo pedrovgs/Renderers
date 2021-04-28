@@ -20,7 +20,6 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 import com.pedrogomez.renderers.sample.R;
@@ -29,7 +28,7 @@ import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.renderers.RemovableVideoRenderer;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -60,13 +59,11 @@ public class RecyclerViewAdapterActivity extends BaseActivity {
   private void initAdapter() {
     RandomVideoCollectionGenerator randomVideoCollectionGenerator =
         new RandomVideoCollectionGenerator();
-    final AdapteeCollection<Video> videoCollection =
-        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
+    final List<Video> videoCollection = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
     RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>().withPrototype(
         new RemovableVideoRenderer(new RemovableVideoRenderer.Listener() {
           @Override public void onRemoveButtonTapped(Video video) {
-            ArrayList<Video> clonedList =
-                new ArrayList<>((Collection<? extends Video>) videoCollection);
+            ArrayList<Video> clonedList = new ArrayList<>(videoCollection);
             clonedList.remove(video);
             adapter.diffUpdate(clonedList);
           }

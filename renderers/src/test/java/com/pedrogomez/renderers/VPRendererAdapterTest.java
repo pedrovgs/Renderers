@@ -31,7 +31,9 @@ import org.robolectric.annotation.Config;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.spy;
@@ -55,6 +57,7 @@ import static org.mockito.Mockito.when;
 
   @Mock private RendererBuilder mockedRendererBuilder;
   @Mock private AdapteeCollection<Object> mockedCollection;
+  @Mock private List<Object> mockedList;
   @Mock private ViewGroup mockedParent;
   @Mock private ObjectRenderer mockedRenderer;
 
@@ -63,22 +66,18 @@ import static org.mockito.Mockito.when;
     initializeVPRendererAdapter();
   }
 
-  @Test public void shouldReturnTheAdapteeCollection() {
-    assertEquals(mockedCollection, adapter.getCollection());
+  @Test public void shouldReturnTheList() {
+    assertEquals(mockedList, adapter.getList());
   }
 
   @Test public void shouldReturnCollectionSizeOnGetCount() {
-    when(mockedCollection.size()).thenReturn(ANY_SIZE);
+    when(mockedList.size()).thenReturn(ANY_SIZE);
 
     assertEquals(ANY_SIZE, adapter.getCount());
   }
 
-  @Test public void shouldReturnItemAtCollectionPositionOnGetItem() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
-  }
-
   @Test public void shouldBuildRendererUsingAllNeededDependencies() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+    when(mockedList.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
 
     adapter.instantiateItem(mockedParent, ANY_POSITION);
@@ -94,38 +93,38 @@ import static org.mockito.Mockito.when;
     adapter.instantiateItem(mockedParent, ANY_ITEM_VIEW_TYPE);
   }
 
-  @Test public void shouldAddElementToAdapteeCollection() {
+  @Test public void shouldAddElementToList() {
     adapter.add(ANY_OBJECT);
 
-    verify(mockedCollection).add(ANY_OBJECT);
+    verify(mockedList).add(ANY_OBJECT);
   }
 
-  @Test public void shouldAddAllElementsToAdapteeCollection() {
+  @Test public void shouldAddAllElementsToList() {
     adapter.addAll(ANY_OBJECT_COLLECTION);
 
-    verify(mockedCollection).addAll(ANY_OBJECT_COLLECTION);
+    verify(mockedList).addAll(ANY_OBJECT_COLLECTION);
   }
 
-  @Test public void shouldRemoveElementFromAdapteeCollection() {
+  @Test public void shouldRemoveElementFromList() {
     adapter.remove(ANY_OBJECT);
 
-    verify(mockedCollection).remove(ANY_OBJECT);
+    verify(mockedList).remove(ANY_OBJECT);
   }
 
-  @Test public void shouldRemoveAllElementsFromAdapteeCollection() {
+  @Test public void shouldRemoveAllElementsFromList() {
     adapter.removeAll(ANY_OBJECT_COLLECTION);
 
-    verify(mockedCollection).removeAll(ANY_OBJECT_COLLECTION);
+    verify(mockedList).removeAll(ANY_OBJECT_COLLECTION);
   }
 
-  @Test public void shouldClearElementsFromAdapteeCollection() {
+  @Test public void shouldClearElementsFromList() {
     adapter.clear();
 
-    verify(mockedCollection).clear();
+    verify(mockedList).clear();
   }
 
   @Test public void shouldGetRendererAndRenderIt() {
-    when(mockedCollection.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
+    when(mockedList.get(ANY_POSITION)).thenReturn(ANY_OBJECT);
     when(mockedRendererBuilder.build()).thenReturn(mockedRenderer);
 
     adapter.instantiateItem(mockedParent, ANY_POSITION);
@@ -133,12 +132,22 @@ import static org.mockito.Mockito.when;
     verify(mockedRenderer).render();
   }
 
-  @Test public void shouldSetAdapteeCollection() throws Exception {
+  @Test public void shouldSetAdapteeCollection() {
+    ListAdapteeCollection collection = new ListAdapteeCollection();
+    collection.add("test");
     VPRendererAdapter<Object> adapter = new VPRendererAdapter<Object>(mockedRendererBuilder);
 
-    adapter.setCollection(mockedCollection);
+    adapter.setCollection(collection);
 
-    assertEquals(mockedCollection, adapter.getCollection());
+    assertArrayEquals(collection.toArray(), ((ListAdapteeCollection) adapter.getCollection()).toArray());
+  }
+
+  @Test public void shouldSetList() {
+    VPRendererAdapter<Object> adapter = new VPRendererAdapter<Object>(mockedRendererBuilder);
+
+    adapter.setList(mockedList);
+
+    assertEquals(mockedList, adapter.getList());
   }
 
   @Test public void shouldBeEmptyWhenItsCreatedWithJustARendererBuilder() {
@@ -154,13 +163,20 @@ import static org.mockito.Mockito.when;
     adapter.setCollection(null);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void shouldThrowExceptionWhenSetNullList() {
+    VPRendererAdapter<Object> adapter = new VPRendererAdapter<Object>(mockedRendererBuilder);
+
+    adapter.setList(null);
+  }
+
   private void initializeMocks() {
     MockitoAnnotations.initMocks(this);
     when(mockedParent.getContext()).thenReturn(RuntimeEnvironment.application);
   }
 
   private void initializeVPRendererAdapter() {
-    adapter = new VPRendererAdapter<Object>(mockedRendererBuilder, mockedCollection);
+    adapter = new VPRendererAdapter<>(mockedRendererBuilder, mockedList);
     adapter = spy(adapter);
   }
 }

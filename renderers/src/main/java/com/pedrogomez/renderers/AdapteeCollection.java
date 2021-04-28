@@ -18,6 +18,9 @@ package com.pedrogomez.renderers;
 import java.util.Collection;
 
 /**
+ * @deprecated Adapters collections are provided through List class. This class has no purpose
+ * anymore. This class is going to be removed in upcoming version.
+ *
  * Interface created to represent the adaptee collection used in RendererAdapter and
  * RVRendererAdapter. RendererAdapter and RVRendererAdapter will be created with a RendererBuilder
  * and an AdapteeCollection that store all the content to show in a ListView or RecyclerView
@@ -28,6 +31,7 @@ import java.util.Collection;
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
+@Deprecated
 public interface AdapteeCollection<T> {
 
   /**

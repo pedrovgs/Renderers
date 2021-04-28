@@ -80,11 +80,11 @@ RendererBuilder<Video> rendererBuilder = new RendererBuilder<Video>()
          .bind(Video.class, new LikeVideoRenderer());
 ```
 
-* 3. Initialize your ``ListView`` or ``RecyclerView`` with your ``RendererBuilder`` and your ``AdapteeCollection`` instances inside your Activity or Fragment. **You can use ``ListAdapteeCollection`` or create your own implementation creating a class which implements ``AdapteeCollection`` to configure your ``RendererAdapter`` or ``RVRendererAdapter``.**
+* 3. Initialize your ``ListView`` or ``RecyclerView`` with your ``RendererBuilder`` and an optional ``List`` inside your Activity or Fragment. **You should provide a list of items to configure your ``RendererAdapter`` or ``RVRendererAdapter``.**
 
 ```java
 private void initListView() {
-    adapter = new RendererAdapter<Video>(rendererBuilder, adapteeCollection);
+    adapter = new RendererAdapter<Video>(rendererBuilder, list);
     listView.setAdapter(adapter);
 }
 ```
@@ -93,7 +93,7 @@ or
 
 ```java
 private void initListView() {
-    adapter = new RVRendererAdapter<Video>(rendererBuilder, adapteeCollection);
+    adapter = new RVRendererAdapter<Video>(rendererBuilder, list);
     recyclerView.setAdapter(adapter);
 }
 ```
@@ -123,7 +123,7 @@ Add this dependency to your ``build.gradle``:
 
 ```groovy
 dependencies{
-    implementation 'com.github.pedrovgs:renderers:4.0.0'
+    implementation 'com.github.pedrovgs:renderers:4.0.2'
 }
 ```
 

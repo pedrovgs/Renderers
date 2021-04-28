@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity {
     open(RecyclerViewListAdapterActivity.class);
   }
 
-  private void open(Class activity) {
+  private void open(Class<?> activity) {
     Intent intent = new Intent(this, activity);
     startActivity(intent);
   }
