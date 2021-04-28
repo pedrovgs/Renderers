@@ -35,7 +35,7 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
-  implementation 'androidx.recyclerview:recyclerview:1.2.0'
+  implementation 'androidx.recyclerview:recyclerview:1.1.0'
   implementation 'androidx.viewpager:viewpager:1.0.0'
   testImplementation 'junit:junit:4.12'
   testImplementation 'org.mockito:mockito-core:2.26.0'
