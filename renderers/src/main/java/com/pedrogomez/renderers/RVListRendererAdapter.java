@@ -64,7 +64,7 @@ public class RVListRendererAdapter<T> extends ListAdapter<T, RendererViewHolder>
     }
 
     /**
-     * @deprecated Use {@link #RVListRendererAdapter(RendererBuilder, DiffUtil.ItemCallback, List)} function instead.
+     * @deprecated Use RVListRendererAdapter(RendererBuilder, DiffUtil.ItemCallback, List) constructor instead.
      * This constructor is going to be removed in upcoming version.
      */
     @Deprecated
