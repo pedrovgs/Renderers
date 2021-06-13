@@ -15,8 +15,6 @@
  */
 package com.pedrogomez.renderers.sample.model;
 
-import com.pedrogomez.renderers.AdapteeCollection;
-import com.pedrogomez.renderers.ListAdapteeCollection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,15 +22,15 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Auxiliary class created to generate a VideoCollection with random data.
+ * Auxiliary class created to generate a list of videos with random data.
  *
  * @author Pedro Vicente Gómez Sánchez.
  */
 public class RandomVideoCollectionGenerator {
 
-  private static final Map<String, String> VIDEO_INFO = new HashMap<String, String>();
+  private static final Map<String, String> VIDEO_INFO = new HashMap<>();
 
-  private Random random;
+  private final Random random;
 
   public RandomVideoCollectionGenerator() {
     this.random = new Random();
@@ -40,28 +38,18 @@ public class RandomVideoCollectionGenerator {
   }
 
   /**
-   * Generate a VideoCollection with random data obtained form VIDEO_INFO map. You don't need o
-   * create your own AdapteeCollections. Review ListAdapteeCollection if needed.
+   * Generate a list of videos with random data obtained form VIDEO_INFO map.
    *
    * @param videoCount size of the collection.
-   * @return VideoCollection generated.
+   * @return List<Video> generated.
    */
-  public VideoCollection generate(final int videoCount) {
+  public List<Video> generate(final int videoCount) {
     List<Video> videos = new LinkedList<Video>();
     for (int i = 0; i < videoCount; i++) {
       Video video = generateRandomVideo();
       videos.add(video);
     }
-    return new VideoCollection(videos);
-  }
-
-  public AdapteeCollection<Video> generateListAdapteeVideoCollection(int videoCount) {
-    List<Video> videos = new LinkedList<Video>();
-    for (int i = 0; i < videoCount; i++) {
-      Video video = generateRandomVideo();
-      videos.add(video);
-    }
-    return new ListAdapteeCollection<Video>(videos);
+    return videos;
   }
 
   /**

@@ -21,10 +21,25 @@ import java.util.List;
 
 class DiffCallback<T> extends DiffUtil.Callback {
 
-  private final AdapteeCollection<T> oldList;
+  private final List<T> oldList;
   private final List<T> newList;
 
+  /**
+   * @deprecated Use {@link #DiffCallback(List, List)} function instead.
+   * This constructor is going to be removed in upcoming version.
+   */
+  @Deprecated
   DiffCallback(AdapteeCollection<T> oldList, List<T> newList) {
+    try {
+      this.oldList = (List) oldList;
+    } catch (ClassCastException exception) {
+      throw new ClassCastException("oldList parameter needs to implement List interface. "
+              + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+    }
+    this.newList = newList;
+  }
+
+  DiffCallback(List<T> oldList, List<T> newList) {
     this.oldList = oldList;
     this.newList = newList;
   }

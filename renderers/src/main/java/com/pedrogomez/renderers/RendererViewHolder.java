@@ -21,16 +21,16 @@ import androidx.recyclerview.widget.RecyclerView;
  * RecyclerView.ViewHolder extension created to be able to use Renderer classes in RecyclerView
  * widgets. This class will be completely hidden to the library clients.
  */
-public class RendererViewHolder extends RecyclerView.ViewHolder {
+public class RendererViewHolder<T> extends RecyclerView.ViewHolder {
 
-  private final Renderer renderer;
+  private final Renderer<T> renderer;
 
-  public RendererViewHolder(Renderer renderer) {
+  public RendererViewHolder(Renderer<T> renderer) {
     super(renderer.getRootView());
     this.renderer = renderer;
   }
 
-  public Renderer getRenderer() {
+  public Renderer<T> getRenderer() {
     return renderer;
   }
 }

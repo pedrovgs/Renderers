@@ -17,12 +17,13 @@ package com.pedrogomez.renderers.sample.ui;
 
 import android.os.Bundle;
 import android.widget.ListView;
-import com.pedrogomez.renderers.AdapteeCollection;
 import com.pedrogomez.renderers.RendererAdapter;
 import com.pedrogomez.renderers.sample.R;
 import com.pedrogomez.renderers.sample.model.RandomVideoCollectionGenerator;
 import com.pedrogomez.renderers.sample.model.Video;
 import com.pedrogomez.renderers.sample.ui.builder.VideoRendererBuilder;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -52,9 +53,8 @@ public class ListViewActivity extends BaseActivity {
   private void initAdapter() {
     RandomVideoCollectionGenerator randomVideoCollectionGenerator =
         new RandomVideoCollectionGenerator();
-    AdapteeCollection<Video> videoCollection =
-        randomVideoCollectionGenerator.generateListAdapteeVideoCollection(VIDEO_COUNT);
-    adapter = new RendererAdapter<Video>(new VideoRendererBuilder(), videoCollection);
+    List<Video> videoCollection = randomVideoCollectionGenerator.generate(VIDEO_COUNT);
+    adapter = new RendererAdapter<>(new VideoRendererBuilder(), videoCollection);
   }
 
   /**

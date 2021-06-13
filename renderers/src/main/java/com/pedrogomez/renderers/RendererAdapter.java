@@ -19,8 +19,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import androidx.annotation.NonNull;
+
 import com.pedrogomez.renderers.exception.NullRendererBuiltException;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * BaseAdapter created to work RendererBuilders and Renderer instances. Other adapters have to use
@@ -30,7 +36,7 @@ import java.util.Collection;
  * renderer each time they have to show information into a ListView.
  *
  * RendererAdapter has to be constructed with a LayoutInflater to inflate views, one
- * RendererBuilder to provide Renderer to RendererAdapter and one AdapteeCollection to
+ * RendererBuilder to provide Renderer to RendererAdapter and one list to
  * provide the elements to render.
  *
  * @author Pedro Vicente Gómez Sánchez.
@@ -38,35 +44,64 @@ import java.util.Collection;
 public class RendererAdapter<T> extends BaseAdapter {
 
   private final RendererBuilder<T> rendererBuilder;
-  private AdapteeCollection<T> collection;
+  private List<T> list;
 
   public RendererAdapter(RendererBuilder<T> rendererBuilder) {
-    this(rendererBuilder, new ListAdapteeCollection<T>());
+    this(rendererBuilder, new ArrayList<T>());
   }
 
+  /**
+   * @deprecated Use {@link #RendererAdapter(RendererBuilder, List)} function instead.
+   * This constructor is going to be removed in upcoming version.
+   */
+  @Deprecated
   public RendererAdapter(RendererBuilder<T> rendererBuilder, AdapteeCollection<T> collection) {
     this.rendererBuilder = rendererBuilder;
-    this.collection = collection;
+    try {
+      this.list = (List) collection;
+    } catch (ClassCastException exception) {
+      throw new ClassCastException("collection parameter needs to implement List interface. "
+              + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+    }
+  }
+
+  public RendererAdapter(RendererBuilder<T> rendererBuilder, List<T> list) {
+    this.rendererBuilder = rendererBuilder;
+    this.list = list;
   }
 
   @Override public int getCount() {
-    return collection.size();
+    return list.size();
   }
 
   @Override public T getItem(int position) {
-    return collection.get(position);
+    return list.get(position);
   }
 
   @Override public long getItemId(int position) {
     return position;
   }
 
+  /**
+   * @deprecated Use {@link #setList(List)} function instead.
+   * This method is going to be removed in upcoming version.
+   */
+  @Deprecated
   public void setCollection(AdapteeCollection<T> collection) {
-    if (collection == null) {
-      throw new IllegalArgumentException("The AdapteeCollection configured can't be null");
+    try {
+      setList((List) collection);
+    } catch (ClassCastException exception) {
+      throw new ClassCastException("collection parameter needs to implement List interface. "
+              + "AdapteeCollection has been deprecated and will disappear in upcoming version");
+    }
+  }
+
+  public void setList(@NonNull List<T> list) {
+    if (list == null) {
+      throw new IllegalArgumentException("The list configured can't be null");
     }
 
-    this.collection = collection;
+    this.list = list;
   }
 
   /**
@@ -120,55 +155,62 @@ public class RendererAdapter<T> extends BaseAdapter {
   }
 
   /**
-   * Add an element to the AdapteeCollection.
+   * Add an element to the list.
    *
    * @param element to add.
    */
   public void add(T element) {
-    collection.add(element);
+    list.add(element);
   }
 
   /**
-   * Remove an element from the AdapteeCollection.
+   * Remove an element from the list.
    *
    * @param element to remove.
    */
   public void remove(Object element) {
-    collection.remove(element);
+    list.remove(element);
   }
 
   /**
-   * Add a Collection of elements to the AdapteeCollection.
+   * Add a Collection of elements to the list.
    *
    * @param elements to add.
    */
   public void addAll(Collection<? extends T> elements) {
-    collection.addAll(elements);
+    list.addAll(elements);
   }
 
   /**
-   * Remove a Collection of elements to the AdapteeCollection.
+   * Remove a Collection of elements to the list.
    *
    * @param elements to remove.
    */
   public void removeAll(Collection<?> elements) {
-    collection.removeAll(elements);
+    list.removeAll(elements);
   }
 
   /**
-   * Remove all elements inside the AdapteeCollection.
+   * Remove all elements inside the list.
    */
   public void clear() {
-    collection.clear();
+    list.clear();
   }
 
   /**
+   * @deprecated Use {@link #getList()} function instead.
+   * This method is going to be removed in upcoming version.
+   *
    * Allows the client code to access the AdapteeCollection from subtypes of RendererAdapter.
    *
    * @return collection used in the adapter as the adaptee class.
    */
   protected AdapteeCollection<T> getCollection() {
-    return collection;
+    return new ListAdapteeCollection(list);
+  }
+
+  protected List<T> getList() {
+    return list;
   }
 
   /**
